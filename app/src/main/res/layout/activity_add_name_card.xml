@@ -1,0 +1,428 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AddNameCardActivity">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        //company
+        <LinearLayout
+            android:id="@+id/llCompanyDetails"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@color/offwhite"
+            android:layout_margin="10dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Company Details"
+                android:textSize="35sp"
+                android:textStyle="bold"/>
+
+            //company name
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/tvCompanyName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:text="Company Name:"
+                    android:textSize="20sp"/>
+
+                <EditText
+                    android:id="@+id/etCompanyName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="enter company name"
+                    android:layout_marginLeft="10dp"
+                    android:layout_toRightOf="@id/tvCompanyName"/>
+
+            </RelativeLayout>
+
+            //company postal code
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp">
+
+                <TextView
+                    android:id="@+id/tvCompanyPostalCode"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:text="Postal Code:"
+                    android:textSize="20sp"/>
+
+                <EditText
+                    android:id="@+id/etPostalCode"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="enter postal cod "
+                    android:layout_marginLeft="10dp"
+                    android:layout_toRightOf="@id/tvCompanyPostalCode"/>
+
+            </RelativeLayout>
+
+            //company unit number
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp">
+
+                <TextView
+                    android:id="@+id/tvUnitNumber"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:text="Unit Number:"
+                    android:textSize="20sp"/>
+
+                <EditText
+                    android:id="@+id/etUnitNumber"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="enter unit number "
+                    android:layout_marginLeft="10dp"
+                    android:layout_toRightOf="@id/tvUnitNumber"/>
+
+            </RelativeLayout>
+
+            //company tel number
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp">
+
+                <TextView
+                    android:id="@+id/tvOfficeNumber"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:text="Office Number:"
+                    android:textSize="20sp"/>
+
+                <EditText
+                    android:id="@+id/etOfficeNumber"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="enter office tel number "
+                    android:layout_marginLeft="10dp"
+                    android:layout_toRightOf="@id/tvOfficeNumber"/>
+
+            </RelativeLayout>
+
+            //company industry
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp">
+
+                <TextView
+                    android:id="@+id/tvIndustry"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:text="Which industry:"
+                    android:textSize="20sp"/>
+
+                <Spinner
+                    android:id="@+id/spinnerIndustry"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"></Spinner>
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+        //contact
+        <LinearLayout
+            android:id="@+id/llContactDetails"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@color/offwhite"
+            android:layout_margin="10dp">
+
+            //button and textview to add more rows
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/tvContactDetails"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Contact Details"
+                    android:textSize="35sp"
+                    android:textStyle="bold"/>
+
+                <TextView
+                    android:id="@+id/tvAdd"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="22sp"
+                    android:text="ADD"
+                    android:textStyle="bold"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentEnd="true"/>
+
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Contact #1"
+                    android:textSize="25sp"
+                    android:textStyle="bold"/>
+
+                //contact name
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp">
+
+                    <TextView
+                        android:id="@+id/tvContactName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:text="Contact Name:"
+                        android:textSize="20sp"/>
+
+                    <EditText
+                        android:id="@+id/etContactName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="enter name "
+                        android:layout_marginLeft="10dp"
+                        android:layout_toRightOf="@id/tvContactName"/>
+
+                </RelativeLayout>
+
+                //contact title
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp">
+
+                    <TextView
+                        android:id="@+id/tvContactTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:text="Contact Title:"
+                        android:textSize="20sp"/>
+
+                    <EditText
+                        android:id="@+id/etContactTitle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="enter title"
+                        android:layout_marginLeft="10dp"
+                        android:layout_toRightOf="@id/tvContactTitle"/>
+
+                </RelativeLayout>
+
+                //contact mobile
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp">
+
+                    <TextView
+                        android:id="@+id/tvContactMobile"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:text="Contact Mobile:"
+                        android:textSize="20sp"/>
+
+                    <EditText
+                        android:id="@+id/etContactMobile"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="enter mobile number"
+                        android:layout_marginLeft="10dp"
+                        android:layout_toRightOf="@id/tvContactMobile"/>
+
+                </RelativeLayout>
+
+                //contact incharge yes no
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp">
+
+                    <TextView
+                        android:id="@+id/tvContactIC"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:text="Contact IC:"
+                        android:textSize="20sp"/>
+
+                    <Switch
+                        android:id="@+id/switchContactIC"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"/>
+
+                </RelativeLayout>
+
+            </LinearLayout>
+
+            //container that holds the rows
+            <LinearLayout
+                android:id="@+id/llcontact"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"/>
+
+        </LinearLayout>
+
+        //other info
+        <LinearLayout
+            android:id="@+id/llOtherInfo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@color/offwhite"
+            android:layout_margin="10dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Other Info"
+                android:textSize="35sp"
+                android:textStyle="bold"/>
+
+            //lacks of
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/tvLack"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:text="Lacking of:"
+                    android:textSize="20sp"/>
+
+                <CheckBox
+                    android:id="@+id/cbCopier"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_toRightOf="@id/tvLack"
+                    android:text="Copier"/>
+
+                <CheckBox
+                    android:id="@+id/cbScanner"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@id/cbCopier"
+                    android:layout_marginLeft="10dp"
+                    android:text="Scanner"/>
+
+                <CheckBox
+                    android:id="@+id/cbShredder"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@id/cbScanner"
+                    android:layout_marginLeft="10dp"
+                    android:text="Shredder"/>
+
+            </RelativeLayout>
+
+            //priority level
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp">
+
+                <TextView
+                    android:id="@+id/tvPriorityLevel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:text="Priority Level:"
+                    android:textSize="20sp"/>
+
+                <RadioGroup
+                    android:id="@+id/rgPriorityLevel"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@id/tvPriorityLevel"
+                    android:checkedButton="@id/rbNormal"
+                    android:orientation="horizontal">
+
+                    <RadioButton
+                        android:id="@+id/rbNormal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Normal"/>
+
+                    <RadioButton
+                        android:id="@+id/rbFollowUp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Follow Up"/>
+
+                    <RadioButton
+                        android:id="@+id/rbUrgent"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Urgent"/>
+
+                </RadioGroup>
+
+            </RelativeLayout>
+
+            //comments
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp">
+
+                <TextView
+                    android:id="@+id/tvComment"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Comment:"
+                    android:textSize="20sp"/>
+
+                <EditText
+                    android:id="@+id/etComment"
+                    android:layout_toRightOf="@+id/tvComment"
+                    android:layout_width="match_parent"
+                    android:layout_height="75dp"
+                    android:gravity="top"
+                    android:padding="4dp"
+                    android:textSize="17dp"/>
+
+            </RelativeLayout>
+
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</ScrollView>

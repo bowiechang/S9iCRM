@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">S9IMOBILECRM</string>
+
+    <string-array name="industry">
+        <item>IT</item>
+        <item>Agriculture</item>
+        <item>Health</item>
+    </string-array>
+</resources>

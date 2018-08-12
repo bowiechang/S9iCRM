@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "180309079946",
+    "firebase_url": "https://s9imobilecrm.firebaseio.com",
+    "project_id": "s9imobilecrm",
+    "storage_bucket": "s9imobilecrm.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:180309079946:android:3c73b4794515a3d9",
+        "android_client_info": {
+          "package_name": "com.example.geenie.s9imobilecrm"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "180309079946-aavt8r8p9criacc7gkaimjchih8a08kg.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.geenie.s9imobilecrm",
+            "certificate_hash": "ad797692465da3941a85a7838449bd14013faf50"
+          }
+        },
+        {
+          "client_id": "180309079946-gcb4af32vmgoq53qt40f97tfnj2q27j6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBN369krWw-CxJPuhIFzdQ1WSuAI-7iDdE"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "180309079946-gcb4af32vmgoq53qt40f97tfnj2q27j6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
