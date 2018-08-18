@@ -138,8 +138,10 @@
 
                 <Spinner
                     android:id="@+id/spinnerIndustry"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"></Spinner>
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:entries="@array/industry"
+                    android:layout_toRightOf="@id/tvIndustry"/>
 
             </RelativeLayout>
 
@@ -422,6 +424,14 @@
 
 
         </LinearLayout>
+
+        <Button
+            android:id="@+id/btnAddNameCard"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="COMPLETE"
+            android:gravity="bottom"
+            android:layout_margin="10dp"/>
 
     </LinearLayout>
 

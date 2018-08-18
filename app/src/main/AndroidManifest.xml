@@ -11,16 +11,17 @@
         android:theme="@style/AppTheme">
         <activity android:name=".MainTesterActivity">
 
-        </activity>
-        <activity android:name=".SignUpLoginActivity" />
-        <activity android:name=".ProfileActivity" />
-        <activity android:name=".AddNameCardActivity">
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity android:name=".SignUpLoginActivity" />
+        <activity android:name=".ProfileActivity" />
+        <activity android:name=".AddNameCardActivity">
+
+
         </activity>
     </application>
 

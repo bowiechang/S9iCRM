@@ -1,5 +1,7 @@
 package com.example.geenie.s9imobilecrm;
 
+import java.util.ArrayList;
+
 public class Company {
 
     private String name;
@@ -7,14 +9,15 @@ public class Company {
     private String unitNo;
     private String officeTel;
     private String industry;
-    private String companyLackOf;
+    private ArrayList companyLackOf;
     private String priorityLevel;
     private String comment;
+    private String createBy;
 
     public Company(){}
 
     public Company(String name, String postalCode, String unitNo, String officeTel, String industry,
-                   String companyLackOf, String priorityLevel, String comment){
+                   ArrayList companyLackOf, String priorityLevel, String comment, String createBy){
 
         this.name = name;
         this.postalCode = postalCode;
@@ -24,6 +27,7 @@ public class Company {
         this.companyLackOf = companyLackOf;
         this.priorityLevel = priorityLevel;
         this.comment = comment;
+        this.createBy = createBy;
     }
 
     public String getName() {
@@ -66,11 +70,11 @@ public class Company {
         this.industry = industry;
     }
 
-    public String getCompanyLackOf() {
+    public ArrayList getCompanyLackOf() {
         return companyLackOf;
     }
 
-    public void setCompanyLackOf(String companyLackOf) {
+    public void setCompanyLackOf(ArrayList companyLackOf) {
         this.companyLackOf = companyLackOf;
     }
 
@@ -88,5 +92,13 @@ public class Company {
 
     public void setComment(String comment) {
         this.comment = comment;
+    }
+
+    public String getCreateBy() {
+        return createBy;
+    }
+
+    public void setCreateBy(String createBy) {
+        this.createBy = createBy;
     }
 }
