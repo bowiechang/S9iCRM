@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:layout_marginTop="15dp"
+    tools:ignore="ExtraText">
+
+    //companyName
+    <TextView
+        android:id="@+id/tvCompanyName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Comapany Name: "/>
+
+    //companyAddress
+    <TextView
+        android:id="@+id/tvCompanyAddress"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:text="Company Address: "/>
+
+    //companyOfficeNumber
+    <TextView
+        android:id="@+id/tvCompanyOfficeNumber"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:text="Company Office Number: "/>
+
+    //companyIndustry
+    <TextView
+        android:id="@+id/tvCompanyIndustry"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:text="Company Industry: "/>
+
+    //companyLack
+    <TextView
+        android:id="@+id/tvCompanyLack"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:text="Company Lack: "/>
+
+    //priority level
+    <TextView
+        android:id="@+id/tvCompanyPriorityLevel"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:text="Priority Level: "/>
+
+    //number of times called
+    <TextView
+        android:id="@+id/tvNumberOfTimesCalled"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:text="Number of times called: "/>
+
+</LinearLayout>

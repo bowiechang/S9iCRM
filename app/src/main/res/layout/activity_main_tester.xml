@@ -20,4 +20,10 @@
         android:layout_height="wrap_content"
         android:text="ADD NAME CARD ACTIVITY"/>
 
+    <Button
+        android:id="@+id/btnViewNameCard"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="VIEW NAME CARD ACTIVITY"/>
+
 </LinearLayout>

@@ -174,8 +174,8 @@ public class AddNameCardActivity extends AppCompatActivity implements View.OnCli
         for(int i = 0; i<length; i ++){
             CheckBox cb = findViewById(checkboxes[i]);
             if(cb.isChecked()){
-//                lack = lack.concat(cb.getText().toString());
-                arrayListLack.add(cb.getText().toString());
+                lack = lack.concat(cb.getText().toString() + " ");
+//                arrayListLack.add(cb.getText().toString());
             }
         }
 
@@ -194,7 +194,7 @@ public class AddNameCardActivity extends AppCompatActivity implements View.OnCli
         System.out.println("uid: " + uid);
 
         final Company company = new Company(companyName, companyPostalCode, companyUnitNo, companyOfficeNumber, companyIndustry,
-                arrayListLack, rbSelectedText, commentText, uid);
+                lack, rbSelectedText, commentText, uid, 0);
         final String dbKey = databaseReference.push().getKey();
         databaseReference.child("Company").child(dbKey).setValue(company).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override

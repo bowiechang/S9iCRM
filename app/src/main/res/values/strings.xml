@@ -6,4 +6,28 @@
         <item>Agriculture</item>
         <item>Health</item>
     </string-array>
+
+    <string-array name="filter">
+        <item>Filter By</item>
+        <item>Filter By Lack Of Printer</item>
+        <item>Filter By Lack Of Scanner</item>
+        <item>Filter By Lack Of Shredder</item>
+        <item>Filter By Priority Level: Urgent</item>
+        <item>Filter By Priority Level: Follow Up</item>
+        <item>Filter By Priority Level: Normal</item>
+    </string-array>
+
+    <string-array name="sort1">
+        <item>Sort By</item>
+        <item>Sort By Number Of Calls(Highest to Lowest)</item>
+        <item>Sort By Number Of Calls(Lowest to Highest)</item>
+        <item>Sort By Priority Level(Urgent to Normal)</item>
+        <item>Sort By Priority Level(Normal to Urgent)</item>
+    </string-array>
+
+    <string-array name="sort2">
+        <item>Sort By</item>
+        <item>Sort By Number Of Calls(Highest to Lowest)</item>
+        <item>Sort By Number Of Calls(Lowest to Highest)</item>
+    </string-array>
 </resources>

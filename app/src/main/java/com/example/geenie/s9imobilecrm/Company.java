@@ -1,7 +1,5 @@
 package com.example.geenie.s9imobilecrm;
 
-import java.util.ArrayList;
-
 public class Company {
 
     private String name;
@@ -9,15 +7,16 @@ public class Company {
     private String unitNo;
     private String officeTel;
     private String industry;
-    private ArrayList companyLackOf;
+    private String companyLackOf;
     private String priorityLevel;
     private String comment;
     private String createBy;
+    private int numberOfTimesCalled;
 
     public Company(){}
 
     public Company(String name, String postalCode, String unitNo, String officeTel, String industry,
-                   ArrayList companyLackOf, String priorityLevel, String comment, String createBy){
+                   String companyLackOf, String priorityLevel, String comment, String createBy, int numberOfTimesCalled){
 
         this.name = name;
         this.postalCode = postalCode;
@@ -28,6 +27,7 @@ public class Company {
         this.priorityLevel = priorityLevel;
         this.comment = comment;
         this.createBy = createBy;
+        this.numberOfTimesCalled = numberOfTimesCalled;
     }
 
     public String getName() {
@@ -70,11 +70,11 @@ public class Company {
         this.industry = industry;
     }
 
-    public ArrayList getCompanyLackOf() {
+    public String getCompanyLackOf() {
         return companyLackOf;
     }
 
-    public void setCompanyLackOf(ArrayList companyLackOf) {
+    public void setCompanyLackOf(String companyLackOf) {
         this.companyLackOf = companyLackOf;
     }
 
@@ -100,5 +100,13 @@ public class Company {
 
     public void setCreateBy(String createBy) {
         this.createBy = createBy;
+    }
+
+    public int getNumberOfTimesCalled() {
+        return numberOfTimesCalled;
+    }
+
+    public void setNumberOfTimesCalled(int numberOfTimesCalled) {
+        this.numberOfTimesCalled = numberOfTimesCalled;
     }
 }
