@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:layout_marginTop="10dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/tvContactCount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Contact"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            android:layout_marginTop="5dp"/>
+
+    </RelativeLayout>
+
+    //contact name
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp">
+
+        <TextView
+            android:id="@+id/tvContactName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="Contact Name: "
+            android:textSize="20sp"/>
+
+        <EditText
+            android:id="@+id/etContactName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="enter name "
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@id/tvContactName"/>
+
+    </RelativeLayout>
+
+    //contact title
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp">
+
+        <TextView
+            android:id="@+id/tvContactTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="Contact Title: "
+            android:textSize="20sp"/>
+
+        <EditText
+            android:id="@+id/etContactTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="enter title"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@id/tvContactTitle"/>
+
+    </RelativeLayout>
+
+    //contact mobile
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp">
+
+        <TextView
+            android:id="@+id/tvContactMobile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="Contact Mobile: "
+            android:textSize="20sp"/>
+
+        <EditText
+            android:id="@+id/etContactMobile"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="enter mobile number"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@id/tvContactMobile"/>
+
+    </RelativeLayout>
+
+    //contact incharge yes no
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp">
+
+        <TextView
+            android:id="@+id/tvContactIC"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="Contact IC: "
+            android:textSize="20sp"/>
+
+        <Switch
+            android:id="@+id/switchContactIC"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"/>
+
+    </RelativeLayout>
+
+
+</LinearLayout>

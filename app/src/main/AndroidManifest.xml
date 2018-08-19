@@ -18,8 +18,9 @@
         </activity>
         <activity android:name=".SignUpLoginActivity" />
         <activity android:name=".ProfileActivity" />
-        <activity android:name=".AddNameCardActivity"></activity>
-        <activity android:name=".ViewMyNameCard"></activity>
+        <activity android:name=".AddNameCardActivity" />
+        <activity android:name=".ViewMyNameCard" />
+        <activity android:name=".ViewMyNameCardDetailed"></activity>
     </application>
 
 </manifest>

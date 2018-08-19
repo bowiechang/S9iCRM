@@ -9,7 +9,7 @@
 
     <string-array name="filter">
         <item>Filter By</item>
-        <item>Filter By Lack Of Printer</item>
+        <item>Filter By Lack Of Copier</item>
         <item>Filter By Lack Of Scanner</item>
         <item>Filter By Lack Of Shredder</item>
         <item>Filter By Priority Level: Urgent</item>

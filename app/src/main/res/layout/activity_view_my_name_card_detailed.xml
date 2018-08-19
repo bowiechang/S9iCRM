@@ -1,0 +1,295 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ViewMyNameCardDetailed"
+    android:padding="15dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        tools:ignore="ExtraText">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="COMPANY DETAILS"
+            android:textSize="25sp"
+            android:textStyle="bold"/>
+
+        //company name
+        <RelativeLayout
+            android:id="@+id/rlCompanyName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp">
+
+            <TextView
+                android:id="@+id/tvCompanyName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Company Name: "/>
+
+            <EditText
+                android:id="@+id/etCompanyName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/tvCompanyName"/>
+        </RelativeLayout>
+
+        //company Address
+        <RelativeLayout
+            android:id="@+id/rlCompanyAddress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp">
+
+            <TextView
+                android:id="@+id/tvCompanyAddress"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Company Address: "/>
+
+            <EditText
+                android:id="@+id/etCompanyAddress"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/tvCompanyAddress"/>
+        </RelativeLayout>
+
+        //company unit
+        <RelativeLayout
+            android:id="@+id/rlCompanyUnit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp">
+
+            <TextView
+                android:id="@+id/tvCompanyUnitNo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Company Unit Number: "/>
+
+            <EditText
+                android:id="@+id/etCompanyUnit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/tvCompanyUnitNo">
+
+            </EditText>
+
+        </RelativeLayout>
+
+        //company postalcode
+        <RelativeLayout
+            android:id="@+id/rlCompanyPostalCode"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp">
+
+            <TextView
+                android:id="@+id/tvCompanyPostalCode"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Company Postal Code: "/>
+
+            <EditText
+                android:id="@+id/etCompanyPostalCode"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/tvCompanyPostalCode"/>
+
+
+        </RelativeLayout>
+
+        //company number
+        <RelativeLayout
+            android:id="@+id/rlCompanyNumber"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp">
+
+            <TextView
+                android:id="@+id/tvCompanyOfficeNumber"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Company Number: "/>
+
+            <EditText
+                android:id="@+id/etCompanyOfficeNumber"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/tvCompanyOfficeNumber"/>
+        </RelativeLayout>
+
+        //company industry
+        <RelativeLayout
+            android:id="@+id/rlCompanyIndustry"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp">
+
+            <TextView
+                android:id="@+id/tvCompanyIndustry"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Company Industry: "/>
+
+            <Spinner
+                android:id="@+id/spinnerIndustry"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:entries="@array/industry"
+                android:layout_toRightOf="@id/tvCompanyIndustry"/>
+        </RelativeLayout>
+
+        //company lacking
+        <RelativeLayout
+            android:id="@+id/rlCompanyLacking"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp">
+
+            <TextView
+                android:id="@+id/tvCompanyLack"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Company Lacking of: "/>
+
+            <CheckBox
+                android:id="@+id/cbCopier"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_toRightOf="@id/tvCompanyLack"
+                android:text="Copier"/>
+
+            <CheckBox
+                android:id="@+id/cbScanner"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/cbCopier"
+                android:layout_marginLeft="10dp"
+                android:text="Scanner"/>
+
+            <CheckBox
+                android:id="@+id/cbShredder"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/cbScanner"
+                android:layout_marginLeft="10dp"
+                android:text="Shredder"/>
+        </RelativeLayout>
+
+        //company number of call
+        <RelativeLayout
+            android:id="@+id/rlCompanyNumberOfCalls"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp">
+
+            <TextView
+                android:id="@+id/tvCompanyNumOfCalls"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Number of Calls: "/>
+
+            <EditText
+                android:id="@+id/etCompanyNumOfCalls"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/tvCompanyNumOfCalls"/>
+        </RelativeLayout>
+
+        //company pl
+        <RelativeLayout
+            android:id="@+id/rlCompanypl"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp">
+
+            <TextView
+                android:id="@+id/tvCompanyPriorityLevel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Company Priority Level: "/>
+
+            <RadioGroup
+                android:id="@+id/rgPriorityLevel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/tvCompanyPriorityLevel"
+                android:checkedButton="@id/rbNormal"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/rbNormal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Normal"/>
+
+                <RadioButton
+                    android:id="@+id/rbFollowUp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Follow Up"/>
+
+                <RadioButton
+                    android:id="@+id/rbUrgent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Urgent"/>
+
+            </RadioGroup>
+        </RelativeLayout>
+
+        //company comments
+        <RelativeLayout
+            android:id="@+id/rlCompanyComments"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp">
+
+            <TextView
+                android:id="@+id/tvCompanyComment"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Company Comments: "/>
+
+            <EditText
+                android:id="@+id/etCompanyComment"
+                android:layout_toRightOf="@+id/tvCompanyComment"
+                android:layout_width="match_parent"
+                android:layout_height="75dp"
+                android:gravity="top"
+                android:padding="4dp"
+                android:textSize="17sp"/>
+        </RelativeLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="CONTACTS"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            android:layout_marginTop="10dp"/>
+
+        <LinearLayout
+            android:id="@+id/containerContact"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="5dp"/>
+
+        <Button
+            android:id="@+id/btnEditandSave"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="EDIT"/>
+
+    </LinearLayout>
+
+</ScrollView>

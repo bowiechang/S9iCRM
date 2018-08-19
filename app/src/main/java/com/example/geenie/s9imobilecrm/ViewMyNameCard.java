@@ -145,7 +145,7 @@ public class ViewMyNameCard extends AppCompatActivity {
 
                 switch(i) {
                     case 1:
-                        filterWithClone("Printer");
+                        filterWithClone("Copier");
                         spinnerSort1.setVisibility(View.VISIBLE);
                         break;
                     case 2:
@@ -245,7 +245,7 @@ public class ViewMyNameCard extends AppCompatActivity {
         arraylistcurrentfilter.clear();
 
         //filter for lacking
-        if(filterkey.equals("Printer") || filterkey.equals("Scanner") || filterkey.equals("Shredder")) {
+        if(filterkey.equals("Copier") || filterkey.equals("Scanner") || filterkey.equals("Shredder")) {
             for (int i = 0; i < list.size(); i++) {
                 Company company = list.get(i);
                 if (company.getCompanyLackOf().contains(filterkey)){

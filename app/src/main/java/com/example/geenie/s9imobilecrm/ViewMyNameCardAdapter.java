@@ -1,8 +1,10 @@
 package com.example.geenie.s9imobilecrm;
 
 import android.content.Context;
+import android.content.Intent;
 import android.location.Address;
 import android.location.Geocoder;
+import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -52,14 +54,12 @@ public class ViewMyNameCardAdapter extends RecyclerView.Adapter<ViewMyNameCardHo
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-//                Intent intent = new Intent(context, PostShowActivity.class);
-//                Bundle extras = new Bundle();
-//                extras.putString("starttime", list.get(position).getStartTime());
-//                extras.putString("date", list.get(position).getDate());
-//                intent.putExtras(extras);
-//                context.startActivity(intent);
-
+                Intent intent = new Intent(context, ViewMyNameCardDetailed.class);
+                Bundle extras = new Bundle();
+                extras.putString("name", list.get(position).getName());
+                extras.putString("postalcode", list.get(position).getPostalCode());
+                intent.putExtras(extras);
+                context.startActivity(intent);
             }
         });
 
