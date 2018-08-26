@@ -343,8 +343,10 @@ public class AddNameCardActivity extends AppCompatActivity implements View.OnCli
         System.out.println("otherinfo details: " + "( " + otherinfodetails + " )");
         System.out.println("uid: " + uid);
 
+        String dateCreate = getDateCreateNow();
+
         final Company company = new Company(companyName, companyPostalCode, companyUnitNo, companyOfficeNumber, companyIndustry,
-                lack, rbSelectedText, commentText, uid, 0);
+                lack, rbSelectedText, commentText, uid, dateCreate, 0);
         final String dbKey = databaseReference.push().getKey();
         databaseReference.child("Company").child(dbKey).setValue(company).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
@@ -509,6 +511,22 @@ public class AddNameCardActivity extends AppCompatActivity implements View.OnCli
         }
         else if(c.get(Calendar.DAY_OF_WEEK) == 1){
             c.add(Calendar.DATE, 1);
+        }
+        SimpleDateFormat sdf1 = new SimpleDateFormat("dd/MM/yyyy");
+        String output = sdf1.format(c.getTime());
+
+        return output;
+    }
+
+    public String getDateCreateNow(){
+
+        String dt = Calendar.getInstance().getTime().toString();
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        Calendar c = Calendar.getInstance();
+        try {
+            c.setTime(sdf.parse(dt));
+        } catch (ParseException e) {
+            e.printStackTrace();
         }
         SimpleDateFormat sdf1 = new SimpleDateFormat("dd/MM/yyyy");
         String output = sdf1.format(c.getTime());

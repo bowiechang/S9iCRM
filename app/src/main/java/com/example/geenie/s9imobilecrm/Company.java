@@ -11,12 +11,13 @@ public class Company {
     private String priorityLevel;
     private String comment;
     private String createBy;
+    private String dateCreated;
     private int numberOfTimesCalled;
 
     public Company(){}
 
     public Company(String name, String postalCode, String unitNo, String officeTel, String industry,
-                   String companyLackOf, String priorityLevel, String comment, String createBy, int numberOfTimesCalled){
+                   String companyLackOf, String priorityLevel, String comment, String createBy, String dateCreated, int numberOfTimesCalled){
 
         this.name = name;
         this.postalCode = postalCode;
@@ -27,6 +28,7 @@ public class Company {
         this.priorityLevel = priorityLevel;
         this.comment = comment;
         this.createBy = createBy;
+        this.dateCreated = dateCreated;
         this.numberOfTimesCalled = numberOfTimesCalled;
     }
 
@@ -108,5 +110,13 @@ public class Company {
 
     public void setNumberOfTimesCalled(int numberOfTimesCalled) {
         this.numberOfTimesCalled = numberOfTimesCalled;
+    }
+
+    public String getDateCreated() {
+        return dateCreated;
+    }
+
+    public void setDateCreated(String dateCreated) {
+        this.dateCreated = dateCreated;
     }
 }

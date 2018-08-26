@@ -69,6 +69,9 @@ public class ViewMyNameCardDetailed extends AppCompatActivity implements View.On
     private int contactCount = 1;
     private int copierCount = 1;
 
+    //for company vals
+    String companyDateCreated;
+
     //for contact vals
     String contactName, contactTitle, contactMobile, contactOffice, contactEmail;
     Boolean contactIC;
@@ -233,6 +236,8 @@ public class ViewMyNameCardDetailed extends AppCompatActivity implements View.On
         rbUrgent.setVisibility(View.GONE);
         rbFollowUp.setVisibility(View.GONE);
         rbNormal.setVisibility(View.GONE);
+
+        companyDateCreated = company.getDateCreated();
 
     }
 
@@ -708,7 +713,7 @@ public class ViewMyNameCardDetailed extends AppCompatActivity implements View.On
                 String createBy = uid;
                 int numberOfTimesCalled = Integer.parseInt(etCompanyNumOfCalls.getText().toString().trim());
 
-                Company company = new Company(name, postalCode, unitNo, officeTel, industry, lack, rbSelectedText, comment, createBy, numberOfTimesCalled);
+                Company company = new Company(name, postalCode, unitNo, officeTel, industry, lack, rbSelectedText, comment, createBy, companyDateCreated, numberOfTimesCalled);
                 databaseReference.child("Company").child(companyDbKey).setValue(company);
 
                 saveContact();
