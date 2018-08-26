@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:layout_marginTop="15dp"
+    tools:ignore="ExtraText">
+
+    //name
+    <TextView
+        android:id="@+id/tvApptCompanyName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Comapany Name: "/>
+
+    //Time
+    <TextView
+        android:id="@+id/tvApptTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Appointment Time: "/>
+
+    //Date
+    <TextView
+        android:id="@+id/tvApptDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Appointment Date: "/>
+
+</LinearLayout>

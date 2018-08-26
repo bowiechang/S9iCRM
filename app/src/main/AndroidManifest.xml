@@ -9,6 +9,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyAlNt2VEaP89U_iYAptiklOG_NAiIJXi28" />
+
         <activity android:name=".MainTesterActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -19,8 +23,11 @@
         <activity android:name=".SignUpLoginActivity" />
         <activity android:name=".ProfileActivity" />
         <activity android:name=".AddNameCardActivity" />
-        <activity android:name=".ViewMyNameCard" />
-        <activity android:name=".ViewMyNameCardDetailed"></activity>
+        <activity android:name=".ViewMyNameCardActivity" />
+        <activity android:name=".ViewMyNameCardDetailed" />
+        <activity android:name=".AddAppointmentActivity" />
+        <activity android:name=".ViewMyAppointmentActivity" />
+        <activity android:name=".ViewMyAppointmentDetailedActivity"/>
     </application>
 
 </manifest>

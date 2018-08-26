@@ -11,6 +11,7 @@ public class MainTesterActivity extends AppCompatActivity implements View.OnClic
     private Button btnLOGINSIGNUP;
     private Button btnAddNameCard;
     private Button btnViewNameCard;
+    private Button btnViewAppointment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,10 +21,12 @@ public class MainTesterActivity extends AppCompatActivity implements View.OnClic
         btnLOGINSIGNUP = findViewById(R.id.btnLOGINSIGNUP);
         btnAddNameCard = findViewById(R.id.btnAddNameCard);
         btnViewNameCard = findViewById(R.id.btnViewNameCard);
+        btnViewAppointment = findViewById(R.id.btnViewAppointment);
 
         btnLOGINSIGNUP.setOnClickListener(this);
         btnAddNameCard.setOnClickListener(this);
         btnViewNameCard.setOnClickListener(this);
+        btnViewAppointment.setOnClickListener(this);
     }
 
     @Override
@@ -37,7 +40,11 @@ public class MainTesterActivity extends AppCompatActivity implements View.OnClic
             MainTesterActivity.this.startActivity(i);
         }
         else if(view == btnViewNameCard){
-            Intent i = new Intent(MainTesterActivity.this, ViewMyNameCard.class);
+            Intent i = new Intent(MainTesterActivity.this, ViewMyNameCardActivity.class);
+            MainTesterActivity.this.startActivity(i);
+        }
+        else if(view == btnViewAppointment){
+            Intent i = new Intent(MainTesterActivity.this, ViewMyAppointmentActivity.class);
             MainTesterActivity.this.startActivity(i);
         }
     }

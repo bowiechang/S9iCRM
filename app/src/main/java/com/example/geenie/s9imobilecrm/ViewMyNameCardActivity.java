@@ -22,7 +22,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 
-public class ViewMyNameCard extends AppCompatActivity {
+public class ViewMyNameCardActivity extends AppCompatActivity {
 
     private Company company;
     private RecyclerView recyclerView;
@@ -230,7 +230,7 @@ public class ViewMyNameCard extends AppCompatActivity {
 
         System.out.println("getmyshowslist list size: " + list.size());
 
-        ViewMyNameCardAdapter viewMyShowsAdapter = new ViewMyNameCardAdapter(ViewMyNameCard.this, list);
+        ViewMyNameCardAdapter viewMyShowsAdapter = new ViewMyNameCardAdapter(ViewMyNameCardActivity.this, list);
         recyclerView.setAdapter(viewMyShowsAdapter);
 
 //        if(listClone.isEmpty()) {

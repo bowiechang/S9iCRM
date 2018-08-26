@@ -26,4 +26,10 @@
         android:layout_height="wrap_content"
         android:text="VIEW NAME CARD ACTIVITY"/>
 
+    <Button
+        android:id="@+id/btnViewAppointment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="VIEW Appointment ACTIVITY"/>
+
 </LinearLayout>

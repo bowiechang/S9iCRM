@@ -337,6 +337,12 @@
             android:layout_height="wrap_content"
             android:text="EDIT"/>
 
+        <Button
+            android:id="@+id/btnAddAppointment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="ADD APPOINTMENT"/>
+
     </LinearLayout>
 
 </ScrollView>

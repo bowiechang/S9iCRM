@@ -2,6 +2,7 @@ package com.example.geenie.s9imobilecrm;
 
 import android.app.DatePickerDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.location.Address;
 import android.location.Geocoder;
 import android.os.Bundle;
@@ -59,6 +60,7 @@ public class ViewMyNameCardDetailed extends AppCompatActivity implements View.On
     private LinearLayout containerContact;
     private LinearLayout containerCopier;
     private Button btnEditandSave;
+    private Button btnAddAppt;
 
     private Company company;
     private Contact contact;
@@ -141,6 +143,8 @@ public class ViewMyNameCardDetailed extends AppCompatActivity implements View.On
         etCompanyComments = findViewById(R.id.etCompanyComment);
         btnEditandSave = findViewById(R.id.btnEditandSave);
         btnEditandSave.setOnClickListener(this);
+        btnAddAppt = findViewById(R.id.btnAddAppointment);
+        btnAddAppt.setOnClickListener(this);
 
         etCompanyName.setVisibility(View.GONE);
         etCompanyAddress.setVisibility(View.GONE);
@@ -887,6 +891,16 @@ public class ViewMyNameCardDetailed extends AppCompatActivity implements View.On
 
             containerCopier.addView(addView, containerCopier.getChildCount());
         }
+        else if(view.equals(btnAddAppt)){
+
+            Intent intent = new Intent(this, AddAppointmentActivity.class);
+            Bundle extras = new Bundle();
+            extras.putString("companydbkey", companyDbKey);
+            extras.putString("companyName", company.getName());
+            extras.putString("companyAddress", etCompanyAddress.getText().toString());
+            intent.putExtras(extras);
+            this.startActivity(intent);
+        }
     }
 
     public void setCompanyEditable(){
@@ -1017,11 +1031,15 @@ public class ViewMyNameCardDetailed extends AppCompatActivity implements View.On
                 TextView tvRowName = (childView.findViewById(R.id.tvContactName));
                 TextView tvRowTitle = (childView.findViewById(R.id.tvContactTitle));
                 TextView tvRowMobile = (childView.findViewById(R.id.tvContactMobile));
+                TextView tvRowOffice = (childView.findViewById(R.id.tvContactOffice));
+                TextView tvRowEmail = (childView.findViewById(R.id.tvContactEmail));
                 TextView tvRowIC = (childView.findViewById(R.id.tvContactIC));
 
                 EditText etContactName = (childView.findViewById(R.id.etContactName));
                 EditText etTitle = (childView.findViewById(R.id.etContactTitle));
                 EditText etMobile = (childView.findViewById(R.id.etContactMobile));
+                EditText etOffice = (childView.findViewById(R.id.etContactOffice));
+                EditText etEmail = (childView.findViewById(R.id.etContactEmail));
                 Switch switchIC = (childView.findViewById(R.id.switchContactIC));
                 String switchICchecked = "false";
 
@@ -1032,6 +1050,8 @@ public class ViewMyNameCardDetailed extends AppCompatActivity implements View.On
                 tvRowName.setText("Contact Name: " + etContactName.getText().toString());
                 tvRowTitle.setText("Contact Title: "+ etTitle.getText().toString());
                 tvRowMobile.setText("Contact Mobile: "+ etMobile.getText().toString());
+                tvRowOffice.setText("Contact Office: "+ etOffice.getText().toString());
+                tvRowEmail.setText("Contact Email: "+ etEmail.getText().toString());
                 tvRowIC.setText("Contact IC: "+ switchICchecked);
 
                 etContactName.setVisibility(View.GONE);

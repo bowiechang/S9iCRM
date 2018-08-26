@@ -8,7 +8,7 @@
     android:layout_marginTop="15dp"
     tools:ignore="ExtraText">
 
-    //companyName
+    //name
     <TextView
         android:id="@+id/tvCompanyName"
         android:layout_width="wrap_content"

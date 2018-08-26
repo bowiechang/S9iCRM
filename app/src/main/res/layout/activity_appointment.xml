@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AddAppointmentActivity"
+    android:orientation="vertical"
+    tools:ignore="ExtraText"
+    android:layout_margin="15dp"
+    android:focusableInTouchMode="true">
+
+    //company name
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:text="MAKING APPOINTMENT FOR: "/>
+
+        <TextView
+            android:id="@+id/tvCompanyName"
+            android:textSize="20sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"/>
+
+    </LinearLayout>
+
+
+    //date
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="10dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:text="APPOINTMENT ON: "/>
+
+        <EditText
+            android:id="@+id/etApptDate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"/>
+
+    </LinearLayout>
+
+    //time
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="10dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:text="APPOINTMENT AT: "/>
+
+        <EditText
+            android:id="@+id/etApptTime"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"/>
+
+    </LinearLayout>
+
+    //location
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="10dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:text="APPOINTMENT LOCATION: "/>
+
+
+        <EditText
+            android:id="@+id/etApptLocation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <EditText
+            android:id="@+id/etApptLocationAddress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+
+    </LinearLayout>
+
+    //contact
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="10dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:text="APPOINTMENT WITH: "/>
+
+        <Spinner
+            android:id="@+id/spApptContact"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"/>
+
+    </LinearLayout>
+
+    //comments
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="10dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:text="APPOINTMENT COMMENT: "/>
+
+        <EditText
+            android:id="@+id/etApptComment"
+            android:layout_width="match_parent"
+            android:layout_height="75dp"
+            android:gravity="top"
+            android:padding="4dp"
+            android:textSize="17sp"
+            android:layout_marginLeft="20dp"/>
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btnAddAppointment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Add Appointment"
+        android:layout_gravity="bottom"/>
+
+</LinearLayout>
