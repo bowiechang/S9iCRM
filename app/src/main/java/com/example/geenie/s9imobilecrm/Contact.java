@@ -5,15 +5,19 @@ public class Contact {
     private String name;
     private String title;
     private String mobileNumber;
+    private String officeNumber;
+    private String email;
     private Boolean ic;
     private String company_id;
 
     public Contact(){}
 
-    public Contact(String name, String title, String mobileNumber, Boolean ic, String company_id){
+    public Contact(String name, String title, String mobileNumber, String officeNumber, String email, Boolean ic, String company_id){
         this.name = name;
         this.title = title;
         this.mobileNumber = mobileNumber;
+        this.officeNumber = officeNumber;
+        this.email = email;
         this.ic = ic;
         this.company_id = company_id;
     }
@@ -56,5 +60,21 @@ public class Contact {
 
     public void setCompany_id(String company_id) {
         this.company_id = company_id;
+    }
+
+    public String getOfficeNumber() {
+        return officeNumber;
+    }
+
+    public void setOfficeNumber(String officeNumber) {
+        this.officeNumber = officeNumber;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 }

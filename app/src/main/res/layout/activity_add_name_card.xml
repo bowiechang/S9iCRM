@@ -147,157 +147,6 @@
 
         </LinearLayout>
 
-        //contact
-        <LinearLayout
-            android:id="@+id/llContactDetails"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:background="@color/offwhite"
-            android:layout_margin="10dp">
-
-            //button and textview to add more rows
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <TextView
-                    android:id="@+id/tvContactDetails"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Contact Details"
-                    android:textSize="35sp"
-                    android:textStyle="bold"/>
-
-                <TextView
-                    android:id="@+id/tvAdd"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="22sp"
-                    android:text="ADD"
-                    android:textStyle="bold"
-                    android:layout_centerVertical="true"
-                    android:layout_alignParentEnd="true"/>
-
-            </RelativeLayout>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Contact #1"
-                    android:textSize="25sp"
-                    android:textStyle="bold"/>
-
-                //contact name
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="2dp">
-
-                    <TextView
-                        android:id="@+id/tvContactName"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:text="Contact Name:"
-                        android:textSize="20sp"/>
-
-                    <EditText
-                        android:id="@+id/etContactName"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="enter name "
-                        android:layout_marginLeft="10dp"
-                        android:layout_toRightOf="@id/tvContactName"/>
-
-                </RelativeLayout>
-
-                //contact title
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="2dp">
-
-                    <TextView
-                        android:id="@+id/tvContactTitle"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:text="Contact Title:"
-                        android:textSize="20sp"/>
-
-                    <EditText
-                        android:id="@+id/etContactTitle"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="enter title"
-                        android:layout_marginLeft="10dp"
-                        android:layout_toRightOf="@id/tvContactTitle"/>
-
-                </RelativeLayout>
-
-                //contact mobile
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="2dp">
-
-                    <TextView
-                        android:id="@+id/tvContactMobile"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:text="Contact Mobile:"
-                        android:textSize="20sp"/>
-
-                    <EditText
-                        android:id="@+id/etContactMobile"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="enter mobile number"
-                        android:layout_marginLeft="10dp"
-                        android:layout_toRightOf="@id/tvContactMobile"/>
-
-                </RelativeLayout>
-
-                //contact incharge yes no
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="2dp">
-
-                    <TextView
-                        android:id="@+id/tvContactIC"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:text="Contact IC:"
-                        android:textSize="20sp"/>
-
-                    <Switch
-                        android:id="@+id/switchContactIC"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentEnd="true"/>
-
-                </RelativeLayout>
-
-            </LinearLayout>
-
-            //container that holds the rows
-            <LinearLayout
-                android:id="@+id/llcontact"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"/>
-
-        </LinearLayout>
-
         //other info
         <LinearLayout
             android:id="@+id/llOtherInfo"
@@ -422,6 +271,248 @@
             </RelativeLayout>
 
 
+
+        </LinearLayout>
+
+        //contact
+        <LinearLayout
+            android:id="@+id/llContactDetails"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@color/offwhite"
+            android:layout_margin="10dp">
+
+            //button and textview to add more rows
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/tvContactDetails"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Contact Details"
+                    android:textSize="35sp"
+                    android:textStyle="bold"/>
+
+                <TextView
+                    android:id="@+id/tvAdd"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="22sp"
+                    android:text="ADD"
+                    android:textStyle="bold"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentEnd="true"/>
+
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Contact #1"
+                    android:textSize="25sp"
+                    android:textStyle="bold"/>
+
+                //contact name
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp">
+
+                    <TextView
+                        android:id="@+id/tvContactName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:text="Contact Name:"
+                        android:textSize="20sp"/>
+
+                    <EditText
+                        android:id="@+id/etContactName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="enter name "
+                        android:layout_marginLeft="10dp"
+                        android:layout_toRightOf="@id/tvContactName"/>
+
+                </RelativeLayout>
+
+                //contact title
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp">
+
+                    <TextView
+                        android:id="@+id/tvContactTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:text="Contact Title:"
+                        android:textSize="20sp"/>
+
+                    <EditText
+                        android:id="@+id/etContactTitle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="enter title"
+                        android:layout_marginLeft="10dp"
+                        android:layout_toRightOf="@id/tvContactTitle"/>
+
+                </RelativeLayout>
+
+                //contact mobile
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp">
+
+                    <TextView
+                        android:id="@+id/tvContactMobile"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:text="Contact Mobile:"
+                        android:textSize="20sp"/>
+
+                    <EditText
+                        android:id="@+id/etContactMobile"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="enter mobile number"
+                        android:layout_marginLeft="10dp"
+                        android:layout_toRightOf="@id/tvContactMobile"/>
+
+                </RelativeLayout>
+
+                //contact office
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp">
+
+                    <TextView
+                        android:id="@+id/tvContactOffice"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:text="Contact Office:"
+                        android:textSize="20sp"/>
+
+                    <EditText
+                        android:id="@+id/etContactOffice"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="enter office number"
+                        android:layout_marginLeft="10dp"
+                        android:layout_toRightOf="@id/tvContactOffice"/>
+
+                </RelativeLayout>
+
+                //contact email
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp">
+
+                    <TextView
+                        android:id="@+id/tvContactEmail"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:text="Contact Email:"
+                        android:textSize="20sp"/>
+
+                    <EditText
+                        android:id="@+id/etContactEmail"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="enter email"
+                        android:layout_marginLeft="10dp"
+                        android:layout_toRightOf="@id/tvContactEmail"/>
+
+                </RelativeLayout>
+
+                //contact incharge yes no
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp">
+
+                    <TextView
+                        android:id="@+id/tvContactIC"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:text="Contact IC:"
+                        android:textSize="20sp"/>
+
+                    <Switch
+                        android:id="@+id/switchContactIC"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"/>
+
+                </RelativeLayout>
+
+            </LinearLayout>
+
+            //container that holds the rows
+            <LinearLayout
+                android:id="@+id/llcontact"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"/>
+
+        </LinearLayout>
+
+        //copier
+        <LinearLayout
+            android:id="@+id/llCopierDetails"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@color/offwhite"
+            android:layout_margin="10dp">
+
+            //button and textview to add more rows
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/tvCopierDetails"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Copier Details"
+                    android:textSize="35sp"
+                    android:textStyle="bold"/>
+
+                <TextView
+                    android:id="@+id/tvAddCopier"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="22sp"
+                    android:text="ADD"
+                    android:textStyle="bold"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentEnd="true"/>
+
+            </RelativeLayout>
+
+            //container that holds the rows
+            <LinearLayout
+                android:id="@+id/llcopier"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"/>
 
         </LinearLayout>
 

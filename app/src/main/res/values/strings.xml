@@ -7,6 +7,12 @@
         <item>Health</item>
     </string-array>
 
+    <string-array name="copierBrand">
+        <item>Fuji Xerox</item>
+        <item>Samsung</item>
+        <item>Cannon</item>
+    </string-array>
+
     <string-array name="filter">
         <item>Filter By</item>
         <item>Filter By Lack Of Copier</item>
