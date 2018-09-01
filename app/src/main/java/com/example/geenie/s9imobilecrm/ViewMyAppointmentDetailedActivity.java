@@ -31,8 +31,11 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 
 public class ViewMyAppointmentDetailedActivity extends AppCompatActivity implements View.OnClickListener, View.OnFocusChangeListener {
 
@@ -51,6 +54,7 @@ public class ViewMyAppointmentDetailedActivity extends AppCompatActivity impleme
     private String appointmentDbKey;
 
     private Calendar calendar = Calendar.getInstance();
+    private Boolean editable = false;
 
     //firebase init
     private FirebaseAuth mAuth = FirebaseAuth.getInstance();
@@ -137,6 +141,35 @@ public class ViewMyAppointmentDetailedActivity extends AppCompatActivity impleme
                 if(appointment!=null){
                     if(appointment.getDate().equals(apptDate) && appointment.getTime().equals(apptTime)) {
                         appointmentDbKey = dataSnapshot.getKey();
+
+                        Calendar c = Calendar.getInstance();
+                        SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+                        String todayDate = df.format(c.getTime());
+
+                        String receivedDate = appointment.getDate();
+                        if (receivedDate.isEmpty()) {
+                            Log.d("receivedDate", "isempty");
+                        } else {
+                            Log.d("receivedDate", receivedDate);
+                        }
+
+                        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+                        Date dateAppointment = null;
+                        Date dateToday = null;
+
+                        try {
+                            dateToday = sdf.parse(todayDate);
+                            dateAppointment = sdf.parse(receivedDate);
+                        } catch (ParseException e) {
+                            e.printStackTrace();
+                        }
+                        if (dateAppointment.after(dateToday)) {
+                            editable = true;
+                        }
+                        else{
+                            btnApptEditSave.setVisibility(View.GONE);
+                            btnDeleteAppt.setVisibility(View.GONE);
+                        }
 
                         tvDate.setText(tvDate.getText().toString().concat(appointment.getDate()));
                         tvTime.setText(tvTime.getText().toString().concat(appointment.getTime()));

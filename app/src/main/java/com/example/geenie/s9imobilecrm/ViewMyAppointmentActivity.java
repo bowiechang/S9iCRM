@@ -64,7 +64,7 @@ public class ViewMyAppointmentActivity extends AppCompatActivity {
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
                 Appointment appointment = dataSnapshot.getValue(Appointment.class);
                 if(appointment!=null){
-                    //
+
                     Calendar c = Calendar.getInstance();
                     SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
                     String todayDate = df.format(c.getTime());
@@ -94,7 +94,7 @@ public class ViewMyAppointmentActivity extends AppCompatActivity {
                         listPast.add(appointment);
                         getMyAppointmentPastList(listPast);
                     }
-                    //
+
                 }
             }
 
