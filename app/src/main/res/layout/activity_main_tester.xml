@@ -32,4 +32,10 @@
         android:layout_height="wrap_content"
         android:text="VIEW Appointment ACTIVITY"/>
 
+    <Button
+        android:id="@+id/btnViewTask"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="VIEW Task ACTIVITY"/>
+
 </LinearLayout>

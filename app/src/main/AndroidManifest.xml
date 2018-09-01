@@ -27,7 +27,9 @@
         <activity android:name=".ViewMyNameCardDetailed" />
         <activity android:name=".AddAppointmentActivity" />
         <activity android:name=".ViewMyAppointmentActivity" />
-        <activity android:name=".ViewMyAppointmentDetailedActivity"/>
+        <activity android:name=".ViewMyAppointmentDetailedActivity" />
+        <activity android:name=".ViewMyTaskActivity" />
+        <activity android:name=".ViewMyDetailedTaskActivity"></activity>
     </application>
 
 </manifest>
