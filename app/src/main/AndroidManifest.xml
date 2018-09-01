@@ -24,12 +24,15 @@
         <activity android:name=".ProfileActivity" />
         <activity android:name=".AddNameCardActivity" />
         <activity android:name=".ViewMyNameCardActivity" />
-        <activity android:name=".ViewMyNameCardDetailed" />
+        <activity android:name=".ViewMyNameCardDetailedActivity" />
         <activity android:name=".AddAppointmentActivity" />
         <activity android:name=".ViewMyAppointmentActivity" />
         <activity android:name=".ViewMyAppointmentDetailedActivity" />
         <activity android:name=".ViewMyTaskActivity" />
-        <activity android:name=".ViewMyDetailedTaskActivity"></activity>
+        <activity android:name=".ViewMyDetailedTaskActivity" />
+        <activity android:name=".ViewMyFollowUpActivity" />
+        <activity android:name=".ViewMyDetailedFollowUpActivity" />
+        <activity android:name=".AddFollowUpActivity"></activity>
     </application>
 
 </manifest>

@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ViewMyDetailedFollowUpActivity"
+    android:orientation="vertical"
+    android:padding="20dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:focusableInTouchMode="true">
+
+        //Date
+        <TextView
+            android:id="@+id/tvFollowUpDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Follow up Date: "
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:layout_marginBottom="6dp"/>
+
+        <EditText
+            android:id="@+id/etFollowUpDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+    //name
+    <TextView
+        android:id="@+id/tvFollowUpName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Company Name: "
+        android:textStyle="bold"
+        android:textSize="20sp"
+        android:layout_marginBottom="6dp"/>
+
+
+    //Type
+    <TextView
+        android:id="@+id/tvFollowUpType"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Follow up Type: "
+        android:textStyle="bold"
+        android:textSize="20sp"
+        android:layout_marginBottom="6dp"/>
+
+    //Status
+    <TextView
+        android:id="@+id/tvFollowUpStatus"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Follow up Status: "
+        android:textStyle="bold"
+        android:textSize="20sp"
+        android:layout_marginBottom="6dp"/>
+
+
+    <Button
+        android:id="@+id/btnFollowUpEdit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:text="Edit"/>
+
+    <Button
+        android:id="@+id/btnFollowUpRemove"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:text="Delete"/>
+
+    <Button
+        android:id="@+id/btnFollowUpComplete"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:text="COMPLETE"/>
+
+</LinearLayout>

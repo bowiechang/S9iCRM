@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ViewMyNameCardDetailed"
+    tools:context=".ViewMyNameCardDetailedActivity"
     android:padding="15dp">
 
     <LinearLayout
@@ -342,6 +342,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="ADD APPOINTMENT"/>
+
+        <Button
+            android:id="@+id/btnAddFollowUp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="ADD FOLLOWUP"/>
 
     </LinearLayout>
 

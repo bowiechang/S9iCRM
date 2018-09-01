@@ -45,7 +45,7 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
 
-public class ViewMyNameCardDetailed extends AppCompatActivity implements View.OnClickListener, TextWatcher {
+public class ViewMyNameCardDetailedActivity extends AppCompatActivity implements View.OnClickListener, TextWatcher {
 
     private TextView tvCompanyName, tvCompanyAddress, tvCompanyUnitNumber, tvCompanyPostalCode,
             tvCompanyNumber, tvCompanyIndustry, tvCompanyLack, tvCompanyNumOfCalls, tvCompanyPl, tvCompanyComments, tvAddContact, tvAddCopier;
@@ -60,7 +60,7 @@ public class ViewMyNameCardDetailed extends AppCompatActivity implements View.On
     private LinearLayout containerContact;
     private LinearLayout containerCopier;
     private Button btnEditandSave;
-    private Button btnAddAppt;
+    private Button btnAddAppt, btnAddFollowUp;
 
     private Company company;
     private Contact contact;
@@ -144,7 +144,9 @@ public class ViewMyNameCardDetailed extends AppCompatActivity implements View.On
         btnEditandSave = findViewById(R.id.btnEditandSave);
         btnEditandSave.setOnClickListener(this);
         btnAddAppt = findViewById(R.id.btnAddAppointment);
+        btnAddFollowUp = findViewById(R.id.btnAddFollowUp);
         btnAddAppt.setOnClickListener(this);
+        btnAddFollowUp.setOnClickListener(this);
 
         etCompanyName.setVisibility(View.GONE);
         etCompanyAddress.setVisibility(View.GONE);
@@ -901,6 +903,15 @@ public class ViewMyNameCardDetailed extends AppCompatActivity implements View.On
             intent.putExtras(extras);
             this.startActivity(intent);
         }
+        else if(view.equals(btnAddFollowUp)){
+
+            Intent intent = new Intent(this, AddFollowUpActivity.class);
+            Bundle extras = new Bundle();
+            extras.putString("companydbkey", companyDbKey);
+            extras.putString("companyName", company.getName());
+            intent.putExtras(extras);
+            this.startActivity(intent);
+        }
     }
 
     public void setCompanyEditable(){
@@ -1325,11 +1336,11 @@ public class ViewMyNameCardDetailed extends AppCompatActivity implements View.On
         month = calendar.get(Calendar.MONTH);
         year = calendar.get(Calendar.YEAR);
 
-        DatePickerDialog datePickerDialog = new DatePickerDialog(ViewMyNameCardDetailed.this, new DatePickerDialog.OnDateSetListener() {
+        DatePickerDialog datePickerDialog = new DatePickerDialog(ViewMyNameCardDetailedActivity.this, new DatePickerDialog.OnDateSetListener() {
 
             @Override
             public void onDateSet(DatePicker datePicker, int year, int month, int day) {
-                et.setText(day+"/"+month+"/"+year);
+                et.setText(day+"/"+(month+1)+"/"+year);
             }
         }
                 ,day,month,year);

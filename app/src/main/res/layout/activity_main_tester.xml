@@ -38,4 +38,10 @@
         android:layout_height="wrap_content"
         android:text="VIEW Task ACTIVITY"/>
 
+    <Button
+        android:id="@+id/btnViewFollowUp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="VIEW Follow Up ACTIVITY"/>
+
 </LinearLayout>

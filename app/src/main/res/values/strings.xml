@@ -7,6 +7,12 @@
         <item>Health</item>
     </string-array>
 
+    <string-array name="followuptype">
+        <item>Casual Call</item>
+        <item>Enquiry Call</item>
+        <item>Close Call</item>
+    </string-array>
+
     <string-array name="copierBrand">
         <item>Fuji Xerox</item>
         <item>Samsung</item>

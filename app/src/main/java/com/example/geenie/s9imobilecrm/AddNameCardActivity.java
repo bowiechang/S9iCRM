@@ -299,7 +299,7 @@ public class AddNameCardActivity extends AppCompatActivity implements View.OnCli
 
             @Override
             public void onDateSet(DatePicker datePicker, int year, int month, int day) {
-                et.setText(day+"/"+month+"/"+year);
+                et.setText(day+"/"+(month+1)+"/"+year);
             }
         }
                 ,day,month,year);
@@ -419,7 +419,7 @@ public class AddNameCardActivity extends AppCompatActivity implements View.OnCli
         //insert to follow up
         //seek for the COMPANY ID and insert into follow up
 
-        FollowUp followUp = new FollowUp(calculateFollowUpDate(), "greeting", "incomplete", companyid);
+        FollowUp followUp = new FollowUp(calculateFollowUpDate(), "greeting", "incomplete", companyid, uid);
         databaseReference.child("FollowUp").push().setValue(followUp);
     }
 
@@ -491,7 +491,7 @@ public class AddNameCardActivity extends AppCompatActivity implements View.OnCli
         //insert to follow up
         //seek for the COMPANY ID and insert into follow up
 
-        FollowUp followUp = new FollowUp(calculateFollowUpDate(), "greeting", "incomplete", companyid);
+        FollowUp followUp = new FollowUp(calculateFollowUpDate(), "greeting", "incomplete", companyid, uid);
         databaseReference.child("FollowUp").push().setValue(followUp);
     }
 

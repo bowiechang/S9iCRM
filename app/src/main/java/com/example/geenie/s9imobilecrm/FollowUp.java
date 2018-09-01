@@ -6,15 +6,17 @@ public class FollowUp {
     private String typeOfFollowup;
     private String followUpStatus;
     private String companyid;
+    private String createdBy;
 
     FollowUp(){}
 
-    FollowUp(String followupDueDate, String typeOfFollowup, String followUpStatus, String companyid){
+    FollowUp(String followupDueDate, String typeOfFollowup, String followUpStatus, String companyid, String createdBy){
 
         this.followupDueDate = followupDueDate;
         this.typeOfFollowup = typeOfFollowup;
         this.followUpStatus = followUpStatus;
         this.companyid = companyid;
+        this.createdBy = createdBy;
     }
 
     public String getFollowupDueDate() {
@@ -48,4 +50,13 @@ public class FollowUp {
     public void setCompanyid(String companyid) {
         this.companyid = companyid;
     }
+
+    public String getCreatedBy() {
+        return createdBy;
+    }
+
+    public void setCreatedBy(String createdBy) {
+        this.createdBy = createdBy;
+    }
+
 }

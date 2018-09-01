@@ -54,7 +54,7 @@ public class ViewMyNameCardAdapter extends RecyclerView.Adapter<ViewMyNameCardHo
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(context, ViewMyNameCardDetailed.class);
+                Intent intent = new Intent(context, ViewMyNameCardDetailedActivity.class);
                 Bundle extras = new Bundle();
                 extras.putString("name", list.get(position).getName());
                 extras.putString("postalcode", list.get(position).getPostalCode());
