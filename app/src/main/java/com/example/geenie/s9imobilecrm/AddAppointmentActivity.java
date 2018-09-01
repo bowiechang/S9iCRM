@@ -215,7 +215,7 @@ public class AddAppointmentActivity extends AppCompatActivity implements View.On
 
             @Override
             public void onDateSet(DatePicker datePicker, int year, int month, int day) {
-                et.setText(day+"/0"+month+1+"/"+year);
+                et.setText(day+"/0"+(month+1)+"/"+year);
             }
         }
                 ,day,month,year);

@@ -1,5 +1,6 @@
 package com.example.geenie.s9imobilecrm;
 
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -9,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -30,6 +32,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
 public class ViewMyAppointmentDetailedActivity extends AppCompatActivity implements View.OnClickListener, View.OnFocusChangeListener {
 
@@ -46,6 +49,8 @@ public class ViewMyAppointmentDetailedActivity extends AppCompatActivity impleme
     private ArrayList<String> arrayListContactName;
 
     private String appointmentDbKey;
+
+    private Calendar calendar = Calendar.getInstance();
 
     //firebase init
     private FirebaseAuth mAuth = FirebaseAuth.getInstance();
@@ -71,7 +76,7 @@ public class ViewMyAppointmentDetailedActivity extends AppCompatActivity impleme
         arrayListContactkey = new ArrayList<>();
         arrayListContactName = new ArrayList<>();
 
-        companyName = getIntent().getExtras().getString("companyName");
+        companyName = getIntent().getExtras().getString("companyname");
         apptTime = getIntent().getExtras().getString("time");
         apptDate = getIntent().getExtras().getString("date");
 
@@ -94,6 +99,24 @@ public class ViewMyAppointmentDetailedActivity extends AppCompatActivity impleme
         spWith = findViewById(R.id.spApptContact);
 
         etLocationName.setOnFocusChangeListener(this);
+        //get date
+        etDate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(view.equals(etDate)) {
+                    getDate(etDate);
+                }
+            }
+        });
+        etDate.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+                if(b) {
+                    getDate(etDate);
+                }
+            }
+        });
+
 
         etDate.setVisibility(View.GONE);
         etTime.setVisibility(View.GONE);
@@ -112,8 +135,7 @@ public class ViewMyAppointmentDetailedActivity extends AppCompatActivity impleme
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
                 appointment = dataSnapshot.getValue(Appointment.class);
                 if(appointment!=null){
-                    if(appointment.getDate().equals(apptDate) && appointment.getTime().equals(apptTime)){
-
+                    if(appointment.getDate().equals(apptDate) && appointment.getTime().equals(apptTime)) {
                         appointmentDbKey = dataSnapshot.getKey();
 
                         tvDate.setText(tvDate.getText().toString().concat(appointment.getDate()));
@@ -126,12 +148,11 @@ public class ViewMyAppointmentDetailedActivity extends AppCompatActivity impleme
                         etComment.setText(appointment.getComments());
 
 
-                        if(!appointment.getLocationName().equals("")){
+                        if (!appointment.getLocationName().equals("")) {
                             tvLocation.setText(tvLocation.getText().toString().concat(appointment.getLocationName().concat(", " + appointment.getLocationAddress())));
                             etLocationName.setText(appointment.getLocationName());
                             etLocationAddress.setText(appointment.getLocationAddress());
-                        }
-                        else{
+                        } else {
                             tvLocation.setText(tvLocation.getText().toString().concat(appointment.getLocationAddress()));
                             etLocationAddress.setText(appointment.getLocationAddress());
                         }
@@ -140,6 +161,7 @@ public class ViewMyAppointmentDetailedActivity extends AppCompatActivity impleme
                         etTime.setText(appointment.getTime());
                         etComment.setText(appointment.getComments());
                     }
+
                 }
             }
 
@@ -163,7 +185,7 @@ public class ViewMyAppointmentDetailedActivity extends AppCompatActivity impleme
 
             }
         };
-        databaseReference.child("Appointment").orderByChild("companyName").equalTo(companyName).addChildEventListener(childEventListenerAppointment);
+        databaseReference.child("Appointment").orderByChild("name").equalTo(companyName).addChildEventListener(childEventListenerAppointment);
         databaseReference.child("Appointment").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -266,11 +288,36 @@ public class ViewMyAppointmentDetailedActivity extends AppCompatActivity impleme
                 Appointment appointment2 = new Appointment(companyName, time, date, locationName, locationAddress,
                         comment, uid, appointment.getDateCreated(), contact_id,  appointment.getCompany_id());
                 databaseReference.child("Appointment").child(appointmentDbKey).setValue(appointment2);
+
+                Intent i = new Intent(ViewMyAppointmentDetailedActivity.this, ViewMyAppointmentActivity.class);
+                ViewMyAppointmentDetailedActivity.this.startActivity(i);
             }
         }
         else if(view.equals(btnDeleteAppt)){
             databaseReference.child("Appointment").child(appointmentDbKey).removeValue();
+
+            Intent i = new Intent(ViewMyAppointmentDetailedActivity.this, ViewMyAppointmentActivity.class);
+            ViewMyAppointmentDetailedActivity.this.startActivity(i);
         }
+    }
+
+    public void getDate(final EditText et){
+        int day, month, year, hour, mins;
+        day = calendar.get(Calendar.DAY_OF_MONTH);
+        month = calendar.get(Calendar.MONTH);
+        year = calendar.get(Calendar.YEAR);
+
+        DatePickerDialog datePickerDialog = new DatePickerDialog(ViewMyAppointmentDetailedActivity.this, new DatePickerDialog.OnDateSetListener() {
+
+            @Override
+            public void onDateSet(DatePicker datePicker, int year, int month, int day) {
+                et.setText(day+"/0"+(month+1)+"/"+year);
+            }
+        }
+                ,day,month,year);
+        datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
+        datePickerDialog.updateDate(year, month, day);
+        datePickerDialog.show();
     }
 
     public void setAppointmentEditable(){
