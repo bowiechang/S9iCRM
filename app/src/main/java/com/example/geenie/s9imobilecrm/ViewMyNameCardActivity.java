@@ -177,7 +177,7 @@ public class ViewMyNameCardActivity extends AppCompatActivity {
             }
         });
 
-        recyclerView = findViewById(R.id.rv);
+        recyclerView = findViewById(R.id.rvUpcoming);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setHasFixedSize(true);
 

@@ -8,10 +8,31 @@
     android:orientation="vertical"
     android:layout_margin="20dp">
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Upcoming Appointments"
+        android:textStyle="bold"
+        android:textSize="35sp"/>
+
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/rv"
+        android:id="@+id/rvUpcoming"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Past Appointments"
+        android:layout_marginTop="20dp"
+        android:textStyle="bold"
+        android:textSize="35sp"/>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rvPast"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_margin="10dp"/>
 
 </LinearLayout>
