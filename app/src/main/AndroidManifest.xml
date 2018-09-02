@@ -34,7 +34,8 @@
         <activity android:name=".ViewMyDetailedFollowUpActivity" />
         <activity android:name=".AddFollowUpActivity" />
         <activity android:name=".ViewMyCopierActivity" />
-        <activity android:name=".ViewDetailedCopierActivity"></activity>
+        <activity android:name=".ViewDetailedCopierActivity" />
+        <activity android:name=".AddSharedCoWorkingCompany"></activity>
     </application>
 
 </manifest>
