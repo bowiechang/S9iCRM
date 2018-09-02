@@ -32,7 +32,9 @@
         <activity android:name=".ViewMyDetailedTaskActivity" />
         <activity android:name=".ViewMyFollowUpActivity" />
         <activity android:name=".ViewMyDetailedFollowUpActivity" />
-        <activity android:name=".AddFollowUpActivity"></activity>
+        <activity android:name=".AddFollowUpActivity" />
+        <activity android:name=".ViewMyCopierActivity" />
+        <activity android:name=".ViewDetailedCopierActivity"></activity>
     </application>
 
 </manifest>

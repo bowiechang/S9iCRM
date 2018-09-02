@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:layout_marginTop="15dp"
+    android:layout_marginBottom="10dp"
+    tools:ignore="ExtraText">
+
+    //Brand + Model
+    <TextView
+        android:id="@+id/tvCopierBrandAndModel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:textSize="25sp"/>
+
+    //company name
+    <TextView
+        android:id="@+id/tvCopierCompanyName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:textSize="20sp"
+        android:text="Company: "/>
+
+    //age
+    <TextView
+        android:id="@+id/tvCopierAge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:textSize="20sp"
+        android:text="Age: "/>
+
+    //problem
+    <TextView
+        android:id="@+id/tvCopierProblem"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:textSize="20sp"
+        android:text="Problem faced: "/>
+
+    //contract ends
+    <TextView
+        android:id="@+id/tvCopierContExpiryDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:textSize="20sp"
+        android:text="Contract Expiry Date: "/>
+
+
+</LinearLayout>

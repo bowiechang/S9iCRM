@@ -14,6 +14,7 @@ public class MainTesterActivity extends AppCompatActivity implements View.OnClic
     private Button btnViewAppointment;
     private Button btnViewTask;
     private Button btnViewFollowUp;
+    private Button btnViewCopier;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +27,7 @@ public class MainTesterActivity extends AppCompatActivity implements View.OnClic
         btnViewAppointment = findViewById(R.id.btnViewAppointment);
         btnViewTask = findViewById(R.id.btnViewTask);
         btnViewFollowUp = findViewById(R.id.btnViewFollowUp);
+        btnViewCopier = findViewById(R.id.btnViewCopier);
 
         btnLOGINSIGNUP.setOnClickListener(this);
         btnAddNameCard.setOnClickListener(this);
@@ -33,6 +35,7 @@ public class MainTesterActivity extends AppCompatActivity implements View.OnClic
         btnViewAppointment.setOnClickListener(this);
         btnViewTask.setOnClickListener(this);
         btnViewFollowUp.setOnClickListener(this);
+        btnViewCopier.setOnClickListener(this);
     }
 
     @Override
@@ -59,6 +62,10 @@ public class MainTesterActivity extends AppCompatActivity implements View.OnClic
         }
         else if(view == btnViewFollowUp){
             Intent i = new Intent(MainTesterActivity.this, ViewMyFollowUpActivity.class);
+            MainTesterActivity.this.startActivity(i);
+        }
+        else if(view == btnViewCopier){
+            Intent i = new Intent(MainTesterActivity.this, ViewMyCopierActivity.class);
             MainTesterActivity.this.startActivity(i);
         }
 

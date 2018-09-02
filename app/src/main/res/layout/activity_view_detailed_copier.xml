@@ -1,0 +1,324 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ViewDetailedCopierActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:focusableInTouchMode="true">
+
+        //copier brand
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp">
+
+            <TextView
+                android:id="@+id/tvCopierBrand"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:text="Copier Brand:"
+                android:textSize="20sp"/>
+
+            <Spinner
+                android:id="@+id/spinnerCopierBrand"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_toRightOf="@id/tvCopierBrand"
+                android:entries="@array/copierBrand"/>
+
+        </RelativeLayout>
+
+        //copier model
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp">
+
+            <TextView
+                android:id="@+id/tvCopierModel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:text="Copier Model:"
+                android:textSize="20sp"/>
+
+            <EditText
+                android:id="@+id/etCopierModel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="enter Model"
+                android:layout_marginLeft="10dp"
+                android:layout_toRightOf="@id/tvCopierModel"/>
+
+        </RelativeLayout>
+
+        //copier age
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp">
+
+            <TextView
+                android:id="@+id/tvCopierAge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:text="Copier Age:"
+                android:textSize="20sp"/>
+
+            <EditText
+                android:id="@+id/etCopierAge"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="enter Age"
+                android:layout_marginLeft="10dp"
+                android:layout_toRightOf="@id/tvCopierAge"/>
+
+        </RelativeLayout>
+
+        //copier problem face
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp">
+
+            <TextView
+                android:id="@+id/tvCopierProblem"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:text="Problem Face by Copier:"
+                android:textSize="20sp"/>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_below="@id/tvCopierProblem"
+                android:layout_marginTop="5dp">
+
+                <CheckBox
+                    android:id="@+id/cbPrint"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:text="Print"/>
+
+                <CheckBox
+                    android:id="@+id/cbScan"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:text="Scan"/>
+
+                <CheckBox
+                    android:id="@+id/cbPaperJam"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:text="PaperJam"/>
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+        //copier rented or purchased
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp">
+
+            <TextView
+                android:id="@+id/tvCopierRorP"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:text="Copier Rented or Purchased:"
+                android:textSize="20sp"/>
+
+            <RadioGroup
+                android:id="@+id/rgRorP"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tvCopierRorP"
+                android:layout_marginTop="5dp"
+                android:checkedButton="@id/rbNormal"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/rbRented"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Rented"/>
+
+                <RadioButton
+                    android:id="@+id/rbPurchased"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Purchased"/>
+
+                <RadioButton
+                    android:id="@+id/rbUnsure"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Unsure"/>
+
+            </RadioGroup>
+
+        </RelativeLayout>
+
+        //copier contract start date
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp">
+
+            <TextView
+                android:id="@+id/tvCopierContStartDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:text="Copier Contract Start Date:"
+                android:textSize="20sp"/>
+
+            <EditText
+                android:id="@+id/etCopierContStartDate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="enter start date"
+                android:layout_marginLeft="10dp"
+                android:layout_toRightOf="@id/tvCopierContStartDate"/>
+
+        </RelativeLayout>
+
+        //copier contract length
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp">
+
+            <TextView
+                android:id="@+id/tvCopierContLength"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:text="Copier Contract Length(MONTHS):"
+                android:textSize="20sp"/>
+
+            <EditText
+                android:id="@+id/etCopierContLength"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:hint="enter months"
+                android:layout_marginLeft="10dp"
+                android:layout_toRightOf="@id/tvCopierContLength"/>
+
+        </RelativeLayout>
+
+        //copier contract expiry date
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp">
+
+            <TextView
+                android:id="@+id/tvCopierContExpiryDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:text="Copier Contract Expiry Date:"
+                android:textSize="20sp"/>
+
+            <EditText
+                android:id="@+id/etCopierContExpiryDate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="enter Expiry date"
+                android:layout_marginLeft="10dp"
+                android:layout_toRightOf="@id/tvCopierContExpiryDate"/>
+
+        </RelativeLayout>
+
+        //copier contract monthly payment
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp">
+
+            <TextView
+                android:id="@+id/tvCopierContMonthlyPayment"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:text="Copier Contract Monthly Payment:"
+                android:textSize="20sp"/>
+
+            <EditText
+                android:id="@+id/etCopierContMonthlyPayment"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="enter Monthly Payment"
+                android:layout_marginLeft="10dp"
+                android:layout_toRightOf="@id/tvCopierContMonthlyPayment"/>
+
+        </RelativeLayout>
+
+        //copier contract final payment
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp">
+
+            <TextView
+                android:id="@+id/tvCopierContFinalPayment"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:text="Copier Contract Final Payment:"
+                android:textSize="20sp"/>
+
+            <EditText
+                android:id="@+id/etCopierContFinalPayment"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="enter Final Payment"
+                android:layout_marginLeft="10dp"
+                android:layout_toRightOf="@id/tvCopierContFinalPayment"/>
+
+        </RelativeLayout>
+
+        //btn recontract
+        <Button
+            android:id="@+id/btnCopierRecont"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Recontracted"/>
+
+        //btn edit
+        <Button
+            android:id="@+id/btnCopierEdit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Edit"/>
+
+        //btn delete
+        <Button
+            android:id="@+id/btnCopierDelete"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Delete"/>
+
+
+
+
+    </LinearLayout>
+</ScrollView>
