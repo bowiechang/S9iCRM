@@ -1,7 +1,6 @@
 package com.example.geenie.s9imobilecrm;
 
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -9,7 +8,9 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
+import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;
@@ -27,16 +28,9 @@ public class AddSharedCoWorkingCompany extends AppCompatActivity {
 
     private Spinner spNameCard, spUser;
 
-    private Company company;
     private ArrayList<Company> companyArrayList= new ArrayList<>();
-    private ArrayList<Appointment> appointmentArrayList= new ArrayList<>();
-    private ArrayList<Contact> contactArrayList= new ArrayList<>();
-    private ArrayList<Copier> copierArrayList = new ArrayList<>();
-    private ArrayList<FollowUp> followUpArrayList= new ArrayList<>();
-
     private ArrayList<String> arraylistCompanyName = new ArrayList<>(), arrayListCompanyid = new ArrayList<>(), arrayListUsername = new ArrayList<>(), arrayListUserid = new ArrayList<>();
 
-    private SharedCoWorkingCompany sharedCoWorkingCompany;
 
     //firebase init
     private FirebaseAuth mAuth = FirebaseAuth.getInstance();
@@ -60,39 +54,7 @@ public class AddSharedCoWorkingCompany extends AppCompatActivity {
         btnRetrieveSharedWorkingCompany.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                databaseReference.child("SharedCoWorkingDetails").addChildEventListener(new ChildEventListener() {
-                    @Override
-                    public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-                        sharedCoWorkingCompany = dataSnapshot.getValue(SharedCoWorkingCompany.class);
-                        if(sharedCoWorkingCompany.getCompanyid().equals("-LKkPuTjiV5s7M_4zTkl")){
-                            ArrayList<Contact> contactArrayList1;
-                            contactArrayList1 = sharedCoWorkingCompany.getContactArrayList();
-
-                            System.out.println("contactarraylist1: " + contactArrayList1.size());
-                        }
-                    }
-
-                    @Override
-                    public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-
-                    }
-
-                    @Override
-                    public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
-
-                    }
-
-                    @Override
-                    public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                    }
-                });
+                retrieveTest();
             }
         });
 
@@ -104,169 +66,18 @@ public class AddSharedCoWorkingCompany extends AppCompatActivity {
                 int selectedCompany = spNameCard.getSelectedItemPosition();
                 final String companyid = arrayListCompanyid.get(selectedCompany);
 
-                int selectedContact = spUser.getSelectedItemPosition();
-                final String contactid = arrayListUserid.get(selectedContact);
+                int selectedUser = spUser.getSelectedItemPosition();
+                final String userid = arrayListUserid.get(selectedUser);
 
-                //retrieve company
-                databaseReference.child("Company").child(companyid).addListenerForSingleValueEvent(new ValueEventListener() {
+                ArrayList<String> arrayList = new ArrayList<>();
+
+                SharedCoWorkingCompany sharedCoWorkingCompany = new SharedCoWorkingCompany(companyid, uid, userid, "ongoing", arrayList);
+                databaseReference.child("SharedCoWorkingDetails").push().setValue(sharedCoWorkingCompany).addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
-                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        company = dataSnapshot.getValue(Company.class);
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError databaseError) {
-
+                    public void onSuccess(Void aVoid) {
+                        Toast.makeText(getApplicationContext(), "Shared!", Toast.LENGTH_SHORT).show();
                     }
                 });
-
-                //retrieve Contact
-                databaseReference.child("Contact").addChildEventListener(new ChildEventListener() {
-                    @Override
-                    public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-                        Contact contactCurrent = dataSnapshot.getValue(Contact.class);
-                        if(contactCurrent.getCompany_id().equals("-LKkPuTjiV5s7M_4zTkl")) {
-                            contactArrayList.add(contactCurrent);
-                        }
-                    }
-
-                    @Override
-                    public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-
-                    }
-
-                    @Override
-                    public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
-
-                    }
-
-                    @Override
-                    public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                    }
-                });
-
-                //retrieve appointment
-                databaseReference.child("Appointment").addChildEventListener(new ChildEventListener() {
-                    @Override
-                    public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-                        Appointment appointmentCurrent = dataSnapshot.getValue(Appointment.class);
-                        if(appointmentCurrent.getCompany_id().equals("-LKkPuTjiV5s7M_4zTkl")) {
-                            appointmentArrayList.add(appointmentCurrent);
-                        }
-                    }
-
-                    @Override
-                    public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-
-                    }
-
-                    @Override
-                    public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
-
-                    }
-
-                    @Override
-                    public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                    }
-                });
-
-                //retrieve copier
-                databaseReference.child("Copier").addChildEventListener(new ChildEventListener() {
-                    @Override
-                    public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-                        Copier copierCurrent = dataSnapshot.getValue(Copier.class);
-                        if(copierCurrent.getCompany_id().equals("-LKkPuTjiV5s7M_4zTkl")){
-                            copierArrayList.add(copierCurrent);
-                        }
-                    }
-
-                    @Override
-                    public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-
-                    }
-
-                    @Override
-                    public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
-
-                    }
-
-                    @Override
-                    public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                    }
-                });
-
-                //retrieve follow up
-                databaseReference.child("FollowUp").addChildEventListener(new ChildEventListener() {
-                    @Override
-                    public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-                        FollowUp followUpCurrent = dataSnapshot.getValue(FollowUp.class);
-                        if(followUpCurrent.getCompanyid().equals("-LKkPuTjiV5s7M_4zTkl")) {
-                            followUpArrayList.add(followUpCurrent);
-                        }
-                    }
-
-                    @Override
-                    public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-
-                    }
-
-                    @Override
-                    public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
-
-                    }
-
-                    @Override
-                    public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                    }
-                });
-
-                //
-                final Handler handler = new Handler();
-                new Thread(new Runnable() {
-                    public void run() {
-                        try{
-                            Thread.sleep(3000);
-                        }
-                        catch (Exception e) { } // Just catch the InterruptedException
-
-                        // Now we use the Handler to post back to the main thread
-                        handler.post(new Runnable() {
-                            public void run() {
-                                // Set the View's visibility back on the main UI Thread
-
-                                    SharedCoWorkingCompany sharedCoWorkingCompany = new SharedCoWorkingCompany(company, copierArrayList, appointmentArrayList,
-                                            followUpArrayList, contactArrayList, uid, contactid, companyid);
-
-                                    databaseReference.child("SharedCoWorkingDetails").push().setValue(sharedCoWorkingCompany);
-
-                            }
-                        });
-                    }
-                }).start();
 
 
             }
@@ -328,8 +139,10 @@ public class AddSharedCoWorkingCompany extends AppCompatActivity {
 
                 String[] split = user.getEmail().split("@");
                 String name = split[0];
-                arrayListUsername.add(name);
-                arrayListUserid.add(dataSnapshot.getKey());
+                if(!dataSnapshot.getKey().equals(uid)) {
+                    arrayListUsername.add(name);
+                    arrayListUserid.add(dataSnapshot.getKey());
+                }
             }
 
             @Override
@@ -367,6 +180,163 @@ public class AddSharedCoWorkingCompany extends AppCompatActivity {
             }
         });
 
+    }
+
+    public void retrieveTest(){
+
+        databaseReference.child("SharedCoWorkingDetails").addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+                final SharedCoWorkingCompany sharedCoWorkingCompany = dataSnapshot.getValue(SharedCoWorkingCompany.class);
+                if(sharedCoWorkingCompany.getCompanyid().equals("-LKkPuTjiV5s7M_4zTkl")){
+
+                    //for Appointment
+                    databaseReference.child("Appointment").addChildEventListener(new ChildEventListener() {
+                        @Override
+                        public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+                            Appointment appointment = dataSnapshot.getValue(Appointment.class);
+                            if(appointment.getCompany_id().equals(sharedCoWorkingCompany.getCompanyid())){
+                                System.out.println("tester(): appointment found" );
+                            }
+                        }
+
+                        @Override
+                        public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+                        }
+
+                        @Override
+                        public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
+
+                        }
+
+                        @Override
+                        public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                        }
+                    });
+
+                    //for Contact
+                    databaseReference.child("Contact").addChildEventListener(new ChildEventListener() {
+                        @Override
+                        public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+                            Contact contact = dataSnapshot.getValue(Contact.class);
+                            if(contact.getCompany_id().equals(sharedCoWorkingCompany.getCompanyid())){
+                                System.out.println("tester(): contact found" );
+                            }
+                        }
+
+                        @Override
+                        public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+                        }
+
+                        @Override
+                        public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
+
+                        }
+
+                        @Override
+                        public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                        }
+                    });
+
+                    //for Copier
+                    databaseReference.child("Copier").addChildEventListener(new ChildEventListener() {
+                        @Override
+                        public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+                            Copier copier = dataSnapshot.getValue(Copier.class);
+                            if(copier.getCompany_id().equals(sharedCoWorkingCompany.getCompanyid())){
+                                System.out.println("tester(): copier found" );
+                            }
+                        }
+
+                        @Override
+                        public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+                        }
+
+                        @Override
+                        public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
+
+                        }
+
+                        @Override
+                        public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                        }
+                    });
+
+                    //for FollowUp
+                    databaseReference.child("FollowUp").addChildEventListener(new ChildEventListener() {
+                        @Override
+                        public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+                            FollowUp followUp = dataSnapshot.getValue(FollowUp.class);
+                            if(followUp.getCompanyid().equals(sharedCoWorkingCompany.getCompanyid())){
+                                System.out.println("tester(): followUp found" );
+                            }
+                        }
+
+                        @Override
+                        public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+                        }
+
+                        @Override
+                        public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
+
+                        }
+
+                        @Override
+                        public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                        }
+                    });
+
+                }
+            }
+
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
     }
 
 }

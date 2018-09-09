@@ -56,4 +56,10 @@
         android:layout_height="wrap_content"
         android:text="Add Shared Co-Working Company ACTIVITY"/>
 
+    <Button
+        android:id="@+id/btnViewSharedCompany"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="View Shared Co-Working Company ACTIVITY"/>
+
 </LinearLayout>

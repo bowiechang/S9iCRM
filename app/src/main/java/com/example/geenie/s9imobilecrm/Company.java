@@ -1,6 +1,8 @@
 package com.example.geenie.s9imobilecrm;
 
-public class Company {
+import java.io.Serializable;
+
+public class Company implements Serializable{
 
     private String name;
     private String postalCode;

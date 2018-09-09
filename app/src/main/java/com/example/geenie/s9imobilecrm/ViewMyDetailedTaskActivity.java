@@ -94,14 +94,16 @@ public class ViewMyDetailedTaskActivity extends AppCompatActivity implements Vie
                         tvStatus.setText(tvStatus.getText().toString().concat(task.getStatus()));
                         tvWithCompany.setText(tvWithCompany.getText().toString().concat(task.getCompanyName()));
 
-                        log = task.getLog();
-                        for(int i=0; i<log.size(); i++) {
-                            String currentlog = log.get(i);
-                            LayoutInflater layoutInflater = (LayoutInflater) getBaseContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                            final View addView = layoutInflater.inflate(R.layout.rowtasklog, null);
-                            final TextView tvLog = addView.findViewById(R.id.tvLog);
-                            tvLog.setText(currentlog);
-                            containerLog.addView(addView, containerLog.getChildCount());
+                        if(task.getLog()!=null) {
+                            log = task.getLog();
+                            for (int i = 0; i < log.size(); i++) {
+                                String currentlog = log.get(i);
+                                LayoutInflater layoutInflater = (LayoutInflater) getBaseContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                                final View addView = layoutInflater.inflate(R.layout.rowlog, null);
+                                final TextView tvLog = addView.findViewById(R.id.tvLog);
+                                tvLog.setText(currentlog);
+                                containerLog.addView(addView, containerLog.getChildCount());
+                            }
                         }
 
 //                        Iterator myVeryOwnIterator = log.keySet().iterator();
@@ -110,7 +112,7 @@ public class ViewMyDetailedTaskActivity extends AppCompatActivity implements Vie
 //                            String value=(String)log.get(key);
 //
 //                            LayoutInflater layoutInflater = (LayoutInflater) getBaseContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-//                            final View addView = layoutInflater.inflate(R.layout.rowtasklog, null);
+//                            final View addView = layoutInflater.inflate(R.layout.rowlog, null);
 //                            final TextView tvLog = addView.findViewById(R.id.tvLog);
 //                            tvLog.setText(key.concat(": " + value));
 //                            containerLog.addView(addView, containerLog.getChildCount());
@@ -171,7 +173,7 @@ public class ViewMyDetailedTaskActivity extends AppCompatActivity implements Vie
         for(int i=0; i<log.size(); i++) {
             String currentlog = arrayList.get(i);
             LayoutInflater layoutInflater = (LayoutInflater) getBaseContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            final View addView = layoutInflater.inflate(R.layout.rowtasklog, null);
+            final View addView = layoutInflater.inflate(R.layout.rowlog, null);
             final TextView tvLog = addView.findViewById(R.id.tvLog);
             tvLog.setText(currentlog);
             containerLog.addView(addView, containerLog.getChildCount());

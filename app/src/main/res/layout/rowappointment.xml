@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layout_marginTop="15dp"
+    tools:ignore="ExtraText">
+
+    //Count
+    <TextView
+        android:id="@+id/tvApptCount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Appointment #"
+        android:textSize="25sp"
+        android:textStyle="bold"/>
+
+    //Date
+    <TextView
+        android:id="@+id/tvApptDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Appointment Date:"
+        android:textSize="20sp"/>
+
+    //Time
+    <TextView
+        android:id="@+id/tvApptTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Appointment Time:"
+        android:textSize="20sp"
+        android:layout_marginTop="10dp"/>
+
+    //Contact
+    <TextView
+        android:id="@+id/tvApptContact"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Appointment Contact:"
+        android:textSize="20sp"
+        android:layout_marginTop="10dp"/>
+
+    //Location
+    <TextView
+        android:id="@+id/tvApptLocation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Appointment Location:"
+        android:textSize="20sp"
+        android:layout_marginTop="10dp"/>
+
+    //Location Address
+    <TextView
+        android:id="@+id/tvApptLocationAddress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Appointment Address:"
+        android:textSize="20sp"
+        android:layout_marginTop="10dp"/>
+
+</LinearLayout>

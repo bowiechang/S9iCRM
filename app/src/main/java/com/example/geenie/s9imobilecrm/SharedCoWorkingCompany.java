@@ -4,85 +4,23 @@ import java.util.ArrayList;
 
 public class SharedCoWorkingCompany {
 
-    private Company company;
-    private ArrayList<Copier> copierArrayList;
-    private ArrayList<Appointment> appointmentArrayList;
-    private ArrayList<FollowUp> followUpArrayList;
-    private ArrayList<Contact> contactArrayList;
-    private String createBy;
-    private String sharedwith;
     private String companyid;
+    private String createdby;
+    private String sharedto;
+    private String status;
+    private ArrayList<String> log;
+
 
 
     public SharedCoWorkingCompany(){}
 
-    public SharedCoWorkingCompany(Company company, ArrayList<Copier> copierArrayList, ArrayList<Appointment> appointmentArrayList,
-                                  ArrayList<FollowUp> followUpArrayList, ArrayList<Contact> contactArrayList, String createBy, String sharedwith, String companyid){
+    public SharedCoWorkingCompany(String companyid ,String createdby, String sharedto, String status, ArrayList<String> log){
 
-        this.company = company;
-        this.copierArrayList = copierArrayList;
-        this.appointmentArrayList = appointmentArrayList;
-        this.followUpArrayList = followUpArrayList;
-        this.contactArrayList = contactArrayList;
-        this.createBy = createBy;
-        this.sharedwith = sharedwith;
         this.companyid = companyid;
-    }
-
-    public Company getCompany() {
-        return company;
-    }
-
-    public void setCompany(Company company) {
-        this.company = company;
-    }
-
-    public ArrayList<Copier> getCopierArrayList() {
-        return copierArrayList;
-    }
-
-    public void setCopierArrayList(ArrayList<Copier> copierArrayList) {
-        this.copierArrayList = copierArrayList;
-    }
-
-    public ArrayList<Appointment> getAppointmentArrayList() {
-        return appointmentArrayList;
-    }
-
-    public void setAppointmentArrayList(ArrayList<Appointment> appointmentArrayList) {
-        this.appointmentArrayList = appointmentArrayList;
-    }
-
-    public ArrayList<FollowUp> getFollowUpArrayList() {
-        return followUpArrayList;
-    }
-
-    public void setFollowUpArrayList(ArrayList<FollowUp> followUpArrayList) {
-        this.followUpArrayList = followUpArrayList;
-    }
-
-    public ArrayList<Contact> getContactArrayList() {
-        return contactArrayList;
-    }
-
-    public void setContactArrayList(ArrayList<Contact> contactArrayList) {
-        this.contactArrayList = contactArrayList;
-    }
-
-    public String getCreateBy() {
-        return createBy;
-    }
-
-    public void setCreateBy(String createBy) {
-        this.createBy = createBy;
-    }
-
-    public String getSharedwith() {
-        return sharedwith;
-    }
-
-    public void setSharedwith(String sharedwith) {
-        this.sharedwith = sharedwith;
+        this.createdby = createdby;
+        this.sharedto = sharedto;
+        this.status = status;
+        this.log = log;
     }
 
     public String getCompanyid() {
@@ -91,5 +29,37 @@ public class SharedCoWorkingCompany {
 
     public void setCompanyid(String companyid) {
         this.companyid = companyid;
+    }
+
+    public String getCreatedby() {
+        return createdby;
+    }
+
+    public void setCreatedby(String createdby) {
+        this.createdby = createdby;
+    }
+
+    public String getSharedto() {
+        return sharedto;
+    }
+
+    public void setSharedto(String sharedto) {
+        this.sharedto = sharedto;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public ArrayList<String> getLog() {
+        return log;
+    }
+
+    public void setLog(ArrayList<String> log) {
+        this.log = log;
     }
 }

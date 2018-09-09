@@ -1,6 +1,8 @@
 package com.example.geenie.s9imobilecrm;
 
-public class Appointment {
+import java.io.Serializable;
+
+public class Appointment implements Serializable {
 
     private String name;
     private String time;

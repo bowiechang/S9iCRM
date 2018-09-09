@@ -1,6 +1,8 @@
 package com.example.geenie.s9imobilecrm;
 
-public class Copier {
+import java.io.Serializable;
+
+public class Copier implements Serializable {
 
     private String brand;
     private String model;

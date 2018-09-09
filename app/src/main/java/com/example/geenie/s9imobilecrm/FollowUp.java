@@ -1,6 +1,8 @@
 package com.example.geenie.s9imobilecrm;
 
-public class FollowUp {
+import java.io.Serializable;
+
+public class FollowUp implements Serializable {
 
     private String followupDueDate;
     private String typeOfFollowup;

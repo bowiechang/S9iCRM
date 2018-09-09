@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layout_marginTop="15dp"
+    tools:ignore="ExtraText">
+
+    //Count
+    <TextView
+        android:id="@+id/tvFollowUpCount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Follow Up #"
+        android:textSize="25sp"
+        android:textStyle="bold"/>
+
+    //duedate
+    <TextView
+        android:id="@+id/tvFUDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Follow Up Due Date:"
+        android:textSize="20sp"/>
+
+    //type
+    <TextView
+        android:id="@+id/tvFUtype"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Follow Up Type:"
+        android:textSize="20sp"
+        android:layout_marginTop="10dp"/>
+
+    //status
+    <TextView
+        android:id="@+id/tvFUStatus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Follow Up Type:"
+        android:textSize="20sp"
+        android:layout_marginTop="10dp"/>
+
+
+</LinearLayout>
