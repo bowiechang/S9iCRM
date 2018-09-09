@@ -62,4 +62,10 @@
         android:layout_height="wrap_content"
         android:text="View Shared Co-Working Company ACTIVITY"/>
 
+    <Button
+        android:id="@+id/btnTakePhotoActivity"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Capture Photo ACTIVITY"/>
+
 </LinearLayout>
