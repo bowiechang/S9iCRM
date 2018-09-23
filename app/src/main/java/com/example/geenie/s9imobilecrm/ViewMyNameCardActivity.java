@@ -6,9 +6,11 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -26,9 +28,12 @@ public class ViewMyNameCardActivity extends AppCompatActivity {
 
     private Company company;
     private RecyclerView recyclerView;
+    private SearchView sv;
     private ArrayList<Company> list;
 //    private ArrayList<Company> listClone;
     ArrayList <Company> arraylistcurrentfilter;
+
+    private ViewMyNameCardAdapter viewMyShowsAdapter;
 
     private Spinner spinnerSort1, spinnerSort2, spinnerFilter;
 
@@ -47,6 +52,42 @@ public class ViewMyNameCardActivity extends AppCompatActivity {
     }
 
     public void init(){
+
+        sv = findViewById(R.id.mSearch);
+        sv.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String query) {
+                Toast.makeText(getApplicationContext(), "Querying: " + query, Toast.LENGTH_SHORT).show();
+
+                ArrayList<Company>listClone = new ArrayList<>();
+                ArrayList<Company>listSubmit = new ArrayList<>();
+                listSubmit.clear();
+                listClone.addAll(list);
+
+                if(!query.equals("")){
+                    for (int i = 0; i < listClone.size(); i++) {
+                        Company company = listClone.get(i);
+                        if (company.getName().toLowerCase().contains(query.toLowerCase())) {
+                            listSubmit.add(company);
+                        }
+                    }
+                    getMyShowsList(listSubmit);
+                }else{
+                    getMyShowsList(list);
+                }
+
+
+
+
+                return false;
+            }
+        });
+
         spinnerSort1 = findViewById(R.id.spinnerSort1);
         spinnerSort2 = findViewById(R.id.spinnerSort2);
         spinnerFilter = findViewById(R.id.spinnerFilter);
@@ -231,7 +272,7 @@ public class ViewMyNameCardActivity extends AppCompatActivity {
 
         System.out.println("getmyshowslist list size: " + list.size());
 
-        ViewMyNameCardAdapter viewMyShowsAdapter = new ViewMyNameCardAdapter(ViewMyNameCardActivity.this, list);
+        viewMyShowsAdapter = new ViewMyNameCardAdapter(ViewMyNameCardActivity.this, list, list);
         recyclerView.setAdapter(viewMyShowsAdapter);
 
 //        if(listClone.isEmpty()) {

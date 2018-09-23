@@ -18,15 +18,14 @@ import java.util.Locale;
  * Created by admin on 20/7/17.
  */
 
-public class ViewMyNameCardAdapter extends RecyclerView.Adapter<ViewMyNameCardHolder> {
+public class ViewMyNameCardAdapter extends RecyclerView.Adapter<ViewMyNameCardHolder>{
 
     protected List<Company> list;
     protected Context context;
 
-    public ViewMyNameCardAdapter(Context context, List<Company> list){
+    public ViewMyNameCardAdapter(Context context, List<Company> list, List<Company> list2){
         this.context = context;
         this.list = list;
-
     }
 
     @Override
@@ -64,6 +63,7 @@ public class ViewMyNameCardAdapter extends RecyclerView.Adapter<ViewMyNameCardHo
         });
 
     }
+
 
     @Override
     public int getItemCount() {
@@ -112,5 +112,4 @@ public class ViewMyNameCardAdapter extends RecyclerView.Adapter<ViewMyNameCardHo
 
 
     }
-
 }
