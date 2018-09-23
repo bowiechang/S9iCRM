@@ -3,6 +3,7 @@ package com.example.geenie.s9imobilecrm;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -18,6 +19,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.nguyenhoanglam.imagepicker.model.Config;
@@ -31,12 +33,18 @@ public class CapturePhotoActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
 
+    private Boolean exist = false;
+    private int count, counter;
+    private String dbkey = "";
+
     //firebase init
     private FirebaseAuth mAuth = FirebaseAuth.getInstance();
     private FirebaseUser user = mAuth.getCurrentUser();
     private String uid = user.getUid();
     private DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
     private StorageReference storageReference = FirebaseStorage.getInstance().getReference();
+
+    private ChildEventListener childEventListenerChecker;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +56,7 @@ public class CapturePhotoActivity extends AppCompatActivity {
         recyclerView.setHasFixedSize(true);
 
         retrieveStoragePath();
+        checkIfExist();
 
 
         Button btnCapturePhoto = findViewById(R.id.btnLaunchPhotoCaptureLib);
@@ -94,15 +103,118 @@ public class CapturePhotoActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+    protected void onActivityResult(int requestCode, int resultCode, final Intent data) {
         if (requestCode == Config.RC_PICK_IMAGES && resultCode == RESULT_OK && data != null) {
-            ArrayList<Image> images = data.getParcelableArrayListExtra(Config.EXTRA_IMAGES);
-            for (int i = 0; i < images.size(); i++) {
-                storageReference.child("-LKkPuTjiV5s7M_4zTkl".concat("/pic" + i + ".jpg")).putFile(Uri.fromFile(new File(images.get(i).getPath())));
-            }
 
-            Photo photo = new Photo(String.valueOf(images.size()));
-            databaseReference.child("Photo").child("-LKkPuTjiV5s7M_4zTkl").push().setValue(photo);
+            System.out.println("exist prompt exist status: " + exist);
+            System.out.println("exist prompt");
+
+//            //creation of the childeventlistner
+            final ChildEventListener childEventListenerChecker = new ChildEventListener() {
+                @Override
+                public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+                    exist = true;
+                    if(dbkey.equals("")) {
+                        dbkey = dataSnapshot.getKey();
+                    }
+                    System.out.println("exist childevent: " + exist);
+                    System.out.println("exist dbkey: " + dbkey);
+                    Photo photo = dataSnapshot.getValue(Photo.class);
+                    count = Integer.parseInt(photo.getCount());
+                    counter = count;
+                }
+
+                @Override
+                public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+                }
+
+                @Override
+                public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
+
+                }
+
+                @Override
+                public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                }
+            };
+
+            databaseReference.child("Photo").child("-LKkPuTjiV5s7M_4zTkl").addChildEventListener(childEventListenerChecker);
+            databaseReference.child("Photo").child("-LKkPuTjiV5s7M_4zTkl").addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    if(exist){
+                        ArrayList<Image> images = data.getParcelableArrayListExtra(Config.EXTRA_IMAGES);
+                        for (int i = 0; i < images.size(); i++) {
+                            storageReference.child("-LKkPuTjiV5s7M_4zTkl".concat("/pic" + counter + ".jpg")).putFile(Uri.fromFile(new File(images.get(i).getPath())));
+                            counter++;
+                        }
+                        Photo photo2 = new Photo(String.valueOf(images.size() + count));
+                        databaseReference.child("Photo").child("-LKkPuTjiV5s7M_4zTkl").child(dbkey).setValue(photo2);
+                        System.out.println("exist pushing child: in SingleEvent");
+                        System.out.println("exist singleValue: " + exist);
+
+                        final Handler handler = new Handler();
+                        new Thread(new Runnable() {
+                            public void run() {
+                                try {
+                                    Thread.sleep(2000);
+                                }
+                                catch (Exception e) { }
+                                handler.post(new Runnable() {
+                                    public void run() {
+                                        retrieveStoragePath();
+                                    }
+                                });
+                            }
+                        }).start();
+                    }
+                    else{
+                        databaseReference.child("Photo").child("-LKkPuTjiV5s7M_4zTkl").removeEventListener(childEventListenerChecker);
+                    }
+
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                }
+            });
+
+            if(!exist){
+                System.out.println("exist: " + exist);
+
+                ArrayList<Image> images = data.getParcelableArrayListExtra(Config.EXTRA_IMAGES);
+                for (int i = 0; i < images.size(); i++) {
+                    storageReference.child("-LKkPuTjiV5s7M_4zTkl".concat("/pic" + i + ".jpg")).putFile(Uri.fromFile(new File(images.get(i).getPath())));
+                }
+
+                Photo photo2 = new Photo(String.valueOf(images.size()));
+                databaseReference.child("Photo").child("-LKkPuTjiV5s7M_4zTkl").push().setValue(photo2);
+                System.out.println("exist pushing child: in (!exist checker)");
+
+                final Handler handler = new Handler();
+                new Thread(new Runnable() {
+                    public void run() {
+                        try {
+                            Thread.sleep(2000);
+                        }
+                        catch (Exception e) { }
+                        handler.post(new Runnable() {
+                            public void run() {
+                                retrieveStoragePath();
+                            }
+                        });
+                    }
+                }).start();
+
+            }
         }
         super.onActivityResult(requestCode, resultCode, data);
     }
@@ -112,6 +224,7 @@ public class CapturePhotoActivity extends AppCompatActivity {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
                 Photo photo = dataSnapshot.getValue(Photo.class);
+                System.out.println("exist storage count: " + photo.getCount());
                 ArrayList<String> arrayList = new ArrayList<>();
                 for (int i = 0; i < Integer.parseInt(photo.getCount()); i++) {
                     arrayList.add(String.valueOf(i));
@@ -145,5 +258,44 @@ public class CapturePhotoActivity extends AppCompatActivity {
 
         PhotoAdapter photoAdapter = new PhotoAdapter(list,CapturePhotoActivity.this);
         recyclerView.setAdapter(photoAdapter);
+    }
+
+    private void checkIfExist(){
+
+        childEventListenerChecker = new ChildEventListener() {
+            @Override
+            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+                exist = true;
+                if(dbkey.equals("")) {
+                    dbkey = dataSnapshot.getKey();
+                }
+                System.out.println("exist childevent: " + exist);
+                System.out.println("exist dbkey: " + dbkey);
+                Photo photo = dataSnapshot.getValue(Photo.class);
+                count = Integer.parseInt(photo.getCount());
+                counter = count;
+            }
+
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        };
+        databaseReference.child("Photo").child("-LKkPuTjiV5s7M_4zTkl").addChildEventListener(childEventListenerChecker);
     }
 }

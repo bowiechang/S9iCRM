@@ -11,6 +11,13 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rvPhotos"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/lightgrey"
+            android:orientation="horizontal"/>
+
         //company
         <LinearLayout
             android:id="@+id/llCompanyDetails"
@@ -515,6 +522,12 @@
                 android:orientation="vertical"/>
 
         </LinearLayout>
+
+        <Button
+            android:id="@+id/btnLaunchPhotoCaptureLib"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Take Photo"/>
 
         <Button
             android:id="@+id/btnAddNameCard"

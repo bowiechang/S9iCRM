@@ -30,13 +30,14 @@ public class ViewMyNameCardActivity extends AppCompatActivity {
 //    private ArrayList<Company> listClone;
     ArrayList <Company> arraylistcurrentfilter;
 
+    private Spinner spinnerSort1, spinnerSort2, spinnerFilter;
+
     //firebase init
     private FirebaseAuth mAuth = FirebaseAuth.getInstance();
     private FirebaseUser user = mAuth.getCurrentUser();
     private String uid = user.getUid();
     private DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("Company");
 
-    private Spinner spinnerSort1, spinnerSort2, spinnerFilter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

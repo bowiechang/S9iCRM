@@ -13,6 +13,13 @@
         android:orientation="vertical"
         tools:ignore="ExtraText">
 
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rvPhotos"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/lightgrey"
+            android:orientation="horizontal"/>
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -348,6 +355,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="ADD FOLLOWUP"/>
+
+        <Button
+            android:id="@+id/btnLaunchPhotoCaptureLib"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Take Photo"/>
 
     </LinearLayout>
 
