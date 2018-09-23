@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -26,6 +28,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -50,11 +54,21 @@ public class ViewDetailedSharedCoWorkingCompanyActivity extends AppCompatActivit
     private ArrayList<Contact> contactArrayList= new ArrayList<>();
     private ArrayList<String> log = new ArrayList<>();
 
+    //photos
+    private RecyclerView recyclerView;
+    private Button btnCapturePhoto;
+
+    private Boolean exist = false;
+    private int count, counter;
+    private String dbkey = "";
+
     //firebase init
     private FirebaseAuth mAuth = FirebaseAuth.getInstance();
     private FirebaseUser user = mAuth.getCurrentUser();
     private String uid = user.getUid();
     private DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
+    private ChildEventListener childEventListenerChecker;
+    private StorageReference storageReference = FirebaseStorage.getInstance().getReference();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,6 +83,11 @@ public class ViewDetailedSharedCoWorkingCompanyActivity extends AppCompatActivit
     public void init(){
 
         companyid = getIntent().getExtras().getString("companyid");
+
+        recyclerView = findViewById(R.id.rvPhotos);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+        recyclerView.setHasFixedSize(true);
+        retrieveStoragePath();
 
         etLog = findViewById(R.id.etLog);
         btnSubmitLog = findViewById(R.id.btnLog);
@@ -795,5 +814,46 @@ public class ViewDetailedSharedCoWorkingCompanyActivity extends AppCompatActivit
         else if(view.equals(btnTerminateSharing)){
             databaseReference.child("SharedCoWorkingDetails").child(dbSharedCoWorkingKey).child("status").setValue("terminated");
         }
+    }
+
+    public void retrieveStoragePath(){
+        databaseReference.child("Photo").child(companyid).addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+                Photo photo = dataSnapshot.getValue(Photo.class);
+                System.out.println("exist storage count: " + photo.getCount());
+                ArrayList<String> arrayList = new ArrayList<>();
+                for (int i = 0; i < Integer.parseInt(photo.getCount()); i++) {
+                    arrayList.add(String.valueOf(i));
+                }
+                getPhotos(arrayList);
+            }
+
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+    private void getPhotos(ArrayList<String> list){
+
+        PhotoAdapter photoAdapter = new PhotoAdapter(list,ViewDetailedSharedCoWorkingCompanyActivity.this);
+        recyclerView.setAdapter(photoAdapter);
     }
 }
