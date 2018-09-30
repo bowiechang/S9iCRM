@@ -3,11 +3,14 @@ package com.example.geenie.s9imobilecrm;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -19,6 +22,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -30,6 +34,7 @@ public class ViewMyNameCardActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private SearchView sv;
     private ArrayList<Company> list;
+    private ArrayList<Company> listUntounched;
 //    private ArrayList<Company> listClone;
     ArrayList <Company> arraylistcurrentfilter;
 
@@ -48,6 +53,17 @@ public class ViewMyNameCardActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_my_name_card);
+
+        //status bar
+        Window window = this.getWindow();
+        window.setStatusBarColor(ContextCompat.getColor(this, R.color.black));
+
+        //toolbar
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+
         init();
     }
 
@@ -62,6 +78,9 @@ public class ViewMyNameCardActivity extends AppCompatActivity {
 
             @Override
             public boolean onQueryTextChange(String query) {
+                spinnerFilter.setSelection(0);
+                spinnerSort1.setSelection(0);
+                spinnerSort2.setSelection(0);
                 Toast.makeText(getApplicationContext(), "Querying: " + query, Toast.LENGTH_SHORT).show();
 
                 ArrayList<Company>listClone = new ArrayList<>();
@@ -80,13 +99,19 @@ public class ViewMyNameCardActivity extends AppCompatActivity {
                 }else{
                     getMyShowsList(list);
                 }
-
-
-
-
                 return false;
             }
         });
+
+        recyclerView = findViewById(R.id.rvUpcoming);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setHasFixedSize(true);
+
+        list = new ArrayList<>();
+        listUntounched = new ArrayList<>();
+//        listClone = new ArrayList<>();
+        arraylistcurrentfilter = new ArrayList<>();
+        read();
 
         spinnerSort1 = findViewById(R.id.spinnerSort1);
         spinnerSort2 = findViewById(R.id.spinnerSort2);
@@ -99,6 +124,9 @@ public class ViewMyNameCardActivity extends AppCompatActivity {
                 if(arraylistcurrentfilter.isEmpty()){
                     //USE LIST
                     switch(i) {
+                        case 0:
+                            getMyShowsList(listUntounched);
+                            break;
                         //calls highest to lowest
                         case 1:
                             sortby("callhighlow", list);
@@ -119,6 +147,9 @@ public class ViewMyNameCardActivity extends AppCompatActivity {
                 }
                 else{
                     switch(i) {
+                        case 0:
+                            getMyShowsList(listUntounched);
+                            break;
                         //calls highest to lowest
                         case 1:
                             sortby("callhighlow", arraylistcurrentfilter);
@@ -151,6 +182,9 @@ public class ViewMyNameCardActivity extends AppCompatActivity {
                 if(arraylistcurrentfilter.isEmpty()){
                     //USE LIST
                     switch(i) {
+                        case 0:
+                            getMyShowsList(listUntounched);
+                            break;
                         //calls highest to lowest
                         case 1:
                             sortby("callhighlow", list);
@@ -163,6 +197,9 @@ public class ViewMyNameCardActivity extends AppCompatActivity {
                 }
                 else{
                     switch(i) {
+                        case 0:
+                            getMyShowsList(listUntounched);
+                            break;
                         //calls highest to lowest
                         case 1:
                             sortby("callhighlow", arraylistcurrentfilter);
@@ -186,6 +223,11 @@ public class ViewMyNameCardActivity extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
 
                 switch(i) {
+                    case 0:
+                        getMyShowsList(listUntounched);
+                        spinnerSort1.setVisibility(View.VISIBLE);
+                        spinnerSort2.setVisibility(View.GONE);
+                        break;
                     case 1:
                         filterWithClone("Copier");
                         spinnerSort1.setVisibility(View.VISIBLE);
@@ -201,14 +243,17 @@ public class ViewMyNameCardActivity extends AppCompatActivity {
                     case 4:
                         filterWithClone("a.Urgent");
                         spinnerSort1.setVisibility(View.GONE);
+                        spinnerSort2.setVisibility(View.VISIBLE);
                         break;
                     case 5:
                         filterWithClone("b.Follow Up");
                         spinnerSort1.setVisibility(View.GONE);
+                        spinnerSort2.setVisibility(View.VISIBLE);
                         break;
                     case 6:
                         filterWithClone("c.Normal");
                         spinnerSort1.setVisibility(View.GONE);
+                        spinnerSort2.setVisibility(View.VISIBLE);
                         break;
                 }
             }
@@ -219,14 +264,7 @@ public class ViewMyNameCardActivity extends AppCompatActivity {
             }
         });
 
-        recyclerView = findViewById(R.id.rvUpcoming);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setHasFixedSize(true);
 
-        list = new ArrayList<>();
-//        listClone = new ArrayList<>();
-        arraylistcurrentfilter = new ArrayList<>();
-        read();
 
     }
 
@@ -261,6 +299,16 @@ public class ViewMyNameCardActivity extends AppCompatActivity {
 
             }
 
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                listUntounched.addAll(list);
+            }
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
@@ -365,6 +413,12 @@ public class ViewMyNameCardActivity extends AppCompatActivity {
             });
             getMyShowsList(list);
         }
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
     }
 
     public void cloneList() {

@@ -10,7 +10,7 @@ import java.util.List;
 
 public class ViewMyAppointmentHolder extends RecyclerView.ViewHolder {
 
-    protected TextView tvApptCompanyName, tvApptTime, tvApptDate;
+    protected TextView tvApptCompanyName, tvApptDateTime, tvApptLocationAddress;
     private Context context;
 
     public ViewMyAppointmentHolder(View itemview, List<Appointment> list, Context context){
@@ -18,8 +18,8 @@ public class ViewMyAppointmentHolder extends RecyclerView.ViewHolder {
         this.context = context;
 
         tvApptCompanyName = itemview.findViewById(R.id.tvApptCompanyName);
-        tvApptTime = itemview.findViewById(R.id.tvApptTime);
-        tvApptDate = itemview.findViewById(R.id.tvApptDate);
+        tvApptDateTime = itemview.findViewById(R.id.tvApptDateTime);
+        tvApptLocationAddress = itemview.findViewById(R.id.tvApptLocationAddress);
 
     }
 }

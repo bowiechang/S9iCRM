@@ -3,30 +3,76 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="200dp"
     android:orientation="vertical"
     android:layout_marginTop="15dp"
+    android:background="@drawable/rectangle"
+    android:padding="20dp"
     tools:ignore="ExtraText">
 
     //name
     <TextView
         android:id="@+id/tvApptCompanyName"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Comapany Name: "/>
+        android:textSize="30sp"
+        android:textColor="@color/black"
+        android:textAllCaps="true"
+        android:fontFamily="@font/roboto_slab_bold"/>
 
-    //Time
-    <TextView
-        android:id="@+id/tvApptTime"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Appointment Time: "/>
 
-    //Date
-    <TextView
-        android:id="@+id/tvApptDate"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Appointment Date: "/>
+        android:orientation="horizontal"
+        android:layout_marginTop="20dp">
+
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/icon_upcomingappt_datetime"
+            android:layout_gravity="center_vertical"/>
+
+        //Date Time
+        <TextView
+            android:id="@+id/tvApptDateTime"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="25dp"
+            android:textSize="18sp"
+            android:textColor="@color/black"
+            android:fontFamily="@font/roboto_condensed_bold"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="10dp">
+
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/icon_upcomingappt_location"
+            android:layout_gravity="center_vertical"/>
+
+        //location address
+        <TextView
+            android:id="@+id/tvApptLocationAddress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="25dp"
+            android:textSize="18sp"
+            android:textColor="@color/black"
+            android:fontFamily="@font/roboto_condensed_bold"/>
+
+    </LinearLayout>
+
+
+
+
 
 </LinearLayout>

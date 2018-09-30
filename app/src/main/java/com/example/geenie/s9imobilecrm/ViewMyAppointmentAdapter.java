@@ -22,7 +22,6 @@ public class ViewMyAppointmentAdapter extends RecyclerView.Adapter<ViewMyAppoint
     public ViewMyAppointmentAdapter(Context context, List<Appointment> list){
         this.context = context;
         this.list = list;
-
     }
 
     @Override
@@ -38,10 +37,9 @@ public class ViewMyAppointmentAdapter extends RecyclerView.Adapter<ViewMyAppoint
     @Override
     public void onBindViewHolder(final ViewMyAppointmentHolder holder, final int position) {
 
-        holder.tvApptCompanyName.setText(holder.tvApptCompanyName.getText().toString().concat(list.get(position).getName()));
-        holder.tvApptDate.setText(holder.tvApptDate.getText().toString().concat((list.get(position).getDate())));
-        holder.tvApptTime.setText(holder.tvApptTime.getText().toString().concat(list.get(position).getTime()));
-
+        holder.tvApptCompanyName.setText((list.get(position).getName()));
+        holder.tvApptDateTime.setText(list.get(position).getDate() .concat(" at " + list.get(position).getTime()));
+        holder.tvApptLocationAddress.setText((list.get(position).getLocationAddress()));
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override

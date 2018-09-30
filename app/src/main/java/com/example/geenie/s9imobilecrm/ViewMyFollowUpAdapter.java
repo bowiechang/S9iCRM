@@ -56,10 +56,17 @@ public class ViewMyFollowUpAdapter extends RecyclerView.Adapter<ViewMyFollowUpHo
     public void onBindViewHolder(final ViewMyFollowUpHolder holder, final int position) {
 
 
-        holder.tvFollowUpDate.setText(holder.tvFollowUpDate.getText().toString().concat(list.get(position).getFollowupDueDate()));
-        holder.tvFollowUpName.setText(holder.tvFollowUpName.getText().toString().concat(cname));
-        holder.tvFollowUpStatus.setText(holder.tvFollowUpStatus.getText().toString().concat(list.get(position).getFollowUpStatus()));
-        holder.tvFollowUpType.setText(holder.tvFollowUpType.getText().toString().concat(list.get(position).getTypeOfFollowup()));
+        holder.tvFollowUpDate.setText("By ".concat(list.get(position).getFollowupDueDate()));
+        holder.tvFollowUpName.setText((cname));
+
+        //capitalise first letter
+        String status = list.get(position).getFollowUpStatus();
+        String type = list.get(position).getTypeOfFollowup();
+        String newstatus = status.substring(0, 1).toUpperCase()+status.substring(1);
+        String newtype = type.substring(0, 1).toUpperCase()+type.substring(1);
+
+        holder.tvFollowUpStatus.setText(newstatus);
+        holder.tvFollowUpType.setText(newtype);
 
         databaseReference.child("Company").orderByKey().equalTo(list.get(position).getCompanyid()).addChildEventListener(new ChildEventListener() {
             @Override

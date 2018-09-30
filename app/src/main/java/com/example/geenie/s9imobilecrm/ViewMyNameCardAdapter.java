@@ -42,12 +42,15 @@ public class ViewMyNameCardAdapter extends RecyclerView.Adapter<ViewMyNameCardHo
     @Override
     public void onBindViewHolder(final ViewMyNameCardHolder holder, final int position) {
 
+        String[] split = list.get(position).getPriorityLevel().split("\\.");
+        String PL = split[1];
+
         holder.tvCompanyName.setText(holder.tvCompanyName.getText().toString().concat(list.get(position).getName()));
         holder.tvCompanyAddress.setText(holder.tvCompanyAddress.getText().toString().concat(getLatLng(list.get(position).getPostalCode())));
         holder.tvCompanyIndustry.setText(holder.tvCompanyIndustry.getText().toString().concat(list.get(position).getIndustry()));
         holder.tvCompanyLack.setText(holder.tvCompanyLack.getText().toString().concat(list.get(position).getCompanyLackOf()));
         holder.tvCompanyOfficeNum.setText(holder.tvCompanyOfficeNum.getText().toString().concat(list.get(position).getOfficeTel()));
-        holder.tvCompanyPriorityLevel.setText(holder.tvCompanyPriorityLevel.getText().toString().concat(list.get(position).getPriorityLevel()));
+        holder.tvCompanyPriorityLevel.setText(holder.tvCompanyPriorityLevel.getText().toString().concat(PL));
         holder.tvNumberOfTimesCalled.setText(holder.tvNumberOfTimesCalled.getText().toString().concat(list.get(position).getNumberOfTimesCalled() + ""));
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -8,64 +8,83 @@
     android:padding="20dp"
     android:orientation="vertical">
 
-    <Button
-        android:id="@+id/btnLOGINSIGNUP"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="LOGIN/SIGNUP ACTIVITY"/>
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-    <Button
-        android:id="@+id/btnAddNameCard"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="ADD NAME CARD ACTIVITY"/>
+        <Button
+            android:id="@+id/btnLOGINSIGNUP"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="LOGIN/SIGNUP ACTIVITY"/>
 
-    <Button
-        android:id="@+id/btnViewNameCard"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="VIEW NAME CARD ACTIVITY"/>
+        <Button
+            android:id="@+id/btnAddNameCard"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="ADD NAME CARD ACTIVITY"/>
 
-    <Button
-        android:id="@+id/btnViewAppointment"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="VIEW Appointment ACTIVITY"/>
+        <Button
+            android:id="@+id/btnViewNameCard"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="VIEW NAME CARD ACTIVITY"/>
 
-    <Button
-        android:id="@+id/btnViewTask"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="VIEW Task ACTIVITY"/>
+        <Button
+            android:id="@+id/btnViewAppointment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="VIEW Appointment ACTIVITY"/>
 
-    <Button
-        android:id="@+id/btnViewFollowUp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="VIEW Follow Up ACTIVITY"/>
+        <Button
+            android:id="@+id/btnViewTask"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="VIEW Task ACTIVITY"/>
 
-    <Button
-        android:id="@+id/btnViewCopier"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="VIEW Copier ACTIVITY"/>
+        <Button
+            android:id="@+id/btnViewFollowUp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="VIEW Follow Up ACTIVITY"/>
 
-    <Button
-        android:id="@+id/btnAddSharedCompany"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Add Shared Co-Working Company ACTIVITY"/>
+        <Button
+            android:id="@+id/btnViewCopier"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="VIEW Copier ACTIVITY"/>
 
-    <Button
-        android:id="@+id/btnViewSharedCompany"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="View Shared Co-Working Company ACTIVITY"/>
+        <Button
+            android:id="@+id/btnAddSharedCompany"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Add Shared Co-Working Company ACTIVITY"/>
 
-    <Button
-        android:id="@+id/btnTakePhotoActivity"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Capture Photo ACTIVITY"/>
+        <Button
+            android:id="@+id/btnViewSharedCompany"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="View Shared Co-Working Company ACTIVITY"/>
 
-</LinearLayout>
+        <Button
+            android:id="@+id/btnTakePhotoActivity"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Capture Photo ACTIVITY"/>
+
+        <Button
+            android:id="@+id/btnViewAlerts"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="View Alerts"/>
+
+        <Button
+            android:id="@+id/btnViewDashBoard"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="View Dashboard"/>
+
+    </LinearLayout>
+
+</ScrollView>

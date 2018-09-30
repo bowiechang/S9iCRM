@@ -1,53 +1,92 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".ViewMyNameCardActivity"
-    android:padding="10dp">
+    tools:context=".ViewMyNameCardActivity">
 
-    <android.support.v7.widget.SearchView
-        android:id="@+id/mSearch"
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/appbarlayout"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        app:defaultQueryHint="Search.."
-        />
-
-    <TextView
-        android:id="@+id/tvViewMyNameCard"
-        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Saved Name Cards"
-        android:textStyle="bold"
-        android:textSize="25sp"/>
+        android:background="@null"
+        app:elevation="0dp"
+        android:elevation="0dp">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/offwhite"
+            android:theme="@style/ToolbarTheme">
+
+            <TextView
+                android:id="@+id/toolbar_title"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:text="Name Card"
+                android:textColor="@color/black"
+                android:fontFamily="@font/roboto_slab_bold"
+                android:textSize="25sp"
+                android:textStyle="bold" />
+
+        </android.support.v7.widget.Toolbar>
+
+    </android.support.design.widget.AppBarLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_below="@id/appbarlayout"
+        android:padding="15dp">
+
+        <android.support.v7.widget.SearchView
+            android:id="@+id/mSearch"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            app:defaultQueryHint="Search.."
+            android:background="@color/lightgrey"/>
 
         <Spinner
             android:id="@+id/spinnerFilter"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:entries="@array/filter"/>
+            android:entries="@array/filter"
+            android:layout_marginTop="10dp"/>
 
-        <Spinner
-            android:id="@+id/spinnerSort1"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:entries="@array/sort1"/>
+            android:layout_height="wrap_content">
 
-        <Spinner
-            android:id="@+id/spinnerSort2"
+            <Spinner
+                android:id="@+id/spinnerSort1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:entries="@array/sort1"
+                android:layout_marginTop="5dp"/>
+
+            <Spinner
+                android:id="@+id/spinnerSort2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:entries="@array/sort2"
+                android:layout_marginTop="5dp"
+                android:visibility="invisible"/>
+
+        </RelativeLayout>
+
+
+
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rvUpcoming"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:entries="@array/sort2"/>
+            android:layout_height="match_parent"
+            android:layout_margin="10dp"/>
 
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/rvUpcoming"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_margin="10dp"/>
-
-
-
-</LinearLayout>
+    </LinearLayout>
+</RelativeLayout>

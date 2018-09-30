@@ -388,6 +388,16 @@ public class AddNameCardActivity extends AppCompatActivity implements View.OnCli
         int idx = rgPriorityLevel.indexOfChild(radioButton);
         RadioButton rbChecked = (RadioButton)  rgPriorityLevel.getChildAt(idx);
         String rbSelectedText = rbChecked.getText().toString();
+        String newPL = "";
+        if(rbSelectedText.equals("Urgent")){
+            newPL = "a.Urgent";
+        }
+        else if(rbSelectedText.equals("Follow Up")){
+            newPL = "b.Follow up";
+        }
+        else if(rbSelectedText.equals("Normal")){
+            newPL = "c.Normal";
+        }
         String commentText = comment.getText().toString().trim();
 
         String comdetails = companyName + " " + companyPostalCode + " " + companyUnitNo + " " + companyOfficeNumber + " " + companyIndustry;
@@ -400,7 +410,7 @@ public class AddNameCardActivity extends AppCompatActivity implements View.OnCli
         String dateCreate = getDateCreateNow();
 
         final Company company = new Company(companyName, companyPostalCode, companyUnitNo, companyOfficeNumber, companyIndustry,
-                lack, rbSelectedText, commentText, uid, dateCreate, 0);
+                lack, newPL, commentText, uid, dateCreate, 0);
 
         String dbkeyhere;
         if(dbkey.equals("")) {

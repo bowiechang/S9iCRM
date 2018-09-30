@@ -2,12 +2,17 @@ package com.example.geenie.s9imobilecrm;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -37,10 +42,29 @@ public class ViewMyTaskAdapter extends RecyclerView.Adapter<ViewMyTaskHolder> {
     @Override
     public void onBindViewHolder(final ViewMyTaskHolder holder, final int position) {
 
-        holder.tvTaskTitle.setText(holder.tvTaskTitle.getText().toString().concat(list.get(position).getTitle()));
-        holder.tvTaskDesc.setText(holder.tvTaskDesc.getText().toString().concat(list.get(position).getDesc()));
-        holder.tvTaskCompany.setText(holder.tvTaskCompany.getText().toString().concat(list.get(position).getCompanyName()));
-        holder.tvTaskDueDate.setText(holder.tvTaskDueDate.getText().toString().concat(list.get(position).getDueDate()));
+        holder.tvTaskTitle.setText((list.get(position).getTitle()));
+        holder.tvTaskDesc.setText((list.get(position).getDesc()));
+        holder.tvTaskCompany.setText((list.get(position).getCompanyName()));
+        holder.tvTaskDueDate.setText("By ".concat(list.get(position).getDueDate()));
+
+        Calendar c = Calendar.getInstance();
+        SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+        String todayDate = df.format(c.getTime());
+
+        String receivedDate = list.get(position).getDueDate();
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        Date dateAppointment = null;
+        Date dateToday = null;
+
+        try {
+            dateToday = sdf.parse(todayDate);
+            dateAppointment = sdf.parse(receivedDate);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        if (dateToday.after(dateAppointment)) {
+            holder.tvTaskDueDate.setTextColor(Color.RED);
+        }
 
         System.out.println("viewmytask: Adapter: " + list.get(position).getTitle() );
 

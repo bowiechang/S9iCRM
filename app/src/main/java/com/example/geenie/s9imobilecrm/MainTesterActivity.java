@@ -18,6 +18,8 @@ public class MainTesterActivity extends AppCompatActivity implements View.OnClic
     private Button btnAddCoWorkingCompany;
     private Button btnViewCoWorkingCompany;
     private Button btnTakePhotoActivity;
+    private Button btnViewAlerts;
+    private Button btnViewDashboard;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +36,8 @@ public class MainTesterActivity extends AppCompatActivity implements View.OnClic
         btnAddCoWorkingCompany = findViewById(R.id.btnAddSharedCompany);
         btnViewCoWorkingCompany = findViewById(R.id.btnViewSharedCompany);
         btnTakePhotoActivity = findViewById(R.id.btnTakePhotoActivity);
+        btnViewAlerts = findViewById(R.id.btnViewAlerts);
+        btnViewDashboard = findViewById(R.id.btnViewDashBoard);
 
         btnLOGINSIGNUP.setOnClickListener(this);
         btnAddNameCard.setOnClickListener(this);
@@ -45,6 +49,8 @@ public class MainTesterActivity extends AppCompatActivity implements View.OnClic
         btnAddCoWorkingCompany.setOnClickListener(this);
         btnViewCoWorkingCompany.setOnClickListener(this);
         btnTakePhotoActivity.setOnClickListener(this);
+        btnViewAlerts.setOnClickListener(this);
+        btnViewDashboard.setOnClickListener(this);
     }
 
     @Override
@@ -87,6 +93,14 @@ public class MainTesterActivity extends AppCompatActivity implements View.OnClic
         }
         else if(view == btnTakePhotoActivity){
             Intent i = new Intent(MainTesterActivity.this, CapturePhotoActivity.class);
+            MainTesterActivity.this.startActivity(i);
+        }
+        else if(view == btnViewAlerts){
+            Intent i = new Intent(MainTesterActivity.this, TesterForAlertActivity.class);
+            MainTesterActivity.this.startActivity(i);
+        }
+        else if(view == btnViewDashboard){
+            Intent i = new Intent(MainTesterActivity.this, MainActivity.class);
             MainTesterActivity.this.startActivity(i);
         }
     }
