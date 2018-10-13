@@ -20,15 +20,23 @@
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyAlNt2VEaP89U_iYAptiklOG_NAiIJXi28" />
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
 
         <activity android:name=".MainTesterActivity">
 
         </activity>
-        <activity android:name=".SignUpLoginActivity" />
+        <activity android:name=".SignUpLoginActivity">
+
+        </activity>
         <activity android:name=".ProfileActivity" />
         <activity android:name=".AddNameCardActivity" />
         <activity android:name=".ViewMyNameCardActivity">
-
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity android:name=".ViewMyNameCardDetailedActivity" />
         <activity android:name=".AddAppointmentActivity" />
@@ -45,16 +53,16 @@
         <activity android:name=".ViewMySharedCoWorkingActivity" />
         <activity android:name=".ViewDetailedSharedCoWorkingCompanyActivity" />
         <activity android:name=".CapturePhotoActivity" />
-        <activity android:name=".TesterForAlertActivity" />
+        <activity android:name=".TesterForAlertActivity" >
+
+
+        </activity>
         <activity
             android:name=".MainActivity"
             android:label="@string/title_activity_main"
             android:theme="@style/AppTheme.NoActionBar" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+
         </activity>
         <activity android:name=".DashboardApptActivity" />
         <activity android:name=".DashboardFollowupActivity" />

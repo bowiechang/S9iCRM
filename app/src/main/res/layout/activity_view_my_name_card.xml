@@ -41,7 +41,9 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:layout_below="@id/appbarlayout"
-        android:padding="15dp">
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:paddingTop="15dp">
 
         <android.support.v7.widget.SearchView
             android:id="@+id/mSearch"
@@ -78,15 +80,12 @@
 
         </RelativeLayout>
 
-
-
-
         <android.support.v7.widget.RecyclerView
             android:id="@+id/rvUpcoming"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_margin="10dp"/>
-
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="15dp"/>
 
     </LinearLayout>
 </RelativeLayout>

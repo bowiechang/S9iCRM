@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:paddingBottom="15dp"
     tools:ignore="ExtraText">
 
     <RelativeLayout
@@ -16,17 +17,22 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Contact"
+            android:layout_centerVertical="true"
+            android:textColor="@color/black"
             android:textSize="25sp"
             android:textStyle="bold"
-            android:layout_marginTop="12dp"/>
+            android:layout_marginTop="12dp"
+            android:fontFamily="@font/roboto_condensed_bold"/>
 
         <TextView
             android:id="@+id/tvRemove"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="22sp"
+            android:textSize="17sp"
             android:text="Remove"
+            android:fontFamily="@font/roboto_condensed_bold"
             android:textStyle="bold"
+            android:textColor="@color/black"
             android:layout_centerVertical="true"
             android:layout_alignParentEnd="true"/>
 
@@ -39,20 +45,38 @@
         android:layout_marginTop="5dp">
 
         <TextView
+            android:id="@+id/tvContactName1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="Name:"
+            android:textColor="@color/black"
+            android:fontFamily="@font/roboto_condensed_bold"
+            android:textSize="15sp"/>
+
+        <TextView
             android:id="@+id/tvContactName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:text="Contact Name:"
-            android:textSize="20sp"/>
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="100dp"
+            android:textColor="@color/black"
+            android:fontFamily="@font/roboto_condensed_bold"
+            android:textSize="15sp"/>
 
         <EditText
             android:id="@+id/etContactName"
-            android:layout_width="match_parent"
+            android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:hint="enter name "
-            android:layout_marginLeft="10dp"
-            android:layout_toRightOf="@id/tvContactName"/>
+            android:layout_marginLeft="20dp"
+            android:textSize="16sp"
+            android:textColor="@color/black"
+            android:fontFamily="@font/roboto_condensed_bold"
+            android:background="@drawable/rectangle_light"
+            android:padding="5dp"
+            android:layout_alignParentRight="true"/>
 
     </RelativeLayout>
 
@@ -63,20 +87,38 @@
         android:layout_marginTop="2dp">
 
         <TextView
+            android:id="@+id/tvContactTitle1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="Title:"
+            android:textColor="@color/black"
+            android:fontFamily="@font/roboto_condensed_bold"
+            android:textSize="15sp"/>
+
+        <TextView
             android:id="@+id/tvContactTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:text="Contact Title:"
-            android:textSize="20sp"/>
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="100dp"
+            android:textColor="@color/black"
+            android:fontFamily="@font/roboto_condensed_bold"
+            android:textSize="15sp"/>
 
         <EditText
             android:id="@+id/etContactTitle"
-            android:layout_width="match_parent"
+            android:layout_width="200dp"
             android:layout_height="wrap_content"
-            android:hint="enter title"
-            android:layout_marginLeft="10dp"
-            android:layout_toRightOf="@id/tvContactTitle"/>
+            android:hint="enter title "
+            android:layout_marginLeft="20dp"
+            android:textSize="16sp"
+            android:textColor="@color/black"
+            android:padding="5dp"
+            android:fontFamily="@font/roboto_condensed_bold"
+            android:background="@drawable/rectangle_light"
+            android:layout_alignParentRight="true"/>
 
     </RelativeLayout>
 
@@ -87,20 +129,38 @@
         android:layout_marginTop="2dp">
 
         <TextView
+            android:id="@+id/tvContactMobile1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="Mobile Number:"
+            android:textColor="@color/black"
+            android:fontFamily="@font/roboto_condensed_bold"
+            android:textSize="15sp"/>
+
+        <TextView
             android:id="@+id/tvContactMobile"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:text="Contact Mobile:"
-            android:textSize="20sp"/>
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="100dp"
+            android:textColor="@color/black"
+            android:fontFamily="@font/roboto_condensed_bold"
+            android:textSize="15sp"/>
 
         <EditText
             android:id="@+id/etContactMobile"
-            android:layout_width="match_parent"
+            android:layout_width="200dp"
             android:layout_height="wrap_content"
-            android:hint="enter mobile number"
-            android:layout_marginLeft="10dp"
-            android:layout_toRightOf="@id/tvContactMobile"/>
+            android:hint="enter mobile "
+            android:layout_marginLeft="20dp"
+            android:padding="5dp"
+            android:textSize="16sp"
+            android:textColor="@color/black"
+            android:fontFamily="@font/roboto_condensed_bold"
+            android:background="@drawable/rectangle_light"
+            android:layout_alignParentRight="true"/>
 
     </RelativeLayout>
 
@@ -111,20 +171,38 @@
         android:layout_marginTop="2dp">
 
         <TextView
+            android:id="@+id/tvContactOffice1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="Office Number:"
+            android:textColor="@color/black"
+            android:fontFamily="@font/roboto_condensed_bold"
+            android:textSize="15sp"/>
+
+        <TextView
             android:id="@+id/tvContactOffice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:text="Contact Office:"
-            android:textSize="20sp"/>
+            android:textColor="@color/black"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="100dp"
+            android:fontFamily="@font/roboto_condensed_bold"
+            android:textSize="15sp"/>
 
         <EditText
             android:id="@+id/etContactOffice"
-            android:layout_width="match_parent"
+            android:layout_width="200dp"
             android:layout_height="wrap_content"
-            android:hint="enter office number"
-            android:layout_marginLeft="10dp"
-            android:layout_toRightOf="@id/tvContactOffice"/>
+            android:hint="enter office "
+            android:layout_marginLeft="20dp"
+            android:textSize="16sp"
+            android:padding="5dp"
+            android:textColor="@color/black"
+            android:fontFamily="@font/roboto_condensed_bold"
+            android:background="@drawable/rectangle_light"
+            android:layout_alignParentRight="true"/>
 
     </RelativeLayout>
 
@@ -135,20 +213,38 @@
         android:layout_marginTop="2dp">
 
         <TextView
+            android:id="@+id/tvContactEmail1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="Email:"
+            android:textColor="@color/black"
+            android:fontFamily="@font/roboto_condensed_bold"
+            android:textSize="15sp"/>
+
+        <TextView
             android:id="@+id/tvContactEmail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:text="Contact Email:"
-            android:textSize="20sp"/>
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="100dp"
+            android:textColor="@color/black"
+            android:fontFamily="@font/roboto_condensed_bold"
+            android:textSize="15sp"/>
 
         <EditText
             android:id="@+id/etContactEmail"
-            android:layout_width="match_parent"
+            android:layout_width="200dp"
             android:layout_height="wrap_content"
-            android:hint="enter email"
-            android:layout_marginLeft="10dp"
-            android:layout_toRightOf="@id/tvContactEmail"/>
+            android:hint="enter email "
+            android:layout_marginLeft="20dp"
+            android:textSize="16sp"
+            android:padding="5dp"
+            android:textColor="@color/black"
+            android:fontFamily="@font/roboto_condensed_bold"
+            android:background="@drawable/rectangle_light"
+            android:layout_alignParentRight="true"/>
 
     </RelativeLayout>
 
@@ -159,18 +255,33 @@
         android:layout_marginTop="2dp">
 
         <TextView
-            android:id="@+id/tvContactIC"
+            android:id="@+id/tvContactIC1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:text="Contact IC:"
-            android:textSize="20sp"/>
+            android:textColor="@color/black"
+            android:fontFamily="@font/roboto_condensed_bold"
+            android:textSize="15sp"/>
+
+        <TextView
+            android:id="@+id/tvContactIC"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="100dp"
+            android:textColor="@color/black"
+            android:fontFamily="@font/roboto_condensed_bold"
+            android:textSize="15sp"/>
 
         <Switch
             android:id="@+id/switchContactIC"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"/>
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="80dp"
+            android:buttonTint="@color/black"/>
 
     </RelativeLayout>
 

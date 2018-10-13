@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:paddingBottom="15dp"
+    tools:ignore="ExtraText">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -13,18 +16,23 @@
             android:id="@+id/tvCopierCount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Copier"
+            android:text="Contact"
+            android:layout_centerVertical="true"
+            android:textColor="@color/black"
             android:textSize="25sp"
             android:textStyle="bold"
-            android:layout_marginTop="12dp"/>
+            android:layout_marginTop="12dp"
+            android:fontFamily="@font/roboto_condensed_bold"/>
 
         <TextView
             android:id="@+id/tvRemove"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="22sp"
+            android:textSize="17sp"
             android:text="Remove"
+            android:fontFamily="@font/roboto_condensed_bold"
             android:textStyle="bold"
+            android:textColor="@color/black"
             android:layout_centerVertical="true"
             android:layout_alignParentEnd="true"/>
 
@@ -37,20 +45,36 @@
         android:layout_marginTop="5dp">
 
         <TextView
-            android:id="@+id/tvCopierBrand"
+            android:id="@+id/tvCopierBrand1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:text="Copier Brand:"
-            android:textSize="20sp"/>
+            android:textColor="@color/black"
+            android:fontFamily="@font/roboto_condensed_bold"
+            android:textSize="15sp"/>
 
-        <Spinner
-            android:id="@+id/spinnerCopierBrand"
+        <TextView
+            android:id="@+id/tvCopierBrand"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_toRightOf="@id/tvCopierBrand"
-            android:entries="@array/copierBrand"/>
+            android:layout_centerVertical="true"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="160dp"
+            android:textColor="@color/black"
+            android:fontFamily="@font/roboto_condensed_bold"
+            android:textSize="15sp"/>
+
+        <android.support.v7.widget.AppCompatSpinner
+            android:id="@+id/spinnerCopierBrand"
+            android:layout_width="match_parent"
+            android:padding="5dp"
+            android:layout_height="wrap_content"
+            android:entries="@array/copierBrand"
+            android:theme="@style/Spinner"
+            android:background="@drawable/rectangle_light"
+            android:layout_marginLeft="85dp"
+            android:layout_toRightOf="@id/tvCopierBrand1"/>
 
     </RelativeLayout>
 
@@ -61,20 +85,38 @@
         android:layout_marginTop="5dp">
 
         <TextView
-            android:id="@+id/tvCopierModel"
+            android:id="@+id/tvCopierModel1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:text="Copier Model:"
-            android:textSize="20sp"/>
+            android:textColor="@color/black"
+            android:fontFamily="@font/roboto_condensed_bold"
+            android:textSize="15sp"/>
+
+        <TextView
+            android:id="@+id/tvCopierModel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="160dp"
+            android:textColor="@color/black"
+            android:fontFamily="@font/roboto_condensed_bold"
+            android:textSize="15sp"/>
 
         <EditText
             android:id="@+id/etCopierModel"
-            android:layout_width="match_parent"
+            android:layout_width="130dp"
             android:layout_height="wrap_content"
             android:hint="enter Model"
-            android:layout_marginLeft="10dp"
-            android:layout_toRightOf="@id/tvCopierModel"/>
+            android:layout_marginLeft="20dp"
+            android:textSize="16sp"
+            android:textColor="@color/black"
+            android:fontFamily="@font/roboto_condensed_bold"
+            android:background="@drawable/rectangle_light"
+            android:padding="5dp"
+            android:layout_alignParentRight="true"/>
 
     </RelativeLayout>
 
@@ -85,20 +127,38 @@
         android:layout_marginTop="5dp">
 
         <TextView
-            android:id="@+id/tvCopierAge"
+            android:id="@+id/tvCopierAge1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:text="Copier Age:"
-            android:textSize="20sp"/>
+            android:textColor="@color/black"
+            android:fontFamily="@font/roboto_condensed_bold"
+            android:textSize="15sp"/>
+
+        <TextView
+            android:id="@+id/tvCopierAge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="160dp"
+            android:textColor="@color/black"
+            android:fontFamily="@font/roboto_condensed_bold"
+            android:textSize="15sp"/>
 
         <EditText
             android:id="@+id/etCopierAge"
-            android:layout_width="match_parent"
+            android:layout_width="130dp"
             android:layout_height="wrap_content"
             android:hint="enter Age"
-            android:layout_marginLeft="10dp"
-            android:layout_toRightOf="@id/tvCopierAge"/>
+            android:layout_marginLeft="20dp"
+            android:textSize="16sp"
+            android:textColor="@color/black"
+            android:fontFamily="@font/roboto_condensed_bold"
+            android:background="@drawable/rectangle_light"
+            android:padding="5dp"
+            android:layout_alignParentRight="true"/>
 
     </RelativeLayout>
 
@@ -109,42 +169,64 @@
         android:layout_marginTop="5dp">
 
         <TextView
+            android:id="@+id/tvCopierProblem1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Problem Faced:"
+            android:textColor="@color/black"
+            android:fontFamily="@font/roboto_condensed_bold"
+            android:textSize="15sp"/>
+
+        <TextView
             android:id="@+id/tvCopierProblem"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:text="Problem Face by Copier:"
-            android:textSize="20sp"/>
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="160dp"
+            android:textColor="@color/black"
+            android:fontFamily="@font/roboto_condensed_bold"
+            android:textSize="15sp"/>
 
-        <LinearLayout
+        <RelativeLayout
+            android:id="@+id/rlProblemFaced"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_below="@id/tvCopierProblem"
-            android:layout_marginTop="5dp">
+            android:layout_below="@id/tvCopierProblem1">
 
-            <CheckBox
+            <android.support.v7.widget.AppCompatCheckBox
                 android:id="@+id/cbPrint"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
+                android:layout_marginLeft="5dp"
+                android:fontFamily="@font/roboto_condensed_bold"
+                android:textSize="12sp"
+                android:buttonTint="@color/black"
                 android:text="Print"/>
 
-            <CheckBox
+            <android.support.v7.widget.AppCompatCheckBox
                 android:id="@+id/cbScan"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
+                android:layout_marginLeft="5dp"
+                android:fontFamily="@font/roboto_condensed_bold"
+                android:textSize="12sp"
+                android:layout_toRightOf="@id/cbPrint"
+                android:buttonTint="@color/black"
                 android:text="Scan"/>
 
-            <CheckBox
+            <android.support.v7.widget.AppCompatCheckBox
                 android:id="@+id/cbPaperJam"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
+                android:layout_marginLeft="5dp"
+                android:fontFamily="@font/roboto_condensed_bold"
+                android:textSize="12sp"
+                android:layout_toRightOf="@id/cbScan"
+                android:buttonTint="@color/black"
                 android:text="PaperJam"/>
 
-        </LinearLayout>
+        </RelativeLayout>
 
     </RelativeLayout>
 
@@ -155,19 +237,29 @@
         android:layout_marginTop="5dp">
 
         <TextView
+            android:id="@+id/tvCopierRorP1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Rented or Purchased:"
+            android:textColor="@color/black"
+            android:fontFamily="@font/roboto_condensed_bold"
+            android:textSize="15sp"/>
+
+        <TextView
             android:id="@+id/tvCopierRorP"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:text="Copier Rented or Purchased:"
-            android:textSize="20sp"/>
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="160dp"
+            android:textColor="@color/black"
+            android:fontFamily="@font/roboto_condensed_bold"
+            android:textSize="15sp"/>
 
         <RadioGroup
             android:id="@+id/rgRorP"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/tvCopierRorP"
-            android:layout_marginTop="5dp"
+            android:layout_below="@id/tvCopierRorP1"
             android:checkedButton="@id/rbNormal"
             android:orientation="horizontal">
 
@@ -175,19 +267,31 @@
                 android:id="@+id/rbRented"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Rented"/>
+                android:layout_weight="0.33"
+                android:text="Rented"
+                android:textSize="12sp"
+                android:fontFamily="@font/roboto_condensed_bold"
+                android:buttonTint="@color/black"/>
 
             <RadioButton
                 android:id="@+id/rbPurchased"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Purchased"/>
+                android:layout_weight="0.33"
+                android:text="Purchased"
+                android:textSize="12sp"
+                android:fontFamily="@font/roboto_condensed_bold"
+                android:buttonTint="@color/black"/>
 
             <RadioButton
                 android:id="@+id/rbUnsure"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Unsure"/>
+                android:layout_weight="0.33"
+                android:text="Unsure"
+                android:textSize="12sp"
+                android:fontFamily="@font/roboto_condensed_bold"
+                android:buttonTint="@color/black"/>
 
         </RadioGroup>
 
@@ -200,20 +304,40 @@
         android:layout_marginTop="5dp">
 
         <TextView
+            android:id="@+id/tvCopierContStartDate1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="Contract Start:"
+            android:textColor="@color/black"
+            android:fontFamily="@font/roboto_condensed_bold"
+            android:textSize="15sp"/>
+
+        <TextView
             android:id="@+id/tvCopierContStartDate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:text="Copier Contract Start Date:"
-            android:textSize="20sp"/>
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="160dp"
+            android:textColor="@color/black"
+            android:fontFamily="@font/roboto_condensed_bold"
+            android:textSize="15sp"/>
 
         <EditText
             android:id="@+id/etCopierContStartDate"
-            android:layout_width="match_parent"
+            android:layout_width="130dp"
             android:layout_height="wrap_content"
-            android:hint="enter start date"
-            android:layout_marginLeft="10dp"
-            android:layout_toRightOf="@id/tvCopierContStartDate"/>
+            android:hint="enter Age"
+            android:layout_marginLeft="20dp"
+            android:textSize="16sp"
+            android:textColor="@color/black"
+            android:fontFamily="@font/roboto_condensed_bold"
+            android:background="@drawable/rectangle_light"
+            android:padding="5dp"
+            android:layout_alignParentRight="true"/>
+
+
 
     </RelativeLayout>
 
@@ -224,21 +348,38 @@
         android:layout_marginTop="5dp">
 
         <TextView
+            android:id="@+id/tvCopierContLength1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="Contract Length(MONTHS):"
+            android:textColor="@color/black"
+            android:fontFamily="@font/roboto_condensed_bold"
+            android:textSize="15sp"/>
+
+        <TextView
             android:id="@+id/tvCopierContLength"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:text="Copier Contract Length(MONTHS):"
-            android:textSize="20sp"/>
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="160dp"
+            android:textColor="@color/black"
+            android:fontFamily="@font/roboto_condensed_bold"
+            android:textSize="15sp"/>
 
         <EditText
             android:id="@+id/etCopierContLength"
-            android:layout_width="match_parent"
+            android:layout_width="130dp"
             android:layout_height="wrap_content"
-            android:inputType="number"
-            android:hint="enter months"
-            android:layout_marginLeft="10dp"
-            android:layout_toRightOf="@id/tvCopierContLength"/>
+            android:hint="enter Months"
+            android:layout_marginLeft="20dp"
+            android:textSize="16sp"
+            android:textColor="@color/black"
+            android:fontFamily="@font/roboto_condensed_bold"
+            android:background="@drawable/rectangle_light"
+            android:padding="5dp"
+            android:layout_alignParentRight="true"/>
 
     </RelativeLayout>
 
@@ -249,20 +390,38 @@
         android:layout_marginTop="5dp">
 
         <TextView
+            android:id="@+id/tvCopierContExpiryDate1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="Contract Expiry:"
+            android:textColor="@color/black"
+            android:fontFamily="@font/roboto_condensed_bold"
+            android:textSize="15sp"/>
+
+        <TextView
             android:id="@+id/tvCopierContExpiryDate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:text="Copier Contract Expiry Date:"
-            android:textSize="20sp"/>
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="160dp"
+            android:textColor="@color/black"
+            android:fontFamily="@font/roboto_condensed_bold"
+            android:textSize="15sp"/>
 
         <EditText
             android:id="@+id/etCopierContExpiryDate"
-            android:layout_width="match_parent"
+            android:layout_width="130dp"
             android:layout_height="wrap_content"
-            android:hint="enter Expiry date"
-            android:layout_marginLeft="10dp"
-            android:layout_toRightOf="@id/tvCopierContExpiryDate"/>
+            android:hint="enter Months"
+            android:layout_marginLeft="20dp"
+            android:textSize="16sp"
+            android:textColor="@color/black"
+            android:fontFamily="@font/roboto_condensed_bold"
+            android:background="@drawable/rectangle_light"
+            android:padding="5dp"
+            android:layout_alignParentRight="true"/>
 
     </RelativeLayout>
 
@@ -273,20 +432,38 @@
         android:layout_marginTop="5dp">
 
         <TextView
+            android:id="@+id/tvCopierContMonthlyPayment1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="Contract Monthly Payment:"
+            android:textColor="@color/black"
+            android:fontFamily="@font/roboto_condensed_bold"
+            android:textSize="15sp"/>
+
+        <TextView
             android:id="@+id/tvCopierContMonthlyPayment"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:text="Copier Contract Monthly Payment:"
-            android:textSize="20sp"/>
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="160dp"
+            android:textColor="@color/black"
+            android:fontFamily="@font/roboto_condensed_bold"
+            android:textSize="15sp"/>
 
         <EditText
             android:id="@+id/etCopierContMonthlyPayment"
-            android:layout_width="match_parent"
+            android:layout_width="130dp"
             android:layout_height="wrap_content"
-            android:hint="enter Monthly Payment"
-            android:layout_marginLeft="10dp"
-            android:layout_toRightOf="@id/tvCopierContMonthlyPayment"/>
+            android:hint="0"
+            android:layout_marginLeft="20dp"
+            android:textSize="16sp"
+            android:textColor="@color/black"
+            android:fontFamily="@font/roboto_condensed_bold"
+            android:background="@drawable/rectangle_light"
+            android:padding="5dp"
+            android:layout_alignParentRight="true"/>
 
     </RelativeLayout>
 
@@ -297,20 +474,38 @@
         android:layout_marginTop="5dp">
 
         <TextView
+            android:id="@+id/tvCopierContFinalPayment1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="Contract Final Payment:"
+            android:textColor="@color/black"
+            android:fontFamily="@font/roboto_condensed_bold"
+            android:textSize="15sp"/>
+
+        <TextView
             android:id="@+id/tvCopierContFinalPayment"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:text="Copier Contract Final Payment:"
-            android:textSize="20sp"/>
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="160dp"
+            android:textColor="@color/black"
+            android:fontFamily="@font/roboto_condensed_bold"
+            android:textSize="15sp"/>
 
         <EditText
             android:id="@+id/etCopierContFinalPayment"
-            android:layout_width="match_parent"
+            android:layout_width="130dp"
             android:layout_height="wrap_content"
-            android:hint="enter Final Payment"
-            android:layout_marginLeft="10dp"
-            android:layout_toRightOf="@id/tvCopierContFinalPayment"/>
+            android:hint="0"
+            android:layout_marginLeft="20dp"
+            android:textSize="16sp"
+            android:textColor="@color/black"
+            android:fontFamily="@font/roboto_condensed_bold"
+            android:background="@drawable/rectangle_light"
+            android:padding="5dp"
+            android:layout_alignParentRight="true"/>
 
     </RelativeLayout>
 

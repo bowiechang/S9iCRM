@@ -38,7 +38,7 @@ public class ViewMyNameCardActivity extends AppCompatActivity {
 //    private ArrayList<Company> listClone;
     ArrayList <Company> arraylistcurrentfilter;
 
-    private ViewMyNameCardAdapter viewMyShowsAdapter;
+    private ViewMyNameCardAdapter viewMyNameCardsAdapter;
 
     private Spinner spinnerSort1, spinnerSort2, spinnerFilter;
 
@@ -95,9 +95,9 @@ public class ViewMyNameCardActivity extends AppCompatActivity {
                             listSubmit.add(company);
                         }
                     }
-                    getMyShowsList(listSubmit);
+                    getMyNameCardList(listSubmit);
                 }else{
-                    getMyShowsList(list);
+                    getMyNameCardList(list);
                 }
                 return false;
             }
@@ -125,7 +125,7 @@ public class ViewMyNameCardActivity extends AppCompatActivity {
                     //USE LIST
                     switch(i) {
                         case 0:
-                            getMyShowsList(listUntounched);
+                            getMyNameCardList(listUntounched);
                             break;
                         //calls highest to lowest
                         case 1:
@@ -148,7 +148,7 @@ public class ViewMyNameCardActivity extends AppCompatActivity {
                 else{
                     switch(i) {
                         case 0:
-                            getMyShowsList(listUntounched);
+                            getMyNameCardList(listUntounched);
                             break;
                         //calls highest to lowest
                         case 1:
@@ -183,7 +183,7 @@ public class ViewMyNameCardActivity extends AppCompatActivity {
                     //USE LIST
                     switch(i) {
                         case 0:
-                            getMyShowsList(listUntounched);
+                            getMyNameCardList(listUntounched);
                             break;
                         //calls highest to lowest
                         case 1:
@@ -198,7 +198,7 @@ public class ViewMyNameCardActivity extends AppCompatActivity {
                 else{
                     switch(i) {
                         case 0:
-                            getMyShowsList(listUntounched);
+                            getMyNameCardList(listUntounched);
                             break;
                         //calls highest to lowest
                         case 1:
@@ -224,7 +224,7 @@ public class ViewMyNameCardActivity extends AppCompatActivity {
 
                 switch(i) {
                     case 0:
-                        getMyShowsList(listUntounched);
+                        getMyNameCardList(listUntounched);
                         spinnerSort1.setVisibility(View.VISIBLE);
                         spinnerSort2.setVisibility(View.GONE);
                         break;
@@ -278,7 +278,7 @@ public class ViewMyNameCardActivity extends AppCompatActivity {
                 if(company!=null){
                     if(company.getCreateBy().equals(uid)){
                         list.add(company);
-                        getMyShowsList(list);
+                        getMyNameCardList(list);
                         System.out.println("reading...");
                     }
                 }
@@ -316,12 +316,12 @@ public class ViewMyNameCardActivity extends AppCompatActivity {
         });
     }
 
-    private void getMyShowsList(ArrayList list){
+    private void getMyNameCardList(ArrayList list){
 
         System.out.println("getmyshowslist list size: " + list.size());
 
-        viewMyShowsAdapter = new ViewMyNameCardAdapter(ViewMyNameCardActivity.this, list, list);
-        recyclerView.setAdapter(viewMyShowsAdapter);
+        viewMyNameCardsAdapter = new ViewMyNameCardAdapter(ViewMyNameCardActivity.this, list, list);
+        recyclerView.setAdapter(viewMyNameCardsAdapter);
 
 //        if(listClone.isEmpty()) {
 //            cloneList();
@@ -342,7 +342,7 @@ public class ViewMyNameCardActivity extends AppCompatActivity {
                     arraylistcurrentfilter.add(company);
                 }
             }
-            getMyShowsList(arraylistcurrentfilter);
+            getMyNameCardList(arraylistcurrentfilter);
         }
 
         //filter for priority levels
@@ -353,7 +353,7 @@ public class ViewMyNameCardActivity extends AppCompatActivity {
                     arraylistcurrentfilter.add(company);
                 }
             }
-            getMyShowsList(arraylistcurrentfilter);
+            getMyNameCardList(arraylistcurrentfilter);
         }
         else if(filterkey.equals("b.Follow Up")) {
             for (int i = 0; i < list.size(); i++) {
@@ -362,7 +362,7 @@ public class ViewMyNameCardActivity extends AppCompatActivity {
                     arraylistcurrentfilter.add(company);
                 }
             }
-            getMyShowsList(arraylistcurrentfilter);
+            getMyNameCardList(arraylistcurrentfilter);
         }
         else if(filterkey.equals("c.Normal")) {
             for (int i = 0; i < list.size(); i++) {
@@ -371,7 +371,7 @@ public class ViewMyNameCardActivity extends AppCompatActivity {
                     arraylistcurrentfilter.add(company);
                 }
             }
-            getMyShowsList(arraylistcurrentfilter);
+            getMyNameCardList(arraylistcurrentfilter);
         }
     }
 
@@ -384,7 +384,7 @@ public class ViewMyNameCardActivity extends AppCompatActivity {
                     return Integer.valueOf(companyob2.getNumberOfTimesCalled()).compareTo(companyob1.getNumberOfTimesCalled()); // To compare integer values
                 }
             });
-            getMyShowsList(list);
+            getMyNameCardList(list);
         }
         else if(sorterkey.equals("calllowhigh")) {
             Collections.sort(list, new Comparator<Company>() {
@@ -393,7 +393,7 @@ public class ViewMyNameCardActivity extends AppCompatActivity {
                 return Integer.valueOf(companyob1.getNumberOfTimesCalled()).compareTo(companyob2.getNumberOfTimesCalled()); // To compare integer values
                 }
             });
-            getMyShowsList(list);
+            getMyNameCardList(list);
         }
         else if(sorterkey.equals("pllowhigh")) {
             Collections.sort(list, new Comparator<Company>() {
@@ -402,7 +402,7 @@ public class ViewMyNameCardActivity extends AppCompatActivity {
                      return companyob2.getPriorityLevel().compareToIgnoreCase(companyob1.getPriorityLevel()); // To compare string values
                 }
             });
-            getMyShowsList(list);
+            getMyNameCardList(list);
         }
         else if(sorterkey.equals("plhighlow")) {
             Collections.sort(list, new Comparator<Company>() {
@@ -411,7 +411,7 @@ public class ViewMyNameCardActivity extends AppCompatActivity {
                     return companyob1.getPriorityLevel().compareToIgnoreCase(companyob2.getPriorityLevel()); // To compare string values
                 }
             });
-            getMyShowsList(list);
+            getMyNameCardList(list);
         }
     }
 

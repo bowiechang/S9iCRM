@@ -41,19 +41,21 @@ public class TesterForAlertActivity extends AppCompatActivity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_tester_for_alert);
+        setContentView(R.layout.redesign_namecard_list);
 
 
-        tvAppt = findViewById(R.id.tvAppointment);
-        tvFu = findViewById(R.id.tvFollowUp);
-        tvTask = findViewById(R.id.tvTask);
-        tvCompany = findViewById(R.id.tvCompany);
-        tvCopier = findViewById(R.id.tvCopier);
-        getAlertCountForAppt();
-        getAlertCountForFollowUp();
-        getAlertForTask();
-        getAlertForCompany();
-        getAlertForCopier();
+//        //dashboard
+//        tvAppt = findViewById(R.id.tvAppointment);
+//        tvFu = findViewById(R.id.tvFollowUp);
+//        tvTask = findViewById(R.id.tvTask);
+//        tvCompany = findViewById(R.id.tvCompany);
+//        tvCopier = findViewById(R.id.tvCopier);
+//        getAlertCountForAppt();
+//        getAlertCountForFollowUp();
+//        getAlertForTask();
+//        getAlertForCompany();
+//        getAlertForCopier();
+//        //dashboard
     }
 
 

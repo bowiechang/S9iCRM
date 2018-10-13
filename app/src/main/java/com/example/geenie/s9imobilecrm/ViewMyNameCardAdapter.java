@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
 
@@ -33,7 +34,7 @@ public class ViewMyNameCardAdapter extends RecyclerView.Adapter<ViewMyNameCardHo
         ViewMyNameCardHolder viewMyNameCardHolder;
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
 //        View view = layoutInflater.inflate(R.layout.allshows_list2, parent, false);
-        View view = layoutInflater.inflate(R.layout.namecard_list, parent, false);
+        View view = layoutInflater.inflate(R.layout.redesign_namecard_list, parent, false);
         viewMyNameCardHolder = new ViewMyNameCardHolder(view, list, context);
 
         return viewMyNameCardHolder;
@@ -45,13 +46,12 @@ public class ViewMyNameCardAdapter extends RecyclerView.Adapter<ViewMyNameCardHo
         String[] split = list.get(position).getPriorityLevel().split("\\.");
         String PL = split[1];
 
-        holder.tvCompanyName.setText(holder.tvCompanyName.getText().toString().concat(list.get(position).getName()));
+        holder.tvCompanyName.setText((list.get(position).getName()));
         holder.tvCompanyAddress.setText(holder.tvCompanyAddress.getText().toString().concat(getLatLng(list.get(position).getPostalCode())));
-        holder.tvCompanyIndustry.setText(holder.tvCompanyIndustry.getText().toString().concat(list.get(position).getIndustry()));
-        holder.tvCompanyLack.setText(holder.tvCompanyLack.getText().toString().concat(list.get(position).getCompanyLackOf()));
-        holder.tvCompanyOfficeNum.setText(holder.tvCompanyOfficeNum.getText().toString().concat(list.get(position).getOfficeTel()));
+        holder.tvCompanyLack.setText(restringLacking(list.get(position).getCompanyLackOf()));
+        holder.tvCompanyOfficeNum.setText((list.get(position).getOfficeTel()));
         holder.tvCompanyPriorityLevel.setText(holder.tvCompanyPriorityLevel.getText().toString().concat(PL));
-        holder.tvNumberOfTimesCalled.setText(holder.tvNumberOfTimesCalled.getText().toString().concat(list.get(position).getNumberOfTimesCalled() + ""));
+        holder.tvNumberOfTimesCalled.setText((list.get(position).getNumberOfTimesCalled() + ""));
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -65,6 +65,30 @@ public class ViewMyNameCardAdapter extends RecyclerView.Adapter<ViewMyNameCardHo
             }
         });
 
+    }
+
+    public String restringLacking(String lacking){
+
+        List<String> listLacking = Arrays.asList(lacking.split(" "));
+        String newLacking = "Lacking of ";
+        for (int i = 0; i < listLacking.size(); i++) {
+            System.out.println("i value: " + i);
+            if(i == 0){
+                newLacking = newLacking.concat(listLacking.get(i).toString());
+            }
+            else if(listLacking.size() - 1 == i){
+                System.out.println("i value: " + i);
+                // Last iteration
+                newLacking = newLacking.concat(" and " + listLacking.get(i));
+                System.out.println("newlacking value: " + newLacking);
+            }
+            else{
+                newLacking = newLacking.concat(", " + listLacking.get(i));
+                System.out.println("newlacking value: " + newLacking);
+            }
+        }
+        System.out.println("newlacking final value: " + newLacking);
+        return newLacking;
     }
 
 
