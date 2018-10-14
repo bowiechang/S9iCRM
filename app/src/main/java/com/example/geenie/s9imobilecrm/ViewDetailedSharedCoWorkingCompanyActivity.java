@@ -853,7 +853,7 @@ public class ViewDetailedSharedCoWorkingCompanyActivity extends AppCompatActivit
 
     private void getPhotos(ArrayList<String> list){
 
-        PhotoAdapter photoAdapter = new PhotoAdapter(list,ViewDetailedSharedCoWorkingCompanyActivity.this);
+        PhotoAdapter photoAdapter = new PhotoAdapter(list,ViewDetailedSharedCoWorkingCompanyActivity.this, dbkey);
         recyclerView.setAdapter(photoAdapter);
     }
 }

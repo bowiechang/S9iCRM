@@ -17,6 +17,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -39,6 +40,8 @@ public class MainActivity extends AppCompatActivity
 
     private TextView tvAppt, tvFu, tvTask, tvCompany, tvCopier;
     private CardView cvAppt, cvTask, cvFollowup, cvCompany, cvCopier;
+
+    private RelativeLayout relativeLayoutAddNameCard;
 
     private ArrayList<Appointment> appointmentArrayList = new ArrayList<>();
     private ArrayList<Task> taskArrayList = new ArrayList<>();
@@ -89,11 +92,18 @@ public class MainActivity extends AppCompatActivity
     }
 
     public void init(){
+
+        relativeLayoutAddNameCard = findViewById(R.id.relativeLayoutAddNameCard);
+        relativeLayoutAddNameCard.setOnClickListener(this);
+
         tvAppt = findViewById(R.id.tvAppointment);
         tvFu = findViewById(R.id.tvFollowUp);
         tvTask = findViewById(R.id.tvTask);
         tvCompany = findViewById(R.id.tvCompany);
         tvCopier = findViewById(R.id.tvCopier);
+
+        //copier retrieval has different setting of text, seems it doesnt set for 0 count so we set it here
+        tvCopier.setText(String.valueOf(copierCount));
 
         cvAppt = findViewById(R.id.cardviewAppt);
         cvTask = findViewById(R.id.cardviewTask);
@@ -521,6 +531,10 @@ public class MainActivity extends AppCompatActivity
             Bundle args = new Bundle();
             args.putSerializable("ARRAYLIST",copierArrayList);
             intent.putExtra("BUNDLE",args);
+            startActivity(intent);
+        }
+        else if(view.equals(relativeLayoutAddNameCard)){
+            Intent intent = new Intent(MainActivity.this, AddNameCardActivity.class);
             startActivity(intent);
         }
     }

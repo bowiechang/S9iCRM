@@ -33,6 +33,7 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;
@@ -96,6 +97,9 @@ public class ViewMyNameCardDetailedActivity extends AppCompatActivity implements
     private int contactCount = 1;
     private int copierCount = 1;
 
+    //received company id
+    String receivedCompanyDbKey;
+
     //for company vals
     String companyDateCreated;
 
@@ -104,8 +108,8 @@ public class ViewMyNameCardDetailedActivity extends AppCompatActivity implements
     Boolean contactIC;
 
     //for copier vals
-    String copierBrand, copierModel, copierAge, copierProblems, copierROP, copierContLength, copierStartDate, copierEndDate, copierMP, copierFP;
-
+    String copierBrand, copierModel, copierAge, copierProblems, copierROP, copierStartDate, copierEndDate, copierMP, copierFP;
+    int copierContLength;
     private Calendar calendar = Calendar.getInstance();
 
     //firebase init
@@ -126,10 +130,11 @@ public class ViewMyNameCardDetailedActivity extends AppCompatActivity implements
 
         namekey = getIntent().getExtras().getString("name");
         postalcodekey = getIntent().getExtras().getString("postalcode");
+        receivedCompanyDbKey = getIntent().getExtras().getString("dbkey");
 
-        if(namekey!=null && postalcodekey!=null){
+//        if(namekey!=null && postalcodekey!=null){
             seekCompanyDetails();
-        }
+//        }
 
         //status bar
         Window window = this.getWindow();
@@ -225,13 +230,26 @@ public class ViewMyNameCardDetailedActivity extends AppCompatActivity implements
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
                 company = dataSnapshot.getValue(Company.class);
                 if(company!=null) {
-                    if (company.getPostalCode().equals(postalcodekey)) {
-                        inputCompanyDetails(company);
-                        companyDbKey = dataSnapshot.getKey();
-                        seekContactsFromCompany(companyDbKey);
-                        seekCopierFromCompany(companyDbKey);
-                        checkIfExist();
-                        retrieveStoragePath();
+                    if(receivedCompanyDbKey != null){
+                        if(dataSnapshot.getKey().equals(receivedCompanyDbKey)){
+                            inputCompanyDetails(company);
+                            companyDbKey = dataSnapshot.getKey();
+                            seekContactsFromCompany(companyDbKey);
+                            seekCopierFromCompany(companyDbKey);
+                            checkIfExist();
+                            retrieveStoragePath();
+                        }
+                    }
+//                    else(company.getPostalCode().equals(postalcodekey)) {
+                    else{
+                        if(company.getName().equals(namekey) && company.getPostalCode().equals(postalcodekey)) {
+                            inputCompanyDetails(company);
+                            companyDbKey = dataSnapshot.getKey();
+                            seekContactsFromCompany(companyDbKey);
+                            seekCopierFromCompany(companyDbKey);
+                            checkIfExist();
+                            retrieveStoragePath();
+                        }
                     }
                 }
             }
@@ -273,9 +291,11 @@ public class ViewMyNameCardDetailedActivity extends AppCompatActivity implements
         tvCompanyNumber.setText((company.getOfficeTel()));
         tvCompanyIndustry.setText((company.getIndustry()));
         tvCompanyLack.setText((restringLacking(company.getCompanyLackOf())));
-        tvCompanyNumOfCalls.setText(tvCompanyNumOfCalls.getText().toString().concat(" " + String.valueOf(company.getNumberOfTimesCalled())));
-        tvCompanyPl.setText(tvCompanyPl.getText().toString().concat(" " + newpl));
+        tvCompanyNumOfCalls.setText(String.valueOf(company.getNumberOfTimesCalled()));
+        tvCompanyPl.setText(newpl);
         tvCompanyComments.setText((company.getComment()));
+
+        tvCompanyNumber.setOnClickListener(this);
 
         etCompanyName.setText(company.getName());
         etCompanyUnitNo.setText(company.getUnitNo());
@@ -309,105 +329,105 @@ public class ViewMyNameCardDetailedActivity extends AppCompatActivity implements
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
                 contact = dataSnapshot.getValue(Contact.class);
-                if(contact!=null){
+                if(contact!=null) {
+                    if (contact.getCompany_id().equals(companyDbKey)) {
 
-                    System.out.println("child addded");
+                        System.out.println("child addded");
 
-                    contactKeyArrayList.add(dataSnapshot.getKey());
+                        contactKeyArrayList.add(dataSnapshot.getKey());
 
-                    LayoutInflater layoutInflater = (LayoutInflater) getBaseContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                    final View addView = layoutInflater.inflate(R.layout.rowcontact, null);
+                        LayoutInflater layoutInflater = (LayoutInflater) getBaseContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                        final View addView = layoutInflater.inflate(R.layout.rowcontact, null);
 
-                    final TextView tvContactCount = addView.findViewById(R.id.tvContactCount);
-                    tvContactCount.setText("Contact #" + contactCount);
-                    contactCount ++;
+                        final TextView tvContactCount = addView.findViewById(R.id.tvContactCount);
+                        tvContactCount.setText("Contact #" + contactCount);
+                        contactCount++;
 
-                    //remove contact
-                    TextView tvContactRemove = addView.findViewById(R.id.tvRemove);
-                    tvContactRemove.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
+                        //remove contact
+                        TextView tvContactRemove = addView.findViewById(R.id.tvRemove);
+                        tvContactRemove.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
 
 
-                            TextView tvCurrentCount = addView.findViewById(R.id.tvContactCount);
-                            if(!tvCurrentCount.getText().toString().equals(String.valueOf(contactCount))){
-                                ((LinearLayout)addView.getParent()).removeView(addView);
-                                contactCount --;
-                                rearrangeContactCount();
+                                TextView tvCurrentCount = addView.findViewById(R.id.tvContactCount);
+                                if (!tvCurrentCount.getText().toString().equals(String.valueOf(contactCount))) {
+                                    ((LinearLayout) addView.getParent()).removeView(addView);
+                                    contactCount--;
+                                    rearrangeContactCount();
+                                } else {
+                                    ((LinearLayout) addView.getParent()).removeView(addView);
+                                    contactCount--;
+                                }
+
+                                String contactcounter = tvContactCount.getText().toString();
+                                String[] split = contactcounter.split("#");
+                                int contactCount = Integer.parseInt(split[1].trim()) - 1;
+
+                                if (contactKeyArrayList.size() >= contactCount) {
+                                    String key = contactKeyArrayList.get(contactCount);
+                                    databaseReference.child("Contact").child(key).removeValue();
+                                    contactKeyArrayList.remove(contactCount);
+                                }
+
                             }
-                            else{
-                                ((LinearLayout)addView.getParent()).removeView(addView);
-                                contactCount --;
+                        });
+
+                        //NAME
+                        TextView tvRowName = addView.findViewById(R.id.tvContactName);
+                        tvRowName.setText(tvRowName.getText().toString().concat(contact.getName()));
+                        EditText etRowName = addView.findViewById(R.id.etContactName);
+                        etRowName.setText(contact.getName());
+                        etRowName.setVisibility(View.GONE);
+
+                        //TITLE
+                        TextView tvRowTitle = addView.findViewById(R.id.tvContactTitle);
+                        tvRowTitle.setText(tvRowTitle.getText().toString().concat(contact.getTitle()));
+                        EditText etRowTitle = addView.findViewById(R.id.etContactTitle);
+                        etRowTitle.setText(contact.getTitle());
+                        etRowTitle.setVisibility(View.GONE);
+
+                        //MOBILE
+                        TextView tvRowMobile = addView.findViewById(R.id.tvContactMobile);
+                        tvRowMobile.setText(tvRowMobile.getText().toString().concat(contact.getMobileNumber()));
+                        EditText etRowMobile = addView.findViewById(R.id.etContactMobile);
+                        etRowMobile.setText(contact.getMobileNumber());
+                        etRowMobile.setVisibility(View.GONE);
+
+                        //OFFICE
+                        TextView tvRowOffice = addView.findViewById(R.id.tvContactOffice);
+                        tvRowOffice.setText(tvRowOffice.getText().toString().concat(contact.getOfficeNumber()));
+                        EditText etRowOffice = addView.findViewById(R.id.etContactOffice);
+                        etRowOffice.setText(contact.getOfficeNumber());
+                        etRowOffice.setVisibility(View.GONE);
+
+                        //EMAIL
+                        TextView tvRowEmail = addView.findViewById(R.id.tvContactEmail);
+                        tvRowEmail.setText(tvRowEmail.getText().toString().concat(contact.getEmail()));
+                        EditText etRowEmail = addView.findViewById(R.id.etContactEmail);
+                        etRowEmail.setText(contact.getEmail());
+                        etRowEmail.setVisibility(View.GONE);
+
+                        //IC
+                        TextView tvRowIC = addView.findViewById(R.id.tvContactIC);
+                        Switch icSwitch2 = addView.findViewById(R.id.switchContactIC);
+                        icSwitch2.setVisibility(View.GONE);
+                        icSwitch2.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                            @Override
+                            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                                ICswitchChecker();
                             }
-
-                            String contactcounter  = tvContactCount.getText().toString();
-                            String[] split = contactcounter.split("#");
-                            int contactCount = Integer.parseInt(split[1].trim()) - 1;
-
-                            if(contactKeyArrayList.size() >= contactCount){
-                                String key = contactKeyArrayList.get(contactCount);
-                                databaseReference.child("Contact").child(key).removeValue();
-                                contactKeyArrayList.remove(contactCount);
-                            }
-
+                        });
+                        if (contact.getIc().equals(true)) {
+                            tvRowIC.setText(tvRowIC.getText().toString().concat("yes"));
+                            icSwitch2.isChecked();
+                        } else {
+                            tvRowIC.setText(tvRowIC.getText().toString().concat("no"));
+                            icSwitch2.setChecked(false);
                         }
-                    });
 
-                    //NAME
-                    TextView tvRowName = addView.findViewById(R.id.tvContactName);
-                    tvRowName.setText(tvRowName.getText().toString().concat(contact.getName()));
-                    EditText etRowName = addView.findViewById(R.id.etContactName);
-                    etRowName.setText(contact.getName());
-                    etRowName.setVisibility(View.GONE);
-
-                    //TITLE
-                    TextView tvRowTitle = addView.findViewById(R.id.tvContactTitle);
-                    tvRowTitle.setText(tvRowTitle.getText().toString().concat(contact.getTitle()));
-                    EditText etRowTitle = addView.findViewById(R.id.etContactTitle);
-                    etRowTitle.setText(contact.getTitle());
-                    etRowTitle.setVisibility(View.GONE);
-
-                    //MOBILE
-                    TextView tvRowMobile = addView.findViewById(R.id.tvContactMobile);
-                    tvRowMobile.setText(tvRowMobile.getText().toString().concat(contact.getMobileNumber()));
-                    EditText etRowMobile = addView.findViewById(R.id.etContactMobile);
-                    etRowMobile.setText(contact.getMobileNumber());
-                    etRowMobile.setVisibility(View.GONE);
-
-                    //OFFICE
-                    TextView tvRowOffice = addView.findViewById(R.id.tvContactOffice);
-                    tvRowOffice.setText(tvRowOffice.getText().toString().concat(contact.getOfficeNumber()));
-                    EditText etRowOffice = addView.findViewById(R.id.etContactOffice);
-                    etRowOffice.setText(contact.getOfficeNumber());
-                    etRowOffice.setVisibility(View.GONE);
-
-                    //EMAIL
-                    TextView tvRowEmail = addView.findViewById(R.id.tvContactEmail);
-                    tvRowEmail.setText(tvRowEmail.getText().toString().concat(contact.getEmail()));
-                    EditText etRowEmail= addView.findViewById(R.id.etContactEmail);
-                    etRowEmail.setText(contact.getEmail());
-                    etRowEmail.setVisibility(View.GONE);
-
-                    //IC
-                    TextView tvRowIC = addView.findViewById(R.id.tvContactIC);
-                    Switch icSwitch2 = addView.findViewById(R.id.switchContactIC);
-                    icSwitch2.setVisibility(View.GONE);
-                    icSwitch2.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-                        @Override
-                        public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                            ICswitchChecker();
-                        }
-                    });
-                    if(contact.getIc().equals(true)){
-                        tvRowIC.setText(tvRowIC.getText().toString().concat("yes"));
-                        icSwitch2.isChecked();
+                        containerContact.addView(addView, containerContact.getChildCount());
                     }
-                    else{
-                        tvRowIC.setText(tvRowIC.getText().toString().concat("no"));
-                        icSwitch2.setChecked(false);
-                    }
-
-                    containerContact.addView(addView, containerContact.getChildCount());
                 }
             }
 
@@ -431,7 +451,7 @@ public class ViewMyNameCardDetailedActivity extends AppCompatActivity implements
 
             }
         };
-        databaseReference.child("Contact").orderByChild("company_id").equalTo(key).addChildEventListener(childEventListenerContacts);
+        databaseReference.child("Contact").addChildEventListener(childEventListenerContacts);
 
         databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -772,6 +792,16 @@ public class ViewMyNameCardDetailedActivity extends AppCompatActivity implements
                 RadioButton rbChecked = (RadioButton)  rgPriorityLevel.getChildAt(idx);
                 String rbSelectedText = rbChecked.getText().toString();
 
+                if(idx == 0){
+                    rbSelectedText = "c.".concat(rbSelectedText);
+                }
+                else if(idx == 1){
+                    rbSelectedText = "b.".concat(rbSelectedText);
+                }
+                else if(idx == 2){
+                    rbSelectedText = "a.".concat(rbSelectedText);
+                }
+
                 String name = etCompanyName.getText().toString().trim();
                 String postalCode = etCompanyPostalCode.getText().toString().trim();
                 String unitNo = etCompanyUnitNo.getText().toString().trim();
@@ -784,7 +814,16 @@ public class ViewMyNameCardDetailedActivity extends AppCompatActivity implements
 
 
                 Company company = new Company(name, postalCode, unitNo, officeTel, industry, lack, rbSelectedText, comment, createBy, companyDateCreated, numberOfTimesCalled);
-                databaseReference.child("Company").child(companyDbKey).setValue(company);
+                databaseReference.child("Company").child(companyDbKey).setValue(company).addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Intent intent = new Intent(ViewMyNameCardDetailedActivity.this, ViewMyNameCardDetailedActivity.class);
+                        Bundle extras = new Bundle();
+                        extras.putString("dbkey", companyDbKey);
+                        intent.putExtras(extras);
+                        ViewMyNameCardDetailedActivity.this.startActivity(intent);
+                    }
+                });
 
                 saveContact();
                 saveCopier();
@@ -792,8 +831,8 @@ public class ViewMyNameCardDetailedActivity extends AppCompatActivity implements
                 setContactNotEditable();
                 setCopierNotEditable();
 
-                relativeLayoutView.setVisibility(View.VISIBLE);
-                relativeLayoutEdit.setVisibility(View.GONE);
+//                relativeLayoutView.setVisibility(View.VISIBLE);
+//                relativeLayoutEdit.setVisibility(View.GONE);
 
             }
         }
@@ -981,6 +1020,28 @@ public class ViewMyNameCardDetailedActivity extends AppCompatActivity implements
             extras.putString("companyName", company.getName());
             intent.putExtras(extras);
             this.startActivity(intent);
+        }
+        else if(view.equals(tvCompanyNumber)){
+            String companyNumber = tvCompanyNumber.getText().toString();
+            Uri number = Uri.parse("tel:".concat(companyNumber));
+            Intent callIntent = new Intent(Intent.ACTION_DIAL, number);
+            startActivity(callIntent);
+
+            databaseReference.child("Company").child(companyDbKey).child("numberOfTimesCalled").addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    System.out.println("number:: " + dataSnapshot.getValue().toString());
+
+                    int numOfPhoneCall = Integer.parseInt(dataSnapshot.getValue().toString());
+                    databaseReference.child("Company").child(companyDbKey).child("numberOfTimesCalled").setValue(numOfPhoneCall + 1);
+
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                }
+            });
         }
         else if(view.equals(btnCapturePhoto)){
             ImagePicker.with(ViewMyNameCardDetailedActivity.this)                         //  Initialize ImagePicker with activity or fragment context
@@ -1422,8 +1483,10 @@ public class ViewMyNameCardDetailedActivity extends AppCompatActivity implements
                 //rgROP
                 RadioGroup rgROP = (childView.findViewById(R.id.rgRorP));
                 int rgCheckednumber = rgROP.getCheckedRadioButtonId();
+                System.out.println("radiobutton:: checked rg number: " + rgCheckednumber);
                 View radioButton = rgROP.findViewById(rgCheckednumber);
                 int idx = rgROP.indexOfChild(radioButton);
+                System.out.println("radiobutton:: button index: " + idx);
                 RadioButton rbChecked = (RadioButton)rgROP.getChildAt(idx);
                 String rbROPtext = rbChecked.getText().toString();
 
@@ -1446,12 +1509,18 @@ public class ViewMyNameCardDetailedActivity extends AppCompatActivity implements
                     copierROP = rbROPtext;
                     copierProblems = problem;
                     copierStartDate = etStartDate.getText().toString().trim();
-                    copierContLength = etlength.getText().toString().trim();
+                    if(etlength.getText().toString().trim().equals("")){
+                        copierContLength = 0;
+                    }
+                    else{
+                        copierContLength = Integer.parseInt(etlength.getText().toString().trim());
+                    }
+
                     copierEndDate = etExpiryDate.getText().toString().trim();
                     copierMP = etMP.getText().toString().trim();
                     copierFP = etFP.getText().toString().trim();
 
-                    Copier copier = new Copier(copierBrand, copierModel, copierAge, copierProblems, copierROP, Integer.parseInt(copierContLength), copierStartDate, copierEndDate, copierMP, copierFP, companyid);
+                    Copier copier = new Copier(copierBrand, copierModel, copierAge, copierProblems, copierROP, copierContLength, copierStartDate, copierEndDate, copierMP, copierFP, companyid);
 
                     if(copierKeyArrayList.size() > c) {
                         System.out.println("checker: C: " + c);
@@ -1703,7 +1772,14 @@ public class ViewMyNameCardDetailedActivity extends AppCompatActivity implements
     }
 
     public void retrieveStoragePath(){
-        databaseReference.child("Photo").child(companyDbKey).addChildEventListener(new ChildEventListener() {
+        String dbkeytouse;
+        if(receivedCompanyDbKey != null){
+            dbkeytouse = receivedCompanyDbKey;
+        }
+        else{
+            dbkeytouse = companyDbKey;
+        }
+        databaseReference.child("Photo").child(dbkeytouse).addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
                 Photo photo = dataSnapshot.getValue(Photo.class);
@@ -1739,7 +1815,7 @@ public class ViewMyNameCardDetailedActivity extends AppCompatActivity implements
 
     private void getPhotos(ArrayList<String> list){
 
-        PhotoAdapter photoAdapter = new PhotoAdapter(list,ViewMyNameCardDetailedActivity.this);
+        PhotoAdapter photoAdapter = new PhotoAdapter(list,ViewMyNameCardDetailedActivity.this, companyDbKey);
         recyclerView.setAdapter(photoAdapter);
     }
 
@@ -1784,7 +1860,10 @@ public class ViewMyNameCardDetailedActivity extends AppCompatActivity implements
 
     @Override
     public boolean onSupportNavigateUp() {
-        onBackPressed();
+
+        Intent intent = new Intent(ViewMyNameCardDetailedActivity.this, ViewMyNameCardActivity.class);
+        ViewMyNameCardDetailedActivity.this.startActivity(intent);
+
         return true;
     }
 }

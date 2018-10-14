@@ -1,5 +1,6 @@
 package com.example.geenie.s9imobilecrm;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -13,6 +14,7 @@ import android.view.View;
 import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -28,10 +30,11 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 
-public class ViewMyNameCardActivity extends AppCompatActivity {
+public class ViewMyNameCardActivity extends AppCompatActivity implements View.OnClickListener {
 
     private Company company;
     private RecyclerView recyclerView;
+    private TextView tvAddNameCard;
     private SearchView sv;
     private ArrayList<Company> list;
     private ArrayList<Company> listUntounched;
@@ -102,6 +105,9 @@ public class ViewMyNameCardActivity extends AppCompatActivity {
                 return false;
             }
         });
+
+        tvAddNameCard = findViewById(R.id.addNameCard);
+        tvAddNameCard.setOnClickListener(this);
 
         recyclerView = findViewById(R.id.rvUpcoming);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -426,5 +432,13 @@ public class ViewMyNameCardActivity extends AppCompatActivity {
 //            listClone.clear();
 //        }
 //        listClone = (ArrayList<Company>)list.clone();
+    }
+
+    @Override
+    public void onClick(View view) {
+        if(view.equals(tvAddNameCard)){
+            Intent i = new Intent(ViewMyNameCardActivity.this, AddNameCardActivity.class);
+            ViewMyNameCardActivity.this.startActivity(i);
+        }
     }
 }

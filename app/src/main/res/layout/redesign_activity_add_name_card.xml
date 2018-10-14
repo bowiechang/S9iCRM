@@ -1,0 +1,625 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".AddNameCardActivity">
+
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/appbarlayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@null"
+        app:elevation="0dp"
+        android:elevation="0dp">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/offwhite"
+            android:theme="@style/ToolbarTheme">
+
+            <TextView
+                android:id="@+id/toolbar_title"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:text="Company Details"
+                android:textColor="@color/black"
+                android:fontFamily="@font/roboto_slab_bold"
+                android:textSize="25sp"
+                android:textStyle="bold" />
+
+        </android.support.v7.widget.Toolbar>
+
+    </android.support.design.widget.AppBarLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/appbarlayout">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="20dp">
+
+            //photo
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <RelativeLayout
+                    android:id="@+id/btnLaunchPhotoCaptureLib"
+                    android:layout_width="0dp"
+                    android:layout_height="150dp"
+                    android:layout_weight="0.2"
+                    android:padding="5dp"
+                    android:layout_marginRight="10dp"
+                    android:background="@drawable/rectangle">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:textAlignment="center"
+                        android:fontFamily="@font/roboto_condensed_bold"
+                        android:text="Take Photo"
+                        android:textColor="@color/black"
+                        android:textSize="18sp" />
+
+                </RelativeLayout>
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/rvPhotos"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.8"
+                    android:background="@color/lightgrey"
+                    android:orientation="horizontal"/>
+
+            </LinearLayout>
+
+
+
+            //name and address container
+            <LinearLayout
+                android:id="@+id/containerCompanyDetails"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/rectangle"
+                android:orientation="vertical"
+                android:layout_marginTop="10dp"
+                android:padding="20dp">
+
+                //header
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Company Details"
+                        android:fontFamily="@font/roboto_slab_bold"
+                        android:textSize="28sp"
+                        android:textColor="@color/black"/>
+
+                </RelativeLayout>
+
+                //company name
+                <LinearLayout
+                    android:id="@+id/rlCompanyNameEdit"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="20dp">
+
+                    <ImageView
+                        android:id="@+id/ivCompanyNameEdit"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:adjustViewBounds="true"
+                        android:layout_marginTop="3dp"
+                        android:layout_gravity="center_vertical"
+                        android:src="@drawable/companyname"/>
+                    <EditText
+                        android:id="@+id/etCompanyName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/roboto_condensed_bold"
+                        android:layout_gravity="center_vertical"
+                        android:hint="Input company name"
+                        android:background="@drawable/rectangle_light"
+                        android:padding="5dp"
+                        android:layout_marginLeft="30dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginBottom="3dp"
+                        android:inputType="textCapCharacters"
+                        android:textSize="15sp"
+                        android:textColor="@color/black"/>
+
+                </LinearLayout>
+
+                //company pl
+                <RelativeLayout
+                    android:id="@+id/rlCompanyplEdit"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp">
+
+                    <ImageView
+                        android:id="@+id/ivCompanyPriorityLevel"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:adjustViewBounds="true"
+                        android:layout_marginTop="5dp"
+                        android:src="@drawable/priority"/>
+
+                    <RadioGroup
+                        android:id="@+id/rgPriorityLevel"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_toRightOf="@id/ivCompanyPriorityLevel"
+                        android:checkedButton="@id/rbNormal"
+                        android:layout_marginLeft="30dp"
+                        android:orientation="horizontal">
+
+                        <RadioButton
+                            android:id="@+id/rbNormal"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.33"
+                            android:text="Normal"
+                            android:textSize="12sp"
+                            android:fontFamily="@font/roboto_condensed_bold"
+                            android:buttonTint="@color/black"/>
+
+                        <RadioButton
+                            android:id="@+id/rbFollowUp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.33"
+                            android:text="Follow Up"
+                            android:textSize="12sp"
+                            android:fontFamily="@font/roboto_condensed_bold"
+                            android:buttonTint="@color/black"/>
+
+                        <RadioButton
+                            android:id="@+id/rbUrgent"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.33"
+                            android:text="Urgent"
+                            android:textSize="12sp"
+                            android:fontFamily="@font/roboto_condensed_bold"
+                            android:buttonTint="@color/black"/>
+
+                    </RadioGroup>
+                </RelativeLayout>
+
+                //company Address
+                <RelativeLayout
+                    android:id="@+id/rlCompanyAddressEdit"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp">
+
+                    <!--<TextView-->
+                    <!--android:id="@+id/tvCompanyAddress1"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:fontFamily="@font/roboto_reg"-->
+                    <!--android:text="Address: "-->
+                    <!--android:textColor="@color/black"-->
+                    <!--android:textSize="16sp"/>-->
+
+                    <ImageView
+                        android:id="@+id/ivCompanyAddressEdit"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:adjustViewBounds="true"
+                        android:layout_marginTop="10dp"
+                        android:src="@drawable/address"/>
+
+
+                    <EditText
+                        android:id="@+id/etCompanyAddress"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_toRightOf="@id/ivCompanyAddressEdit"
+                        android:fontFamily="@font/roboto_condensed_bold"
+                        android:background="@drawable/rectangle_light"
+                        android:textSize="15sp"
+                        android:layout_marginLeft="30dp"
+                        android:hint="Input company address"
+                        android:padding="5dp"
+                        android:textColor="@color/black"/>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/etCompanyAddress"
+                        android:orientation="horizontal"
+                        android:layout_toRightOf="@id/ivCompanyAddressEdit"
+                        android:layout_marginLeft="30dp">
+
+                        <EditText
+                            android:id="@+id/etCompanyUnit"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.5"
+                            android:fontFamily="@font/roboto_condensed_bold"
+                            android:textSize="15sp"
+                            android:layout_marginTop="5dp"
+                            android:hint="Unit number"
+                            android:inputType="number"
+                            android:background="@drawable/rectangle_light"
+                            android:padding="5dp"
+                            android:textColor="@color/black"/>
+
+                        <EditText
+                            android:id="@+id/etCompanyPostalCode"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.5"
+                            android:fontFamily="@font/roboto_condensed_bold"
+                            android:textSize="15sp"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginTop="5dp"
+                            android:inputType="number"
+                            android:hint="Postal code"
+                            android:padding="5dp"
+                            android:background="@drawable/rectangle_light"
+                            android:textColor="@color/black"/>
+
+                    </LinearLayout>
+
+
+
+                </RelativeLayout>
+
+                //company number
+                <RelativeLayout
+                    android:id="@+id/rlCompanyNumberEdit"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp">
+
+                    <!--<TextView-->
+                    <!--android:id="@+id/tvCompanyOfficeNumber1"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:fontFamily="@font/roboto_reg"-->
+                    <!--android:text="Office Tel: "-->
+                    <!--android:textColor="@color/black"-->
+                    <!--android:textSize="16sp"-->
+                    <!--android:layout_centerVertical="true" />-->
+
+                    <ImageView
+                        android:id="@+id/ivCompanyOfficeNumberEdit"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:adjustViewBounds="true"
+                        android:layout_marginTop="10dp"
+                        android:src="@drawable/icon_followup_type"/>
+
+                    <EditText
+                        android:id="@+id/etCompanyOfficeNumber"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_toRightOf="@id/ivCompanyOfficeNumberEdit"
+                        android:fontFamily="@font/roboto_condensed_bold"
+                        android:textSize="15sp"
+                        android:inputType="number"
+                        android:background="@drawable/rectangle_light"
+                        android:hint="Input office number"
+                        android:padding="5dp"
+                        android:layout_marginLeft="30dp"
+                        android:textColor="@color/black"/>
+
+                </RelativeLayout>
+
+                //company industry
+                <RelativeLayout
+                    android:id="@+id/rlCompanyIndustryEdit"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp">
+
+                    <!--<TextView-->
+                    <!--android:id="@+id/tvCompanyIndustry1"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:fontFamily="@font/roboto_reg"-->
+                    <!--android:text="Industry: "-->
+                    <!--android:textColor="@color/black"-->
+                    <!--android:textSize="16sp"-->
+                    <!--android:layout_centerVertical="true" />-->
+
+                    <ImageView
+                        android:id="@+id/ivCompanyIndustryEdit"
+                        android:layout_width="18dp"
+                        android:layout_height="18dp"
+                        android:adjustViewBounds="true"
+                        android:layout_marginTop="5dp"
+                        android:src="@drawable/industry"/>
+
+                    <!--<Spinner-->
+                    <!--android:id="@+id/spinnerIndustry"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:padding="5dp"-->
+                    <!--android:layout_marginLeft="30dp"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:entries="@array/industry"-->
+                    <!--android:background="@drawable/rectangle_light"-->
+                    <!--android:layout_toRightOf="@id/ivCompanyIndustryEdit"/>-->
+
+                    <android.support.v7.widget.AppCompatSpinner
+                        android:id="@+id/spinnerIndustry"
+                        android:layout_width="match_parent"
+                        android:padding="5dp"
+                        android:layout_marginLeft="33dp"
+                        android:layout_height="wrap_content"
+                        android:entries="@array/industry"
+                        android:theme="@style/Spinner"
+                        android:background="@drawable/rectangle_light"
+                        android:layout_toRightOf="@id/ivCompanyIndustryEdit"/>
+
+                </RelativeLayout>
+
+                //line
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/black"
+                    android:layout_marginTop="25dp"
+                    android:alpha="0.6"/>
+
+                //company lacking
+                <RelativeLayout
+                    android:id="@+id/rlCompanyLackingEdit"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp">
+
+                    <TextView
+                        android:id="@+id/tvCompanyLackEdit"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/roboto_condensed_bold"
+                        android:textColor="@color/black"
+                        android:text="Lacking of "
+                        android:textSize="16sp"
+                        android:layout_centerVertical="true" />
+
+                    <!--<ImageView-->
+                    <!--android:id="@+id/ivCompanyLack"-->
+                    <!--android:layout_width="20dp"-->
+                    <!--android:layout_height="20dp"-->
+                    <!--android:adjustViewBounds="true"-->
+                    <!--android:layout_marginTop="5dp"-->
+                    <!--android:src="@drawable/lack"/>-->
+
+                    <!--<TextView-->
+                    <!--android:id="@+id/tvCompanyLack"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:textSize="23sp"-->
+                    <!--android:textAllCaps="true"-->
+                    <!--android:textColor="@color/black"-->
+                    <!--android:layout_toRightOf="@id/ivCompanyLack"-->
+                    <!--android:layout_marginLeft="20dp"-->
+                    <!--android:fontFamily="@font/roboto_condensed_bold"/>-->
+
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toRightOf="@id/tvCompanyLackEdit">
+
+                        <android.support.v7.widget.AppCompatCheckBox
+                            android:id="@+id/cbCopier"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5dp"
+                            android:fontFamily="@font/roboto_condensed_bold"
+                            android:textSize="12sp"
+                            android:buttonTint="@color/black"
+                            android:text="Copier"/>
+
+                        <android.support.v7.widget.AppCompatCheckBox
+                            android:id="@+id/cbScanner"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_toRightOf="@id/cbCopier"
+                            android:layout_marginLeft="5dp"
+                            android:fontFamily="@font/roboto_condensed_bold"
+                            android:textSize="12sp"
+                            android:buttonTint="@color/black"
+                            android:text="Scanner"/>
+
+                        <android.support.v7.widget.AppCompatCheckBox
+                            android:id="@+id/cbShredder"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_toRightOf="@id/cbScanner"
+                            android:layout_marginLeft="5dp"
+                            android:fontFamily="@font/roboto_condensed_bold"
+                            android:textSize="12sp"
+                            android:buttonTint="@color/black"
+                            android:text="Shredder"/>
+
+
+                    </RelativeLayout>
+
+
+                </RelativeLayout>
+
+            </LinearLayout>
+
+            //company comments container
+            <RelativeLayout
+                android:id="@+id/rlCompanyCommentsEdit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/rectangle"
+                android:layout_marginTop="15dp"
+                android:layout_below="@id/containerCompanyDetailsEdit"
+                android:padding="20dp">
+
+                <!--<TextView-->
+                <!--android:id="@+id/tvCompanyComment1"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:fontFamily="@font/roboto_reg"-->
+                <!--android:text="Comments: "-->
+                <!--android:textColor="@color/black"-->
+                <!--android:textSize="16sp"-->
+                <!--android:layout_centerVertical="true" />-->
+
+                <ImageView
+                    android:id="@+id/ivCompanyCommentEdit"
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:adjustViewBounds="true"
+                    android:layout_marginTop="3dp"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/comments"/>
+
+                <EditText
+                    android:id="@+id/etCompanyComment"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@id/ivCompanyCommentEdit"
+                    android:fontFamily="@font/roboto_condensed_bold"
+                    android:background="@null"
+                    android:gravity="top"
+                    android:textSize="17sp"
+                    android:hint="Input comments"
+                    android:layout_marginLeft="30dp"
+                    android:textColor="@color/black"
+                    android:padding="5dp"/>
+
+            </RelativeLayout>
+
+
+
+            //contact portion
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/rectangle"
+                android:padding="20dp"
+                android:layout_marginTop="15dp">
+
+                //header
+                <RelativeLayout
+                    android:id="@+id/relativeLayoutContactsHeader"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Contacts"
+                        android:fontFamily="@font/roboto_slab_bold"
+                        android:textSize="28sp"
+                        android:textColor="@color/black"/>
+
+                    <TextView
+                        android:id="@+id/tvAddContact"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Add"
+                        android:fontFamily="@font/roboto_condensed_bold"
+                        android:textSize="24sp"
+                        android:layout_alignParentRight="true"
+                        android:textColor="@color/black"/>
+
+                </RelativeLayout>
+
+                //contacts container
+                <LinearLayout
+                    android:id="@+id/containerContact"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginTop="20dp"
+                    android:layout_below="@id/relativeLayoutContactsHeader"/>
+
+            </RelativeLayout>
+
+            //copiers portion
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/rectangle"
+                android:padding="20dp"
+                android:layout_marginBottom="30dp"
+                android:layout_marginTop="15dp">
+
+                //header
+                <RelativeLayout
+                    android:id="@+id/relativeLayoutCopierHeader"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Copiers"
+                        android:fontFamily="@font/roboto_slab_bold"
+                        android:textSize="28sp"
+                        android:textColor="@color/black"/>
+
+                    <TextView
+                        android:id="@+id/tvAddCopier"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Add"
+                        android:fontFamily="@font/roboto_condensed_bold"
+                        android:textSize="24sp"
+                        android:layout_alignParentRight="true"
+                        android:textColor="@color/black"/>
+
+                </RelativeLayout>
+                <LinearLayout
+                    android:id="@+id/containerCopier"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginTop="20dp"
+                    android:layout_below="@id/relativeLayoutCopierHeader"/>
+
+            </RelativeLayout>
+
+
+            <RelativeLayout
+                android:id="@+id/btnAddNameCard"
+                android:layout_width="match_parent"
+                android:layout_height="65dp"
+                android:padding="5dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/rectangle">
+
+                <TextView
+                    android:id="@+id/tvEditSaveBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:fontFamily="@font/roboto_condensed_bold"
+                    android:text="ADD NAME CARD"
+                    android:textColor="@color/black"
+                    android:textSize="18sp" />
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</RelativeLayout>

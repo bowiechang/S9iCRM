@@ -3,19 +3,23 @@ package com.example.geenie.s9imobilecrm;
 import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.location.Address;
+import android.location.Geocoder;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.Button;
+import android.view.Window;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.DatePicker;
@@ -23,6 +27,7 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.TextView;
@@ -43,36 +48,37 @@ import com.nguyenhoanglam.imagepicker.model.Image;
 import com.nguyenhoanglam.imagepicker.ui.imagepicker.ImagePicker;
 
 import java.io.File;
+import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
+import java.util.Locale;
 
-public class AddNameCardActivity extends AppCompatActivity implements View.OnClickListener {
+public class AddNameCardActivity extends AppCompatActivity implements View.OnClickListener, TextWatcher {
 
     //company
     private EditText etCompanyName;
     private EditText etPostalCode;
+    private EditText etAddress;
     private EditText etUnitNo;
     private EditText etOfficeNumber;
     private Spinner spIndustry;
 
     //contact
-    private EditText etName;
-    private EditText etTitle;
-    private EditText etMobileNumber;
-    private EditText etoffNumber;
-    private EditText etEmail;
-    private Switch switchIC;
+    private TextView tvAddContact;
+    private LinearLayout containerContact;
 
     //copier
     private TextView tvAddCopier;
-    private LinearLayout linearLayoutCopier;
+    private LinearLayout containerCopier;
     private Calendar calendar = Calendar.getInstance();
+
 
     //photos
     private RecyclerView recyclerView;
-    private Button btnCapturePhoto;
+    private RelativeLayout btnCapturePhoto;
 
     private Boolean exist = false;
     private int count, counter;
@@ -85,11 +91,11 @@ public class AddNameCardActivity extends AppCompatActivity implements View.OnCli
     private EditText comment;
 
 
-    private TextView tvAdd;
-    private LinearLayout linearLayoutContact;
-    private Button btnAddANameCard;
+//    private TextView tvAdd;
+//    private LinearLayout linearLayoutContact;
+    private RelativeLayout btnAddANameCard;
 
-    private int contactCount = 2;
+    private int contactCount = 1;
     private int copierCount = 1;
 
     //firebase init
@@ -103,8 +109,18 @@ public class AddNameCardActivity extends AppCompatActivity implements View.OnCli
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_name_card);
+        setContentView(R.layout.redesign_activity_add_name_card);
         init();
+
+        //status bar
+        Window window = this.getWindow();
+        window.setStatusBarColor(ContextCompat.getColor(this, R.color.black));
+
+        //toolbar
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
     }
 
     public void init(){
@@ -117,32 +133,21 @@ public class AddNameCardActivity extends AppCompatActivity implements View.OnCli
 
         //company
         etCompanyName = findViewById(R.id.etCompanyName);
-        etPostalCode = findViewById(R.id.etPostalCode);
-        etUnitNo = findViewById(R.id.etUnitNumber);
-        etOfficeNumber = findViewById(R.id.etOfficeNumber);
+        etAddress = findViewById(R.id.etCompanyAddress);
+        etPostalCode = findViewById(R.id.etCompanyPostalCode);
+        etPostalCode.addTextChangedListener(this);
+        etUnitNo = findViewById(R.id.etCompanyUnit);
+        etOfficeNumber = findViewById(R.id.etCompanyOfficeNumber);
         spIndustry = findViewById(R.id.spinnerIndustry);
 
         //contact
-        etName = findViewById(R.id.etContactName);
-        etTitle = findViewById(R.id.etContactTitle);
-        etMobileNumber = findViewById(R.id.etContactMobile);
-        etoffNumber = findViewById(R.id.etContactOffice);
-        etEmail = findViewById(R.id.etContactEmail);
-        switchIC = findViewById(R.id.switchContactIC);
-        switchIC.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                ICswitchChecker();
-            }
-        });
-
-        linearLayoutContact = findViewById(R.id.llcontact);
-        tvAdd = findViewById(R.id.tvAdd);
-        tvAdd.setOnClickListener(this);
+        containerContact = findViewById(R.id.containerContact);
+        tvAddContact = findViewById(R.id.tvAddContact);
+        tvAddContact.setOnClickListener(this);
 
         //copier
+        containerCopier = findViewById(R.id.containerCopier);
         tvAddCopier = findViewById(R.id.tvAddCopier);
-        linearLayoutCopier = findViewById(R.id.llcopier);
         tvAddCopier.setOnClickListener(this);
 
         //otherinfo
@@ -153,58 +158,137 @@ public class AddNameCardActivity extends AppCompatActivity implements View.OnCli
         rbNormal = findViewById(R.id.rbNormal);
         rbFollowUp = findViewById(R.id.rbFollowUp);
         rbUrgent = findViewById(R.id.rbUrgent);
-        comment = findViewById(R.id.etComment);
+        comment = findViewById(R.id.etCompanyComment);
 
         btnAddANameCard = findViewById(R.id.btnAddNameCard);
         btnAddANameCard.setOnClickListener(this);
+
+        initForContact();
+
+    }
+
+    public void initForContact(){
+
+        LayoutInflater layoutInflater = (LayoutInflater) getBaseContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        final View addView = layoutInflater.inflate(R.layout.rowcontact, null);
+
+        final TextView tvContactCount = addView.findViewById(R.id.tvContactCount);
+        tvContactCount.setText("Contact #" + contactCount);
+        contactCount ++;
+
+        //remove contact
+        TextView tvContactRemove = addView.findViewById(R.id.tvRemove);
+        tvContactRemove.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+
+                TextView tvCurrentCount = addView.findViewById(R.id.tvContactCount);
+                if(!tvCurrentCount.getText().toString().equals(String.valueOf(contactCount))){
+                    ((LinearLayout)addView.getParent()).removeView(addView);
+                    contactCount --;
+                    rearrangeContactCount();
+                }
+                else{
+                    ((LinearLayout)addView.getParent()).removeView(addView);
+                    contactCount --;
+                }
+
+                String contactcounter  = tvContactCount.getText().toString();
+                String[] split = contactcounter.split("#");
+                int contactCount = Integer.parseInt(split[1].trim()) - 1;
+
+//                    if(contactKeyArrayList.size() >= contactCount){
+//                        String key = contactKeyArrayList.get(contactCount);
+//                        databaseReference.child("Contact").child(key).removeValue();
+//                        contactKeyArrayList.remove(contactCount);
+//                    }
+
+            }
+        });
+
+        //NAME
+        TextView tvRowName = addView.findViewById(R.id.tvContactName);
+        tvRowName.setVisibility(View.GONE);
+
+        //TITLE
+        TextView tvRowTitle = addView.findViewById(R.id.tvContactTitle);
+        tvRowTitle.setVisibility(View.GONE);
+
+        //MOBILE
+        TextView tvRowMobile = addView.findViewById(R.id.tvContactMobile);
+        tvRowMobile.setVisibility(View.GONE);
+
+        //OFFICE
+        TextView tvRowOffice = addView.findViewById(R.id.tvContactOffice);
+        tvRowOffice.setVisibility(View.GONE);
+
+        //EMAIL
+        TextView tvRowEmail = addView.findViewById(R.id.tvContactEmail);
+        tvRowEmail.setVisibility(View.GONE);
+
+        //IC
+        TextView tvRowIC = addView.findViewById(R.id.tvContactIC);
+        Switch icSwitch2 = addView.findViewById(R.id.switchContactIC);
+        icSwitch2.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                ICswitchChecker();
+            }
+        });
+
+        containerContact.addView(addView, containerContact.getChildCount());
 
     }
 
     @Override
     public void onClick(View view) {
-        if(view == tvAdd){
-            //perform rowcontact insert
-            LayoutInflater layoutInflater = (LayoutInflater) getBaseContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            final View addView = layoutInflater.inflate(R.layout.rowcontact, null);
+//        if(view == tvAdd){
+//            //perform rowcontact insert
+//            LayoutInflater layoutInflater = (LayoutInflater) getBaseContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+//            final View addView = layoutInflater.inflate(R.layout.rowcontact, null);
+//
+//            TextView tvContactCount = addView.findViewById(R.id.tvContactCount);
+//            tvContactCount.setText("Contact #" + contactCount);
+//            contactCount ++;
+//
+//            //icSwitchChecker
+//            Switch icSwitch = addView.findViewById(R.id.switchContactIC);
+//            icSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+//                @Override
+//                public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+//                    ICswitchChecker();
+//                }
+//            });
+//
+//            //remove contact
+//            TextView tvContactRemove = addView.findViewById(R.id.tvRemove);
+//            tvContactRemove.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View view) {
+//
+//
+//                    TextView tvCurrentCount = addView.findViewById(R.id.tvContactCount);
+//                    if(!tvCurrentCount.getText().toString().equals(String.valueOf(contactCount))){
+//                        ((LinearLayout)addView.getParent()).removeView(addView);
+//                        contactCount --;
+//                        rearrangeContactCount();
+//                    }
+//                    else{
+//                        ((LinearLayout)addView.getParent()).removeView(addView);
+//                        contactCount --;
+//                    }
+//
+//                }
+//            });
+//
+//            linearLayoutContact.addView(addView, linearLayoutContact.getChildCount());
+//
+//        }
+//        else
 
-            TextView tvContactCount = addView.findViewById(R.id.tvContactCount);
-            tvContactCount.setText("Contact #" + contactCount);
-            contactCount ++;
+        if(view == btnAddANameCard){
 
-            //icSwitchChecker
-            Switch icSwitch = addView.findViewById(R.id.switchContactIC);
-            icSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-                @Override
-                public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                    ICswitchChecker();
-                }
-            });
-
-            //remove contact
-            TextView tvContactRemove = addView.findViewById(R.id.tvRemove);
-            tvContactRemove.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-
-
-                    TextView tvCurrentCount = addView.findViewById(R.id.tvContactCount);
-                    if(!tvCurrentCount.getText().toString().equals(String.valueOf(contactCount))){
-                        ((LinearLayout)addView.getParent()).removeView(addView);
-                        contactCount --;
-                        rearrangeContactCount();
-                    }
-                    else{
-                        ((LinearLayout)addView.getParent()).removeView(addView);
-                        contactCount --;
-                    }
-
-                }
-            });
-
-            linearLayoutContact.addView(addView, linearLayoutContact.getChildCount());
-
-        }
-        else if(view == btnAddANameCard){
             insertCompanyDetails();
         }
         else if(view == tvAddCopier){
@@ -317,7 +401,79 @@ public class AddNameCardActivity extends AppCompatActivity implements View.OnCli
                 }
             });
 
-            linearLayoutCopier.addView(addView, linearLayoutCopier.getChildCount());
+            containerCopier.addView(addView, containerCopier.getChildCount());
+        }
+        else if(view.equals(tvAddContact)){
+
+            LayoutInflater layoutInflater = (LayoutInflater) getBaseContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            final View addView = layoutInflater.inflate(R.layout.rowcontact, null);
+
+            final TextView tvContactCount = addView.findViewById(R.id.tvContactCount);
+            tvContactCount.setText("Contact #" + contactCount);
+            contactCount ++;
+
+            //remove contact
+            TextView tvContactRemove = addView.findViewById(R.id.tvRemove);
+            tvContactRemove.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+
+                    TextView tvCurrentCount = addView.findViewById(R.id.tvContactCount);
+                    if(!tvCurrentCount.getText().toString().equals(String.valueOf(contactCount))){
+                        ((LinearLayout)addView.getParent()).removeView(addView);
+                        contactCount --;
+                        rearrangeContactCount();
+                    }
+                    else{
+                        ((LinearLayout)addView.getParent()).removeView(addView);
+                        contactCount --;
+                    }
+
+                    String contactcounter  = tvContactCount.getText().toString();
+                    String[] split = contactcounter.split("#");
+                    int contactCount = Integer.parseInt(split[1].trim()) - 1;
+
+//                    if(contactKeyArrayList.size() >= contactCount){
+//                        String key = contactKeyArrayList.get(contactCount);
+//                        databaseReference.child("Contact").child(key).removeValue();
+//                        contactKeyArrayList.remove(contactCount);
+//                    }
+
+                }
+            });
+
+            //NAME
+            TextView tvRowName = addView.findViewById(R.id.tvContactName);
+            tvRowName.setVisibility(View.GONE);
+
+            //TITLE
+            TextView tvRowTitle = addView.findViewById(R.id.tvContactTitle);
+            tvRowTitle.setVisibility(View.GONE);
+
+            //MOBILE
+            TextView tvRowMobile = addView.findViewById(R.id.tvContactMobile);
+            tvRowMobile.setVisibility(View.GONE);
+
+            //OFFICE
+            TextView tvRowOffice = addView.findViewById(R.id.tvContactOffice);
+            tvRowOffice.setVisibility(View.GONE);
+
+            //EMAIL
+            TextView tvRowEmail = addView.findViewById(R.id.tvContactEmail);
+            tvRowEmail.setVisibility(View.GONE);
+
+            //IC
+            TextView tvRowIC = addView.findViewById(R.id.tvContactIC);
+            Switch icSwitch2 = addView.findViewById(R.id.switchContactIC);
+            icSwitch2.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                    ICswitchChecker();
+                }
+            });
+
+            containerContact.addView(addView, containerContact.getChildCount());
         }
         else if(view.equals(btnCapturePhoto)){
             ImagePicker.with(AddNameCardActivity.this)                         //  Initialize ImagePicker with activity or fragment context
@@ -367,6 +523,14 @@ public class AddNameCardActivity extends AppCompatActivity implements View.OnCli
         String companyName = etCompanyName.getText().toString().trim();
         String companyPostalCode = etPostalCode.getText().toString().trim();
         String companyUnitNo = etUnitNo.getText().toString().trim();
+        char firstletterUnitchecker = companyUnitNo.charAt(0);
+        if(!companyUnitNo.contains("#")){
+            companyUnitNo = "#".concat(companyUnitNo);
+        }
+        else if(firstletterUnitchecker != '#'){
+            companyUnitNo = companyUnitNo.replaceAll("#", "");
+            companyUnitNo = "#".concat(companyUnitNo);
+        }
         String companyOfficeNumber = etOfficeNumber.getText().toString().trim();
         String companyIndustry = spIndustry.getSelectedItem().toString();
 
@@ -412,7 +576,7 @@ public class AddNameCardActivity extends AppCompatActivity implements View.OnCli
         final Company company = new Company(companyName, companyPostalCode, companyUnitNo, companyOfficeNumber, companyIndustry,
                 lack, newPL, commentText, uid, dateCreate, 0);
 
-        String dbkeyhere;
+        final String dbkeyhere;
         if(dbkey.equals("")) {
             dbkeyhere = databaseReference.push().getKey();
         }
@@ -422,38 +586,43 @@ public class AddNameCardActivity extends AppCompatActivity implements View.OnCli
         databaseReference.child("Company").child(dbkeyhere).setValue(company).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void aVoid) {
-                Toast.makeText(getApplicationContext(), "name card added!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Name Card Added!", Toast.LENGTH_SHORT).show();
+
+                Intent intent = new Intent(AddNameCardActivity.this, ViewMyNameCardDetailedActivity.class);
+                Bundle extras = new Bundle();
+                extras.putString("dbkey", dbkeyhere);
+                intent.putExtras(extras);
+                AddNameCardActivity.this.startActivity(intent);
             }
         });
 
         addContacts(dbkeyhere);
         addCopier(dbkeyhere);
-        finish();
     }
 
     public void addContacts(String companyid){
-        // name, title mobile, ic must be extracted
+//        // name, title mobile, ic must be extracted
+//
+//        //contact
+//        String contactName = etName.getText().toString().trim();
+//        String contactTitle = etTitle.getText().toString().trim();
+//        String contactMobileNumber = etMobileNumber.getText().toString().trim();
+//        String contactOfficeNumber = etoffNumber.getText().toString().trim();
+//        String contactEmail = etEmail.getText().toString().trim();
+//
+//        Boolean contactIC = false;
+//        if(switchIC.isChecked()){
+//            contactIC = true;
+//        }
+//
+//        Contact contact = new Contact(contactName, contactTitle, contactMobileNumber, contactOfficeNumber, contactEmail, contactIC, companyid);
+//        databaseReference.child("Contact").push().setValue(contact);
 
-        //contact
-        String contactName = etName.getText().toString().trim();
-        String contactTitle = etTitle.getText().toString().trim();
-        String contactMobileNumber = etMobileNumber.getText().toString().trim();
-        String contactOfficeNumber = etoffNumber.getText().toString().trim();
-        String contactEmail = etEmail.getText().toString().trim();
+        if(containerContact.getChildCount() > 0){
 
-        Boolean contactIC = false;
-        if(switchIC.isChecked()){
-            contactIC = true;
-        }
-
-        Contact contact = new Contact(contactName, contactTitle, contactMobileNumber, contactOfficeNumber, contactEmail, contactIC, companyid);
-        databaseReference.child("Contact").push().setValue(contact);
-
-        if(linearLayoutContact.getChildCount() > 0){
-
-            int childCount = linearLayoutContact.getChildCount();
+            int childCount = containerContact.getChildCount();
             for(int c=0; c<childCount; c++){
-                View childView = linearLayoutContact.getChildAt(c);
+                View childView = containerContact.getChildAt(c);
                 EditText etContactName = (childView.findViewById(R.id.etContactName));
                 EditText etTitle = (childView.findViewById(R.id.etContactTitle));
                 EditText etMobile = (childView.findViewById(R.id.etContactMobile));
@@ -496,10 +665,10 @@ public class AddNameCardActivity extends AppCompatActivity implements View.OnCli
 
     public void addCopier(String companyid){
 
-        if(linearLayoutCopier.getChildCount() > 0){
-            int childCount = linearLayoutCopier.getChildCount();
+        if(containerCopier.getChildCount() > 0){
+            int childCount = containerCopier.getChildCount();
             for(int c=0; c<childCount; c++){
-                View childView = linearLayoutCopier.getChildAt(c);
+                View childView = containerCopier.getChildAt(c);
 
                 Spinner spinnerCopierBrand = (childView.findViewById(R.id.spinnerCopierBrand));
                 EditText etCopierModel = (childView.findViewById(R.id.etCopierModel));
@@ -624,10 +793,10 @@ public class AddNameCardActivity extends AppCompatActivity implements View.OnCli
 
     public void rearrangeContactCount(){
 
-        int childCount = linearLayoutContact.getChildCount();
+        int childCount = containerContact.getChildCount();
 
         for(int c=0; c<childCount; c++){
-            View childView = linearLayoutContact.getChildAt(c);
+            View childView = containerContact.getChildAt(c);
             TextView tvContactCount = (childView.findViewById(R.id.tvContactCount));
             tvContactCount.setText("Contact #" + (c + 2));
 
@@ -636,10 +805,10 @@ public class AddNameCardActivity extends AppCompatActivity implements View.OnCli
 
     public void rearrangeCopierCount(){
 
-        int childCount = linearLayoutCopier.getChildCount();
+        int childCount = containerCopier.getChildCount();
 
         for(int c=0; c<childCount; c++){
-            View childView = linearLayoutCopier.getChildAt(c);
+            View childView = containerCopier.getChildAt(c);
             TextView tvContactCount = (childView.findViewById(R.id.tvCopierCount));
             tvContactCount.setText("Copier #" + (c + 1));
 
@@ -648,16 +817,12 @@ public class AddNameCardActivity extends AppCompatActivity implements View.OnCli
 
     public void ICswitchChecker(){
 
-        int childCount = linearLayoutContact.getChildCount();
+        int childCount = containerContact.getChildCount();
         int icChecker = 0;
-
-        if(switchIC.isChecked()){
-            icChecker ++;
-        }
 
         for(int c=0; c<childCount; c++){
 
-            View childView = linearLayoutContact.getChildAt(c);
+            View childView = containerContact.getChildAt(c);
             Switch switchIC = (childView.findViewById(R.id.switchContactIC));
 
             if(switchIC.isChecked()){
@@ -740,9 +905,72 @@ public class AddNameCardActivity extends AppCompatActivity implements View.OnCli
         });
     }
 
+    public String getLatLng(String zip){
+
+        String finaladdress = "";
+
+        final Geocoder geocoder = new Geocoder(this, Locale.getDefault());
+        try {
+            List<Address> addresses = geocoder.getFromLocationName(zip, 1);
+            if (addresses != null && !addresses.isEmpty()) {
+                Address address = addresses.get(0);
+                getAddress(address.getLatitude(), address.getLongitude());
+
+                List<Address> address2 = geocoder.getFromLocation(address.getLatitude(), address.getLongitude(), 1);
+                finaladdress = address2.get(0).getAddressLine(0);
+
+            }
+        } catch (IOException e) {
+            // handle exception
+        }
+        return finaladdress;
+    }
+    public void getAddress(double lat, double lng){
+
+        Geocoder geocoder;
+        List<Address> addresses;
+        geocoder = new Geocoder(this, Locale.getDefault());
+
+        try {
+            addresses = geocoder.getFromLocation(lat, lng, 1); // Here 1 represent max location result to returned, by documents it recommended 1 to 5
+            String address = addresses.get(0).getAddressLine(0); // If any additial address line present than only, check with max available address lines by getMaxAddressLineIndex()
+            String city = addresses.get(0).getLocality();
+            String state = addresses.get(0).getAdminArea();
+            String country = addresses.get(0).getCountryName();
+            String postalCode = addresses.get(0).getPostalCode();
+            String knownName = addresses.get(0).getFeatureName(); // Only if available else return NULL
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
+    }
+
     private void getPhotos(ArrayList<String> list){
 
-        PhotoAdapter photoAdapter = new PhotoAdapter(list,AddNameCardActivity.this);
+        PhotoAdapter photoAdapter = new PhotoAdapter(list,AddNameCardActivity.this, dbkey);
         recyclerView.setAdapter(photoAdapter);
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
+    }
+
+    @Override
+    public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+    }
+
+    @Override
+    public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+        etAddress.setText(getLatLng(String.valueOf(charSequence)));
+    }
+
+    @Override
+    public void afterTextChanged(Editable editable) {
+
     }
 }

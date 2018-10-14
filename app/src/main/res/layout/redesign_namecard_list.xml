@@ -13,6 +13,7 @@
         android:id="@+id/tvCompanyName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textAllCaps="true"
         android:textSize="30sp"
         android:textColor="@color/black"
         android:fontFamily="@font/roboto_slab_bold"/>

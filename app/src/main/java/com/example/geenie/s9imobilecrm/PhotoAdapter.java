@@ -29,10 +29,12 @@ public class PhotoAdapter extends RecyclerView.Adapter<PhotoHolder> {
     protected Context context;
     private StorageReference storageReference = FirebaseStorage.getInstance().getReference();
     private Bitmap bitmap;
+    private String dbkey;
 
-    public PhotoAdapter(ArrayList<String> list, Context context){
+    public PhotoAdapter(ArrayList<String> list, Context context, String dbkey){
         this.context = context;
         this.list = list;
+        this.dbkey = dbkey;
     }
 
     @Override
@@ -54,7 +56,7 @@ public class PhotoAdapter extends RecyclerView.Adapter<PhotoHolder> {
         System.out.println("bitmap insert: onBINDviewholder" );
 
 
-        final StorageReference pathrefIVZoom = storageReference.child("-LKkPuTjiV5s7M_4zTkl"+"/pic" + position + ".jpg");
+        final StorageReference pathrefIVZoom = storageReference.child(dbkey+"/pic" + position + ".jpg");
         pathrefIVZoom.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
             @Override
             public void onSuccess(Uri uri) {

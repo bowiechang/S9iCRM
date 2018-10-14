@@ -256,8 +256,8 @@ public class CapturePhotoActivity extends AppCompatActivity {
 
     private void getPhotos(ArrayList<String> list){
 
-        PhotoAdapter photoAdapter = new PhotoAdapter(list,CapturePhotoActivity.this);
-        recyclerView.setAdapter(photoAdapter);
+//        PhotoAdapter photoAdapter = new PhotoAdapter(list,CapturePhotoActivity.this);
+//        recyclerView.setAdapter(photoAdapter);
     }
 
     private void checkIfExist(){

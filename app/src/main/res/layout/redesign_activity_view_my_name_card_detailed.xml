@@ -49,6 +49,7 @@
             android:orientation="vertical"
             tools:ignore="ExtraText">
 
+            //photo
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -85,9 +86,6 @@
                     android:orientation="horizontal"/>
 
             </LinearLayout>
-
-
-
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -187,7 +185,7 @@
 
 
                                 <TextView
-                                    android:id="@+id/tvCompanyPriorityLevel"
+                                    android:id="@+id/tvCompanyPriorityLevel1"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:fontFamily="@font/roboto_reg"
@@ -195,6 +193,17 @@
                                     android:textColor="@color/black"
                                     android:textSize="13sp"
                                     android:layout_marginLeft="40dp"
+                                    android:layout_centerVertical="true" />
+
+                                <TextView
+                                    android:id="@+id/tvCompanyPriorityLevel"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/roboto_reg"
+                                    android:textColor="@color/black"
+                                    android:layout_toRightOf="@id/tvCompanyPriorityLevel1"
+                                    android:textSize="13sp"
+                                    android:layout_marginLeft="5dp"
                                     android:layout_centerVertical="true" />
 
                                 <!--<ImageView-->
@@ -301,12 +310,23 @@
                                 android:layout_height="wrap_content">
 
                                 <TextView
-                                    android:id="@+id/tvCompanyNumOfCalls"
+                                    android:id="@+id/tvCompanyNumOfCalls1"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:fontFamily="@font/roboto_reg"
                                     android:text="Total Call: "
                                     android:layout_marginLeft="40dp"
+                                    android:textColor="@color/black"
+                                    android:textSize="13sp"
+                                    android:layout_centerVertical="true" />
+
+                                <TextView
+                                    android:id="@+id/tvCompanyNumOfCalls"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/roboto_reg"
+                                    android:layout_marginLeft="5dp"
+                                    android:layout_toRightOf="@id/tvCompanyNumOfCalls1"
                                     android:textColor="@color/black"
                                     android:textSize="13sp"
                                     android:layout_centerVertical="true" />
@@ -906,6 +926,7 @@
 
 
 
+                //contact portion
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
