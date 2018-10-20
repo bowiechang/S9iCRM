@@ -1,19 +1,24 @@
 package com.example.geenie.s9imobilecrm;
 
 import android.app.DatePickerDialog;
+import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
@@ -22,6 +27,7 @@ import com.google.android.gms.location.places.Place;
 import com.google.android.gms.location.places.ui.PlaceAutocomplete;
 import com.google.android.gms.location.places.ui.PlacePicker;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;
@@ -39,10 +45,13 @@ import java.util.Date;
 
 public class ViewMyAppointmentDetailedActivity extends AppCompatActivity implements View.OnClickListener, View.OnFocusChangeListener {
 
-    private TextView tvDate, tvTime, tvLocation, tvWith, tvComment;
+    private RelativeLayout containerRead, containerEdit;
+
+    private TextView tvDate, tvTime, tvLocation, tvWith, tvComment, tvCompanyName, tvCompanyNameEdit;
     private EditText etDate, etTime, etLocationName, etLocationAddress, etComment;
     private Spinner spWith;
-    private Button btnApptEditSave, btnDeleteAppt;
+    private RelativeLayout btnApptEditSave, btnDeleteAppt;
+    private TextView tvbtnTextEditSave, tvbtnTextDelete;
 
     private String companyName, apptTime, apptDate;
     private Appointment appointment;
@@ -69,13 +78,25 @@ public class ViewMyAppointmentDetailedActivity extends AppCompatActivity impleme
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_view_my_appointment_detailed);
+        setContentView(R.layout.redesign_activity_view_my_appointment_detailed);
+
+        //status bar
+        Window window = this.getWindow();
+        window.setStatusBarColor(ContextCompat.getColor(this, R.color.black));
+
+        //toolbar
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+
         init();
-
-
     }
 
     public void init(){
+
+        containerRead = findViewById(R.id.containerRead);
+        containerEdit = findViewById(R.id.containerEdit);
 
         arrayListContactkey = new ArrayList<>();
         arrayListContactName = new ArrayList<>();
@@ -89,11 +110,19 @@ public class ViewMyAppointmentDetailedActivity extends AppCompatActivity impleme
         tvLocation = findViewById(R.id.tvApptLocation);
         tvWith = findViewById(R.id.tvApptContact);
         tvComment = findViewById(R.id.tvApptComment);
+        tvCompanyName = findViewById(R.id.tvCompanyName);
+        tvCompanyNameEdit = findViewById(R.id.tvCompanyNameEdit);
+
+        tvCompanyName.setText(companyName);
+        tvCompanyNameEdit.setText(companyName);
 
         btnApptEditSave = findViewById(R.id.btnApptEditSave);
         btnDeleteAppt = findViewById(R.id.btnDeleteAppt);
         btnApptEditSave.setOnClickListener(this);
         btnDeleteAppt.setOnClickListener(this);
+
+        tvbtnTextDelete = findViewById(R.id.tvBtnDelete);
+        tvbtnTextEditSave = findViewById(R.id.tvBtnEditSave);
 
         etDate = findViewById(R.id.etApptDate);
         etTime = findViewById(R.id.etApptTime);
@@ -117,6 +146,23 @@ public class ViewMyAppointmentDetailedActivity extends AppCompatActivity impleme
             public void onFocusChange(View view, boolean b) {
                 if(b) {
                     getDate(etDate);
+                }
+            }
+        });
+        //get time
+        etTime.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(view.equals(etDate)) {
+                    getTime(etTime);
+                }
+            }
+        });
+        etTime.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+                if(b) {
+                    getTime(etTime);
                 }
             }
         });
@@ -173,7 +219,6 @@ public class ViewMyAppointmentDetailedActivity extends AppCompatActivity impleme
 
                         tvDate.setText(tvDate.getText().toString().concat(appointment.getDate()));
                         tvTime.setText(tvTime.getText().toString().concat(appointment.getTime()));
-                        tvLocation.setText(tvLocation.getText().toString().concat(appointment.getLocationName().concat(", " + appointment.getLocationAddress())));
                         tvComment.setText(tvComment.getText().toString().concat(appointment.getComments()));
 
                         etDate.setText(appointment.getDate());
@@ -303,7 +348,7 @@ public class ViewMyAppointmentDetailedActivity extends AppCompatActivity impleme
     @Override
     public void onClick(View view) {
         if(view.equals(btnApptEditSave)){
-            if(btnApptEditSave.getText().toString().equals("Edit")){
+            if(tvbtnTextEditSave.getText().toString().equalsIgnoreCase("Edit")){
                 setAppointmentEditable();
             }
             else{
@@ -320,18 +365,53 @@ public class ViewMyAppointmentDetailedActivity extends AppCompatActivity impleme
 
                 Appointment appointment2 = new Appointment(companyName, time, date, locationName, locationAddress,
                         comment, uid, appointment.getDateCreated(), contact_id,  appointment.getCompany_id());
-                databaseReference.child("Appointment").child(appointmentDbKey).setValue(appointment2);
+                databaseReference.child("Appointment").child(appointmentDbKey).setValue(appointment2).addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Toast.makeText(getApplicationContext(), "Save Successful!", Toast.LENGTH_SHORT).show();
 
-                Intent i = new Intent(ViewMyAppointmentDetailedActivity.this, ViewMyAppointmentActivity.class);
-                ViewMyAppointmentDetailedActivity.this.startActivity(i);
+                        Intent i = new Intent(ViewMyAppointmentDetailedActivity.this, ViewMyAppointmentActivity.class);
+                        ViewMyAppointmentDetailedActivity.this.startActivity(i);
+                    }
+                });
+
+
             }
         }
         else if(view.equals(btnDeleteAppt)){
-            databaseReference.child("Appointment").child(appointmentDbKey).removeValue();
+            databaseReference.child("Appointment").child(appointmentDbKey).removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
+                @Override
+                public void onSuccess(Void aVoid) {
+                    Toast.makeText(getApplicationContext(), "Delete Successful!", Toast.LENGTH_SHORT).show();
 
-            Intent i = new Intent(ViewMyAppointmentDetailedActivity.this, ViewMyAppointmentActivity.class);
-            ViewMyAppointmentDetailedActivity.this.startActivity(i);
+                    Intent i = new Intent(ViewMyAppointmentDetailedActivity.this, ViewMyAppointmentActivity.class);
+                    ViewMyAppointmentDetailedActivity.this.startActivity(i);
+                }
+            });
         }
+    }
+
+    public void getTime(final EditText et){
+        int hour, mins;
+        hour = calendar.get(Calendar.HOUR_OF_DAY);
+        mins = calendar.get(Calendar.MINUTE);
+
+        TimePickerDialog timePickerDialog = new TimePickerDialog(this, new TimePickerDialog.OnTimeSetListener(){
+
+            @Override
+            public void onTimeSet(TimePicker timePicker, int hour, int minute) {
+
+                if(hour > 12){
+                    hour = hour - 12;
+                    et.setText(String.format("%01d:%02d PM", hour, minute));
+                }
+                else{
+                    et.setText(String.format("%01d:%02d AM", hour, minute));
+                }
+
+            }
+        },hour, mins, false);
+        timePickerDialog.show();
     }
 
     public void getDate(final EditText et){
@@ -355,6 +435,9 @@ public class ViewMyAppointmentDetailedActivity extends AppCompatActivity impleme
 
     public void setAppointmentEditable(){
 
+        containerRead.setVisibility(View.GONE);
+        containerEdit.setVisibility(View.VISIBLE);
+
         tvDate = findViewById(R.id.tvApptDate);
         tvTime = findViewById(R.id.tvApptTime);
         tvLocation = findViewById(R.id.tvApptLocation);
@@ -374,7 +457,7 @@ public class ViewMyAppointmentDetailedActivity extends AppCompatActivity impleme
         etComment.setVisibility(View.VISIBLE);
         spWith.setVisibility(View.VISIBLE);
 
-        btnApptEditSave.setText("SAVE");
+        tvbtnTextEditSave.setText("SAVE");
 
     }
 
@@ -423,5 +506,12 @@ public class ViewMyAppointmentDetailedActivity extends AppCompatActivity impleme
         if(b){
             selectLocation();
         }
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        Intent i = new Intent(ViewMyAppointmentDetailedActivity.this, ViewMyAppointmentActivity.class);
+        ViewMyAppointmentDetailedActivity.this.startActivity(i);
+        return true;
     }
 }

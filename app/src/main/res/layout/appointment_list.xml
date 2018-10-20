@@ -3,11 +3,14 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="200dp"
+    android:layout_height="155dp"
     android:orientation="vertical"
     android:layout_marginTop="15dp"
     android:background="@drawable/rectangle"
-    android:padding="20dp"
+    android:paddingTop="20dp"
+    android:paddingLeft="20dp"
+    android:paddingRight="20dp"
+    android:paddingBottom="10dp"
     tools:ignore="ExtraText">
 
     //name
@@ -15,7 +18,7 @@
         android:id="@+id/tvApptCompanyName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="30sp"
+        android:textSize="26sp"
         android:textColor="@color/black"
         android:textAllCaps="true"
         android:fontFamily="@font/roboto_slab_bold"/>
@@ -25,12 +28,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_marginTop="20dp">
+        android:layout_marginTop="5dp">
 
 
         <ImageView
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
             android:src="@drawable/icon_upcomingappt_datetime"
             android:layout_gravity="center_vertical"/>
 
@@ -39,7 +42,7 @@
             android:id="@+id/tvApptDateTime"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="25dp"
+            android:layout_marginLeft="15dp"
             android:textSize="18sp"
             android:textColor="@color/black"
             android:fontFamily="@font/roboto_condensed_bold"/>
@@ -50,12 +53,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_marginTop="10dp">
+        android:layout_marginTop="5dp">
 
 
         <ImageView
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_width="22dp"
+            android:layout_height="22dp"
             android:src="@drawable/icon_upcomingappt_location"
             android:layout_gravity="center_vertical"/>
 
@@ -64,7 +67,7 @@
             android:id="@+id/tvApptLocationAddress"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="25dp"
+            android:layout_marginLeft="15dp"
             android:textSize="18sp"
             android:textColor="@color/black"
             android:fontFamily="@font/roboto_condensed_bold"/>

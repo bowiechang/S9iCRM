@@ -51,6 +51,10 @@ dependencies {
     implementation 'com.github.felixsoares:ImageZoom:1.0'
     implementation 'com.jsibbold:zoomage:1.2.0-SNAPSHOT'
 
+    //csv importer
+//    implementation 'com.opencsv:opencsv:3.9'
+//    implementation 'de.siegmar:fastcsv:1.0.3'
+
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'

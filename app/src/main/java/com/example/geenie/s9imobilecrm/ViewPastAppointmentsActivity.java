@@ -1,6 +1,5 @@
 package com.example.geenie.s9imobilecrm;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -9,10 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
-import android.view.View;
 import android.view.Window;
-import android.widget.RelativeLayout;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -28,12 +24,10 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
-public class ViewMyAppointmentActivity extends AppCompatActivity implements View.OnClickListener {
+public class ViewPastAppointmentsActivity extends AppCompatActivity {
 
-    private RelativeLayout relativeLayoutViewPastAppointment, relativeLayoutAddAppointment;
-
-    private RecyclerView recyclerViewUpcoming, recyclerViewPast;
-    private ArrayList<Appointment> listUpcoming, listPast;
+    private RecyclerView  recyclerViewPast;
+    private ArrayList<Appointment> listPast;
 
     //firebase init
     private FirebaseAuth mAuth = FirebaseAuth.getInstance();
@@ -44,7 +38,7 @@ public class ViewMyAppointmentActivity extends AppCompatActivity implements View
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_view_my_appointment);
+        setContentView(R.layout.activity_past_appointments);
 
         //status bar
         Window window = this.getWindow();
@@ -61,26 +55,16 @@ public class ViewMyAppointmentActivity extends AppCompatActivity implements View
 
     public void init(){
 
-        relativeLayoutViewPastAppointment = findViewById(R.id.relativeLayoutViewPastAppointment);
-        relativeLayoutAddAppointment = findViewById(R.id.relativeLayoutAddAppointment);
-        relativeLayoutViewPastAppointment.setOnClickListener(this);
-        relativeLayoutAddAppointment.setOnClickListener(this);
-        recyclerViewUpcoming = findViewById(R.id.rvUpcoming);
+
         recyclerViewPast = findViewById(R.id.rvPast);
-        recyclerViewUpcoming.setLayoutManager(new LinearLayoutManager(this));
         recyclerViewPast.setLayoutManager(new LinearLayoutManager(this));
-        recyclerViewUpcoming.setHasFixedSize(true);
         recyclerViewPast.setHasFixedSize(true);
 
-        listUpcoming = new ArrayList<>();
         listPast = new ArrayList<>();
         read();
     }
 
     public void read(){
-
-        listUpcoming.clear();
-
         databaseReference.orderByChild("createby").equalTo(uid).addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
@@ -92,11 +76,6 @@ public class ViewMyAppointmentActivity extends AppCompatActivity implements View
                     String todayDate = df.format(c.getTime());
 
                     String receivedDate = appointment.getDate();
-                    if (receivedDate.isEmpty()) {
-                        Log.d("receivedDate", "isempty");
-                    } else {
-                        Log.d("receivedDate", receivedDate);
-                    }
 
                     SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
                     Date dateAppointment = null;
@@ -109,8 +88,6 @@ public class ViewMyAppointmentActivity extends AppCompatActivity implements View
                         e.printStackTrace();
                     }
                     if (dateAppointment.after(dateToday)) {
-                        listUpcoming.add(appointment);
-                        getMyAppointmentUpcomingList(listUpcoming);
                     }
                     else{
                         listPast.add(appointment);
@@ -142,32 +119,8 @@ public class ViewMyAppointmentActivity extends AppCompatActivity implements View
         });
     }
 
-    private void getMyAppointmentUpcomingList(ArrayList list){
-        ViewMyAppointmentAdapter viewMyAppointmentAdapter = new ViewMyAppointmentAdapter(ViewMyAppointmentActivity.this, list);
-        recyclerViewUpcoming.setAdapter(viewMyAppointmentAdapter);
-    }
-
     private void getMyAppointmentPastList(ArrayList list){
-        ViewMyAppointmentAdapter viewMyAppointmentAdapter = new ViewMyAppointmentAdapter(ViewMyAppointmentActivity.this, list);
+        ViewMyAppointmentAdapter viewMyAppointmentAdapter = new ViewMyAppointmentAdapter(ViewPastAppointmentsActivity.this, list);
         recyclerViewPast.setAdapter(viewMyAppointmentAdapter);
     }
-
-    @Override
-    public void onClick(View view) {
-        if(view.equals(relativeLayoutViewPastAppointment)){
-            Intent i = new Intent(ViewMyAppointmentActivity.this, ViewPastAppointmentsActivity.class);
-            ViewMyAppointmentActivity.this.startActivity(i);
-        }
-        else if(view.equals(relativeLayoutAddAppointment)){
-            Intent i = new Intent(ViewMyAppointmentActivity.this, AddAppointmentActivity.class);
-            ViewMyAppointmentActivity.this.startActivity(i);
-        }
-    }
-
-    @Override
-    public boolean onSupportNavigateUp() {
-        onBackPressed();
-        return true;
-    }
-
 }

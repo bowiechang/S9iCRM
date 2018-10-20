@@ -6,13 +6,16 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
@@ -24,6 +27,7 @@ import com.google.android.gms.location.places.Place;
 import com.google.android.gms.location.places.ui.PlaceAutocomplete;
 import com.google.android.gms.location.places.ui.PlacePicker;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;
@@ -43,7 +47,7 @@ public class AddAppointmentActivity extends AppCompatActivity implements View.On
     private TextView tvCompanyName;
     private EditText etTime, etDate, etLocation, etLocationAddress, etComment;
     private Spinner spinnerContact;
-    private Button btnAddApointment;
+    private RelativeLayout btnAddApointment;
 
     private String companyDbkey, companyName, companyAddress;
     private Calendar calendar = Calendar.getInstance();
@@ -65,8 +69,18 @@ public class AddAppointmentActivity extends AppCompatActivity implements View.On
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_appointment);
+        setContentView(R.layout.redesign_activity_appointment);
         init();
+
+        //status bar
+        Window window = this.getWindow();
+        window.setStatusBarColor(ContextCompat.getColor(this, R.color.black));
+
+        //toolbar
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
 
     }
 
@@ -300,10 +314,23 @@ public class AddAppointmentActivity extends AppCompatActivity implements View.On
 
         String dateCreated = getDateCreateNow();
         int selecteditem = spinnerContact.getSelectedItemPosition();
-        String contact_id = arrayListContactkey.get(selecteditem);
+        String contact_id;
+        if(arrayListContactkey == null || arrayListContactkey.size() == 0){
+            contact_id = "empty";
+        }
+        else {
+            contact_id = arrayListContactkey.get(selecteditem);
+        }
 
         Appointment appointment = new Appointment(companyName, apptTime, apptDate, apptLocationName, apptLocationAddress, apptComment, uid, getDateCreateNow(), contact_id, companyDbkey);
-        databaseReference.child("Appointment").push().setValue(appointment);
+        databaseReference.child("Appointment").push().setValue(appointment).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                Toast.makeText(getApplicationContext(), "Appointment Added", Toast.LENGTH_SHORT).show();
+                Intent i = new Intent(AddAppointmentActivity.this, ViewMyAppointmentActivity.class);
+                AddAppointmentActivity.this.startActivity(i);
+            }
+        });
 
     }
 
@@ -328,5 +355,11 @@ public class AddAppointmentActivity extends AppCompatActivity implements View.On
         if(view.equals(btnAddApointment)){
             addAppointment();
         }
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
     }
 }

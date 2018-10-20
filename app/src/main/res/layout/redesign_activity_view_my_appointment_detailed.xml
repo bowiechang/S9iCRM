@@ -1,0 +1,518 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ViewMyAppointmentDetailedActivity"
+    android:orientation="vertical"
+    android:focusableInTouchMode="true">
+
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/appbarlayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@null"
+        app:elevation="0dp"
+        android:elevation="0dp">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/offwhite"
+            android:theme="@style/ToolbarTheme">
+
+            <TextView
+                android:id="@+id/toolbar_title"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:text="Appointment"
+                android:textColor="@color/black"
+                android:fontFamily="@font/roboto_slab_bold"
+                android:textSize="25sp"
+                android:textStyle="bold" />
+
+        </android.support.v7.widget.Toolbar>
+
+    </android.support.design.widget.AppBarLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="15dp"
+        android:layout_marginTop="15dp"
+        android:layout_below="@id/appbarlayout"
+        tools:ignore="ExtraText">
+
+
+        //container read
+        <RelativeLayout
+            android:id="@+id/containerRead"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            //details
+            <LinearLayout
+                android:id="@+id/detailsContainer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@drawable/rectangle"
+                android:padding="20dp">
+
+                //company name
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:id="@+id/ivName"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:adjustViewBounds="true"
+                        android:layout_marginTop="5dp"
+                        android:src="@drawable/companyname"/>
+
+                    <TextView
+                        android:id="@+id/tvCompanyName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="19sp"
+                        android:textColor="@color/black"
+                        android:textAllCaps="true"
+                        android:layout_toRightOf="@id/ivName"
+                        android:layout_marginLeft="20dp"
+                        android:fontFamily="@font/roboto_condensed_bold"
+                        android:layout_centerVertical="true"/>
+
+                </RelativeLayout>
+
+                //date
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="10dp">
+
+                    <ImageView
+                        android:id="@+id/ivApptDateTime"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:adjustViewBounds="true"
+                        android:layout_marginTop="5dp"
+                        android:src="@drawable/icon_upcomingappt_datetime"/>
+
+                    <TextView
+                        android:id="@+id/tvApptDate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="19sp"
+                        android:textColor="@color/black"
+                        android:textAllCaps="true"
+                        android:layout_toRightOf="@id/ivApptDateTime"
+                        android:layout_marginLeft="20dp"
+                        android:fontFamily="@font/roboto_condensed_bold"
+                        android:layout_centerVertical="true"/>
+
+                    <TextView
+                        android:id="@+id/tvApptAt"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="19sp"
+                        android:textColor="@color/black"
+                        android:text="at"
+                        android:layout_toRightOf="@id/tvApptDate"
+                        android:layout_marginLeft="10dp"
+                        android:fontFamily="@font/roboto_condensed_bold"
+                        android:layout_centerVertical="true"/>
+
+                    <TextView
+                        android:id="@+id/tvApptTime"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="19sp"
+                        android:textColor="@color/black"
+                        android:textAllCaps="true"
+                        android:layout_toRightOf="@id/tvApptAt"
+                        android:layout_marginLeft="10dp"
+                        android:fontFamily="@font/roboto_condensed_bold"
+                        android:layout_centerVertical="true"/>
+                </LinearLayout>
+
+                //location
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="10dp">
+
+                    <ImageView
+                        android:id="@+id/ivApptLocation"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:adjustViewBounds="true"
+                        android:layout_marginTop="5dp"
+                        android:src="@drawable/icon_upcomingappt_location"/>
+
+                    <TextView
+                        android:id="@+id/tvApptLocation"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="19sp"
+                        android:textColor="@color/black"
+                        android:textAllCaps="true"
+                        android:layout_toRightOf="@id/ivApptLocation"
+                        android:layout_marginLeft="20dp"
+                        android:fontFamily="@font/roboto_condensed_bold"
+                        android:layout_centerVertical="true"/>
+
+                </LinearLayout>
+
+                //contact
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="10dp">
+
+                    <ImageView
+                        android:id="@+id/tvApptContact1"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:adjustViewBounds="true"
+                        android:src="@drawable/icon_namecard"
+                        android:layout_gravity="center_vertical"/>
+
+                    <TextView
+                        android:id="@+id/tvApptContact"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="19sp"
+                        android:textColor="@color/black"
+                        android:textAllCaps="true"
+                        android:layout_toRightOf="@id/tvApptContact1"
+                        android:layout_marginLeft="20dp"
+                        android:fontFamily="@font/roboto_condensed_bold"
+                        android:layout_gravity="center_vertical"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            //company comments container
+            <RelativeLayout
+                android:id="@+id/rlCompanyComments"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/rectangle"
+                android:layout_marginTop="10dp"
+                android:padding="20dp"
+                android:layout_below="@id/detailsContainer">
+
+                <ImageView
+                    android:id="@+id/ivCompanyComment"
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:adjustViewBounds="true"
+                    android:layout_marginTop="3dp"
+                    android:src="@drawable/comments"/>
+
+                <TextView
+                    android:id="@+id/tvApptComment"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="16sp"
+                    android:textColor="@color/black"
+                    android:text="No Comments"
+                    android:layout_toRightOf="@id/ivCompanyComment"
+                    android:layout_marginLeft="20dp"
+                    android:fontFamily="@font/roboto_condensed_bold"
+                    android:layout_centerVertical="true"/>
+
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+        //container edit
+        <RelativeLayout
+            android:id="@+id/containerEdit"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone">
+
+            //details
+            <LinearLayout
+                android:id="@+id/detailsContainerEdit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@drawable/rectangle"
+                android:padding="20dp">
+
+
+
+                //company name
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:id="@+id/ivNameEdit"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:adjustViewBounds="true"
+                        android:layout_marginTop="5dp"
+                        android:src="@drawable/companyname"/>
+
+                    <TextView
+                        android:id="@+id/tvCompanyNameEdit"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="23sp"
+                        android:textColor="@color/black"
+                        android:textAllCaps="true"
+                        android:layout_toRightOf="@id/ivNameEdit"
+                        android:layout_marginLeft="20dp"
+                        android:fontFamily="@font/roboto_condensed_bold"
+                        android:layout_centerVertical="true"/>
+
+                </RelativeLayout>
+
+
+                //date
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="10dp">
+
+                    <ImageView
+                        android:id="@+id/ivApptDateTimeEdit"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:adjustViewBounds="true"
+                        android:layout_marginTop="5dp"
+                        android:src="@drawable/icon_upcomingappt_datetime"/>
+
+                    <EditText
+                        android:id="@+id/etApptDate"
+                        android:layout_width="0dp"
+                        android:layout_weight="0.5"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/roboto_condensed_bold"
+                        android:layout_gravity="center_vertical"
+                        android:hint="Input date"
+                        android:background="@drawable/rectangle_light"
+                        android:padding="5dp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="5dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginBottom="3dp"
+                        android:inputType="text"
+                        android:textSize="15sp"
+                        android:textColor="@color/black"/>
+
+                    <EditText
+                        android:id="@+id/etApptTime"
+                        android:layout_width="0dp"
+                        android:layout_weight="0.5"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/roboto_condensed_bold"
+                        android:layout_gravity="center_vertical"
+                        android:hint="Input time"
+                        android:background="@drawable/rectangle_light"
+                        android:padding="5dp"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginBottom="3dp"
+                        android:inputType="text"
+                        android:textSize="15sp"
+                        android:textColor="@color/black"/>
+
+                </LinearLayout>
+
+                //location
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="10dp">
+
+                    <ImageView
+                        android:id="@+id/ivApptLocationEdit"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:adjustViewBounds="true"
+                        android:layout_marginTop="5dp"
+                        android:src="@drawable/icon_upcomingappt_location"/>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <EditText
+                            android:id="@+id/etApptLocation"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/roboto_condensed_bold"
+                            android:layout_gravity="center_vertical"
+                            android:hint="Select to use Google Place Picker"
+                            android:background="@drawable/rectangle_light"
+                            android:padding="5dp"
+                            android:layout_marginLeft="20dp"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginBottom="3dp"
+                            android:inputType="text"
+                            android:textSize="15sp"
+                            android:textColor="@color/black"/>
+
+                        <EditText
+                            android:id="@+id/etApptLocationAddress"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/roboto_condensed_bold"
+                            android:layout_gravity="center_vertical"
+                            android:hint="Or input address"
+                            android:background="@drawable/rectangle_light"
+                            android:padding="5dp"
+                            android:layout_marginLeft="20dp"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginBottom="3dp"
+                            android:inputType="text"
+                            android:textSize="15sp"
+                            android:textColor="@color/black"/>
+
+                    </LinearLayout>
+
+
+
+                </LinearLayout>
+
+                //contact
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="10dp">
+
+                    <ImageView
+                        android:id="@+id/tvApptContactEdit"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:adjustViewBounds="true"
+                        android:layout_marginTop="5dp"
+                        android:src="@drawable/icon_namecard"/>
+
+                    <android.support.v7.widget.AppCompatSpinner
+                        android:id="@+id/spApptContact"
+                        android:layout_width="match_parent"
+                        android:padding="5dp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_height="wrap_content"
+                        android:theme="@style/Spinner"
+                        android:background="@drawable/rectangle_light"
+                        android:layout_toRightOf="@id/tvApptContactEdit"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            //company comments container
+            <RelativeLayout
+                android:id="@+id/rlCompanyCommentsEdit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/rectangle"
+                android:layout_marginTop="10dp"
+                android:padding="20dp"
+                android:layout_below="@id/detailsContainerEdit">
+
+                <ImageView
+                    android:id="@+id/ivCompanyCommentEdit"
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:adjustViewBounds="true"
+                    android:layout_marginTop="3dp"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/comments"/>
+
+                <EditText
+                    android:id="@+id/etApptComment"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@id/ivCompanyCommentEdit"
+                    android:fontFamily="@font/roboto_condensed_bold"
+                    android:background="@null"
+                    android:gravity="top"
+                    android:textSize="17sp"
+                    android:hint="Input comments"
+                    android:layout_marginLeft="30dp"
+                    android:textColor="@color/black"
+                    android:padding="5dp"/>
+
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_alignParentBottom="true">
+
+            <RelativeLayout
+                android:id="@+id/btnApptEditSave"
+                android:layout_width="0dp"
+                android:layout_height="65dp"
+                android:layout_weight="0.5"
+                android:padding="5dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="5dp"
+                android:layout_above="@id/btnDeleteAppt"
+                android:background="@drawable/rectangle">
+
+                <TextView
+                    android:id="@+id/tvBtnEditSave"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:fontFamily="@font/roboto_condensed_bold"
+                    android:text="EDIT"
+                    android:textColor="@color/black"
+                    android:textSize="18sp" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/btnDeleteAppt"
+                android:layout_width="0dp"
+                android:layout_height="65dp"
+                android:layout_weight="0.5"
+                android:padding="5dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="5dp"
+                android:layout_alignParentBottom="true"
+                android:background="@drawable/rectangle">
+
+                <TextView
+                    android:id="@+id/tvBtnDelete"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:fontFamily="@font/roboto_condensed_bold"
+                    android:text="DELETE"
+                    android:textColor="@color/black"
+                    android:textSize="18sp" />
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+
+    </RelativeLayout>
+</RelativeLayout>

@@ -52,7 +52,7 @@ public class SignUpLoginActivity extends AppCompatActivity implements View.OnCli
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 FirebaseUser user = firebaseAuth.getCurrentUser();
                 if(user != null){
-                    Intent i = new Intent(SignUpLoginActivity.this, ProfileActivity.class);
+                    Intent i = new Intent(SignUpLoginActivity.this, MainActivity.class);
                     SignUpLoginActivity.this.startActivity(i);
                     Toast.makeText(getApplicationContext(), "YOU ARE ALREADY LOGGED IN!", Toast.LENGTH_SHORT).show();
 

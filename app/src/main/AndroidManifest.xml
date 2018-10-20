@@ -9,6 +9,7 @@
 
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
 
     <application
         android:allowBackup="true"
@@ -24,19 +25,15 @@
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
 
-        <activity android:name=".MainTesterActivity">
-
-        </activity>
+        <activity android:name=".MainTesterActivity" />
         <activity android:name=".SignUpLoginActivity">
 
         </activity>
         <activity android:name=".ProfileActivity" />
         <activity android:name=".AddNameCardActivity" />
-        <activity android:name=".ViewMyNameCardActivity">
-
-        </activity>
+        <activity android:name=".ViewMyNameCardActivity" />
         <activity android:name=".ViewMyNameCardDetailedActivity" />
-        <activity android:name=".AddAppointmentActivity" />
+        <activity android:name=".AddAppointmentActivity"></activity>
         <activity android:name=".ViewMyAppointmentActivity" />
         <activity android:name=".ViewMyAppointmentDetailedActivity" />
         <activity android:name=".ViewMyTaskActivity" />
@@ -50,17 +47,14 @@
         <activity android:name=".ViewMySharedCoWorkingActivity" />
         <activity android:name=".ViewDetailedSharedCoWorkingCompanyActivity" />
         <activity android:name=".CapturePhotoActivity" />
-        <activity android:name=".TesterForAlertActivity" >
-
-
-        </activity>
+        <activity android:name=".TesterForAlertActivity" />
         <activity
             android:name=".MainActivity"
             android:label="@string/title_activity_main"
-            android:theme="@style/AppTheme.NoActionBar" >
-
+            android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -68,7 +62,11 @@
         <activity android:name=".DashboardFollowupActivity" />
         <activity android:name=".DashboardTaskActivity" />
         <activity android:name=".DashboardCompanyActivity" />
-        <activity android:name=".DashboardCopierActivity"></activity>
+        <activity android:name=".DashboardCopierActivity" />
+        <activity android:name=".ViewPastAppointmentsActivity" />
+        <activity android:name=".importTester">
+
+        </activity>
     </application>
 
 </manifest>
