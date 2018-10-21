@@ -1,0 +1,326 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ViewMyDetailedFollowUpActivity"
+    android:orientation="vertical"
+    android:focusableInTouchMode="true">
+
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/appbarlayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@null"
+        app:elevation="0dp"
+        android:elevation="0dp">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/offwhite"
+            android:theme="@style/ToolbarTheme">
+
+            <TextView
+                android:id="@+id/toolbar_title"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:text="Follow Up"
+                android:textColor="@color/black"
+                android:fontFamily="@font/roboto_slab_bold"
+                android:textSize="25sp"
+                android:textStyle="bold" />
+
+        </android.support.v7.widget.Toolbar>
+
+    </android.support.design.widget.AppBarLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="15dp"
+        android:layout_marginTop="15dp"
+        android:layout_below="@id/appbarlayout"
+        tools:ignore="ExtraText">
+
+
+        //container read
+        <RelativeLayout
+            android:id="@+id/containerRead"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@drawable/rectangle"
+                android:padding="20dp">
+
+                //company name
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/tvFollowUpName1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="19sp"
+                        android:textColor="@color/black"
+                        android:text="Company: "
+                        android:layout_toRightOf="@id/ivName"
+                        android:fontFamily="@font/roboto_condensed_bold"
+                        android:layout_centerVertical="true"/>
+
+                    <TextView
+                        android:id="@+id/tvFollowUpName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="19sp"
+                        android:textColor="@color/black"
+                        android:textAllCaps="true"
+                        android:layout_toRightOf="@id/ivName"
+                        android:layout_marginLeft="90dp"
+                        android:fontFamily="@font/roboto_condensed_bold"
+                        android:layout_centerVertical="true"/>
+
+                </RelativeLayout>
+
+                //date
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="10dp">
+
+                    <TextView
+                        android:id="@+id/tvFollowUpDate1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="19sp"
+                        android:textColor="@color/black"
+                        android:text="Deadline: "
+                        android:layout_toRightOf="@id/ivApptDateTime"
+                        android:fontFamily="@font/roboto_condensed_bold"
+                        android:layout_centerVertical="true"/>
+
+                    <TextView
+                        android:id="@+id/tvFollowUpDate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="19sp"
+                        android:textColor="@color/black"
+                        android:textAllCaps="true"
+                        android:layout_toRightOf="@id/ivApptDateTime"
+                        android:layout_marginLeft="90dp"
+                        android:fontFamily="@font/roboto_condensed_bold"
+                        android:layout_centerVertical="true"/>
+
+                </RelativeLayout>
+
+                //type
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="10dp"
+                    android:gravity="center_vertical">
+
+
+                    <!--<ImageView-->
+                    <!--android:layout_width="22dp"-->
+                    <!--android:layout_height="22dp"-->
+                    <!--android:src="@drawable/icon_followup_type"/>-->
+
+                    //type
+                    <TextView
+                        android:id="@+id/tvFollowupType1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="18sp"
+                        android:text="Type: "
+                        android:textColor="@color/black"
+                        android:fontFamily="@font/roboto_condensed_bold"/>
+
+                    //type
+                    <TextView
+                        android:id="@+id/tvFollowUpType"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="18sp"
+                        android:layout_marginLeft="90dp"
+                        android:textColor="@color/black"
+                        android:fontFamily="@font/roboto_condensed_bold"/>
+
+                </RelativeLayout>
+
+                //status
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="10dp"
+                    android:gravity="center_vertical">
+
+
+                    <!--<ImageView-->
+                    <!--android:layout_width="22dp"-->
+                    <!--android:layout_height="22dp"-->
+                    <!--android:src="@drawable/icon_followup_type"/>-->
+
+                    //status
+                    <TextView
+                        android:id="@+id/tvFollowupStatus1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="18sp"
+                        android:text="Status: "
+                        android:textColor="@color/black"
+                        android:fontFamily="@font/roboto_condensed_bold"/>
+
+                    //status
+                    <TextView
+                        android:id="@+id/tvFollowUpStatus"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="18sp"
+                        android:layout_marginLeft="90dp"
+                        android:textColor="@color/black"
+                        android:fontFamily="@font/roboto_condensed_bold"/>
+
+                </RelativeLayout>
+
+                //number
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="10dp"
+                    android:gravity="center_vertical"
+                    android:layout_marginBottom="15dp">
+
+
+                    <!--<ImageView-->
+                    <!--android:layout_width="22dp"-->
+                    <!--android:layout_height="22dp"-->
+                    <!--android:src="@drawable/icon_followup_type"/>-->
+
+                    //number
+                    <TextView
+                        android:id="@+id/tvFollowupNumber1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="18sp"
+                        android:text="Phone: "
+                        android:textColor="@color/black"
+                        android:fontFamily="@font/roboto_condensed_bold"/>
+
+                    //number
+                    <TextView
+                        android:id="@+id/tvFollowupNumber"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="18sp"
+                        android:layout_marginLeft="90dp"
+                        android:textColor="@color/black"
+                        android:fontFamily="@font/roboto_condensed_bold"/>
+
+                </RelativeLayout>
+
+
+            </LinearLayout>
+
+
+
+        </RelativeLayout>
+
+
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:id="@+id/btnCall"
+        android:layout_width="match_parent"
+        android:layout_height="65dp"
+        android:layout_above="@id/ll"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:background="@drawable/rectangle">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:fontFamily="@font/roboto_condensed_bold"
+            android:text="CALL"
+            android:textColor="@color/black"
+            android:textSize="18sp" />
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/ll"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginBottom="15dp">
+
+        <RelativeLayout
+            android:id="@+id/btnFollowUpRemove"
+            android:layout_width="0dp"
+            android:layout_height="65dp"
+            android:layout_weight="0.5"
+            android:padding="5dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="5dp"
+            android:background="@drawable/rectangle">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:fontFamily="@font/roboto_condensed_bold"
+                android:text="DELETE"
+                android:textColor="@color/black"
+                android:textSize="18sp" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/btnFollowUpComplete"
+            android:layout_width="0dp"
+            android:layout_height="65dp"
+            android:layout_weight="0.5"
+            android:padding="5dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="5dp"
+            android:background="@drawable/rectangle">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:fontFamily="@font/roboto_condensed_bold"
+                android:text="COMPLETE"
+                android:textColor="@color/black"
+                android:textSize="18sp" />
+
+        </RelativeLayout>
+
+
+    </LinearLayout>
+
+
+
+
+
+</RelativeLayout>

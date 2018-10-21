@@ -15,7 +15,7 @@
         android:id="@+id/tvFollowupDate"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="30sp"
+        android:textSize="24sp"
         android:textColor="@color/black"
         android:fontFamily="@font/roboto_slab_bold"/>
 
@@ -27,19 +27,28 @@
         android:gravity="center_vertical">
 
 
-        <ImageView
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:src="@drawable/icon_followup_office"/>
+        <!--<ImageView-->
+            <!--android:layout_width="20dp"-->
+            <!--android:layout_height="20dp"-->
+            <!--android:src="@drawable/icon_followup_office"/>-->
+
+        //company name
+        <TextView
+            android:id="@+id/tvFollowupName1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:text="Company: "
+            android:textColor="@color/black"
+            android:fontFamily="@font/roboto_condensed_bold"/>
 
         //company name
         <TextView
             android:id="@+id/tvFollowupName"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="25dp"
-            android:textAllCaps="true"
             android:textSize="18sp"
+            android:layout_marginLeft="25dp"
             android:textColor="@color/black"
             android:fontFamily="@font/roboto_condensed_bold"/>
 
@@ -49,36 +58,70 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_marginTop="10dp"
         android:gravity="center_vertical">
 
 
-        <ImageView
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:src="@drawable/icon_followup_type"/>
+        <!--<ImageView-->
+            <!--android:layout_width="22dp"-->
+            <!--android:layout_height="22dp"-->
+            <!--android:src="@drawable/icon_followup_type"/>-->
+
+        //type
+        <TextView
+            android:id="@+id/tvFollowupType1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:text="Type: "
+            android:textColor="@color/black"
+            android:fontFamily="@font/roboto_condensed_bold"/>
 
         //type
         <TextView
             android:id="@+id/tvFollowupType"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="25dp"
             android:textSize="18sp"
+            android:layout_marginLeft="53dp"
+            android:textColor="@color/black"
+            android:fontFamily="@font/roboto_condensed_bold"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical">
+
+
+        <!--<ImageView-->
+        <!--android:layout_width="22dp"-->
+        <!--android:layout_height="22dp"-->
+        <!--android:src="@drawable/icon_followup_type"/>-->
+
+        //status
+        <TextView
+            android:id="@+id/tvFollowupStatus1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:text="Status: "
+            android:textColor="@color/black"
+            android:fontFamily="@font/roboto_condensed_bold"/>
+
+        //status
+        <TextView
+            android:id="@+id/tvFollowupStatus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:layout_marginLeft="44dp"
             android:textColor="@color/black"
             android:fontFamily="@font/roboto_condensed_bold"/>
 
     </LinearLayout>
 
 
-    //status
-    <TextView
-        android:id="@+id/tvFollowupStatus"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:textSize="28sp"
-        android:textColor="@color/black"
-        android:fontFamily="@font/roboto_condensed_bold"/>
 
 </LinearLayout>

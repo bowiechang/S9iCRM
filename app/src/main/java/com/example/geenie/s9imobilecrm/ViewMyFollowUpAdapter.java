@@ -65,8 +65,8 @@ public class ViewMyFollowUpAdapter extends RecyclerView.Adapter<ViewMyFollowUpHo
         String newstatus = status.substring(0, 1).toUpperCase()+status.substring(1);
         String newtype = type.substring(0, 1).toUpperCase()+type.substring(1);
 
-        holder.tvFollowUpStatus.setText(newstatus);
-        holder.tvFollowUpType.setText(newtype);
+        holder.tvFollowUpStatus.setText((newstatus));
+        holder.tvFollowUpType.setText((newtype));
 
         databaseReference.child("Company").orderByKey().equalTo(list.get(position).getCompanyid()).addChildEventListener(new ChildEventListener() {
             @Override
@@ -74,7 +74,7 @@ public class ViewMyFollowUpAdapter extends RecyclerView.Adapter<ViewMyFollowUpHo
                 Company company = dataSnapshot.getValue(Company.class);
                 if(company!=null){
                     cname = company.getName();
-                    holder.tvFollowUpName.setText(holder.tvFollowUpName.getText().toString().concat(cname));
+                    holder.tvFollowUpName.setText((holder.tvFollowUpName.getText().toString().concat(cname)));
                 }
             }
 
