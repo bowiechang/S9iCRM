@@ -15,6 +15,8 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class SignUpLoginActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -22,6 +24,7 @@ public class SignUpLoginActivity extends AppCompatActivity implements View.OnCli
     Button btnSU, btnLogin;
 
     private FirebaseAuth mAuth = FirebaseAuth.getInstance();
+    private DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,7 +32,6 @@ public class SignUpLoginActivity extends AppCompatActivity implements View.OnCli
         setContentView(R.layout.activity_sign_up_login);
 
         init();
-
     }
 
     public void init(){
@@ -44,23 +46,6 @@ public class SignUpLoginActivity extends AppCompatActivity implements View.OnCli
 
         btnSU.setOnClickListener(this);
         btnLogin.setOnClickListener(this);
-
-
-        //listens to auth on changes, if not null proceed
-        FirebaseAuth.AuthStateListener authStateListener = new FirebaseAuth.AuthStateListener() {
-            @Override
-            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-                FirebaseUser user = firebaseAuth.getCurrentUser();
-                if(user != null){
-                    Intent i = new Intent(SignUpLoginActivity.this, MainActivity.class);
-                    SignUpLoginActivity.this.startActivity(i);
-                    Toast.makeText(getApplicationContext(), "YOU ARE ALREADY LOGGED IN!", Toast.LENGTH_SHORT).show();
-
-                }
-            }
-        };
-        //add the listener its important!
-        mAuth.addAuthStateListener(authStateListener);
 
     }
 
@@ -88,6 +73,38 @@ public class SignUpLoginActivity extends AppCompatActivity implements View.OnCli
                     if (task.isSuccessful()) {
                         // Sign in success, update UI with the signed-in user's information
                         Toast.makeText(getApplicationContext(), "SIGN UP SUCCESSFUL!", Toast.LENGTH_SHORT).show();
+                        FirebaseUser userFirebase = mAuth.getCurrentUser();
+
+                        String uid = userFirebase.getUid();
+                        String email1  = userFirebase.getEmail();
+                        String[] split = email1.split("@");
+
+                        String name = split[0];
+
+                        String formattedName = name.substring(0,1).toUpperCase() + name.substring(1);
+
+
+                        String email = userFirebase.getEmail();
+                        String role;
+                        if(name.equalsIgnoreCase("howie") || name.equalsIgnoreCase("geenie")){
+                            role = "employer";
+                        }
+                        else{
+                            role = "employee";
+                        }
+
+                        User user = new User(formattedName, email, role);
+
+                        databaseReference.child("User").child(uid).setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                Toast.makeText(getApplicationContext(), "SAVE SUCCESSFUL!", Toast.LENGTH_SHORT).show();
+                                Intent i = new Intent(SignUpLoginActivity.this, MainActivity.class);
+                                SignUpLoginActivity.this.startActivity(i);
+                            }
+                        });
+
+
 
                     } else {
                         // If sign in fails, display a message to the user.
@@ -109,7 +126,7 @@ public class SignUpLoginActivity extends AppCompatActivity implements View.OnCli
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful()){
                     Toast.makeText(getApplicationContext(), "LOGIN SUCCESSFUL!", Toast.LENGTH_SHORT).show();
-                    Intent i = new Intent(SignUpLoginActivity.this, ProfileActivity.class);
+                    Intent i = new Intent(SignUpLoginActivity.this, MainActivity.class);
                     SignUpLoginActivity.this.startActivity(i);
                 }
                 else{
@@ -120,7 +137,6 @@ public class SignUpLoginActivity extends AppCompatActivity implements View.OnCli
         });
 
     }
-
 
 
     //methods for validation here

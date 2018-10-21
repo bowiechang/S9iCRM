@@ -44,7 +44,7 @@ import java.util.Calendar;
 
 public class AddAppointmentActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private TextView tvCompanyName;
+    private TextView tvCompanyName, tvNoContact;
     private EditText etTime, etDate, etLocation, etLocationAddress, etComment;
     private Spinner spinnerContact;
     private RelativeLayout btnAddApointment;
@@ -94,6 +94,7 @@ public class AddAppointmentActivity extends AppCompatActivity implements View.On
         companyAddress = getIntent().getExtras().getString("companyAddress");
 
         tvCompanyName = findViewById(R.id.tvCompanyName);
+        tvNoContact = findViewById(R.id.tvNoContact);
         etTime = findViewById(R.id.etApptTime);
         etDate = findViewById(R.id.etApptDate);
         etLocation = findViewById(R.id.etApptLocation);
@@ -131,7 +132,7 @@ public class AddAppointmentActivity extends AppCompatActivity implements View.On
         etTime.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(view.equals(etDate)) {
+                if(view.equals(etTime)) {
                     getTime(etTime);
                 }
             }
@@ -202,12 +203,14 @@ public class AddAppointmentActivity extends AppCompatActivity implements View.On
                 databaseReference.child("Contact").removeEventListener(childEventListenerContacts);
                 System.out.println("child event removed");
 
+                if(arrayListContactkey.size() == 0){
+                    spinnerContact.setVisibility(View.GONE);
+                    tvNoContact.setVisibility(View.VISIBLE);
+                }
+                ArrayAdapter<String> adapter = new ArrayAdapter<>(AddAppointmentActivity.this,
+                        R.layout.custom_spinner_item, arrayListContactName);
 
-                ArrayAdapter<String> adapter = new ArrayAdapter<String>(AddAppointmentActivity.this,
-                        android.R.layout.simple_spinner_item, arrayListContactName);
-
-                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                System.out.println("arraylistcn: " + arrayListContactName);
+                adapter.setDropDownViewResource(R.layout.custom_spinner_item);
                 spinnerContact.setAdapter(adapter);
 
             }
@@ -229,7 +232,15 @@ public class AddAppointmentActivity extends AppCompatActivity implements View.On
 
             @Override
             public void onDateSet(DatePicker datePicker, int year, int month, int day) {
-                et.setText(day+"/0"+(month+1)+"/"+year);
+
+                if(month == 0 || month == 1 || month == 2 || month == 3 || month == 4 || month == 5
+                        || month == 6 || month == 7 || month == 8) {
+                    et.setText(day + "/0" + (month + 1) + "/" + year);
+                }
+                else{
+                    et.setText(day + "/" + (month + 1) + "/" + year);
+                }
+
             }
         }
                 ,day,month,year);

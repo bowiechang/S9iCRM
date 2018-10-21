@@ -424,6 +424,8 @@ public class ViewMyNameCardActivity extends AppCompatActivity implements View.On
     @Override
     public boolean onSupportNavigateUp() {
         onBackPressed();
+        Intent i = new Intent(ViewMyNameCardActivity.this, MainActivity.class);
+        ViewMyNameCardActivity.this.startActivity(i);
         return true;
     }
 

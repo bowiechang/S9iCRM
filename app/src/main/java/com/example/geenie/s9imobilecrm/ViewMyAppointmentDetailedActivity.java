@@ -324,10 +324,9 @@ public class ViewMyAppointmentDetailedActivity extends AppCompatActivity impleme
                 System.out.println("child event removed");
 
                 ArrayAdapter<String> adapter = new ArrayAdapter<String>(ViewMyAppointmentDetailedActivity.this,
-                        android.R.layout.simple_spinner_item, arrayListContactName);
+                        R.layout.custom_spinner_item, arrayListContactName);
 
-                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                System.out.println("arraylistcn: " + arrayListContactName);
+                adapter.setDropDownViewResource(R.layout.custom_spinner_item);
                 spWith.setAdapter(adapter);
 
                 for(int i=0; i < arrayListContactkey.size(); i ++){
@@ -420,11 +419,19 @@ public class ViewMyAppointmentDetailedActivity extends AppCompatActivity impleme
         month = calendar.get(Calendar.MONTH);
         year = calendar.get(Calendar.YEAR);
 
+
+
         DatePickerDialog datePickerDialog = new DatePickerDialog(ViewMyAppointmentDetailedActivity.this, new DatePickerDialog.OnDateSetListener() {
 
             @Override
             public void onDateSet(DatePicker datePicker, int year, int month, int day) {
-                et.setText(day+"/0"+(month+1)+"/"+year);
+                if(month == 0 || month == 1 || month == 2 || month == 3 || month == 4 || month == 5
+                        || month == 6 || month == 7 || month == 8) {
+                    et.setText(day + "/0" + (month + 1) + "/" + year);
+                }
+                else{
+                    et.setText(day + "/" + (month + 1) + "/" + year);
+                }
             }
         }
                 ,day,month,year);

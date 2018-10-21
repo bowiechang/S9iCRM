@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Window;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -24,9 +25,9 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
-public class ViewPastAppointmentsActivity extends AppCompatActivity {
+public class ViewMyPastAppointmentActivity extends AppCompatActivity {
 
-    private RecyclerView  recyclerViewPast;
+    private RecyclerView recyclerViewPast;
     private ArrayList<Appointment> listPast;
 
     //firebase init
@@ -38,7 +39,7 @@ public class ViewPastAppointmentsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_past_appointments);
+        setContentView(R.layout.activity_view_past_appointment);
 
         //status bar
         Window window = this.getWindow();
@@ -55,16 +56,15 @@ public class ViewPastAppointmentsActivity extends AppCompatActivity {
 
     public void init(){
 
-
         recyclerViewPast = findViewById(R.id.rvPast);
         recyclerViewPast.setLayoutManager(new LinearLayoutManager(this));
         recyclerViewPast.setHasFixedSize(true);
-
         listPast = new ArrayList<>();
         read();
     }
 
     public void read(){
+
         databaseReference.orderByChild("createby").equalTo(uid).addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
@@ -76,6 +76,11 @@ public class ViewPastAppointmentsActivity extends AppCompatActivity {
                     String todayDate = df.format(c.getTime());
 
                     String receivedDate = appointment.getDate();
+                    if (receivedDate.isEmpty()) {
+                        Log.d("receivedDate", "isempty");
+                    } else {
+                        Log.d("receivedDate", receivedDate);
+                    }
 
                     SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
                     Date dateAppointment = null;
@@ -87,13 +92,10 @@ public class ViewPastAppointmentsActivity extends AppCompatActivity {
                     } catch (ParseException e) {
                         e.printStackTrace();
                     }
-                    if (dateAppointment.after(dateToday)) {
-                    }
-                    else{
+                    if (dateAppointment.before(dateToday)) {
                         listPast.add(appointment);
                         getMyAppointmentPastList(listPast);
                     }
-
                 }
             }
 
@@ -118,9 +120,14 @@ public class ViewPastAppointmentsActivity extends AppCompatActivity {
             }
         });
     }
-
     private void getMyAppointmentPastList(ArrayList list){
-        ViewMyAppointmentAdapter viewMyAppointmentAdapter = new ViewMyAppointmentAdapter(ViewPastAppointmentsActivity.this, list);
+        ViewMyAppointmentAdapter viewMyAppointmentAdapter = new ViewMyAppointmentAdapter(ViewMyPastAppointmentActivity.this, list);
         recyclerViewPast.setAdapter(viewMyAppointmentAdapter);
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
     }
 }

@@ -206,15 +206,34 @@
                     android:layout_marginTop="5dp"
                     android:src="@drawable/icon_namecard"/>
 
-                <android.support.v7.widget.AppCompatSpinner
-                    android:id="@+id/spApptContact"
+                <RelativeLayout
                     android:layout_width="match_parent"
-                    android:padding="5dp"
-                    android:layout_marginLeft="20dp"
                     android:layout_height="match_parent"
-                    android:theme="@style/Spinner"
-                    android:background="@drawable/rectangle_light"
-                    android:layout_toRightOf="@id/tvApptContactEdit"/>
+                    android:layout_toRightOf="@id/tvApptContactEdit"
+                    android:layout_marginLeft="20dp">
+
+                    <android.support.v7.widget.AppCompatSpinner
+                        android:id="@+id/spApptContact"
+                        android:layout_width="match_parent"
+                        android:padding="5dp"
+                        android:layout_height="40dp"
+                        android:theme="@style/Spinner"
+                        android:background="@drawable/rectangle_light" />
+
+                    <TextView
+                        android:id="@+id/tvNoContact"
+                        android:layout_width="match_parent"
+                        android:padding="5dp"
+                        android:layout_height="match_parent"
+                        android:textSize="15sp"
+                        android:textColor="@color/black"
+                        android:fontFamily="@font/roboto_condensed_bold"
+                        android:text="NO CONTACT FOUND"
+                        android:visibility="gone"/>
+
+                </RelativeLayout>
+
+
 
             </LinearLayout>
         </LinearLayout>

@@ -35,6 +35,13 @@ public class importTester extends AppCompatActivity {
 
     public void readCsv(){
 
+        /*HOW TO USE IMPORTER
+          1) CONVERT .XLSX FILE INTO UNICODE TEXT FILE
+          2) OPEN NOTEPAD AND REPLACE SPACE WITH COMMA
+          3) THEN CONVERT IT BACK TO TEXT DOCUMENT WITH UTF-8 ENCODING
+          4) DRAG IT INTO THE RAW FOLDER AND SET THE PATH FOR IT.*/
+
+
         InputStream is = getResources().openRawResource(R.raw.csvtext);
         BufferedReader reader = new BufferedReader(new InputStreamReader(is, Charset.forName("UTF-8")));
 

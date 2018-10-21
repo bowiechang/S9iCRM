@@ -228,27 +228,31 @@ public class ViewMyNameCardDetailedActivity extends AppCompatActivity implements
         databaseReference.child("Company").orderByChild("name").addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-                company = dataSnapshot.getValue(Company.class);
-                if(company!=null) {
+                Company company1 = dataSnapshot.getValue(Company.class);
+                if(company1!=null) {
                     if(receivedCompanyDbKey != null){
                         if(dataSnapshot.getKey().equals(receivedCompanyDbKey)){
-                            inputCompanyDetails(company);
+                            inputCompanyDetails(company1);
                             companyDbKey = dataSnapshot.getKey();
                             seekContactsFromCompany(companyDbKey);
                             seekCopierFromCompany(companyDbKey);
                             checkIfExist();
                             retrieveStoragePath();
+
+                            company = company1;
                         }
                     }
 //                    else(company.getPostalCode().equals(postalcodekey)) {
                     else{
-                        if(company.getName().equals(namekey) && company.getPostalCode().equals(postalcodekey)) {
-                            inputCompanyDetails(company);
+                        if(company1.getName().equals(namekey) && company1.getPostalCode().equals(postalcodekey)) {
+                            inputCompanyDetails(company1);
                             companyDbKey = dataSnapshot.getKey();
                             seekContactsFromCompany(companyDbKey);
                             seekCopierFromCompany(companyDbKey);
                             checkIfExist();
                             retrieveStoragePath();
+
+                            company = company1;
                         }
                     }
                 }

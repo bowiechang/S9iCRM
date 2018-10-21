@@ -163,7 +163,7 @@ public class AddNameCardActivity extends AppCompatActivity implements View.OnCli
         btnAddANameCard = findViewById(R.id.btnAddNameCard);
         btnAddANameCard.setOnClickListener(this);
 
-        initForContact();
+//        initForContact();
 
     }
 
@@ -658,7 +658,6 @@ public class AddNameCardActivity extends AppCompatActivity implements View.OnCli
 
         //insert to follow up
         //seek for the COMPANY ID and insert into follow up
-
         FollowUp followUp = new FollowUp(calculateFollowUpDate(), "greeting", "incomplete", companyid, uid);
         databaseReference.child("FollowUp").push().setValue(followUp);
     }
@@ -730,9 +729,6 @@ public class AddNameCardActivity extends AppCompatActivity implements View.OnCli
 
         //insert to follow up
         //seek for the COMPANY ID and insert into follow up
-
-        FollowUp followUp = new FollowUp(calculateFollowUpDate(), "greeting", "incomplete", companyid, uid);
-        databaseReference.child("FollowUp").push().setValue(followUp);
     }
 
     public String calculateFollowUpDate(){

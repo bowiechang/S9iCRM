@@ -9,7 +9,7 @@
 
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -33,7 +33,7 @@
         <activity android:name=".AddNameCardActivity" />
         <activity android:name=".ViewMyNameCardActivity" />
         <activity android:name=".ViewMyNameCardDetailedActivity" />
-        <activity android:name=".AddAppointmentActivity"></activity>
+        <activity android:name=".AddAppointmentActivity" />
         <activity android:name=".ViewMyAppointmentActivity" />
         <activity android:name=".ViewMyAppointmentDetailedActivity" />
         <activity android:name=".ViewMyTaskActivity" />
@@ -51,21 +51,20 @@
         <activity
             android:name=".MainActivity"
             android:label="@string/title_activity_main"
-            android:theme="@style/AppTheme.NoActionBar">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".DashboardApptActivity" />
         <activity android:name=".DashboardFollowupActivity" />
         <activity android:name=".DashboardTaskActivity" />
         <activity android:name=".DashboardCompanyActivity" />
         <activity android:name=".DashboardCopierActivity" />
-        <activity android:name=".ViewPastAppointmentsActivity" />
-        <activity android:name=".importTester">
+        <activity android:name=".importTester" />
+        <activity android:name=".ViewMyPastAppointmentActivity" />
+        <activity android:name=".StarterActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
     </application>
 

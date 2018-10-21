@@ -72,7 +72,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 Toast.makeText(getApplicationContext(), "SAVE SUCCESSFUL!", Toast.LENGTH_SHORT).show();
-                Intent i = new Intent(ProfileActivity.this, AddNameCardActivity.class);
+                Intent i = new Intent(ProfileActivity.this, MainActivity.class);
                 ProfileActivity.this.startActivity(i);
             }
         });

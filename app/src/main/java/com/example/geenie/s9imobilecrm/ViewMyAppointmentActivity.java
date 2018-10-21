@@ -30,10 +30,10 @@ import java.util.Date;
 
 public class ViewMyAppointmentActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private RelativeLayout relativeLayoutViewPastAppointment, relativeLayoutAddAppointment;
+    private RelativeLayout relativeLayoutViewPastAppointment;
 
-    private RecyclerView recyclerViewUpcoming, recyclerViewPast;
-    private ArrayList<Appointment> listUpcoming, listPast;
+    private RecyclerView recyclerViewUpcoming;
+    private ArrayList<Appointment> listUpcoming;
 
     //firebase init
     private FirebaseAuth mAuth = FirebaseAuth.getInstance();
@@ -62,18 +62,12 @@ public class ViewMyAppointmentActivity extends AppCompatActivity implements View
     public void init(){
 
         relativeLayoutViewPastAppointment = findViewById(R.id.relativeLayoutViewPastAppointment);
-        relativeLayoutAddAppointment = findViewById(R.id.relativeLayoutAddAppointment);
         relativeLayoutViewPastAppointment.setOnClickListener(this);
-        relativeLayoutAddAppointment.setOnClickListener(this);
         recyclerViewUpcoming = findViewById(R.id.rvUpcoming);
-        recyclerViewPast = findViewById(R.id.rvPast);
         recyclerViewUpcoming.setLayoutManager(new LinearLayoutManager(this));
-        recyclerViewPast.setLayoutManager(new LinearLayoutManager(this));
         recyclerViewUpcoming.setHasFixedSize(true);
-        recyclerViewPast.setHasFixedSize(true);
 
         listUpcoming = new ArrayList<>();
-        listPast = new ArrayList<>();
         read();
     }
 
@@ -112,11 +106,6 @@ public class ViewMyAppointmentActivity extends AppCompatActivity implements View
                         listUpcoming.add(appointment);
                         getMyAppointmentUpcomingList(listUpcoming);
                     }
-                    else{
-                        listPast.add(appointment);
-                        getMyAppointmentPastList(listPast);
-                    }
-
                 }
             }
 
@@ -147,19 +136,10 @@ public class ViewMyAppointmentActivity extends AppCompatActivity implements View
         recyclerViewUpcoming.setAdapter(viewMyAppointmentAdapter);
     }
 
-    private void getMyAppointmentPastList(ArrayList list){
-        ViewMyAppointmentAdapter viewMyAppointmentAdapter = new ViewMyAppointmentAdapter(ViewMyAppointmentActivity.this, list);
-        recyclerViewPast.setAdapter(viewMyAppointmentAdapter);
-    }
-
     @Override
     public void onClick(View view) {
         if(view.equals(relativeLayoutViewPastAppointment)){
-            Intent i = new Intent(ViewMyAppointmentActivity.this, ViewPastAppointmentsActivity.class);
-            ViewMyAppointmentActivity.this.startActivity(i);
-        }
-        else if(view.equals(relativeLayoutAddAppointment)){
-            Intent i = new Intent(ViewMyAppointmentActivity.this, AddAppointmentActivity.class);
+            Intent i = new Intent(ViewMyAppointmentActivity.this, ViewMyPastAppointmentActivity.class);
             ViewMyAppointmentActivity.this.startActivity(i);
         }
     }
@@ -167,6 +147,8 @@ public class ViewMyAppointmentActivity extends AppCompatActivity implements View
     @Override
     public boolean onSupportNavigateUp() {
         onBackPressed();
+        Intent i = new Intent(ViewMyAppointmentActivity.this, MainActivity.class);
+        ViewMyAppointmentActivity.this.startActivity(i);
         return true;
     }
 
