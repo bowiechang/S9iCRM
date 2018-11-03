@@ -1,13 +1,18 @@
 package com.example.geenie.s9imobilecrm;
 
 import android.app.DatePickerDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.widget.Button;
+import android.view.Window;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -25,7 +30,7 @@ public class AddFollowUpActivity extends AppCompatActivity implements View.OnCli
     private TextView tvName;
     private EditText etDate;
     private Spinner spinnerType;
-    private Button btnAddFollowUp;
+    private RelativeLayout btnAddFollowUp;
 
     //firebase init
     private FirebaseAuth mAuth = FirebaseAuth.getInstance();
@@ -42,6 +47,16 @@ public class AddFollowUpActivity extends AppCompatActivity implements View.OnCli
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_follow_up);
 
+        //status bar
+        Window window = this.getWindow();
+        window.setStatusBarColor(ContextCompat.getColor(this, R.color.black));
+
+        //toolbar
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+
         init();
     }
 
@@ -55,6 +70,8 @@ public class AddFollowUpActivity extends AppCompatActivity implements View.OnCli
         spinnerType = findViewById(R.id.spinnerFollowUp);
         btnAddFollowUp = findViewById(R.id.btnAddFollowUp);
         btnAddFollowUp.setOnClickListener(this);
+
+        tvName.setText(companyName);
 
         //get date
         etDate.setOnClickListener(new View.OnClickListener() {
@@ -111,5 +128,18 @@ public class AddFollowUpActivity extends AppCompatActivity implements View.OnCli
         datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
         datePickerDialog.updateDate(year, month, day);
         datePickerDialog.show();
+
+        //hide keyboard
+        View view = this.getCurrentFocus();
+        if (view != null) {
+            InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+        }
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
     }
 }

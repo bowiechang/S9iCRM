@@ -219,12 +219,17 @@ public class ViewMyDetailedFollowUpActivity extends AppCompatActivity implements
                 @Override
                 public void onSuccess(Void aVoid) {
                     Toast.makeText(getApplicationContext(), "Follow Up Compeleted", Toast.LENGTH_SHORT).show();
-                    onBackPressed();
+
+                    Intent i = new Intent(ViewMyDetailedFollowUpActivity.this, ViewMyFollowUpActivity.class);
+                    ViewMyDetailedFollowUpActivity.this.startActivity(i);
+
                 }
             });
         }
         else if(view.equals(btnRemove)){
             databaseReference.child(followUpDBkey).removeValue();
+            Toast.makeText(getApplicationContext(), "Follow Up Deleted", Toast.LENGTH_SHORT).show();
+
             Intent i = new Intent(ViewMyDetailedFollowUpActivity.this, ViewMyFollowUpActivity.class);
             ViewMyDetailedFollowUpActivity.this.startActivity(i);
         }

@@ -1,6 +1,5 @@
 package com.example.geenie.s9imobilecrm;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -9,9 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.view.View;
 import android.view.Window;
-import android.widget.RelativeLayout;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -23,12 +20,10 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 
-public class ViewMyFollowUpActivity extends AppCompatActivity implements View.OnClickListener {
+public class ViewMyPastFollowUpActivity extends AppCompatActivity{
 
-    private RelativeLayout relativeLayoutViewPastFollowUp;
-
-    private RecyclerView recyclerViewFollowUp;
-    private ArrayList<FollowUp> listFollowUp, listPastFollowUp;
+    private RecyclerView recyclerViewPastFollowUp;
+    private ArrayList<FollowUp> listPastFollowUp;
 
     //firebase init
     private FirebaseAuth mAuth = FirebaseAuth.getInstance();
@@ -39,9 +34,9 @@ public class ViewMyFollowUpActivity extends AppCompatActivity implements View.On
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_view_my_follow_up);
+        setContentView(R.layout.activity_view_my_past_follow_up);
 
-        //status bar
+
         Window window = this.getWindow();
         window.setStatusBarColor(ContextCompat.getColor(this, R.color.black));
 
@@ -56,13 +51,10 @@ public class ViewMyFollowUpActivity extends AppCompatActivity implements View.On
 
     public void init(){
 
-        relativeLayoutViewPastFollowUp = findViewById(R.id.relativeLayoutViewPastFollowUp);
-        relativeLayoutViewPastFollowUp.setOnClickListener(this);
-        recyclerViewFollowUp = findViewById(R.id.rvFollowUp);
-        recyclerViewFollowUp.setLayoutManager(new LinearLayoutManager(this));
-        recyclerViewFollowUp.setHasFixedSize(true);
+        recyclerViewPastFollowUp = findViewById(R.id.rvPastFollowUp);
+        recyclerViewPastFollowUp.setLayoutManager(new LinearLayoutManager(this));
+        recyclerViewPastFollowUp.setHasFixedSize(true);
 
-        listFollowUp = new ArrayList<>();
         listPastFollowUp = new ArrayList<>();
         read();
     }
@@ -76,9 +68,9 @@ public class ViewMyFollowUpActivity extends AppCompatActivity implements View.On
                 System.out.println("in");
                 if(followUp!=null){
 
-                    if(followUp.getFollowUpStatus().equals("incomplete")){
-                        listFollowUp.add(followUp);
-                        getMyFollowUp(listFollowUp);
+                    if(followUp.getFollowUpStatus().equals("completed")){
+                        listPastFollowUp.add(followUp);
+                        getMyPastFollowUp(listPastFollowUp);
                     }
                 }
             }
@@ -105,23 +97,14 @@ public class ViewMyFollowUpActivity extends AppCompatActivity implements View.On
         });
     }
 
-    private void getMyFollowUp(ArrayList list){
-        ViewMyFollowUpAdapter viewMyFollowUpAdapter = new ViewMyFollowUpAdapter(ViewMyFollowUpActivity.this, list);
-        recyclerViewFollowUp.setAdapter(viewMyFollowUpAdapter);
+    private void getMyPastFollowUp(ArrayList list){
+        ViewMyPastFollowUpAdapter viewMyPastFollowUpAdapter = new ViewMyPastFollowUpAdapter(ViewMyPastFollowUpActivity.this, list);
+        recyclerViewPastFollowUp.setAdapter(viewMyPastFollowUpAdapter);
     }
 
     @Override
     public boolean onSupportNavigateUp() {
-        Intent i = new Intent(ViewMyFollowUpActivity.this, MainActivity.class);
-        startActivity(i);
+        onBackPressed();
         return true;
-    }
-
-    @Override
-    public void onClick(View view) {
-        if(view.equals(relativeLayoutViewPastFollowUp)){
-            Intent i = new Intent(ViewMyFollowUpActivity.this, ViewMyPastFollowUpActivity.class);
-            startActivity(i);
-        }
     }
 }

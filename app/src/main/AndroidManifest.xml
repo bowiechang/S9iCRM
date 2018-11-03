@@ -26,9 +26,7 @@
             android:resource="@array/preloaded_fonts" />
 
         <activity android:name=".MainTesterActivity" />
-        <activity android:name=".SignUpLoginActivity">
-
-        </activity>
+        <activity android:name=".SignUpLoginActivity"></activity>
         <activity android:name=".ProfileActivity" />
         <activity android:name=".AddNameCardActivity" />
         <activity android:name=".ViewMyNameCardActivity" />
@@ -66,6 +64,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".ViewMyPastFollowUpActivity"></activity>
     </application>
 
 </manifest>
