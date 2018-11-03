@@ -5,12 +5,15 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.Button;
+import android.view.Window;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -22,18 +25,20 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 public class ViewMyDetailedTaskActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private TextView tvTitle, tvDesc, tvWithCompany, tvDueDate, tvStatus;
+    private TextView tvTitle, tvDesc, tvWithCompany, tvDueDate, tvStatus, tvToolbarTitle;
     private LinearLayout containerLog;
     private EditText etLog;
-    private Button btnLog, btnCompleteTask;
+    private RelativeLayout btnLog;
+    private RelativeLayout btnCompleteTask;
     private String title, companyid, companyname;
-
     private Task task;
-
     private String taskDbKey;
 
 //    private HashMap<String, String> log;
@@ -50,6 +55,16 @@ public class ViewMyDetailedTaskActivity extends AppCompatActivity implements Vie
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_my_detailed_task);
+
+        //status bar
+        Window window = this.getWindow();
+        window.setStatusBarColor(ContextCompat.getColor(this, R.color.black));
+
+        //toolbar
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         init();
     }
@@ -69,10 +84,13 @@ public class ViewMyDetailedTaskActivity extends AppCompatActivity implements Vie
         btnLog = findViewById(R.id.btnLog);
         btnCompleteTask = findViewById(R.id.btnCompleteTask);
         containerLog = findViewById(R.id.containerLog);
+        tvToolbarTitle = findViewById(R.id.toolbar_title);
 
         btnLog.setOnClickListener(this);
         btnCompleteTask.setOnClickListener(this);
         retrieveTaskDetails();
+
+
     }
 
 
@@ -85,6 +103,13 @@ public class ViewMyDetailedTaskActivity extends AppCompatActivity implements Vie
                 task = dataSnapshot.getValue(Task.class);
                 if(task!=null){
                     if(task.getTitle().equals(title) && task.getCompanyid().equals(companyid)) {
+
+                        if(task.getStatus().equalsIgnoreCase("completed")){
+                            btnCompleteTask.setVisibility(View.GONE);
+                            btnLog.setVisibility(View.GONE);
+                            etLog.setVisibility(View.GONE);
+                            tvToolbarTitle.setText("Completed Task");
+                        }
 
                         taskDbKey = dataSnapshot.getKey();
 
@@ -160,6 +185,7 @@ public class ViewMyDetailedTaskActivity extends AppCompatActivity implements Vie
         }
         else if(view.equals(btnCompleteTask)){
             databaseReference.child("Task").child(taskDbKey).child("status").setValue("completed");
+            databaseReference.child("Task").child(taskDbKey).child("dateCompleted").setValue(getDateCreateNow());
             Toast.makeText(getApplicationContext(), "TASK COMPLETED!", Toast.LENGTH_SHORT).show();
             Intent i = new Intent(ViewMyDetailedTaskActivity.this, ViewMyTaskActivity.class);
             ViewMyDetailedTaskActivity.this.startActivity(i);
@@ -183,6 +209,30 @@ public class ViewMyDetailedTaskActivity extends AppCompatActivity implements Vie
 
     public String getName(){
         String[] split = user.getEmail().split("@");
-        return split[0];
+        return split[0].substring(0, 1).toUpperCase()+split[0].substring(1);
+    }
+
+    public String getDateCreateNow(){
+
+        String dt = Calendar.getInstance().getTime().toString();
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        Calendar c = Calendar.getInstance();
+        try {
+            c.setTime(sdf.parse(dt));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        SimpleDateFormat sdf1 = new SimpleDateFormat("dd/MM/yyyy");
+        String output = sdf1.format(c.getTime());
+
+        return output;
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        Intent i = new Intent(ViewMyDetailedTaskActivity.this, ViewMyTaskActivity.class);
+        ViewMyDetailedTaskActivity.this.startActivity(i);
+        return true;
     }
 }

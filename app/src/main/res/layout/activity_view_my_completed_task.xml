@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ViewMyTaskActivity"
+    tools:context=".ViewMyCompletedTaskActivity"
     android:orientation="vertical">
 
     <android.support.design.widget.AppBarLayout
@@ -32,7 +32,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:gravity="center_vertical"
-                    android:text="Task"
+                    android:text="Completed Task"
                     android:textColor="@color/black"
                     android:fontFamily="@font/roboto_slab_bold"
                     android:textSize="25sp"
@@ -46,47 +46,11 @@
 
     </android.support.design.widget.AppBarLayout>
 
-
-
-    <RelativeLayout
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rvComplete"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:layout_below="@id/appbarlayout"
-        android:paddingRight="15dp"
-        android:paddingLeft="15dp"
-        android:paddingBottom="15dp">
-
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/rvIncomplete"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_alignParentBottom="true">
-
-            <RelativeLayout
-                android:id="@+id/relativeLayoutViewCompeletdTask"
-                android:layout_width="match_parent"
-                android:layout_height="65dp"
-                android:padding="5dp"
-                android:background="@drawable/rectangle">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    android:fontFamily="@font/roboto_condensed_bold"
-                    android:text="View Compeletd Task"
-                    android:textColor="@color/black"
-                    android:textSize="18sp" />
-
-            </RelativeLayout>
-        </LinearLayout>
-    </RelativeLayout>
-
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:layout_below="@id/appbarlayout"/>
 
 </RelativeLayout>

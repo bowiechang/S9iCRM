@@ -3,103 +3,258 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ViewMyDetailedTaskActivity"
-    android:padding="20dp">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ViewMyDetailedTaskActivity">
 
-    <LinearLayout
+
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:focusableInTouchMode="true">
+        android:layout_height="match_parent">
 
-        //title
-        <TextView
-            android:id="@+id/tvTaskTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textStyle="bold"
-            android:textSize="20sp"
-            android:text="Task Title: "/>
-
-        //with company
-        <TextView
-            android:id="@+id/tvWithCompany"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:textSize="17sp"
-            android:text="With Company: "/>
-
-        //desc
-        <TextView
-            android:id="@+id/tvTaskDesc"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:textSize="17sp"
-            android:text="Task Description: "/>
-
-        //due date
-        <TextView
-            android:id="@+id/tvTaskDueDate"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:textSize="17sp"
-            android:text="Task Due Date: "/>
-
-        //status
-        <TextView
-            android:id="@+id/tvTaskStatus"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:textSize="17sp"
-            android:text="Task Status: "/>
-
-        <TextView
+        <android.support.design.widget.AppBarLayout
+            android:id="@+id/appbarlayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:text="LOGS"
-            android:textStyle="bold"
-            android:textSize="30sp"/>
+            android:background="@null"
+            app:elevation="0dp"
+            android:elevation="0dp">
 
-        //container for log
-        <LinearLayout
-            android:id="@+id/containerLog"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:layout_marginTop="10dp"/>
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="@color/offwhite"
+                android:theme="@style/ToolbarTheme">
 
-        <LinearLayout
+                <TextView
+                    android:id="@+id/toolbar_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:text="Task"
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/roboto_slab_bold"
+                    android:textSize="25sp"
+                    android:textStyle="bold" />
+
+            </android.support.v7.widget.Toolbar>
+
+        </android.support.design.widget.AppBarLayout>
+
+        //container read
+        <RelativeLayout
+            android:id="@+id/containerRead"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:orientation="horizontal">
+            android:layout_below="@id/appbarlayout"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:paddingBottom="20dp"
+            android:paddingTop="10dp">
 
-            <EditText
-                android:id="@+id/etLog"
-                android:layout_width="0dp"
+            //main
+            <LinearLayout
+                android:id="@+id/ll1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:background="@drawable/rectangle"
+                android:padding="20dp"
+                android:focusableInTouchMode="true">
+
+                //title
+                <TextView
+                    android:id="@+id/tvTaskTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold"
+                    android:textSize="23sp"
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/roboto_slab_bold"/>
+
+                //desc
+                <TextView
+                    android:id="@+id/tvTaskDesc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="3dp"
+                    android:textSize="17sp"
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/roboto_condensed_bold"/>
+
+                //company name
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="20dp">
+
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:adjustViewBounds="true"
+                        android:layout_marginTop="5dp"
+                        android:src="@drawable/companyname"/>
+
+                    <TextView
+                        android:id="@+id/tvWithCompany"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="19sp"
+                        android:textColor="@color/black"
+                        android:textAllCaps="true"
+                        android:layout_marginLeft="30dp"
+                        android:fontFamily="@font/roboto_condensed_bold"
+                        android:layout_centerVertical="true"/>
+
+                </RelativeLayout>
+
+                //due date
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:adjustViewBounds="true"
+                        android:layout_marginTop="5dp"
+                        android:src="@drawable/icon_upcomingappt_datetime"/>
+
+                    <TextView
+                        android:id="@+id/tvTaskDueDate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="19sp"
+                        android:textColor="@color/black"
+                        android:textAllCaps="true"
+                        android:layout_marginLeft="30dp"
+                        android:fontFamily="@font/roboto_condensed_bold"
+                        android:layout_centerVertical="true"/>
+
+                </RelativeLayout>
+
+                //status
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:adjustViewBounds="true"
+                        android:layout_marginTop="5dp"
+                        android:src="@drawable/status"/>
+
+                    <TextView
+                        android:id="@+id/tvTaskStatus"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="19sp"
+                        android:textColor="@color/black"
+                        android:textAllCaps="true"
+                        android:layout_marginLeft="30dp"
+                        android:fontFamily="@font/roboto_condensed_bold"
+                        android:layout_centerVertical="true"/>
+
+                </RelativeLayout>
+
+            </LinearLayout>
+
+            //logs
+            <LinearLayout
+                android:id="@+id/ll2"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.7" />
+                android:padding="20dp"
+                android:layout_below="@id/ll1"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/rectangle"
+                android:orientation="vertical">
 
-            <Button
-                android:id="@+id/btnLog"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.3"
-                android:text="Add Log"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="LOGS"
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/roboto_slab_bold"
+                    android:textStyle="bold"
+                    android:textSize="23sp"/>
 
-        </LinearLayout>
+                //container for log
+                <LinearLayout
+                    android:id="@+id/containerLog"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginTop="15dp"/>
 
-        <Button
-            android:id="@+id/btnCompleteTask"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="COMPLETE TASK"
-            android:layout_gravity="bottom"/>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:orientation="horizontal">
 
-    </LinearLayout>
+                    <EditText
+                        android:id="@+id/etLog"
+                        android:layout_width="0dp"
+                        android:layout_weight="0.8"
+                        android:textSize="14sp"
+                        android:textColor="@color/black"
+                        android:fontFamily="@font/roboto"
+                        android:backgroundTint="@color/black"
+                        android:layout_height="wrap_content" />
+
+                    <RelativeLayout
+                        android:id="@+id/btnLog"
+                        android:layout_width="0dp"
+                        android:layout_weight="0.2"
+                        android:layout_marginTop="2dp"
+                        android:layout_marginLeft="5dp"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/rectangle">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/black"
+                            android:fontFamily="@font/roboto_slab_bold"
+                            android:layout_centerInParent="true"
+                            android:padding="5dp"
+                            android:text="ADD"
+                            android:textSize="18sp"/>
+
+                    </RelativeLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <RelativeLayout
+                android:id="@+id/btnCompleteTask"
+                android:layout_width="match_parent"
+                android:layout_height="65dp"
+                android:padding="5dp"
+                android:layout_below="@id/ll2"
+                android:layout_marginTop="20dp"
+                android:layout_alignParentBottom="true"
+                android:background="@drawable/rectangle">
+
+                <TextView
+                    android:id="@+id/tvBtnDelete"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:fontFamily="@font/roboto_condensed_bold"
+                    android:text="COMPLETE TASK"
+                    android:textColor="@color/black"
+                    android:textSize="18sp" />
+
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+    </RelativeLayout>
 </ScrollView>
