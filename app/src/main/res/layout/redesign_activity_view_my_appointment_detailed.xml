@@ -226,7 +226,6 @@
                     android:layout_height="wrap_content"
                     android:textSize="16sp"
                     android:textColor="@color/black"
-                    android:text="No Comments"
                     android:layout_toRightOf="@id/ivCompanyComment"
                     android:layout_marginLeft="20dp"
                     android:fontFamily="@font/roboto_condensed_bold"

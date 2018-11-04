@@ -225,6 +225,10 @@ public class ViewMyAppointmentDetailedActivity extends AppCompatActivity impleme
                         etTime.setText(appointment.getTime());
                         etComment.setText(appointment.getComments());
 
+                        if(appointment.getComments().equalsIgnoreCase("")){
+                            tvComment.setText("No Comments");
+                        }
+
 
                         if (!appointment.getLocationName().equals("")) {
                             tvLocation.setText(tvLocation.getText().toString().concat(appointment.getLocationName().concat(", " + appointment.getLocationAddress())));
