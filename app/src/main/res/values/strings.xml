@@ -5,6 +5,7 @@
         <item>IT</item>
         <item>Agriculture</item>
         <item>Health</item>
+        <item>unsure</item>
     </string-array>
 
     <string-array name="followuptype">

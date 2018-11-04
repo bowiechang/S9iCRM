@@ -11,7 +11,6 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Window;
-import android.widget.RelativeLayout;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -23,12 +22,11 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 
-public class ViewMySharedCoWorkingActivity extends AppCompatActivity implements View.OnClickListener {
+public class ViewMyCoWorkingSharedToActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private RecyclerView recyclerViewSharedWithMe;
-    private RelativeLayout relativeLayoutshareCoworking, relativeLayoutViewIShared;
+    private RecyclerView recyclerViewIshare;
 
-    private ArrayList<SharedCoWorkingCompany> listSharedWithMe;
+    private ArrayList<SharedCoWorkingCompany> listIShare;
 
     //firebase init
     private FirebaseAuth mAuth = FirebaseAuth.getInstance();
@@ -39,7 +37,7 @@ public class ViewMySharedCoWorkingActivity extends AppCompatActivity implements 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_view_my_shared_co_working);
+        setContentView(R.layout.activity_view_my_co_working_shared_to);
 
         //status bar
         Window window = this.getWindow();
@@ -56,16 +54,11 @@ public class ViewMySharedCoWorkingActivity extends AppCompatActivity implements 
 
     public void init(){
 
-        relativeLayoutshareCoworking = findViewById(R.id.relativeLayoutViewShare);
-        relativeLayoutViewIShared = findViewById(R.id.relativeLayoutViewIShare);
-        relativeLayoutViewIShared.setOnClickListener(this);
-        relativeLayoutshareCoworking.setOnClickListener(this);
+        recyclerViewIshare = findViewById(R.id.rvIshare);
+        recyclerViewIshare.setLayoutManager(new LinearLayoutManager(this));
+        recyclerViewIshare.setHasFixedSize(true);
 
-        recyclerViewSharedWithMe = findViewById(R.id.rvSharedWithMe);
-        recyclerViewSharedWithMe.setLayoutManager(new LinearLayoutManager(this));
-        recyclerViewSharedWithMe.setHasFixedSize(true);
-
-        listSharedWithMe = new ArrayList<>();
+        listIShare = new ArrayList<>();
         read();
     }
 
@@ -76,9 +69,9 @@ public class ViewMySharedCoWorkingActivity extends AppCompatActivity implements 
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
                 SharedCoWorkingCompany sharedCoWorkingCompany = dataSnapshot.getValue(SharedCoWorkingCompany.class);
 
-                if(sharedCoWorkingCompany.getSharedto().equals(uid) && sharedCoWorkingCompany.getStatus().equals("ongoing")){
-                    listSharedWithMe.add(sharedCoWorkingCompany);
-                    getSharedWith(listSharedWithMe);
+                if(sharedCoWorkingCompany.getCreatedby().equals(uid) && sharedCoWorkingCompany.getStatus().equals("ongoing")){
+                    listIShare.add(sharedCoWorkingCompany);
+                    getIShared(listIShare);
                 }
             }
 
@@ -104,26 +97,21 @@ public class ViewMySharedCoWorkingActivity extends AppCompatActivity implements 
         });
     }
 
-    private void getSharedWith(ArrayList list){
+    private void getIShared(ArrayList list){
         ViewMySharedCoWorkingAdapter viewMySharedCoWorkingAdapter = new ViewMySharedCoWorkingAdapter(this, list);
-        recyclerViewSharedWithMe.setAdapter(viewMySharedCoWorkingAdapter);
-    }
-
-    @Override
-    public void onClick(View view) {
-        if(view.equals(relativeLayoutshareCoworking)){
-            Intent i = new Intent(ViewMySharedCoWorkingActivity.this, AddSharedCoWorkingCompany.class);
-            ViewMySharedCoWorkingActivity.this.startActivity(i);
-        }
-        else if(view.equals(relativeLayoutViewIShared)){
-            Intent i = new Intent(ViewMySharedCoWorkingActivity.this, ViewMyCoWorkingSharedToActivity.class);
-            ViewMySharedCoWorkingActivity.this.startActivity(i);
-        }
+        recyclerViewIshare.setAdapter(viewMySharedCoWorkingAdapter);
     }
 
     @Override
     public boolean onSupportNavigateUp() {
         onBackPressed();
+        Intent i = new Intent(ViewMyCoWorkingSharedToActivity.this, ViewMySharedCoWorkingActivity.class);
+        ViewMyCoWorkingSharedToActivity.this.startActivity(i);
         return true;
+    }
+
+    @Override
+    public void onClick(View view) {
+
     }
 }

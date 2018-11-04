@@ -1,10 +1,15 @@
 package com.example.geenie.s9imobilecrm;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -25,12 +30,45 @@ public class importTester extends AppCompatActivity {
     private String uid = user.getUid();
     private DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
 
+    int i = 0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_import_tester);
-        readCsv();
+//        readCsv();
+        dbcounter();
 
+    }
+
+    public void dbcounter(){
+        databaseReference.child("Company").addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+                System.out.println("importer:: " + i);
+                i++;
+            }
+
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
     }
 
     public void readCsv(){
@@ -42,7 +80,7 @@ public class importTester extends AppCompatActivity {
           4) DRAG IT INTO THE RAW FOLDER AND SET THE PATH FOR IT.*/
 
 
-        InputStream is = getResources().openRawResource(R.raw.csvtext);
+        InputStream is = getResources().openRawResource(R.raw.csvimporting4);
         BufferedReader reader = new BufferedReader(new InputStreamReader(is, Charset.forName("UTF-8")));
 
         String line = "";
@@ -53,6 +91,15 @@ public class importTester extends AppCompatActivity {
                 String [] tokens = line.split(",");
 
                 System.out.println("importer:: line token: " + tokens[0]);
+                System.out.println("importer:: line token: " + tokens[1]);
+                System.out.println("importer:: line token: " + tokens[2]);
+                System.out.println("importer:: line token: " + tokens[3]);
+                System.out.println("importer:: line token: " + tokens[4]);
+                System.out.println("importer:: line token: " + tokens[5]);
+                System.out.println("importer:: line token: " + tokens[6]);
+                System.out.println("importer:: line token: " + tokens[7]);
+                System.out.println("importer:: line token: " + tokens[8]);
+                System.out.println("importer:: line token: " + tokens[9]);
 
                 String dateCreate = getDateCreateNow();
 
@@ -60,8 +107,8 @@ public class importTester extends AppCompatActivity {
                     tokens[4], tokens[5], tokens[6], tokens[7], tokens[8], dateCreate, Integer.parseInt(tokens[9]));
 
 
-                String key = databaseReference.child("Tester").child("Company").push().getKey();
-                databaseReference.child("Tester").child("Company").child(key).setValue(c);
+                String key = databaseReference.child("Company").push().getKey();
+                databaseReference.child("Company").child(key).setValue(c);
 
                 Boolean torf = null;
                 if(tokens[15].equals("TRUE")){
@@ -73,7 +120,7 @@ public class importTester extends AppCompatActivity {
 
                 Contact ct = new Contact(tokens[10], tokens[11], tokens[12], tokens[13], tokens[14], torf, key);
 
-                databaseReference.child("Tester").child("Contact").push().setValue(ct);
+                databaseReference.child("Contact").push().setValue(ct);
             }
         }
         catch (IOException e){

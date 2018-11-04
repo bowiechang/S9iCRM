@@ -1,21 +1,26 @@
 package com.example.geenie.s9imobilecrm;
 
 import android.content.Context;
+import android.content.Intent;
 import android.location.Address;
 import android.location.Geocoder;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
+import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.TextView;
@@ -39,11 +44,11 @@ import java.util.Locale;
 public class ViewDetailedSharedCoWorkingCompanyActivity extends AppCompatActivity implements View.OnClickListener {
 
     private LinearLayout containerContacts, containerCopier, containertAppt, containerFollowUp, containerLog;
-    private TextView tvDetailedCoWorkingCompanyName, tvDetailedCoWorkingCompanyAddress, tvDetailedCoWorkingCompanyUnit, tvDetailedCoWorkingCompanyPostalCode,
+    private TextView tvDetailedCoWorkingCompanyName, tvDetailedCoWorkingCompanyAddress,
             tvDetailedCoWorkingCompanyNumber, tvDetailedCoWorkingCompanyIndustry, tvDetailedCoWorkingCompanyLack, tvDetailedCoWorkingCompanyNumOfCalls,
             tvDetailedCoWorkingCompanyPL, tvDetailedCoWorkingCompanyComments, tvDetailedCoWorkingCompanyIShare, tvDetailedCoWorkingCompanySharedWith;
     private EditText etLog;
-    private Button btnSubmitLog, btnTerminateSharing;
+    private RelativeLayout btnSubmitLog, btnTerminateSharing;
 
     private String dbSharedCoWorkingKey;
     private String companyid;
@@ -75,6 +80,16 @@ public class ViewDetailedSharedCoWorkingCompanyActivity extends AppCompatActivit
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_detailed_shared_co_working_company);
 
+        //status bar
+        Window window = this.getWindow();
+        window.setStatusBarColor(ContextCompat.getColor(this, R.color.black));
+
+        //toolbar
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+
         init();
 
 //        databaseReference.child("SharedCoWorkingDetails").child("-LLqzXnV4zJt5C-8h5cz").child("copierArrayList").child("1").child("new").setValue("new");
@@ -103,8 +118,6 @@ public class ViewDetailedSharedCoWorkingCompanyActivity extends AppCompatActivit
 
         tvDetailedCoWorkingCompanyName = findViewById(R.id.tvDetailedSharedCoWorkingCompanyName);
         tvDetailedCoWorkingCompanyAddress = findViewById(R.id.tvDetailedSharedCoWorkingCompanyAddress);
-        tvDetailedCoWorkingCompanyPostalCode = findViewById(R.id.tvDetailedSharedCoWorkingCompanyPostalCode);
-        tvDetailedCoWorkingCompanyUnit = findViewById(R.id.tvDetailedSharedCoWorkingCompanyUnit);
         tvDetailedCoWorkingCompanyNumber = findViewById(R.id.tvDetailedSharedCoWorkingCompanyNumber);
         tvDetailedCoWorkingCompanyIndustry = findViewById(R.id.tvDetailedSharedCoWorkingCompanyIndustry);
         tvDetailedCoWorkingCompanyLack = findViewById(R.id.tvDetailedSharedCoWorkingCompanyLacking);
@@ -131,17 +144,26 @@ public class ViewDetailedSharedCoWorkingCompanyActivity extends AppCompatActivit
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
                 company = dataSnapshot.getValue(Company.class);
+
+                String [] spliter = company.getPriorityLevel().split("\\.");
+                String newpl = spliter[1];
+
+                tvDetailedCoWorkingCompanyPL.setText("Prioirty Level: " + newpl);
+
                 //company
                 tvDetailedCoWorkingCompanyName.setText(company.getName());
-                tvDetailedCoWorkingCompanyAddress.setText(tvDetailedCoWorkingCompanyAddress.getText().toString().concat(getLatLng(company.getPostalCode().trim())));
-                tvDetailedCoWorkingCompanyPostalCode.setText(tvDetailedCoWorkingCompanyPostalCode.getText().toString().concat(company.getPostalCode()));
-                tvDetailedCoWorkingCompanyUnit.setText(tvDetailedCoWorkingCompanyUnit.getText().toString().concat(company.getUnitNo()));
+                tvDetailedCoWorkingCompanyAddress.setText((getLatLng(company.getPostalCode().trim())).concat(" " + company.getUnitNo()));
                 tvDetailedCoWorkingCompanyNumber.setText(tvDetailedCoWorkingCompanyNumber.getText().toString().concat(company.getOfficeTel()));
                 tvDetailedCoWorkingCompanyIndustry.setText(tvDetailedCoWorkingCompanyIndustry.getText().toString().concat(company.getIndustry()));
                 tvDetailedCoWorkingCompanyLack.setText(tvDetailedCoWorkingCompanyLack.getText().toString().concat(company.getCompanyLackOf()));
-                tvDetailedCoWorkingCompanyNumOfCalls.setText(tvDetailedCoWorkingCompanyNumOfCalls.getText().toString().concat(String.valueOf(company.getNumberOfTimesCalled())));;
-                tvDetailedCoWorkingCompanyPL.setText(tvDetailedCoWorkingCompanyPL.getText().toString().concat(company.getPriorityLevel()));
-                tvDetailedCoWorkingCompanyComments.setText(tvDetailedCoWorkingCompanyComments.getText().toString().concat(company.getComment()));
+                tvDetailedCoWorkingCompanyNumOfCalls.setText(tvDetailedCoWorkingCompanyNumOfCalls.getText().toString().concat(String.valueOf(company.getNumberOfTimesCalled())));
+
+                if(company.getComment().equalsIgnoreCase("")){
+                    tvDetailedCoWorkingCompanyComments.setText("No Comments");
+                }
+                else {
+                    tvDetailedCoWorkingCompanyComments.setText(company.getComment());
+                }
             }
 
             @Override
@@ -168,7 +190,7 @@ public class ViewDetailedSharedCoWorkingCompanyActivity extends AppCompatActivit
 
     public void retrievingContacts(){
 
-        databaseReference.child("Contacts").addChildEventListener(new ChildEventListener() {
+        databaseReference.child("Contact").addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
                 Contact contact = dataSnapshot.getValue(Contact.class);
@@ -269,8 +291,6 @@ public class ViewDetailedSharedCoWorkingCompanyActivity extends AppCompatActivit
 
             }
         });
-
-
 
     }
 
@@ -459,28 +479,30 @@ public class ViewDetailedSharedCoWorkingCompanyActivity extends AppCompatActivit
                     LayoutInflater layoutInflater = (LayoutInflater) getBaseContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
                     final View addView = layoutInflater.inflate(R.layout.rowappointment, null);
 
-
                     final TextView tvApptCount = addView.findViewById(R.id.tvApptCount);
                     tvApptCount.setText(tvApptCount.getText().toString().concat(String.valueOf(apptCount)));
                     apptCount++;
 
                     //date
                     TextView tvApptDate = addView.findViewById(R.id.tvApptDate);
-                    tvApptDate.setText(tvApptDate.getText().toString().concat(" " + appointment.getDate()));
+                    tvApptDate.setText(appointment.getDate());
 
                     //time
                     TextView tvApptTime = addView.findViewById(R.id.tvApptTime);
-                    tvApptTime.setText(tvApptTime.getText().toString().concat(" " + appointment.getTime()));
+                    tvApptTime.setText(appointment.getTime());
 
                     //contact
                     final TextView tvApptContact = addView.findViewById(R.id.tvApptContact);
-
-                    databaseReference.child("User").orderByKey().equalTo(appointment.getContact_id()).addChildEventListener(new ChildEventListener() {
+                    databaseReference.child("Contact").orderByKey().equalTo(appointment.getContact_id()).addChildEventListener(new ChildEventListener() {
                         @Override
                         public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
                             Contact contact = dataSnapshot.getValue(Contact.class);
-                            tvApptContact.setText(tvApptContact.getText().toString().concat(" " + contact.getName()));
-
+                            if(contact == null || contact.getName().equalsIgnoreCase("")){
+                                tvApptContact.setText("No Contact Found");
+                            }
+                            else {
+                                tvApptContact.setText(contact.getName());
+                            }
                         }
 
                         @Override
@@ -506,13 +528,13 @@ public class ViewDetailedSharedCoWorkingCompanyActivity extends AppCompatActivit
 
                     //locatonName
                     TextView tvApptLocation = addView.findViewById(R.id.tvApptLocation);
-                    tvApptLocation.setText(tvApptLocation.getText().toString().concat(" " + appointment.getLocationName()));
+                    tvApptLocation.setText(appointment.getLocationName());
                     if(appointment.getLocationName().equals("")){
-                        tvApptLocation.setVisibility(View.GONE);
+                        tvApptLocation.setText("No Location Found");
                     }
 
                     TextView tvApptLocationAddress = addView.findViewById(R.id.tvApptLocationAddress);
-                    tvApptLocationAddress.setText(tvApptLocationAddress.getText().toString().concat(" " + appointment.getLocationAddress()));
+                    tvApptLocationAddress.setText(appointment.getLocationAddress());
 
                     containertAppt.addView(addView, containertAppt.getChildCount());
 
@@ -782,8 +804,12 @@ public class ViewDetailedSharedCoWorkingCompanyActivity extends AppCompatActivit
     }
 
     public String getName(){
+
+        //capitalise first letter
         String[] split = user.getEmail().split("@");
-        return split[0];
+        String name = split[0];
+        String newname = name.substring(0, 1).toUpperCase()+name.substring(1);
+        return newname;
     }
 
     public void readLogs(ArrayList<String> arrayList){
@@ -853,7 +879,16 @@ public class ViewDetailedSharedCoWorkingCompanyActivity extends AppCompatActivit
 
     private void getPhotos(ArrayList<String> list){
 
-        PhotoAdapter photoAdapter = new PhotoAdapter(list,ViewDetailedSharedCoWorkingCompanyActivity.this, dbkey);
+        PhotoAdapter photoAdapter = new PhotoAdapter(list,ViewDetailedSharedCoWorkingCompanyActivity.this, companyid);
         recyclerView.setAdapter(photoAdapter);
+    }
+
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        Intent i = new Intent(ViewDetailedSharedCoWorkingCompanyActivity.this, ViewMySharedCoWorkingActivity.class);
+        ViewDetailedSharedCoWorkingCompanyActivity.this.startActivity(i);
+        return true;
     }
 }

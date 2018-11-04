@@ -5,43 +5,113 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:layout_marginTop="15dp"
+    android:paddingBottom="15dp"
     tools:ignore="ExtraText">
 
-    //Count
-    <TextView
-        android:id="@+id/tvFollowUpCount"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Follow Up #"
-        android:textSize="25sp"
-        android:textStyle="bold"/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-    //duedate
-    <TextView
-        android:id="@+id/tvFUDate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Follow Up Due Date:"
-        android:textSize="20sp"/>
+        <TextView
+            android:id="@+id/tvFollowUpCount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Follow Up #"
+            android:layout_centerVertical="true"
+            android:textColor="@color/black"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            android:layout_marginTop="12dp"
+            android:fontFamily="@font/roboto_condensed_bold"/>
 
-    //type
-    <TextView
-        android:id="@+id/tvFUtype"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Follow Up Type:"
-        android:textSize="20sp"
-        android:layout_marginTop="10dp"/>
+    </RelativeLayout>
 
-    //status
-    <TextView
-        android:id="@+id/tvFUStatus"
-        android:layout_width="wrap_content"
+    //followup date
+    <RelativeLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Follow Up Type:"
-        android:textSize="20sp"
-        android:layout_marginTop="10dp"/>
+        android:layout_marginTop="5dp">
+
+        <TextView
+            android:id="@+id/tvFUDate1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="Due Date:"
+            android:textColor="@color/black"
+            android:fontFamily="@font/roboto_condensed_bold"
+            android:textSize="15sp"/>
+
+        <TextView
+            android:id="@+id/tvFUDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="65dp"
+            android:textColor="@color/black"
+            android:fontFamily="@font/roboto_condensed_bold"
+            android:textSize="15sp"/>
+
+    </RelativeLayout>
+
+    //followup type
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp">
+
+        <TextView
+            android:id="@+id/tvFUtype1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="Type:"
+            android:textColor="@color/black"
+            android:fontFamily="@font/roboto_condensed_bold"
+            android:textSize="15sp"/>
+
+        <TextView
+            android:id="@+id/tvFUtype"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="65dp"
+            android:textColor="@color/black"
+            android:fontFamily="@font/roboto_condensed_bold"
+            android:textSize="15sp"/>
+
+    </RelativeLayout>
+
+    //followup type
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp">
+
+        <TextView
+            android:id="@+id/tvFUStatus1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="Status:"
+            android:textColor="@color/black"
+            android:fontFamily="@font/roboto_condensed_bold"
+            android:textSize="15sp"/>
+
+        <TextView
+            android:id="@+id/tvFUStatus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="65dp"
+            android:textColor="@color/black"
+            android:fontFamily="@font/roboto_condensed_bold"
+            android:textSize="15sp"/>
+
+    </RelativeLayout>
 
 
 </LinearLayout>

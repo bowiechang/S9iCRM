@@ -45,6 +45,7 @@ public class PhotoAdapter extends RecyclerView.Adapter<PhotoHolder> {
         photoHolder = new PhotoHolder(view, context);
 
         System.out.println("bitmap insert: onCREATEviewholder" );
+        System.out.println("bitmap insert: dbkey: " + dbkey);
 
 
         return photoHolder;

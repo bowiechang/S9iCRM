@@ -46,9 +46,15 @@ public class ViewMyNameCardAdapter extends RecyclerView.Adapter<ViewMyNameCardHo
         String[] split = list.get(position).getPriorityLevel().split("\\.");
         String PL = split[1];
 
+        if(list.get(position).getCompanyLackOf().equalsIgnoreCase("")){
+            holder.tvCompanyLack.setVisibility(View.GONE);
+        }
+        else{
+            holder.tvCompanyLack.setText(restringLacking(list.get(position).getCompanyLackOf()));
+        }
         holder.tvCompanyName.setText((list.get(position).getName()));
         holder.tvCompanyAddress.setText(holder.tvCompanyAddress.getText().toString().concat(getLatLng(list.get(position).getPostalCode())));
-        holder.tvCompanyLack.setText(restringLacking(list.get(position).getCompanyLackOf()));
+
         holder.tvCompanyOfficeNum.setText((list.get(position).getOfficeTel()));
         holder.tvCompanyPriorityLevel.setText(holder.tvCompanyPriorityLevel.getText().toString().concat(PL));
         holder.tvNumberOfTimesCalled.setText((list.get(position).getNumberOfTimesCalled() + ""));

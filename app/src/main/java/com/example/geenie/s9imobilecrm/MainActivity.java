@@ -174,6 +174,8 @@ public class MainActivity extends AppCompatActivity
             i = new Intent(MainActivity.this, ViewMyFollowUpActivity.class);
         } else if (id == R.id.task) {
             i = new Intent(MainActivity.this, ViewMyTaskActivity.class);
+        } else if(id == R.id.coworking) {
+            i = new Intent(MainActivity.this, ViewMySharedCoWorkingActivity.class);
         }
 
         MainActivity.this.startActivity(i);

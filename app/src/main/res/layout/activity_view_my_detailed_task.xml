@@ -177,7 +177,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="LOGS"
+                    android:text="Logs"
                     android:textColor="@color/black"
                     android:fontFamily="@font/roboto_slab_bold"
                     android:textStyle="bold"

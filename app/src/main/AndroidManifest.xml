@@ -26,7 +26,13 @@
             android:resource="@array/preloaded_fonts" />
 
         <activity android:name=".MainTesterActivity" />
-        <activity android:name=".SignUpLoginActivity" />
+        <activity android:name=".SignUpLoginActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity android:name=".ProfileActivity" />
         <activity android:name=".AddNameCardActivity" />
         <activity android:name=".ViewMyNameCardActivity" />
@@ -55,17 +61,17 @@
         <activity android:name=".DashboardTaskActivity" />
         <activity android:name=".DashboardCompanyActivity" />
         <activity android:name=".DashboardCopierActivity" />
-        <activity android:name=".importTester" />
+        <activity android:name=".importTester">
+
+
+        </activity>
         <activity android:name=".ViewMyPastAppointmentActivity" />
         <activity android:name=".StarterActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name=".ViewMyPastFollowUpActivity" />
-        <activity android:name=".ViewMyCompletedTaskActivity"></activity>
+        <activity android:name=".ViewMyCompletedTaskActivity" />
+        <activity android:name=".ViewMyCoWorkingSharedToActivity"></activity>
     </application>
 
 </manifest>

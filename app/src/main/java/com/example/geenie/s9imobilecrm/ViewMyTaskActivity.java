@@ -159,4 +159,12 @@ public class ViewMyTaskActivity extends AppCompatActivity implements View.OnClic
             ViewMyTaskActivity.this.startActivity(i);
         }
     }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        Intent i = new Intent(ViewMyTaskActivity.this, MainActivity.class);
+        ViewMyTaskActivity.this.startActivity(i);
+        return true;
+    }
 }

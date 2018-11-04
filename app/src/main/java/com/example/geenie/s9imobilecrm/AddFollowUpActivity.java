@@ -79,6 +79,7 @@ public class AddFollowUpActivity extends AppCompatActivity implements View.OnCli
             public void onClick(View view) {
                 if(view.equals(etDate)) {
                     getDate(etDate);
+
                 }
             }
         });
@@ -87,6 +88,7 @@ public class AddFollowUpActivity extends AppCompatActivity implements View.OnCli
             public void onFocusChange(View view, boolean b) {
                 if(b) {
                     getDate(etDate);
+
                 }
             }
         });
@@ -122,19 +124,19 @@ public class AddFollowUpActivity extends AppCompatActivity implements View.OnCli
             @Override
             public void onDateSet(DatePicker datePicker, int year, int month, int day) {
                 et.setText(day+"/"+(month+1)+"/"+year);
+
+                //hide keyboard
+                View view = AddFollowUpActivity.this.getCurrentFocus();
+                if (view != null) {
+                    InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+                    imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+                }
             }
         }
                 ,day,month,year);
         datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
         datePickerDialog.updateDate(year, month, day);
         datePickerDialog.show();
-
-        //hide keyboard
-        View view = this.getCurrentFocus();
-        if (view != null) {
-            InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
-            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
-        }
     }
 
     @Override

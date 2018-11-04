@@ -1,229 +1,540 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ViewDetailedSharedCoWorkingCompanyActivity"
-    android:padding="20dp">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+ xmlns:app="http://schemas.android.com/apk/res-auto"
+ xmlns:tools="http://schemas.android.com/tools"
+ android:layout_width="match_parent"
+ android:layout_height="match_parent"
+ tools:context=".ViewMyNameCardDetailedActivity"
+ tools:ignore="ExtraText"
+ android:focusableInTouchMode="true">
 
-    <LinearLayout
+    <android.support.design.widget.AppBarLayout
+         android:id="@+id/appbarlayout"
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:background="@null"
+         app:elevation="0dp"
+         android:elevation="0dp">
+
+         <android.support.v7.widget.Toolbar
+             android:id="@+id/toolbar"
+             android:layout_width="match_parent"
+             android:layout_height="?attr/actionBarSize"
+             android:background="@color/offwhite"
+             android:theme="@style/ToolbarTheme">
+
+             <TextView
+                 android:id="@+id/toolbar_title"
+                 android:layout_width="match_parent"
+                 android:layout_height="match_parent"
+                 android:gravity="center_vertical"
+                 android:text="Co-Working Contact"
+                 android:textColor="@color/black"
+                 android:fontFamily="@font/roboto_slab_bold"
+                 android:textSize="25sp"
+                 android:textStyle="bold" />
+
+         </android.support.v7.widget.Toolbar>
+
+     </android.support.design.widget.AppBarLayout>
+
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_below="@id/appbarlayout">
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/rvPhotos"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@color/lightgrey"
-            android:orientation="horizontal"/>
-
-        // Company Name
-        <TextView
-            android:id="@+id/tvDetailedSharedCoWorkingCompanyName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="30sp"
-            android:textStyle="bold"
-            android:layout_gravity="center_horizontal"/>
-        //Shared with
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/tvDetailedSharedCoWorkingSharerName"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textStyle="bold"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="share with"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"/>
-
-            <TextView
-                android:id="@+id/tvDetailedSharedCoWorkingSharedToName"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textStyle="bold"/>
-
-        </LinearLayout>
-
-
-        //company Address
-        <TextView
-            android:id="@+id/tvDetailedSharedCoWorkingCompanyAddress"
-            android:layout_marginTop="7dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Company Address: "/>
-
-        //company unit
-        <TextView
-            android:id="@+id/tvDetailedSharedCoWorkingCompanyUnit"
-            android:layout_marginTop="7dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Company Unit: "/>
-
-        //company postalcode
-        <TextView
-            android:id="@+id/tvDetailedSharedCoWorkingCompanyPostalCode"
-            android:layout_marginTop="7dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Company PostalCode: "/>
-
-        //company number
-        <TextView
-            android:id="@+id/tvDetailedSharedCoWorkingCompanyNumber"
-            android:layout_marginTop="7dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Company Number: "/>
-
-        //company industry
-        <TextView
-            android:id="@+id/tvDetailedSharedCoWorkingCompanyIndustry"
-            android:layout_marginTop="7dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Company Industry: "/>
-
-        //company lacking
-        <TextView
-            android:id="@+id/tvDetailedSharedCoWorkingCompanyLacking"
-            android:layout_marginTop="7dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Company Lacking: "/>
-
-        //company number of call
-        <TextView
-            android:id="@+id/tvDetailedSharedCoWorkingCompanyNumberOfCall"
-            android:layout_marginTop="7dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Number of call: "/>
-
-        //company pl
-        <TextView
-            android:id="@+id/tvDetailedSharedCoWorkingCompanyPriorityLevel"
-            android:layout_marginTop="7dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Company Priority Level: "/>
-
-        //company comments
-        <TextView
-            android:id="@+id/tvDetailedSharedCoWorkingCompanyComments"
-            android:layout_marginTop="7dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Company Comments: "/>
-
-
-        //Contacts
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Contacts"
-            android:textStyle="bold"
-            android:textSize="45sp"/>
-        <LinearLayout
-            android:id="@+id/containerContact"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"/>
-
-        //Copier
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Copiers"
-            android:textStyle="bold"
-            android:textSize="45sp"
-            android:layout_marginTop="30dp"/>
-        <LinearLayout
-            android:id="@+id/containerCopier"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"/>
-
-        //Appt
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Appointments"
-            android:textStyle="bold"
-            android:textSize="45sp"/>
-        <LinearLayout
-            android:id="@+id/containerAppointment"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"/>
-
-        //Follow up
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Follow Ups"
-            android:textStyle="bold"
-            android:textSize="45sp"/>
-        <LinearLayout
-            android:id="@+id/containerFollowUp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"/>
-
-        //Log
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Log"
-            android:textStyle="bold"
-            android:textSize="45sp"/>
-        <LinearLayout
-            android:id="@+id/containerLog"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:layout_marginTop="10dp"/>
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:paddingBottom="20dp"
+            android:paddingTop="10dp">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:orientation="horizontal">
-
-            <EditText
-                android:id="@+id/etLog"
-                android:layout_width="0dp"
+            //Shared with
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.7" />
+                android:gravity="center_horizontal"
+                android:orientation="horizontal">
 
-            <Button
-                android:id="@+id/btnLog"
-                android:layout_width="0dp"
+                <TextView
+                    android:id="@+id/tvDetailedSharedCoWorkingSharerName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="shared with"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"/>
+
+                <TextView
+                    android:id="@+id/tvDetailedSharedCoWorkingSharedToName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"/>
+
+            </LinearLayout>
+
+            // container for company details
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.3"
-                android:text="Add Log"/>
+                android:orientation="vertical"
+                android:padding="20dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/rectangle">
+
+                <TextView
+                    android:id="@+id/tvDetailedSharedCoWorkingCompanyName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto_slab_bold"
+                    android:textSize="28sp"
+                    android:textColor="@color/black"/>
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/rvPhotos"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@color/lightgrey"
+                    android:layout_marginTop="5dp"
+                    android:orientation="horizontal"/>
+
+                //company Address
+                <RelativeLayout
+                    android:id="@+id/rlCompanyAddress"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp">
+
+                    <!--<TextView-->
+                    <!--android:id="@+id/tvCompanyAddress1"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:fontFamily="@font/roboto_reg"-->
+                    <!--android:text="Address: "-->
+                    <!--android:textColor="@color/black"-->
+                    <!--android:textSize="16sp"/>-->
+
+                    <ImageView
+                        android:id="@+id/ivCompanyAddress"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:adjustViewBounds="true"
+                        android:layout_marginTop="10dp"
+                        android:src="@drawable/address"/>
+
+                    <TextView
+                        android:id="@+id/tvDetailedSharedCoWorkingCompanyAddress"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="23sp"
+                        android:textColor="@color/black"
+                        android:textAllCaps="true"
+                        android:layout_toRightOf="@id/ivCompanyAddress"
+                        android:layout_marginLeft="20dp"
+                        android:fontFamily="@font/roboto_condensed_bold"/>
+
+                </RelativeLayout>
+
+                //company number
+                <RelativeLayout
+                    android:id="@+id/rlCompanyNumber"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp">
+
+                    <!--<TextView-->
+                    <!--android:id="@+id/tvCompanyOfficeNumber1"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:fontFamily="@font/roboto_reg"-->
+                    <!--android:text="Office Tel: "-->
+                    <!--android:textColor="@color/black"-->
+                    <!--android:textSize="16sp"-->
+                    <!--android:layout_centerVertical="true" />-->
+
+                    <ImageView
+                        android:id="@+id/ivCompanyOfficeNumber"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:adjustViewBounds="true"
+                        android:layout_marginTop="10dp"
+                        android:src="@drawable/icon_followup_type"/>
+
+                    <TextView
+                        android:id="@+id/tvDetailedSharedCoWorkingCompanyNumber"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="25sp"
+                        android:textAllCaps="true"
+                        android:textColor="@color/black"
+                        android:layout_toRightOf="@id/ivCompanyOfficeNumber"
+                        android:layout_marginLeft="20dp"
+                        android:fontFamily="@font/roboto_condensed_bold"
+                        android:layout_centerVertical="true"/>
+
+                </RelativeLayout>
+
+                //number of calls
+                <RelativeLayout
+                    android:id="@+id/rlCompanyNumberOfCall"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/tvCompanyNumOfCalls1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/roboto_reg"
+                        android:text="Total Call: "
+                        android:layout_marginLeft="40dp"
+                        android:textColor="@color/black"
+                        android:textSize="13sp"
+                        android:layout_centerVertical="true" />
+
+                    <TextView
+                        android:id="@+id/tvDetailedSharedCoWorkingCompanyNumberOfCall"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/roboto_reg"
+                        android:layout_marginLeft="5dp"
+                        android:layout_toRightOf="@id/tvCompanyNumOfCalls1"
+                        android:textColor="@color/black"
+                        android:textSize="13sp"
+                        android:layout_centerVertical="true" />
+
+                </RelativeLayout>
+
+                //company industry
+                <RelativeLayout
+                    android:id="@+id/rlCompanyIndustry"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp">
+
+                    <!--<TextView-->
+                    <!--android:id="@+id/tvCompanyIndustry1"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:fontFamily="@font/roboto_reg"-->
+                    <!--android:text="Industry: "-->
+                    <!--android:textColor="@color/black"-->
+                    <!--android:textSize="16sp"-->
+                    <!--android:layout_centerVertical="true" />-->
+
+                    <ImageView
+                        android:id="@+id/ivCompanyIndustry"
+                        android:layout_width="18dp"
+                        android:layout_height="18dp"
+                        android:adjustViewBounds="true"
+                        android:layout_marginTop="5dp"
+                        android:src="@drawable/industry"/>
+
+                    <TextView
+                        android:id="@+id/tvDetailedSharedCoWorkingCompanyIndustry"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="23sp"
+                        android:textAllCaps="true"
+                        android:textColor="@color/black"
+                        android:layout_toRightOf="@id/ivCompanyIndustry"
+                        android:layout_marginLeft="20dp"
+                        android:fontFamily="@font/roboto_condensed_bold"
+                        android:layout_centerVertical="true"/>
+                </RelativeLayout>
+
+                //company pl
+                <RelativeLayout
+                    android:id="@+id/rlCompanypl"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp">
+
+                    <!--<TextView-->
+                    <!--android:id="@+id/tvCompanyIndustry1"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:fontFamily="@font/roboto_reg"-->
+                    <!--android:text="Industry: "-->
+                    <!--android:textColor="@color/black"-->
+                    <!--android:textSize="16sp"-->
+                    <!--android:layout_centerVertical="true" />-->
+
+                    <TextView
+                        android:id="@+id/tvDetailedSharedCoWorkingCompanyPriorityLevel"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="23sp"
+                        android:textAllCaps="true"
+                        android:textColor="@color/black"
+                        android:fontFamily="@font/roboto_condensed_bold"
+                        android:layout_centerVertical="true"/>
+                </RelativeLayout>
+
+                //line
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/black"
+                    android:layout_marginTop="25dp"/>
+
+                //company lacking
+                <RelativeLayout
+                    android:id="@+id/rlCompanyLacking"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="25dp">
+
+                    <TextView
+                        android:id="@+id/tvDetailedSharedCoWorkingCompanyLacking"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/roboto_condensed_bold"
+                        android:textColor="@color/black"
+                        android:text="Lacking of "
+                        android:textSize="16sp"
+                        android:layout_centerVertical="true" />
+
+                </RelativeLayout>
+
+            </LinearLayout>
+
+            //company comments container
+            <RelativeLayout
+                android:id="@+id/rlCompanyComments"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/rectangle"
+                android:layout_marginTop="15dp"
+                android:layout_below="@id/containerCompanyDetails"
+                android:padding="20dp">
+
+                <!--<TextView-->
+                <!--android:id="@+id/tvCompanyComment1"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:fontFamily="@font/roboto_reg"-->
+                <!--android:text="Comments: "-->
+                <!--android:textColor="@color/black"-->
+                <!--android:textSize="16sp"-->
+                <!--android:layout_centerVertical="true" />-->
+
+                <ImageView
+                    android:id="@+id/ivCompanyComment"
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:adjustViewBounds="true"
+                    android:layout_marginTop="3dp"
+                    android:src="@drawable/comments"/>
+
+                <TextView
+                    android:id="@+id/tvDetailedSharedCoWorkingCompanyComments"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="16sp"
+                    android:textColor="@color/black"
+                    android:layout_toRightOf="@id/ivCompanyComment"
+                    android:layout_marginLeft="20dp"
+                    android:fontFamily="@font/roboto_condensed_bold"
+                    android:layout_centerVertical="true"/>
+
+            </RelativeLayout>
+
+            // container for contact details
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="20dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/rectangle">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto_slab_bold"
+                    android:textSize="28sp"
+                    android:text="Contacts"
+                    android:textColor="@color/black"/>
+
+                <LinearLayout
+                    android:id="@+id/containerContact"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"/>
+
+            </LinearLayout>
+
+            // container for copier details
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="20dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/rectangle">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto_slab_bold"
+                    android:textSize="28sp"
+                    android:text="Copiers"
+                    android:textColor="@color/black"/>
+
+                <LinearLayout
+                    android:id="@+id/containerCopier"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"/>
+
+            </LinearLayout>
+
+            // container for appt details
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="20dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/rectangle">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto_slab_bold"
+                    android:textSize="28sp"
+                    android:text="Appointments"
+                    android:textColor="@color/black"/>
+
+                <LinearLayout
+                    android:id="@+id/containerAppointment"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"/>
+
+            </LinearLayout>
+
+            // container for followup details
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="20dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/rectangle">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto_slab_bold"
+                    android:textSize="28sp"
+                    android:text="Follow Ups"
+                    android:textColor="@color/black"/>
+
+                <LinearLayout
+                    android:id="@+id/containerFollowUp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"/>
+
+            </LinearLayout>
+
+            // container for log details
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="20dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/rectangle">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto_slab_bold"
+                    android:textSize="28sp"
+                    android:text="Logs"
+                    android:textColor="@color/black"/>
+
+                <LinearLayout
+                    android:id="@+id/containerLog"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:layout_marginTop="10dp"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:orientation="horizontal">
+
+                    <EditText
+                        android:id="@+id/etLog"
+                        android:layout_width="0dp"
+                        android:layout_weight="0.8"
+                        android:textSize="14sp"
+                        android:textColor="@color/black"
+                        android:fontFamily="@font/roboto"
+                        android:backgroundTint="@color/black"
+                        android:layout_height="wrap_content" />
+
+                    <RelativeLayout
+                        android:id="@+id/btnLog"
+                        android:layout_width="0dp"
+                        android:layout_weight="0.2"
+                        android:layout_marginTop="2dp"
+                        android:layout_marginLeft="5dp"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/rectangle">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/black"
+                            android:fontFamily="@font/roboto_slab_bold"
+                            android:layout_centerInParent="true"
+                            android:padding="5dp"
+                            android:text="ADD"
+                            android:textSize="18sp"/>
+
+                    </RelativeLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <RelativeLayout
+                android:id="@+id/btnTerminateSharing"
+                android:layout_width="match_parent"
+                android:layout_height="65dp"
+                android:padding="5dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/rectangle">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:fontFamily="@font/roboto_condensed_bold"
+                    android:text="TERMINATE BOND"
+                    android:textColor="@color/black"
+                    android:textSize="18sp" />
+
+            </RelativeLayout>
 
         </LinearLayout>
-
-        <Button
-            android:id="@+id/btnTerminateSharing"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="TERMINATED SHARING"
-            android:layout_gravity="bottom"/>
-
-    </LinearLayout>
+    </ScrollView>
 
 
-</ScrollView>
+
+</RelativeLayout>

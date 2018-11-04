@@ -20,6 +20,10 @@
             android:id="@+id/task"
             android:icon="@drawable/icon_task"
             android:title="Task" />
+        <item
+            android:id="@+id/coworking"
+            android:icon="@drawable/coworking"
+            android:title="Co-Working" />
     </group>
 
     <!--<item android:title="Communicate">-->

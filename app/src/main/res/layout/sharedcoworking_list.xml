@@ -3,32 +3,45 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="110dp"
     android:orientation="vertical"
     android:layout_marginTop="15dp"
-    android:layout_marginBottom="10dp"
+    android:background="@drawable/rectangle"
+    android:paddingTop="20dp"
+    android:paddingLeft="20dp"
+    android:paddingRight="20dp"
+    android:paddingBottom="10dp"
     tools:ignore="ExtraText">
 
-   //company name
+    //name
     <TextView
         android:id="@+id/tvSharedCoWorkingCompanyName"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Company Name: "/>
+        android:textSize="23sp"
+        android:textColor="@color/black"
+        android:textAllCaps="true"
+        android:fontFamily="@font/roboto_slab_bold"/>
 
+      //appointment
+     <TextView
+         android:id="@+id/tvSharedCoWorkingAppointment"
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:layout_marginTop="3dp"
+         android:textSize="15sp"
+         android:text="Next Appointment: "
+         android:textColor="@color/black"
+         android:fontFamily="@font/roboto_condensed_bold"/>
 
-    //appointment
-    <TextView
-        android:id="@+id/tvSharedCoWorkingAppointment"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Upcoming Appointment: "/>
-
-    //follow up
-    <TextView
-        android:id="@+id/tvSharedCoWorkingFollowUp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Follow up: "/>
-
+     //follow up
+     <TextView
+         android:id="@+id/tvSharedCoWorkingFollowUp"
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:layout_marginTop="3dp"
+         android:textSize="15sp"
+         android:text="Follow Up Due: "
+         android:textColor="@color/black"
+         android:fontFamily="@font/roboto_condensed_bold"/>
 </LinearLayout>
