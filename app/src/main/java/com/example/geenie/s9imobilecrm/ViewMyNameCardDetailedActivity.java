@@ -289,7 +289,7 @@ public class ViewMyNameCardDetailedActivity extends AppCompatActivity implements
         String newpl = spliter[1];
 
         tvCompanyName.setText((company.getName()));
-        tvCompanyAddress.setText((getLatLng(company.getPostalCode().trim())).concat(", " + company.getUnitNo()));
+        tvCompanyAddress.setText((company.getAddress().concat(", " + company.getUnitNo())));
 //        tvCompanyUnitNumber.setText(tvCompanyUnitNumber.getText().toString().concat(company.getUnitNo()));
 //        tvCompanyPostalCode.setText(tvCompanyPostalCode.getText().toString().concat(company.getPostalCode().trim()));
         tvCompanyNumber.setText((company.getOfficeTel()));
@@ -303,7 +303,7 @@ public class ViewMyNameCardDetailedActivity extends AppCompatActivity implements
 
         etCompanyName.setText(company.getName());
         etCompanyUnitNo.setText(company.getUnitNo());
-        etCompanyAddress.setText(getLatLng(company.getPostalCode()));
+        etCompanyAddress.setText(company.getAddress());
         etCompanyPostalCode.setText(company.getPostalCode());
         etCompanyNumber.setText(company.getOfficeTel());
 //        etCompanyNumOfCalls.setText(String.valueOf(company.getNumberOfTimesCalled()));
@@ -807,6 +807,7 @@ public class ViewMyNameCardDetailedActivity extends AppCompatActivity implements
                 }
 
                 String name = etCompanyName.getText().toString().trim();
+                String address = etCompanyAddress.getText().toString().trim();
                 String postalCode = etCompanyPostalCode.getText().toString().trim();
                 String unitNo = etCompanyUnitNo.getText().toString().trim();
                 String officeTel = etCompanyNumber.getText().toString().trim();
@@ -817,7 +818,7 @@ public class ViewMyNameCardDetailedActivity extends AppCompatActivity implements
                 int numberOfTimesCalled = company.getNumberOfTimesCalled();
 
 
-                Company company = new Company(name, postalCode, unitNo, officeTel, industry, lack, rbSelectedText, comment, createBy, companyDateCreated, numberOfTimesCalled);
+                Company company = new Company(name, address, postalCode, unitNo, officeTel, industry, lack, rbSelectedText, comment, createBy, companyDateCreated, numberOfTimesCalled);
                 databaseReference.child("Company").child(companyDbKey).setValue(company).addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {

@@ -49,7 +49,7 @@ public class ViewDashboardNameCardAdapter extends RecyclerView.Adapter<ViewDashb
         System.out.println("dashboard namecard:: pl values: " + PL);
 
         holder.tvCompanyName.setText((list.get(position).getName()));
-        holder.tvCompanyAddress.setText((getLatLng(list.get(position).getPostalCode())));
+        holder.tvCompanyAddress.setText(list.get(position).getAddress());
         holder.tvCompanyOfficeNum.setText(holder.tvCompanyOfficeNum.getText().toString().concat(list.get(position).getOfficeTel()));
         holder.tvCompanyPL.setText("Priority: ".concat(PL));
 

@@ -25,6 +25,7 @@ package com.example.geenie.s9imobilecrm;
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.List;
@@ -33,6 +34,7 @@ public class ViewMyNameCardHolder extends RecyclerView.ViewHolder {
 
     protected TextView tvCompanyName, tvCompanyAddress, tvCompanyOfficeNum,
             tvCompanyLack, tvCompanyPriorityLevel, tvNumberOfTimesCalled;
+    protected ImageView ivNumberOfTimesCalled;
     private Context context;
 
     public ViewMyNameCardHolder(View itemview, List<Company> list, Context context){
@@ -45,6 +47,7 @@ public class ViewMyNameCardHolder extends RecyclerView.ViewHolder {
         tvCompanyLack = itemview.findViewById(R.id.tvCompanyLack);
         tvCompanyPriorityLevel = itemview.findViewById(R.id.tvCompanyPriorityLevel);
         tvNumberOfTimesCalled = itemview.findViewById(R.id.tvNumberOfTimesCalled);
+        ivNumberOfTimesCalled = itemview.findViewById(R.id.ivNumberCall);
 
     }
 }

@@ -275,17 +275,21 @@ public class ViewMyNameCardActivity extends AppCompatActivity implements View.On
     }
 
     public void read(){
+        System.out.println("viewmynamecard:: reading entered");
 
         list.clear();
         databaseReference.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
                 company = dataSnapshot.getValue(Company.class);
+                System.out.println("viewmynamecard:: created by id " + company.getCreateBy());
+                System.out.println("viewmynamecard:: uid " + uid);
+
                 if(company!=null){
                     if(company.getCreateBy().equals(uid)){
                         list.add(company);
                         getMyNameCardList(list);
-                        System.out.println("reading...");
+                        System.out.println("viewmynamecard: company name:: " + company.getName());
                     }
                 }
             }

@@ -521,6 +521,7 @@ public class AddNameCardActivity extends AppCompatActivity implements View.OnCli
 //
         //company
         String companyName = etCompanyName.getText().toString().trim();
+        String companyAddress = etAddress.getText().toString().trim();
         String companyPostalCode = etPostalCode.getText().toString().trim();
         String companyUnitNo = etUnitNo.getText().toString().trim();
         char firstletterUnitchecker = companyUnitNo.charAt(0);
@@ -573,7 +574,7 @@ public class AddNameCardActivity extends AppCompatActivity implements View.OnCli
 
         String dateCreate = getDateCreateNow();
 
-        final Company company = new Company(companyName, companyPostalCode, companyUnitNo, companyOfficeNumber, companyIndustry,
+        final Company company = new Company(companyName, companyAddress, companyPostalCode, companyUnitNo, companyOfficeNumber, companyIndustry,
                 lack, newPL, commentText, uid, dateCreate, 0);
 
         final String dbkeyhere;

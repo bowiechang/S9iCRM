@@ -5,6 +5,7 @@ import java.io.Serializable;
 public class Company implements Serializable{
 
     private String name;
+    private String address;
     private String postalCode;
     private String unitNo;
     private String officeTel;
@@ -18,10 +19,11 @@ public class Company implements Serializable{
 
     public Company(){}
 
-    public Company(String name, String postalCode, String unitNo, String officeTel, String industry,
+    public Company(String name, String address, String postalCode, String unitNo, String officeTel, String industry,
                    String companyLackOf, String priorityLevel, String comment, String createBy, String dateCreated, int numberOfTimesCalled){
 
         this.name = name;
+        this.address = address;
         this.postalCode = postalCode;
         this.unitNo = unitNo;
         this.officeTel = officeTel;
@@ -40,6 +42,14 @@ public class Company implements Serializable{
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     public String getPostalCode() {

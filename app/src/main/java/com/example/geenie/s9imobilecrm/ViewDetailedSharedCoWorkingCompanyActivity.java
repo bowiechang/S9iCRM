@@ -152,7 +152,7 @@ public class ViewDetailedSharedCoWorkingCompanyActivity extends AppCompatActivit
 
                 //company
                 tvDetailedCoWorkingCompanyName.setText(company.getName());
-                tvDetailedCoWorkingCompanyAddress.setText((getLatLng(company.getPostalCode().trim())).concat(" " + company.getUnitNo()));
+                tvDetailedCoWorkingCompanyAddress.setText((company.getAddress().concat(" " + company.getUnitNo())));
                 tvDetailedCoWorkingCompanyNumber.setText(tvDetailedCoWorkingCompanyNumber.getText().toString().concat(company.getOfficeTel()));
                 tvDetailedCoWorkingCompanyIndustry.setText(tvDetailedCoWorkingCompanyIndustry.getText().toString().concat(company.getIndustry()));
                 tvDetailedCoWorkingCompanyLack.setText(tvDetailedCoWorkingCompanyLack.getText().toString().concat(company.getCompanyLackOf()));
