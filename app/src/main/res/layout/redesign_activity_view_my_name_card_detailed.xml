@@ -51,17 +51,19 @@
 
             //photo
             <LinearLayout
+                android:id="@+id/llphoto"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="100dp"
+                android:paddingTop="15dp"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
                 android:orientation="horizontal">
 
                 <RelativeLayout
                     android:id="@+id/btnLaunchPhotoCaptureLib"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="0.2"
-                    android:padding="5dp"
-                    android:layout_marginLeft="10dp"
+                    android:layout_weight="0.3"
                     android:layout_marginRight="10dp"
                     android:background="@drawable/rectangle">
 
@@ -80,13 +82,15 @@
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/rvPhotos"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.8"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.7"
                     android:background="@color/lightgrey"
+                    android:visibility="invisible"
                     android:orientation="horizontal"/>
 
             </LinearLayout>
 
+            //other
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -167,7 +171,7 @@
                                     android:id="@+id/tvCompanyName"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:textSize="23sp"
+                                    android:textSize="17sp"
                                     android:textColor="@color/black"
                                     android:textAllCaps="true"
                                     android:layout_toRightOf="@id/ivCompanyName"
@@ -256,8 +260,9 @@
                                     android:id="@+id/tvCompanyAddress"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:textSize="23sp"
+                                    android:textSize="17sp"
                                     android:textColor="@color/black"
+                                    android:layout_marginTop="10dp"
                                     android:textAllCaps="true"
                                     android:layout_toRightOf="@id/ivCompanyAddress"
                                     android:layout_marginLeft="20dp"
@@ -286,14 +291,14 @@
                                     android:layout_width="20dp"
                                     android:layout_height="20dp"
                                     android:adjustViewBounds="true"
-                                    android:layout_marginTop="10dp"
+                                    android:layout_marginTop="13dp"
                                     android:src="@drawable/icon_followup_type"/>
 
                                 <TextView
                                     android:id="@+id/tvCompanyOfficeNumber"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:textSize="25sp"
+                                    android:textSize="17sp"
                                     android:textAllCaps="true"
                                     android:textColor="@color/black"
                                     android:layout_toRightOf="@id/ivCompanyOfficeNumber"
@@ -317,8 +322,7 @@
                                     android:text="Total Call: "
                                     android:layout_marginLeft="40dp"
                                     android:textColor="@color/black"
-                                    android:textSize="13sp"
-                                    android:layout_centerVertical="true" />
+                                    android:textSize="13sp" />
 
                                 <TextView
                                     android:id="@+id/tvCompanyNumOfCalls"
@@ -328,8 +332,7 @@
                                     android:layout_marginLeft="5dp"
                                     android:layout_toRightOf="@id/tvCompanyNumOfCalls1"
                                     android:textColor="@color/black"
-                                    android:textSize="13sp"
-                                    android:layout_centerVertical="true" />
+                                    android:textSize="13sp" />
 
                             </RelativeLayout>
 
@@ -354,17 +357,18 @@
                                     android:id="@+id/ivCompanyIndustry"
                                     android:layout_width="18dp"
                                     android:layout_height="18dp"
-                                    android:adjustViewBounds="true"
                                     android:layout_marginTop="5dp"
+                                    android:adjustViewBounds="true"
                                     android:src="@drawable/industry"/>
 
                                 <TextView
                                     android:id="@+id/tvCompanyIndustry"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:textSize="23sp"
+                                    android:textSize="17sp"
                                     android:textAllCaps="true"
                                     android:textColor="@color/black"
+                                    android:layout_marginTop="10dp"
                                     android:layout_toRightOf="@id/ivCompanyIndustry"
                                     android:layout_marginLeft="20dp"
                                     android:fontFamily="@font/roboto_condensed_bold"
@@ -489,15 +493,15 @@
                                     android:textSize="28sp"
                                     android:textColor="@color/black"/>
 
-                                <TextView
-                                    android:id="@+id/tvCompanyDetailsSave"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="Save"
-                                    android:fontFamily="@font/roboto_condensed_bold"
-                                    android:textSize="24sp"
-                                    android:layout_alignParentRight="true"
-                                    android:textColor="@color/black"/>
+                                <!--<TextView-->
+                                    <!--android:id="@+id/tvCompanyDetailsSave"-->
+                                    <!--android:layout_width="wrap_content"-->
+                                    <!--android:layout_height="wrap_content"-->
+                                    <!--android:text="Save"-->
+                                    <!--android:fontFamily="@font/roboto_condensed_bold"-->
+                                    <!--android:textSize="24sp"-->
+                                    <!--android:layout_alignParentRight="true"-->
+                                    <!--android:textColor="@color/black"/>-->
 
                             </RelativeLayout>
 

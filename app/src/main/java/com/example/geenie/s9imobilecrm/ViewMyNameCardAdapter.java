@@ -43,11 +43,17 @@ public class ViewMyNameCardAdapter extends RecyclerView.Adapter<ViewMyNameCardHo
     @Override
     public void onBindViewHolder(final ViewMyNameCardHolder holder, final int position) {
 
+//        System.out.println("viewmyncadapter:: coyname: " + list.get(position).getName());
+//        System.out.println("viewmyncadapter:: coyaddress: " + list.get(position).getAddress());
+//        System.out.println("viewmyncadapter:: coyofficetel: " + list.get(position).getOfficeTel());
+//        System.out.println("viewmyncadapter:: coylack: " + list.get(position).getCompanyLackOf());
+
         String[] split = list.get(position).getPriorityLevel().split("\\.");
         String PL = split[1];
 
         if(list.get(position).getCompanyLackOf().equalsIgnoreCase("")){
-            holder.tvCompanyLack.setVisibility(View.GONE);
+            holder.tvCompanyLack.setText("No records of lacking");
+
         }
         else{
             holder.tvCompanyLack.setText(restringLacking(list.get(position).getCompanyLackOf()));
@@ -65,10 +71,15 @@ public class ViewMyNameCardAdapter extends RecyclerView.Adapter<ViewMyNameCardHo
             holder.ivNumberOfTimesCalled.setVisibility(View.GONE);
             holder.tvNumberOfTimesCalled.setVisibility(View.GONE);
         }
+        else{
+            holder.tvCompanyOfficeNum.setText((list.get(position).getOfficeTel()));
+            holder.tvNumberOfTimesCalled.setText((list.get(position).getNumberOfTimesCalled() + ""));
+        }
 
-        holder.tvCompanyOfficeNum.setText((list.get(position).getOfficeTel()));
+
+
         holder.tvCompanyPriorityLevel.setText("Priority Level:  " + PL);
-        holder.tvNumberOfTimesCalled.setText((list.get(position).getNumberOfTimesCalled() + ""));
+
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override

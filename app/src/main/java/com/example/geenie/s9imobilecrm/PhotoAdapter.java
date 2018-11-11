@@ -55,6 +55,7 @@ public class PhotoAdapter extends RecyclerView.Adapter<PhotoHolder> {
     public void onBindViewHolder(final PhotoHolder holder, final int position) {
 
         System.out.println("bitmap insert: onBINDviewholder" );
+        System.out.println("bitmap insert: dbkey: " + dbkey);
 
 
         final StorageReference pathrefIVZoom = storageReference.child(dbkey+"/pic" + position + ".jpg");

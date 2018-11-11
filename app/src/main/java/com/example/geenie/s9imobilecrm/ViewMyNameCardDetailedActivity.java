@@ -289,18 +289,35 @@ public class ViewMyNameCardDetailedActivity extends AppCompatActivity implements
         String newpl = spliter[1];
 
         tvCompanyName.setText((company.getName()));
-        tvCompanyAddress.setText((company.getAddress().concat(", " + company.getUnitNo())));
+
+        if(company.getAddress().equalsIgnoreCase("n/a")){
+            tvCompanyAddress.setText("No Address Given");
+        }
+        else if(!company.getAddress().equalsIgnoreCase("n/a") && !company.getPostalCode().equalsIgnoreCase("n/a") && !company.getUnitNo().equalsIgnoreCase("n/a")){
+            tvCompanyAddress.setText((company.getAddress().concat(", " + company.getUnitNo() + " " + company.getPostalCode())));
+        }
+
 //        tvCompanyUnitNumber.setText(tvCompanyUnitNumber.getText().toString().concat(company.getUnitNo()));
 //        tvCompanyPostalCode.setText(tvCompanyPostalCode.getText().toString().concat(company.getPostalCode().trim()));
         tvCompanyNumber.setText((company.getOfficeTel()));
         tvCompanyIndustry.setText((company.getIndustry()));
-        tvCompanyLack.setText((restringLacking(company.getCompanyLackOf())));
+        if(company.getCompanyLackOf().equalsIgnoreCase("n/a") || company.getCompanyLackOf().equalsIgnoreCase("")){
+            tvCompanyLack.setText("No records of Lacking");
+        }
+        else{
+            tvCompanyLack.setText((restringLacking(company.getCompanyLackOf())));
+        }
         tvCompanyNumOfCalls.setText(String.valueOf(company.getNumberOfTimesCalled()));
         tvCompanyPl.setText(newpl);
-        tvCompanyComments.setText((company.getComment()));
+        if(company.getComment().equalsIgnoreCase("n/a") || company.getComment().equalsIgnoreCase("")){
+            tvCompanyComments.setText("No comments");
+        }
+        else{
+            tvCompanyComments.setText((company.getComment()));
+        }
+
 
         tvCompanyNumber.setOnClickListener(this);
-
         etCompanyName.setText(company.getName());
         etCompanyUnitNo.setText(company.getUnitNo());
         etCompanyAddress.setText(company.getAddress());
@@ -778,6 +795,8 @@ public class ViewMyNameCardDetailedActivity extends AppCompatActivity implements
             }
             else if(tvEditSaveBtn.getText().toString().equals("SAVE")){
 
+                Toast.makeText(getApplicationContext(), "Saving", Toast.LENGTH_SHORT).show();
+
                 String industry = spinnerIndustry.getSelectedItem().toString();
 
                 String lack = "";
@@ -822,19 +841,26 @@ public class ViewMyNameCardDetailedActivity extends AppCompatActivity implements
                 databaseReference.child("Company").child(companyDbKey).setValue(company).addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
+
+                        Toast.makeText(getApplicationContext(), "Save Successful", Toast.LENGTH_SHORT).show();
+
                         Intent intent = new Intent(ViewMyNameCardDetailedActivity.this, ViewMyNameCardDetailedActivity.class);
                         Bundle extras = new Bundle();
                         extras.putString("dbkey", companyDbKey);
                         intent.putExtras(extras);
+                        finish();
                         ViewMyNameCardDetailedActivity.this.startActivity(intent);
                     }
                 });
 
                 saveContact();
                 saveCopier();
-                setCompanyNotEditable();
-                setContactNotEditable();
-                setCopierNotEditable();
+
+
+
+//                setCompanyNotEditable();
+//                setContactNotEditable();
+//                setCopierNotEditable();
 
 //                relativeLayoutView.setVisibility(View.VISIBLE);
 //                relativeLayoutEdit.setVisibility(View.GONE);
@@ -1713,29 +1739,29 @@ public class ViewMyNameCardDetailedActivity extends AppCompatActivity implements
                             counter++;
                         }
                         Photo photo2 = new Photo(String.valueOf(images.size() + count));
-                        databaseReference.child("Photo").child(companyDbKey).child(dbkey).setValue(photo2);
-                        System.out.println("exist pushing child: in SingleEvent");
-                        System.out.println("exist singleValue: " + exist);
-
-                        final Handler handler = new Handler();
-                        new Thread(new Runnable() {
-                            public void run() {
-                                try {
-                                    Thread.sleep(2000);
-                                }
-                                catch (Exception e) { }
-                                handler.post(new Runnable() {
+                        databaseReference.child("Photo").child(companyDbKey).child(dbkey).setValue(photo2).addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void aVoid) {
+                                final Handler handler = new Handler();
+                                new Thread(new Runnable() {
                                     public void run() {
-                                        retrieveStoragePath();
+                                        try {
+                                            Thread.sleep(3000);
+                                        }
+                                        catch (Exception e) { }
+                                        handler.post(new Runnable() {
+                                            public void run() {
+                                                retrieveStoragePath();
+                                            }
+                                        });
                                     }
-                                });
+                                }).start();
                             }
-                        }).start();
+                        });
                     }
                     else{
                         databaseReference.child("Photo").child(companyDbKey).removeEventListener(childEventListenerChecker);
                     }
-
                 }
 
                 @Override
@@ -1760,7 +1786,7 @@ public class ViewMyNameCardDetailedActivity extends AppCompatActivity implements
                 new Thread(new Runnable() {
                     public void run() {
                         try {
-                            Thread.sleep(2000);
+                            Thread.sleep(3000);
                         }
                         catch (Exception e) { }
                         handler.post(new Runnable() {
@@ -1793,6 +1819,7 @@ public class ViewMyNameCardDetailedActivity extends AppCompatActivity implements
                 for (int i = 0; i < Integer.parseInt(photo.getCount()); i++) {
                     arrayList.add(String.valueOf(i));
                 }
+                recyclerView.setVisibility(View.VISIBLE);
                 getPhotos(arrayList);
             }
 
@@ -1868,7 +1895,7 @@ public class ViewMyNameCardDetailedActivity extends AppCompatActivity implements
 
         Intent intent = new Intent(ViewMyNameCardDetailedActivity.this, ViewMyNameCardActivity.class);
         ViewMyNameCardDetailedActivity.this.startActivity(intent);
-
+//        onBackPressed();
         return true;
     }
 }
