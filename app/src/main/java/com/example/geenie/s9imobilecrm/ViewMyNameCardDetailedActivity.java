@@ -60,7 +60,7 @@ import java.util.Locale;
 
 public class ViewMyNameCardDetailedActivity extends AppCompatActivity implements View.OnClickListener, TextWatcher {
 
-    private RelativeLayout relativeLayoutView, relativeLayoutEdit;
+    private RelativeLayout relativeLayoutView, relativeLayoutEdit, relativeLayoutAddCallCount;
 
     private TextView tvCompanyName, tvCompanyAddress,
             tvCompanyNumber, tvCompanyIndustry, tvCompanyLack, tvCompanyNumOfCalls, tvCompanyPl, tvCompanyComments, tvAddContact, tvAddCopier;
@@ -151,6 +151,8 @@ public class ViewMyNameCardDetailedActivity extends AppCompatActivity implements
 
         relativeLayoutEdit = findViewById(R.id.detailscontainerEdit);
         relativeLayoutView = findViewById(R.id.detailscontainerView);
+        relativeLayoutAddCallCount = findViewById(R.id.relativeLayoutAddCallCount);
+        relativeLayoutAddCallCount.setOnClickListener(this);
 
         tvCompanyDetailsEdit = findViewById(R.id.tvCompanyDetailsEdit);
         tvCompanyDetailsEdit.setOnClickListener(this);
@@ -1065,7 +1067,7 @@ public class ViewMyNameCardDetailedActivity extends AppCompatActivity implements
 
                     int numOfPhoneCall = Integer.parseInt(dataSnapshot.getValue().toString());
                     databaseReference.child("Company").child(companyDbKey).child("numberOfTimesCalled").setValue(numOfPhoneCall + 1);
-
+                    tvCompanyNumOfCalls.setText(numOfPhoneCall + 1);
                 }
 
                 @Override
@@ -1095,6 +1097,23 @@ public class ViewMyNameCardDetailedActivity extends AppCompatActivity implements
                     .setAlwaysShowDoneButton(true)      //  Set always show done button in multiple mode
                     .setKeepScreenOn(true)              //  Keep screen on when selecting images
                     .start();                           //  Start ImagePicker
+        }
+        else if(view.equals(relativeLayoutAddCallCount)){
+            databaseReference.child("Company").child(companyDbKey).child("numberOfTimesCalled").addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    System.out.println("number:: " + dataSnapshot.getValue().toString());
+
+                    int numOfPhoneCall = Integer.parseInt(dataSnapshot.getValue().toString());
+                    databaseReference.child("Company").child(companyDbKey).child("numberOfTimesCalled").setValue(numOfPhoneCall + 1);
+                    tvCompanyNumOfCalls.setText(numOfPhoneCall + 1);
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                }
+            });
         }
     }
 
