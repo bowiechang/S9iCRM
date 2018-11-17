@@ -7,7 +7,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
 import android.view.Window;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -17,7 +19,7 @@ public class DashboardFollowupActivity extends AppCompatActivity {
 
     private RecyclerView recyclerViewFollowup;
     private ArrayList<FollowUp> followUpArrayList;
-
+    private TextView tvNone;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +46,7 @@ public class DashboardFollowupActivity extends AppCompatActivity {
 
     public void init(){
 
+        tvNone = findViewById(R.id.tvNone);
         recyclerViewFollowup = findViewById(R.id.rvFollowUp);
         recyclerViewFollowup.setLayoutManager(new LinearLayoutManager(this));
         recyclerViewFollowup.setHasFixedSize(true);
@@ -60,6 +63,10 @@ public class DashboardFollowupActivity extends AppCompatActivity {
             });
 
             getMyFollowUp(followUpArrayList);
+        }
+        else{
+            tvNone.setVisibility(View.VISIBLE);
+            recyclerViewFollowup.setVisibility(View.GONE);
         }
 
     }

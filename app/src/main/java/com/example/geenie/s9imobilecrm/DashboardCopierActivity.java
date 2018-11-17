@@ -7,7 +7,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
 import android.view.Window;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -17,6 +19,7 @@ public class DashboardCopierActivity extends AppCompatActivity {
 
     private RecyclerView recyclerViewCopier;
     private ArrayList<Copier> copierArrayList;
+    private TextView tvNone;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +44,7 @@ public class DashboardCopierActivity extends AppCompatActivity {
 
     public void init(){
 
+        tvNone = findViewById(R.id.tvNone);
         recyclerViewCopier = findViewById(R.id.rvCopier);
         recyclerViewCopier.setLayoutManager(new LinearLayoutManager(this));
         recyclerViewCopier.setHasFixedSize(true);
@@ -57,6 +61,10 @@ public class DashboardCopierActivity extends AppCompatActivity {
             });
 
             getMyCopierList(copierArrayList);
+        }
+        else{
+            tvNone.setVisibility(View.VISIBLE);
+            recyclerViewCopier.setVisibility(View.GONE);
         }
     }
 

@@ -7,7 +7,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
 import android.view.Window;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -17,6 +19,7 @@ public class DashboardApptActivity extends AppCompatActivity {
 
     private RecyclerView recyclerViewUpcoming;
     private ArrayList<Appointment> appointmentArrayList;
+    private TextView tvNone;
 
 
     @Override
@@ -44,6 +47,7 @@ public class DashboardApptActivity extends AppCompatActivity {
 
     public void init(){
 
+        tvNone = findViewById(R.id.tvNone);
         recyclerViewUpcoming = findViewById(R.id.rvUpcoming);
         recyclerViewUpcoming.setLayoutManager(new LinearLayoutManager(this));
         recyclerViewUpcoming.setHasFixedSize(true);
@@ -60,6 +64,10 @@ public class DashboardApptActivity extends AppCompatActivity {
             });
 
             getMyAppointmentUpcomingList(appointmentArrayList);
+        }
+        else{
+            tvNone.setVisibility(View.VISIBLE);
+            recyclerViewUpcoming.setVisibility(View.GONE);
         }
 
     }

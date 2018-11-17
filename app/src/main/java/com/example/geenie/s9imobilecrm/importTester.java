@@ -36,14 +36,18 @@ public class importTester extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_import_tester);
-//        readCsv();
-        dbcounter();
+        readCsv();
+//        dbcounter();
 //        delete();
     }
 
     public void delete(){
         databaseReference.child("Company").removeValue();
         databaseReference.child("Contact").removeValue();
+        databaseReference.child("Copier").removeValue();
+        databaseReference.child("FollowUp").removeValue();
+        databaseReference.child("Photo").removeValue();
+        databaseReference.child("SharedCoWorkingDetails").removeValue();
 
     }
 
@@ -86,7 +90,7 @@ public class importTester extends AppCompatActivity {
           4) DRAG IT INTO THE RAW FOLDER AND SET THE PATH FOR IT.*/
 
 
-        InputStream is = getResources().openRawResource(R.raw.geenieimporter3);
+        InputStream is = getResources().openRawResource(R.raw.pieimporter3);
         BufferedReader reader = new BufferedReader(new InputStreamReader(is, Charset.forName("UTF-8")));
 
         String line = "";

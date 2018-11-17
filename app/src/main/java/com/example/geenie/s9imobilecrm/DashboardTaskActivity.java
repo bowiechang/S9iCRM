@@ -7,7 +7,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
 import android.view.Window;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -17,7 +19,7 @@ public class DashboardTaskActivity extends AppCompatActivity {
 
     private RecyclerView recyclerViewTask;
     private ArrayList<Task> taskArrayList;
-
+    private TextView tvNone;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +44,7 @@ public class DashboardTaskActivity extends AppCompatActivity {
 
     public void init(){
 
+        tvNone = findViewById(R.id.tvNone);
         recyclerViewTask = findViewById(R.id.rvTask);
         recyclerViewTask.setLayoutManager(new LinearLayoutManager(this));
         recyclerViewTask.setHasFixedSize(true);
@@ -59,14 +62,16 @@ public class DashboardTaskActivity extends AppCompatActivity {
 
             getMyTaskIncompleteList(taskArrayList);
         }
-
+        else{
+            tvNone.setVisibility(View.VISIBLE);
+            recyclerViewTask.setVisibility(View.GONE);
+        }
     }
 
     private void getMyTaskIncompleteList(ArrayList list){
         ViewMyTaskAdapter viewMyTaskAdapter = new ViewMyTaskAdapter(DashboardTaskActivity.this, list);
         recyclerViewTask.setAdapter(viewMyTaskAdapter);
     }
-
 
     @Override
     public boolean onSupportNavigateUp() {
