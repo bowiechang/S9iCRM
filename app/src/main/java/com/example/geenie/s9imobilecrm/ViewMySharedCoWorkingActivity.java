@@ -142,7 +142,8 @@ public class ViewMySharedCoWorkingActivity extends AppCompatActivity implements 
 
     @Override
     public boolean onSupportNavigateUp() {
-        onBackPressed();
+        Intent i = new Intent(ViewMySharedCoWorkingActivity.this, MainActivity.class);
+        ViewMySharedCoWorkingActivity.this.startActivity(i);
         return true;
     }
 }

@@ -379,4 +379,12 @@ public class AddSharedCoWorkingCompany extends AppCompatActivity {
         });
     }
 
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        Intent i = new Intent(AddSharedCoWorkingCompany.this, ViewMySharedCoWorkingActivity.class);
+        AddSharedCoWorkingCompany.this.startActivity(i);
+        return true;
+    }
+
 }

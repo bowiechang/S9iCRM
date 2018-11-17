@@ -883,7 +883,6 @@ public class ViewDetailedSharedCoWorkingCompanyActivity extends AppCompatActivit
         recyclerView.setAdapter(photoAdapter);
     }
 
-
     @Override
     public boolean onSupportNavigateUp() {
         onBackPressed();

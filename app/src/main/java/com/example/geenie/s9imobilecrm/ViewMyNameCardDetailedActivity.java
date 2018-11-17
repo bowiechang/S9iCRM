@@ -60,7 +60,7 @@ import java.util.Locale;
 
 public class ViewMyNameCardDetailedActivity extends AppCompatActivity implements View.OnClickListener, TextWatcher {
 
-    private RelativeLayout relativeLayoutView, relativeLayoutEdit, relativeLayoutAddCallCount;
+    private RelativeLayout relativeLayoutView, relativeLayoutEdit, relativeLayoutAddCallCount, relativeLayoutLoading;
 
     private TextView tvCompanyName, tvCompanyAddress,
             tvCompanyNumber, tvCompanyIndustry, tvCompanyLack, tvCompanyNumOfCalls, tvCompanyPl, tvCompanyComments, tvAddContact, tvAddCopier;
@@ -149,6 +149,7 @@ public class ViewMyNameCardDetailedActivity extends AppCompatActivity implements
 
     public void init(){
 
+        relativeLayoutLoading = findViewById(R.id.rlLoading);
         relativeLayoutEdit = findViewById(R.id.detailscontainerEdit);
         relativeLayoutView = findViewById(R.id.detailscontainerView);
         relativeLayoutAddCallCount = findViewById(R.id.relativeLayoutAddCallCount);
@@ -242,6 +243,8 @@ public class ViewMyNameCardDetailedActivity extends AppCompatActivity implements
                             retrieveStoragePath();
 
                             company = company1;
+
+                            relativeLayoutLoading.setVisibility(View.GONE);
                         }
                     }
 //                    else(company.getPostalCode().equals(postalcodekey)) {
@@ -255,6 +258,7 @@ public class ViewMyNameCardDetailedActivity extends AppCompatActivity implements
                             retrieveStoragePath();
 
                             company = company1;
+                            relativeLayoutLoading.setVisibility(View.GONE);
                         }
                     }
                 }
