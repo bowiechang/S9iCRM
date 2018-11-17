@@ -34,7 +34,7 @@ public class ViewMyNameCardActivity extends AppCompatActivity implements View.On
 
     private Company company;
     private RecyclerView recyclerView;
-    private TextView tvAddNameCard;
+    private TextView tvAddNameCard, tvNo;
     private SearchView sv;
     private ArrayList<Company> list;
     private ArrayList<Company> listUntounched;
@@ -105,6 +105,8 @@ public class ViewMyNameCardActivity extends AppCompatActivity implements View.On
                 return false;
             }
         });
+
+        tvNo = findViewById(R.id.tvNone);
 
         tvAddNameCard = findViewById(R.id.addNameCard);
         tvAddNameCard.setOnClickListener(this);
@@ -318,6 +320,10 @@ public class ViewMyNameCardActivity extends AppCompatActivity implements View.On
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 listUntounched.addAll(list);
+                if(list.size() == 0){
+                    tvNo.setVisibility(View.VISIBLE);
+                    recyclerView.setVisibility(View.GONE);
+                }
             }
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {

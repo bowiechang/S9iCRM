@@ -1104,9 +1104,16 @@ public class ViewMyNameCardDetailedActivity extends AppCompatActivity implements
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                     System.out.println("number:: " + dataSnapshot.getValue().toString());
 
-                    int numOfPhoneCall = Integer.parseInt(dataSnapshot.getValue().toString());
-                    databaseReference.child("Company").child(companyDbKey).child("numberOfTimesCalled").setValue(numOfPhoneCall + 1);
-                    tvCompanyNumOfCalls.setText(numOfPhoneCall + 1);
+                    final int numOfPhoneCall = Integer.parseInt(dataSnapshot.getValue().toString());
+                    databaseReference.child("Company").child(companyDbKey).child("numberOfTimesCalled").setValue(numOfPhoneCall + 1).addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void aVoid) {
+                            tvCompanyNumOfCalls.setText(String.valueOf(numOfPhoneCall + 1));
+                            Toast.makeText(getApplicationContext(), "Added Successful! Total Calls Now: " + (numOfPhoneCall + 1), Toast.LENGTH_SHORT).show();
+                        }
+                    });
+
+
                 }
 
                 @Override

@@ -12,6 +12,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Window;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -20,13 +21,14 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
 public class ViewMyFollowUpActivity extends AppCompatActivity implements View.OnClickListener {
 
     private RelativeLayout relativeLayoutViewPastFollowUp;
-
+    private TextView tvNo;
     private RecyclerView recyclerViewFollowUp;
     private ArrayList<FollowUp> listFollowUp, listPastFollowUp;
 
@@ -56,6 +58,7 @@ public class ViewMyFollowUpActivity extends AppCompatActivity implements View.On
 
     public void init(){
 
+        tvNo = findViewById(R.id.tvNone);
         relativeLayoutViewPastFollowUp = findViewById(R.id.relativeLayoutViewPastFollowUp);
         relativeLayoutViewPastFollowUp.setOnClickListener(this);
         recyclerViewFollowUp = findViewById(R.id.rvFollowUp);
@@ -103,7 +106,23 @@ public class ViewMyFollowUpActivity extends AppCompatActivity implements View.On
 
             }
         });
+
+        databaseReference.orderByChild("createdBy").equalTo(uid).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if(listFollowUp.size() == 0){
+                    tvNo.setVisibility(View.VISIBLE);
+                    recyclerViewFollowUp.setVisibility(View.GONE);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
     }
+
 
     private void getMyFollowUp(ArrayList list){
         ViewMyFollowUpAdapter viewMyFollowUpAdapter = new ViewMyFollowUpAdapter(ViewMyFollowUpActivity.this, list);

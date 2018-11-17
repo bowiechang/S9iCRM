@@ -1,68 +1,165 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".AddSharedCoWorkingCompany"
     android:orientation="vertical"
-    android:padding="20dp">
+    tools:ignore="ExtraText"
+    android:focusableInTouchMode="true">
 
-    <TextView
-        android:layout_width="wrap_content"
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/appbarlayout"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="25sp"
-        android:textStyle="bold"
-        android:text="Add Shared Co-Working Company"/>
+        android:background="@null"
+        app:elevation="0dp"
+        android:elevation="0dp">
 
-    <Button
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/offwhite"
+            android:theme="@style/ToolbarTheme">
+
+            <TextView
+                android:id="@+id/toolbar_title"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:text="Add Shared Co-Working Company"
+                android:layout_marginTop="5dp"
+                android:textColor="@color/black"
+                android:fontFamily="@font/roboto_slab_bold"
+                android:textSize="19sp"
+                android:textStyle="bold" />
+
+        </android.support.v7.widget.Toolbar>
+
+    </android.support.design.widget.AppBarLayout>
+
+    <LinearLayout
+        android:id="@+id/detailsContainerEdit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="15dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginBottom="15dp"
+        android:background="@drawable/rectangle"
+        android:layout_below="@id/appbarlayout"
+        android:padding="20dp">
+
+        //company
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="10dp">
+
+            <ImageView
+                android:id="@+id/ivCompany"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:adjustViewBounds="true"
+                android:layout_marginTop="5dp"
+                android:src="@drawable/companyname"/>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_toRightOf="@id/ivCompany"
+                android:layout_marginLeft="20dp">
+
+                <android.support.v7.widget.AppCompatSpinner
+                    android:id="@+id/spinnerShareNameCard"
+                    android:layout_width="match_parent"
+                    android:padding="5dp"
+                    android:layout_height="wrap_content"
+                    android:theme="@style/Spinner"
+                    android:background="@drawable/rectangle_light" />
+
+                <TextView
+                    android:id="@+id/tvNoContact"
+                    android:layout_width="match_parent"
+                    android:padding="5dp"
+                    android:layout_height="match_parent"
+                    android:textSize="15sp"
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/roboto_condensed_bold"
+                    android:text="NO NAME CARD FOUND"
+                    android:visibility="gone"/>
+
+            </RelativeLayout>
+        </LinearLayout>
+
+
+        //user
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="10dp">
+
+            <ImageView
+                android:id="@+id/ivUser"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:adjustViewBounds="true"
+                android:layout_marginTop="5dp"
+                android:src="@drawable/coworking"/>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_toRightOf="@id/ivUser"
+                android:layout_marginLeft="20dp">
+
+                <android.support.v7.widget.AppCompatSpinner
+                    android:id="@+id/spinnerShareWith"
+                    android:layout_width="match_parent"
+                    android:padding="5dp"
+                    android:layout_height="wrap_content"
+                    android:theme="@style/Spinner"
+                    android:background="@drawable/rectangle_light" />
+
+                <TextView
+                    android:id="@+id/tvNoContact2"
+                    android:layout_width="match_parent"
+                    android:padding="5dp"
+                    android:layout_height="match_parent"
+                    android:textSize="15sp"
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/roboto_condensed_bold"
+                    android:text="NO USER FOUND"
+                    android:visibility="gone"/>
+
+            </RelativeLayout>
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <RelativeLayout
         android:id="@+id/btnAddSharedWorkingCompany"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Add Shared Working"/>
-
-    <Button
-        android:id="@+id/btnRetrieveSharedWorkingCompany"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Retrieve Shared Working"/>
-
-    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="30dp">
+        android:layout_height="65dp"
+        android:padding="5dp"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="20dp"
+        android:background="@drawable/rectangle">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Share Name Card: "/>
+            android:layout_centerInParent="true"
+            android:fontFamily="@font/roboto_condensed_bold"
+            android:text="START SHARING CONTACT"
+            android:textColor="@color/black"
+            android:textSize="18sp" />
 
-        <Spinner
-            android:id="@+id/spinnerShareNameCard"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"/>
+    </RelativeLayout>
 
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="10dp">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Share With: "/>
-
-        <Spinner
-            android:id="@+id/spinnerShareWith"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"/>
-
-    </LinearLayout>
-
-</LinearLayout>
+</RelativeLayout>

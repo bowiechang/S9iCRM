@@ -12,6 +12,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Window;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -20,6 +21,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
@@ -28,6 +30,8 @@ public class ViewMyTaskActivity extends AppCompatActivity implements View.OnClic
     private RecyclerView recyclerViewIncomplete;
     private ArrayList<Task> listIncomplete;
     private RelativeLayout relativeLayoutViewCompeletdTask;
+
+    private TextView tvNo;
 
     //firebase init
     private FirebaseAuth mAuth = FirebaseAuth.getInstance();
@@ -69,6 +73,8 @@ public class ViewMyTaskActivity extends AppCompatActivity implements View.OnClic
         recyclerViewIncomplete = findViewById(R.id.rvIncomplete);
         recyclerViewIncomplete.setLayoutManager(new LinearLayoutManager(this));
         recyclerViewIncomplete.setHasFixedSize(true);
+
+        tvNo = findViewById(R.id.tvNone);
 
         listIncomplete = new ArrayList<>();
         read();
@@ -138,6 +144,21 @@ public class ViewMyTaskActivity extends AppCompatActivity implements View.OnClic
             @Override
             public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
 
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+        databaseReference.orderByChild("assigned_uid").equalTo(uid).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if(listIncomplete.size() == 0){
+                    tvNo.setVisibility(View.VISIBLE);
+                    recyclerViewIncomplete.setVisibility(View.GONE);
+                }
             }
 
             @Override

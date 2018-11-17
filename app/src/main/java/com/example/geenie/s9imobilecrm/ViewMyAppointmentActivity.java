@@ -13,6 +13,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -21,6 +22,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -31,7 +33,7 @@ import java.util.Date;
 public class ViewMyAppointmentActivity extends AppCompatActivity implements View.OnClickListener {
 
     private RelativeLayout relativeLayoutViewPastAppointment;
-
+    private TextView tvNo;
     private RecyclerView recyclerViewUpcoming;
     private ArrayList<Appointment> listUpcoming;
 
@@ -61,6 +63,7 @@ public class ViewMyAppointmentActivity extends AppCompatActivity implements View
 
     public void init(){
 
+        tvNo = findViewById(R.id.tvNone);
         relativeLayoutViewPastAppointment = findViewById(R.id.relativeLayoutViewPastAppointment);
         relativeLayoutViewPastAppointment.setOnClickListener(this);
         recyclerViewUpcoming = findViewById(R.id.rvUpcoming);
@@ -122,6 +125,20 @@ public class ViewMyAppointmentActivity extends AppCompatActivity implements View
             @Override
             public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
 
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+        databaseReference.orderByChild("createby").equalTo(uid).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if(listUpcoming.size() == 0) {
+                    tvNo.setVisibility(View.VISIBLE);
+                    recyclerViewUpcoming.setVisibility(View.GONE);
+                }
             }
 
             @Override

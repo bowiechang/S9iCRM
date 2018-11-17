@@ -7,7 +7,7 @@
         <item
             android:id="@+id/namecard"
             android:icon="@drawable/icon_namecard"
-            android:title="Name Cards" />
+            android:title="Name Card" />
         <item
             android:id="@+id/appt"
             android:icon="@drawable/icon_appt"
@@ -24,6 +24,7 @@
             android:id="@+id/coworking"
             android:icon="@drawable/coworking"
             android:title="Co-Working" />
+
     </group>
 
     <!--<item android:title="Communicate">-->

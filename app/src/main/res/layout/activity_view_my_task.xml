@@ -56,11 +56,30 @@
         android:paddingLeft="15dp"
         android:paddingBottom="15dp">
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/rvIncomplete"
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="0.85"/>
+            android:layout_weight="0.85">
+
+            <TextView
+                android:id="@+id/tvNone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:fontFamily="@font/roboto_condensed_bold"
+                android:text="No Incomplete Task Found"
+                android:textColor="@color/black"
+                android:textSize="24sp"
+                android:visibility="gone"/>
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rvIncomplete"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+
+        </RelativeLayout>
+
+
 
         <LinearLayout
             android:layout_width="match_parent"

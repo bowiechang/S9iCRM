@@ -1,12 +1,16 @@
 package com.example.geenie.s9imobilecrm;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.view.Window;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
+import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -21,16 +25,19 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Map;
+import java.util.TreeMap;
 
 public class AddSharedCoWorkingCompany extends AppCompatActivity {
 
-    private Button btnAddSharedWorkingCompany, btnRetrieveSharedWorkingCompany;
+    private RelativeLayout btnAddSharedWorkingCompany;
 
     private Spinner spNameCard, spUser;
 
     private ArrayList<Company> companyArrayList= new ArrayList<>();
     private ArrayList<String> arraylistCompanyName = new ArrayList<>(), arrayListCompanyid = new ArrayList<>(), arrayListUsername = new ArrayList<>(), arrayListUserid = new ArrayList<>();
 
+    private TreeMap<String, String> treeMapCompany =new TreeMap<>();
 
     //firebase init
     private FirebaseAuth mAuth = FirebaseAuth.getInstance();
@@ -43,28 +50,39 @@ public class AddSharedCoWorkingCompany extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_shared_co_working_company);
 
-        spNameCard = findViewById(R.id.spinnerShareNameCard);
-        spUser = findViewById(R.id.spinnerShareWith);
+        //status bar
+        Window window = this.getWindow();
+        window.setStatusBarColor(ContextCompat.getColor(this, R.color.black));
+
+        //toolbar
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+
+        init();
 
         retrieveMyNameCardsAndUsers();
 
+    }
+
+    public void init(){
+
+        spNameCard = findViewById(R.id.spinnerShareNameCard);
+        spUser = findViewById(R.id.spinnerShareWith);
         btnAddSharedWorkingCompany = findViewById(R.id.btnAddSharedWorkingCompany);
-        btnRetrieveSharedWorkingCompany = findViewById(R.id.btnRetrieveSharedWorkingCompany);
-
-        btnRetrieveSharedWorkingCompany.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                retrieveTest();
-            }
-        });
-
 
         btnAddSharedWorkingCompany.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
                 int selectedCompany = spNameCard.getSelectedItemPosition();
-                final String companyid = arrayListCompanyid.get(selectedCompany);
+
+                String string1 = treeMapCompany.entrySet().toArray()[selectedCompany].toString();
+                String [] spliter = string1.split("=");
+                System.out.println("sharedworkingcoy:: details: " + spliter[1]);
+
+                final String companyid = spliter[1];
 
                 int selectedUser = spUser.getSelectedItemPosition();
                 final String userid = arrayListUserid.get(selectedUser);
@@ -76,6 +94,9 @@ public class AddSharedCoWorkingCompany extends AppCompatActivity {
                     @Override
                     public void onSuccess(Void aVoid) {
                         Toast.makeText(getApplicationContext(), "Shared!", Toast.LENGTH_SHORT).show();
+                        Intent i = new Intent(AddSharedCoWorkingCompany.this, ViewMyCoWorkingSharedToActivity.class);
+                        AddSharedCoWorkingCompany.this.startActivity(i);
+
                     }
                 });
 
@@ -91,9 +112,11 @@ public class AddSharedCoWorkingCompany extends AppCompatActivity {
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
                 Company company = dataSnapshot.getValue(Company.class);
                 if(company.getCreateBy().equals(uid)){
-                    companyArrayList.add(company);
-                    arrayListCompanyid.add(dataSnapshot.getKey());
-                    arraylistCompanyName.add(company.getName());
+//
+//                    arrayListCompanyid.add(dataSnapshot.getKey());
+//                    arraylistCompanyName.add(company.getName());
+
+                    treeMapCompany.put(company.getName(), dataSnapshot.getKey());
                 }
             }
 
@@ -121,9 +144,26 @@ public class AddSharedCoWorkingCompany extends AppCompatActivity {
         databaseReference.child("Company").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                ArrayList<String> arraylistCompanyName2 = new ArrayList<>();
+
+//                Set<String> keys = treeMapCompany.keySet();
+//                for(String key: keys){
+//                    arraylistCompanyName2.add(treeMapCompany.get(key));
+//                }
+
+//                for (int i = 0; i < treeMapCompany.size(); i++) {
+//                    arraylistCompanyName2.add(treeMapCompany.get(i));
+//                }
+
+                for (Map.Entry<String, String> entry : treeMapCompany.entrySet()) {
+//                    System.out.println("Key: " + entry.getKey() + ". Value: " + entry.getValue());
+                    arraylistCompanyName2.add(entry.getKey());
+                }
+
                 ArrayAdapter<String> adapter = new ArrayAdapter<String>(AddSharedCoWorkingCompany.this,
-                        android.R.layout.simple_spinner_item, arraylistCompanyName);
-                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                        android.R.layout.simple_spinner_item, arraylistCompanyName2);
+                adapter.setDropDownViewResource(R.layout.custom_spinner_item);
                 spNameCard.setAdapter(adapter);
 
             }

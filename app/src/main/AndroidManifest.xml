@@ -27,11 +27,7 @@
 
         <activity android:name=".MainTesterActivity" />
         <activity android:name=".SignUpLoginActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name=".ProfileActivity" />
         <activity android:name=".AddNameCardActivity" />
@@ -55,7 +51,13 @@
         <activity
             android:name=".MainActivity"
             android:label="@string/title_activity_main"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar">
+        <intent-filter>
+            <action android:name="android.intent.action.MAIN" />
+
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent-filter>
+        </activity>
         <activity android:name=".DashboardApptActivity" />
         <activity android:name=".DashboardFollowupActivity" />
         <activity android:name=".DashboardTaskActivity" />

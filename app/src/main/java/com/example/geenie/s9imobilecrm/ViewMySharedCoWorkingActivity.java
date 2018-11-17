@@ -12,6 +12,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Window;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -20,6 +21,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
@@ -27,7 +29,7 @@ public class ViewMySharedCoWorkingActivity extends AppCompatActivity implements 
 
     private RecyclerView recyclerViewSharedWithMe;
     private RelativeLayout relativeLayoutshareCoworking, relativeLayoutViewIShared;
-
+    private TextView tvNo;
     private ArrayList<SharedCoWorkingCompany> listSharedWithMe;
 
     //firebase init
@@ -65,6 +67,8 @@ public class ViewMySharedCoWorkingActivity extends AppCompatActivity implements 
         recyclerViewSharedWithMe.setLayoutManager(new LinearLayoutManager(this));
         recyclerViewSharedWithMe.setHasFixedSize(true);
 
+        tvNo = findViewById(R.id.tvNone);
+
         listSharedWithMe = new ArrayList<>();
         read();
     }
@@ -95,6 +99,21 @@ public class ViewMySharedCoWorkingActivity extends AppCompatActivity implements 
             @Override
             public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
 
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if(listSharedWithMe.size() == 0){
+                    tvNo.setVisibility(View.VISIBLE);
+                    recyclerViewSharedWithMe.setVisibility(View.GONE);
+                }
             }
 
             @Override
