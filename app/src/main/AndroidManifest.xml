@@ -11,6 +11,11 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
+    <!-- To auto-complete the email text field in the login form with the user's emails -->
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="android.permission.READ_PROFILE" />
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -26,9 +31,7 @@
             android:resource="@array/preloaded_fonts" />
 
         <activity android:name=".MainTesterActivity" />
-        <activity android:name=".SignUpLoginActivity">
-
-        </activity>
+        <activity android:name=".SignUpLoginActivity" />
         <activity android:name=".ProfileActivity" />
         <activity android:name=".AddNameCardActivity" />
         <activity android:name=".ViewMyNameCardActivity" />
@@ -52,28 +55,26 @@
             android:name=".MainActivity"
             android:label="@string/title_activity_main"
             android:theme="@style/AppTheme.NoActionBar">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name=".DashboardApptActivity" />
         <activity android:name=".DashboardFollowupActivity" />
         <activity android:name=".DashboardTaskActivity" />
         <activity android:name=".DashboardCompanyActivity" />
         <activity android:name=".DashboardCopierActivity" />
-        <activity android:name=".importTester">
-
-
-        </activity>
+        <activity android:name=".importTester" />
         <activity android:name=".ViewMyPastAppointmentActivity" />
-        <activity android:name=".StarterActivity">
-
-        </activity>
+        <activity android:name=".StarterActivity" />
         <activity android:name=".ViewMyPastFollowUpActivity" />
         <activity android:name=".ViewMyCompletedTaskActivity" />
-        <activity android:name=".ViewMyCoWorkingSharedToActivity"></activity>
+        <activity android:name=".ViewMyCoWorkingSharedToActivity" />
+        <activity android:name=".LoginActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>
