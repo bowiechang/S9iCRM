@@ -176,11 +176,13 @@ public class MainActivity extends AppCompatActivity
             i = new Intent(MainActivity.this, ViewMyTaskActivity.class);
         } else if(id == R.id.coworking) {
             i = new Intent(MainActivity.this, ViewMySharedCoWorkingActivity.class);
+        } else if(id == R.id.admin) {
+            i = new Intent(MainActivity.this, AdminLoginActivity.class);
         }
 
         MainActivity.this.startActivity(i);
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }

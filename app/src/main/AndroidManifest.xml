@@ -54,9 +54,7 @@
         <activity
             android:name=".MainActivity"
             android:label="@string/title_activity_main"
-            android:theme="@style/AppTheme.NoActionBar">
-
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".DashboardApptActivity" />
         <activity android:name=".DashboardFollowupActivity" />
         <activity android:name=".DashboardTaskActivity" />
@@ -75,6 +73,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".AdminLoginActivity" />
+        <activity android:name=".AdminMainActivity" />
+        <activity android:name=".AdminViewAllRecordActivity" />
+        <activity android:name=".AdminViewAllNameCardActivity" />
+        <activity android:name=".AdminViewAllAppointment"></activity>
     </application>
 
 </manifest>

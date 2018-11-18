@@ -5,25 +5,29 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".LoginActivity">
+    tools:context=".LoginActivity"
+    android:padding="20dp">
 
     <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="200dp">
 
         <ImageView
             android:id="@+id/ivEmail"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
             android:src="@drawable/icon_namecard"/>
 
         <EditText
             android:id="@+id/emailLogin"
-            android:layout_width="180dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Enter email "
-            android:layout_marginLeft="10dp"
+            android:layout_marginLeft="30dp"
             android:textSize="16sp"
+            android:layout_centerVertical="true"
             android:textColor="@color/black"
             android:inputType="textEmailAddress"
             android:fontFamily="@font/roboto_condensed_bold"
@@ -34,24 +38,26 @@
     </RelativeLayout>
 
     <RelativeLayout
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
         android:layout_marginTop="10dp">
 
         <ImageView
             android:id="@+id/ivPassword"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
             android:src="@drawable/icon_password"/>
 
         <EditText
             android:id="@+id/passwordLogin"
-            android:layout_width="180dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Enter password "
-            android:layout_marginLeft="10dp"
+            android:layout_marginLeft="30dp"
             android:textSize="16sp"
             android:textColor="@color/black"
+            android:layout_centerVertical="true"
             android:inputType="textEmailAddress"
             android:fontFamily="@font/roboto_condensed_bold"
             android:background="@drawable/rectangle_light"
@@ -65,8 +71,7 @@
         android:layout_width="match_parent"
         android:layout_height="65dp"
         android:padding="5dp"
-        android:layout_alignParentBottom="true"
-        android:layout_margin="20dp"
+        android:layout_marginTop="40dp"
         android:background="@drawable/rectangle">
 
         <TextView

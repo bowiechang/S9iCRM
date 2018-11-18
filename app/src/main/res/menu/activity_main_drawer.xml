@@ -24,6 +24,10 @@
             android:id="@+id/coworking"
             android:icon="@drawable/coworking"
             android:title="Co-Working" />
+        <item
+            android:id="@+id/admin"
+            android:icon="@drawable/icon_admin"
+            android:title="Admin Only" />
 
     </group>
 

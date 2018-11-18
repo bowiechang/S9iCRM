@@ -29,6 +29,7 @@ public class ViewMyPastAppointmentActivity extends AppCompatActivity {
 
     private RecyclerView recyclerViewPast;
     private ArrayList<Appointment> listPast;
+    private String powers = "normal";
 
     //firebase init
     private FirebaseAuth mAuth = FirebaseAuth.getInstance();
@@ -40,6 +41,10 @@ public class ViewMyPastAppointmentActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_past_appointment);
+
+        if(getIntent().getExtras()!=null) {
+            powers = getIntent().getExtras().getString("powers");
+        }
 
         //status bar
         Window window = this.getWindow();
@@ -65,64 +70,129 @@ public class ViewMyPastAppointmentActivity extends AppCompatActivity {
 
     public void read(){
 
-        databaseReference.orderByChild("createby").equalTo(uid).addChildEventListener(new ChildEventListener() {
-            @Override
-            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-                Appointment appointment = dataSnapshot.getValue(Appointment.class);
-                if(appointment!=null){
+        if(powers.equalsIgnoreCase("normal")) {
+            databaseReference.orderByChild("createby").equalTo(uid).addChildEventListener(new ChildEventListener() {
+                @Override
+                public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+                    Appointment appointment = dataSnapshot.getValue(Appointment.class);
+                    if (appointment != null) {
 
-                    Calendar c = Calendar.getInstance();
-                    SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
-                    String todayDate = df.format(c.getTime());
+                        Calendar c = Calendar.getInstance();
+                        SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+                        String todayDate = df.format(c.getTime());
 
-                    String receivedDate = appointment.getDate();
-                    if (receivedDate.isEmpty()) {
-                        Log.d("receivedDate", "isempty");
-                    } else {
-                        Log.d("receivedDate", receivedDate);
-                    }
+                        String receivedDate = appointment.getDate();
+                        if (receivedDate.isEmpty()) {
+                            Log.d("receivedDate", "isempty");
+                        } else {
+                            Log.d("receivedDate", receivedDate);
+                        }
 
-                    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-                    Date dateAppointment = null;
-                    Date dateToday = null;
+                        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+                        Date dateAppointment = null;
+                        Date dateToday = null;
 
-                    try {
-                        dateToday = sdf.parse(todayDate);
-                        dateAppointment = sdf.parse(receivedDate);
-                    } catch (ParseException e) {
-                        e.printStackTrace();
-                    }
-                    if (dateAppointment.before(dateToday)) {
-                        listPast.add(appointment);
-                        getMyAppointmentPastList(listPast);
+                        try {
+                            dateToday = sdf.parse(todayDate);
+                            dateAppointment = sdf.parse(receivedDate);
+                        } catch (ParseException e) {
+                            e.printStackTrace();
+                        }
+                        if (dateAppointment.before(dateToday)) {
+                            listPast.add(appointment);
+                            getMyAppointmentPastList(listPast);
+                        }
                     }
                 }
-            }
 
-            @Override
-            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+                @Override
+                public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
 
-            }
+                }
 
-            @Override
-            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
+                @Override
+                public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
 
-            }
+                }
 
-            @Override
-            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+                @Override
+                public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
 
-            }
+                }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
 
-            }
-        });
+                }
+            });
+        }
+        else if(powers.equalsIgnoreCase("admin")){
+            databaseReference.addChildEventListener(new ChildEventListener() {
+                @Override
+                public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+                    Appointment appointment = dataSnapshot.getValue(Appointment.class);
+                    if (appointment != null) {
+
+                        Calendar c = Calendar.getInstance();
+                        SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+                        String todayDate = df.format(c.getTime());
+
+                        String receivedDate = appointment.getDate();
+                        if (receivedDate.isEmpty()) {
+                            Log.d("receivedDate", "isempty");
+                        } else {
+                            Log.d("receivedDate", receivedDate);
+                        }
+
+                        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+                        Date dateAppointment = null;
+                        Date dateToday = null;
+
+                        try {
+                            dateToday = sdf.parse(todayDate);
+                            dateAppointment = sdf.parse(receivedDate);
+                        } catch (ParseException e) {
+                            e.printStackTrace();
+                        }
+                        if (dateAppointment.before(dateToday)) {
+                            listPast.add(appointment);
+                            getMyAppointmentPastList(listPast);
+                        }
+                    }
+                }
+
+                @Override
+                public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+                }
+
+                @Override
+                public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
+
+                }
+
+                @Override
+                public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                }
+            });
+
+        }
     }
     private void getMyAppointmentPastList(ArrayList list){
-        ViewMyAppointmentAdapter viewMyAppointmentAdapter = new ViewMyAppointmentAdapter(ViewMyPastAppointmentActivity.this, list);
-        recyclerViewPast.setAdapter(viewMyAppointmentAdapter);
+        if(powers.equalsIgnoreCase("normal")) {
+            ViewMyAppointmentAdapter viewMyAppointmentAdapter = new ViewMyAppointmentAdapter(ViewMyPastAppointmentActivity.this, list);
+            recyclerViewPast.setAdapter(viewMyAppointmentAdapter);
+        }
+        else if(powers.equalsIgnoreCase("admin")){
+            AdminViewMyPastAppointmentAdapter adminViewMyPastAppointmentAdapter = new AdminViewMyPastAppointmentAdapter(ViewMyPastAppointmentActivity.this, list);
+            recyclerViewPast.setAdapter(adminViewMyPastAppointmentAdapter);
+        }
     }
 
     @Override

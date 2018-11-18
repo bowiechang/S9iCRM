@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:layout_marginTop="15dp"
+    android:background="@drawable/rectangle"
+    android:paddingTop="20dp"
+    android:paddingLeft="20dp"
+    android:paddingRight="20dp"
+    android:paddingBottom="10dp"
+    tools:ignore="ExtraText">
+
+    //name
+    <TextView
+        android:id="@+id/tvApptCompanyName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="23sp"
+        android:textColor="@color/black"
+        android:textAllCaps="true"
+        android:fontFamily="@font/roboto_slab_bold"/>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="8dp">
+
+
+        <ImageView
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:src="@drawable/icon_upcomingappt_datetime"
+            android:layout_gravity="center_vertical"/>
+
+        //Date Time
+        <TextView
+            android:id="@+id/tvApptDateTime"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="3dp"
+            android:textSize="15sp"
+            android:textColor="@color/black"
+            android:fontFamily="@font/roboto_condensed_bold"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="8dp">
+
+
+        <ImageView
+            android:layout_width="22dp"
+            android:layout_height="22dp"
+            android:src="@drawable/icon_upcomingappt_location"
+            android:layout_gravity="center_vertical"/>
+
+        //location address
+        <TextView
+            android:id="@+id/tvApptLocationAddress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="6dp"
+            android:textSize="15sp"
+            android:layout_marginTop="3dp"
+            android:textColor="@color/black"
+            android:fontFamily="@font/roboto_condensed_bold"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="8dp">
+
+
+        <ImageView
+            android:layout_width="19dp"
+            android:layout_height="19dp"
+            android:src="@drawable/icon_namecard"
+            android:layout_gravity="center_vertical"/>
+
+        //with which contact
+        <TextView
+            android:id="@+id/tvApptContact"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="9dp"
+            android:textSize="15sp"
+            android:layout_marginTop="3dp"
+            android:textColor="@color/black"
+            android:fontFamily="@font/roboto_condensed_bold"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="10dp">
+
+
+        <ImageView
+            android:layout_width="17dp"
+            android:layout_height="17dp"
+            android:src="@drawable/comments"
+            android:layout_gravity="center_vertical"/>
+
+        //comment
+        <TextView
+            android:id="@+id/tvApptComment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:textSize="15sp"
+            android:layout_marginTop="3dp"
+            android:textColor="@color/black"
+            android:fontFamily="@font/roboto_condensed_bold"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="3dp">
+
+        //created by
+        <TextView
+            android:id="@+id/tvCreatedBy"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="15sp"
+            android:layout_marginLeft="4dp"
+            android:layout_marginTop="3dp"
+            android:textColor="@color/black"
+            android:fontFamily="@font/roboto_condensed_bold"/>
+
+    </LinearLayout>
+
+
+
+</LinearLayout>

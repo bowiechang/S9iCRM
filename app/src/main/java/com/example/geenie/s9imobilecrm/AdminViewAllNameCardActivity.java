@@ -29,15 +29,15 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 
-public class ViewMyNameCardActivity extends AppCompatActivity implements View.OnClickListener {
+public class AdminViewAllNameCardActivity extends AppCompatActivity {
 
     private Company company;
     private RecyclerView recyclerView;
-    private TextView tvAddNameCard, tvNo;
+    private TextView tvNo;
     private SearchView sv;
     private ArrayList<Company> list;
     private ArrayList<Company> listUntounched;
-//    private ArrayList<Company> listClone;
+    //    private ArrayList<Company> listClone;
     ArrayList <Company> arraylistcurrentfilter;
 
     private ViewMyNameCardAdapter viewMyNameCardsAdapter;
@@ -50,11 +50,10 @@ public class ViewMyNameCardActivity extends AppCompatActivity implements View.On
     private String uid = user.getUid();
     private DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("Company");
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_view_my_name_card);
+        setContentView(R.layout.activity_admin_view_all_name_card);
 
         //status bar
         Window window = this.getWindow();
@@ -105,9 +104,6 @@ public class ViewMyNameCardActivity extends AppCompatActivity implements View.On
         });
 
         tvNo = findViewById(R.id.tvNone);
-
-        tvAddNameCard = findViewById(R.id.addNameCard);
-        tvAddNameCard.setOnClickListener(this);
 
         recyclerView = findViewById(R.id.rvUpcoming);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -275,22 +271,18 @@ public class ViewMyNameCardActivity extends AppCompatActivity implements View.On
     }
 
     public void read(){
-        System.out.println("viewmynamecard:: reading entered");
 
         list.clear();
         databaseReference.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
                 company = dataSnapshot.getValue(Company.class);
-                System.out.println("viewmynamecard:: created by id " + company.getCreateBy());
-                System.out.println("viewmynamecard:: uid " + uid);
 
                 if(company!=null){
-                    if(company.getCreateBy().equals(uid)){
-                        list.add(company);
-                        getMyNameCardList(list);
-                        System.out.println("viewmynamecard: company name:: " + company.getName());
-                    }
+                    list.add(company);
+                    getMyNameCardList(list);
+                    System.out.println("viewmynamecard: company name:: " + company.getName());
+
                 }
             }
 
@@ -334,12 +326,9 @@ public class ViewMyNameCardActivity extends AppCompatActivity implements View.On
 
         System.out.println("getmyshowslist list size: " + list.size());
 
-        viewMyNameCardsAdapter = new ViewMyNameCardAdapter(ViewMyNameCardActivity.this, list, list);
+        viewMyNameCardsAdapter = new ViewMyNameCardAdapter(AdminViewAllNameCardActivity.this, list, list);
         recyclerView.setAdapter(viewMyNameCardsAdapter);
 
-//        if(listClone.isEmpty()) {
-//            cloneList();
-//        }
     }
 
     public void filterWithClone(String filterkey){
@@ -404,7 +393,7 @@ public class ViewMyNameCardActivity extends AppCompatActivity implements View.On
             Collections.sort(list, new Comparator<Company>() {
                 @Override
                 public int compare(Company companyob1, Company companyob2) {
-                return Integer.valueOf(companyob1.getNumberOfTimesCalled()).compareTo(companyob2.getNumberOfTimesCalled()); // To compare integer values
+                    return Integer.valueOf(companyob1.getNumberOfTimesCalled()).compareTo(companyob2.getNumberOfTimesCalled()); // To compare integer values
                 }
             });
             getMyNameCardList(list);
@@ -413,7 +402,7 @@ public class ViewMyNameCardActivity extends AppCompatActivity implements View.On
             Collections.sort(list, new Comparator<Company>() {
                 @Override
                 public int compare(Company companyob1, Company companyob2) {
-                     return companyob2.getPriorityLevel().compareToIgnoreCase(companyob1.getPriorityLevel()); // To compare string values
+                    return companyob2.getPriorityLevel().compareToIgnoreCase(companyob1.getPriorityLevel()); // To compare string values
                 }
             });
             getMyNameCardList(list);
@@ -432,23 +421,8 @@ public class ViewMyNameCardActivity extends AppCompatActivity implements View.On
     @Override
     public boolean onSupportNavigateUp() {
         onBackPressed();
-        Intent i = new Intent(ViewMyNameCardActivity.this, MainActivity.class);
-        ViewMyNameCardActivity.this.startActivity(i);
+        Intent i = new Intent(AdminViewAllNameCardActivity.this, AdminViewAllRecordActivity.class);
+        AdminViewAllNameCardActivity.this.startActivity(i);
         return true;
-    }
-
-    public void cloneList() {
-//        if(!listClone.isEmpty()) {
-//            listClone.clear();
-//        }
-//        listClone = (ArrayList<Company>)list.clone();
-    }
-
-    @Override
-    public void onClick(View view) {
-        if(view.equals(tvAddNameCard)){
-            Intent i = new Intent(ViewMyNameCardActivity.this, AddNameCardActivity.class);
-            ViewMyNameCardActivity.this.startActivity(i);
-        }
     }
 }
