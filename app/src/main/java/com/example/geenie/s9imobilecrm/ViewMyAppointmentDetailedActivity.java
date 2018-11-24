@@ -45,15 +45,15 @@ import java.util.Date;
 
 public class ViewMyAppointmentDetailedActivity extends AppCompatActivity implements View.OnClickListener, View.OnFocusChangeListener {
 
-    private RelativeLayout containerRead, containerEdit;
+    private RelativeLayout containerRead, containerEdit, rlCreatedBy;
 
-    private TextView tvDate, tvTime, tvLocation, tvWith, tvComment, tvCompanyName, tvCompanyNameEdit;
+    private TextView tvDate, tvTime, tvLocation, tvWith, tvComment, tvCompanyName, tvCompanyNameEdit, tvCreatedBy;
     private EditText etDate, etTime, etLocationName, etLocationAddress, etComment;
     private Spinner spWith;
     private RelativeLayout btnApptEditSave, btnDeleteAppt;
     private TextView tvbtnTextEditSave, tvbtnTextDelete;
 
-    private String companyName, apptTime, apptDate;
+    private String companyName, apptTime, apptDate, createdByName;
     private Appointment appointment;
     private Contact contact;
 
@@ -97,6 +97,7 @@ public class ViewMyAppointmentDetailedActivity extends AppCompatActivity impleme
 
         containerRead = findViewById(R.id.containerRead);
         containerEdit = findViewById(R.id.containerEdit);
+        rlCreatedBy = findViewById(R.id.rlCreatedBy);
 
         arrayListContactkey = new ArrayList<>();
         arrayListContactName = new ArrayList<>();
@@ -104,7 +105,11 @@ public class ViewMyAppointmentDetailedActivity extends AppCompatActivity impleme
         companyName = getIntent().getExtras().getString("companyname");
         apptTime = getIntent().getExtras().getString("time");
         apptDate = getIntent().getExtras().getString("date");
+        createdByName = getIntent().getExtras().getString("createdByName");
 
+
+
+        tvCreatedBy = findViewById(R.id.tvCreatedBy);
         tvDate = findViewById(R.id.tvApptDate);
         tvTime = findViewById(R.id.tvApptTime);
         tvLocation = findViewById(R.id.tvApptLocation);
@@ -130,6 +135,14 @@ public class ViewMyAppointmentDetailedActivity extends AppCompatActivity impleme
         etLocationAddress = findViewById(R.id.etApptLocationAddress);
         etComment = findViewById(R.id.etApptComment);
         spWith = findViewById(R.id.spApptContact);
+
+        if(createdByName != null){
+            tvCreatedBy.setText(tvCreatedBy.getText().toString().concat(createdByName));
+        }
+        else{
+            tvCreatedBy.setVisibility(View.GONE);
+            rlCreatedBy.setVisibility(View.GONE);
+        }
 
         etLocationName.setOnFocusChangeListener(this);
         //get date
@@ -373,8 +386,15 @@ public class ViewMyAppointmentDetailedActivity extends AppCompatActivity impleme
                     public void onSuccess(Void aVoid) {
                         Toast.makeText(getApplicationContext(), "Save Successful!", Toast.LENGTH_SHORT).show();
 
-                        Intent i = new Intent(ViewMyAppointmentDetailedActivity.this, ViewMyAppointmentActivity.class);
-                        ViewMyAppointmentDetailedActivity.this.startActivity(i);
+
+                        if(createdByName != null){
+                            Intent i2 = new Intent(ViewMyAppointmentDetailedActivity.this, AdminViewAllAppointment.class);
+                            ViewMyAppointmentDetailedActivity.this.startActivity(i2);
+                        }
+                        else{
+                            Intent i = new Intent(ViewMyAppointmentDetailedActivity.this, ViewMyAppointmentActivity.class);
+                            ViewMyAppointmentDetailedActivity.this.startActivity(i);
+                        }
                     }
                 });
 
@@ -387,8 +407,14 @@ public class ViewMyAppointmentDetailedActivity extends AppCompatActivity impleme
                 public void onSuccess(Void aVoid) {
                     Toast.makeText(getApplicationContext(), "Delete Successful!", Toast.LENGTH_SHORT).show();
 
-                    Intent i = new Intent(ViewMyAppointmentDetailedActivity.this, ViewMyAppointmentActivity.class);
-                    ViewMyAppointmentDetailedActivity.this.startActivity(i);
+                    if(createdByName != null){
+                        Intent i2 = new Intent(ViewMyAppointmentDetailedActivity.this, AdminViewAllAppointment.class);
+                        ViewMyAppointmentDetailedActivity.this.startActivity(i2);
+                    }
+                    else{
+                        Intent i = new Intent(ViewMyAppointmentDetailedActivity.this, ViewMyAppointmentActivity.class);
+                        ViewMyAppointmentDetailedActivity.this.startActivity(i);
+                    }
                 }
             });
         }
@@ -521,8 +547,15 @@ public class ViewMyAppointmentDetailedActivity extends AppCompatActivity impleme
 
     @Override
     public boolean onSupportNavigateUp() {
-        Intent i = new Intent(ViewMyAppointmentDetailedActivity.this, ViewMyAppointmentActivity.class);
-        ViewMyAppointmentDetailedActivity.this.startActivity(i);
+        if(createdByName != null){
+            Intent i2 = new Intent(ViewMyAppointmentDetailedActivity.this, AdminViewAllAppointment.class);
+            ViewMyAppointmentDetailedActivity.this.startActivity(i2);
+        }
+        else{
+            Intent i = new Intent(ViewMyAppointmentDetailedActivity.this, ViewMyAppointmentActivity.class);
+            ViewMyAppointmentDetailedActivity.this.startActivity(i);
+        }
+
         return true;
     }
 }

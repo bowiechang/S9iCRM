@@ -102,6 +102,7 @@ public class AdminViewAllAppointmentAdapter extends RecyclerView.Adapter<AdminVi
 
                     if(key.equalsIgnoreCase(list.get(position).getCreateby())){
                         holder.tvCreatedBy.setText("Created By: " + user.getName());
+                        name = user.getName();
                     }
                 }
             }
@@ -132,6 +133,7 @@ public class AdminViewAllAppointmentAdapter extends RecyclerView.Adapter<AdminVi
                 extras.putString("companyname", list.get(position).getName());
                 extras.putString("time", list.get(position).getTime());
                 extras.putString("date", list.get(position).getDate());
+                extras.putString("createdByName", name);
                 intent.putExtras(extras);
                 context.startActivity(intent);
             }

@@ -51,7 +51,7 @@
         <RelativeLayout
             android:id="@+id/containerRead"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content">
 
             //details
             <LinearLayout
@@ -239,7 +239,7 @@
         <RelativeLayout
             android:id="@+id/containerEdit"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:visibility="gone">
 
             //details
@@ -455,6 +455,27 @@
                     android:padding="5dp"/>
 
             </RelativeLayout>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rlCreatedBy"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="5dp"
+            android:layout_below="@id/containerRead"
+            android:background="@drawable/rectangle">
+
+            <TextView
+                android:id="@+id/tvCreatedBy"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto_condensed_bold"
+                android:text="Created By: "
+                android:textColor="@color/black"
+                android:textSize="18sp" />
 
         </RelativeLayout>
 
