@@ -4,6 +4,8 @@ import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -20,6 +22,8 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -35,8 +39,9 @@ public class AddFollowUpActivity extends AppCompatActivity implements View.OnCli
     //firebase init
     private FirebaseAuth mAuth = FirebaseAuth.getInstance();
     private FirebaseUser user = mAuth.getCurrentUser();
-    private String uid = user.getUid();
-    private DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("FollowUp");
+    private String uid;
+    private DatabaseReference databaseReferenceFollowUp = FirebaseDatabase.getInstance().getReference().child("FollowUp");
+    private DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
     private ChildEventListener childEventListenerFollowUp;
 
     private Calendar calendar = Calendar.getInstance();
@@ -64,6 +69,8 @@ public class AddFollowUpActivity extends AppCompatActivity implements View.OnCli
 
         companyDbkey = getIntent().getExtras().getString("companydbkey");
         companyName = getIntent().getExtras().getString("companyName");
+
+        retrieveCompanyDetails();
 
         tvName = findViewById(R.id.tvFollowUpName);
         etDate = findViewById(R.id.etFollowUpDate);
@@ -94,6 +101,39 @@ public class AddFollowUpActivity extends AppCompatActivity implements View.OnCli
         });
     }
 
+    public void retrieveCompanyDetails(){
+
+        databaseReference.child("Company").addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+                Company c = dataSnapshot.getValue(Company.class);
+                if(dataSnapshot.getKey().equalsIgnoreCase(companyDbkey) && c.getName().equalsIgnoreCase(companyName)){
+                    uid = c.getCreateBy();
+                }
+            }
+
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+
     @Override
     public void onClick(View view) {
         if(view.equals(btnAddFollowUp)){
@@ -103,7 +143,7 @@ public class AddFollowUpActivity extends AppCompatActivity implements View.OnCli
             String followupstatus = "incomplete";
 
             FollowUp followUp = new FollowUp(date, type, followupstatus, companyDbkey, uid);
-            databaseReference.push().setValue(followUp).addOnSuccessListener(new OnSuccessListener<Void>() {
+            databaseReferenceFollowUp.push().setValue(followUp).addOnSuccessListener(new OnSuccessListener<Void>() {
                 @Override
                 public void onSuccess(Void aVoid) {
                     Intent i = new Intent(AddFollowUpActivity.this, ViewMyFollowUpActivity.class);

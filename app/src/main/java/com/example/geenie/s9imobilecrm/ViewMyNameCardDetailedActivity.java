@@ -67,6 +67,8 @@ public class ViewMyNameCardDetailedActivity extends AppCompatActivity implements
 
     private TextView tvCompanyDetailsEdit;
 
+    private TextView tvCreatedBy;
+
     private EditText etCompanyName, etCompanyAddress, etCompanyNumber,
             etCompanyComments, etCompanyPostalCode, etCompanyUnitNo;
 
@@ -115,7 +117,8 @@ public class ViewMyNameCardDetailedActivity extends AppCompatActivity implements
     //firebase init
     private FirebaseAuth mAuth = FirebaseAuth.getInstance();
     private FirebaseUser user = mAuth.getCurrentUser();
-    private String uid = user.getUid();
+//    private String uid = user.getUid();
+    private String uid;
     private DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
     private ChildEventListener childEventListenerContacts;
     private ChildEventListener childEventListenerCopier;
@@ -163,6 +166,8 @@ public class ViewMyNameCardDetailedActivity extends AppCompatActivity implements
         recyclerView.setHasFixedSize(true);
         btnCapturePhoto = findViewById(R.id.btnLaunchPhotoCaptureLib);
         btnCapturePhoto.setOnClickListener(this);
+
+        tvCreatedBy = findViewById(R.id.tvCreatedBy);
 
         tvCompanyName = findViewById(R.id.tvCompanyName);
         tvCompanyAddress = findViewById(R.id.tvCompanyAddress);
@@ -236,6 +241,8 @@ public class ViewMyNameCardDetailedActivity extends AppCompatActivity implements
                     if(receivedCompanyDbKey != null){
                         if(dataSnapshot.getKey().equals(receivedCompanyDbKey)){
                             inputCompanyDetails(company1);
+                            uid = company1.getCreateBy();
+                            getUserName(uid);
                             companyDbKey = dataSnapshot.getKey();
                             seekContactsFromCompany(companyDbKey);
                             seekCopierFromCompany(companyDbKey);
@@ -252,6 +259,8 @@ public class ViewMyNameCardDetailedActivity extends AppCompatActivity implements
                         if(company1.getName().equals(namekey) && company1.getPostalCode().equals(postalcodekey)) {
                             inputCompanyDetails(company1);
                             companyDbKey = dataSnapshot.getKey();
+                            uid = company1.getCreateBy();
+                            getUserName(uid);
                             seekContactsFromCompany(companyDbKey);
                             seekCopierFromCompany(companyDbKey);
                             checkIfExist();
@@ -1616,6 +1625,39 @@ public class ViewMyNameCardDetailedActivity extends AppCompatActivity implements
                 ,day,month,year);
         datePickerDialog.updateDate(year, month, day);
         datePickerDialog.show();
+    }
+
+    public void getUserName(final String uid){
+
+        databaseReference.child("User").addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+                if(dataSnapshot.getKey().equalsIgnoreCase(uid)){
+                    User user = dataSnapshot.getValue(User.class);
+                    tvCreatedBy.setText(tvCreatedBy.getText().toString().concat(user.getName()));
+                }
+            }
+
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
     }
 
     public String calculateExpiryDate(String dt, int months){

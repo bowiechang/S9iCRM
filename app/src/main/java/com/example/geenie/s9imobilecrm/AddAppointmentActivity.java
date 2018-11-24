@@ -62,7 +62,7 @@ public class AddAppointmentActivity extends AppCompatActivity implements View.On
     //firebase init
     private FirebaseAuth mAuth = FirebaseAuth.getInstance();
     private FirebaseUser user = mAuth.getCurrentUser();
-    private String uid = user.getUid();
+    private String uid;
     private DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
     private ChildEventListener childEventListenerContacts;
 
@@ -105,6 +105,7 @@ public class AddAppointmentActivity extends AppCompatActivity implements View.On
         btnAddApointment.setOnClickListener(this);
 
         retrieveContact(companyDbkey);
+        retrieveCompanyDetails();
 
         tvCompanyName.setText(companyName);
         etLocationAddress.setText(companyAddress);
@@ -157,6 +158,40 @@ public class AddAppointmentActivity extends AppCompatActivity implements View.On
         });
 
     }
+
+    public void retrieveCompanyDetails(){
+
+        databaseReference.child("Company").addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+                Company c = dataSnapshot.getValue(Company.class);
+                if(dataSnapshot.getKey().equalsIgnoreCase(companyDbkey) && c.getName().equalsIgnoreCase(companyName)){
+                    uid = c.getCreateBy();
+                }
+            }
+
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+
 
     public void retrieveContact(final String companyDbkey){
 

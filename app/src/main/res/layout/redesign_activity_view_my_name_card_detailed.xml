@@ -945,11 +945,6 @@
                 </RelativeLayout>
 
 
-
-
-
-
-
                 //contact portion
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -996,18 +991,12 @@
                 </RelativeLayout>
 
 
-
-
-
-
-
                 //copiers portion
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/rectangle"
                     android:padding="20dp"
-                    android:layout_marginBottom="30dp"
                     android:layout_marginTop="15dp">
 
                     //header
@@ -1042,6 +1031,27 @@
                         android:orientation="vertical"
                         android:layout_marginTop="20dp"
                         android:layout_below="@id/relativeLayoutCopierHeader"/>
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/rlCreatedBy"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="20dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginBottom="30dp"
+                    android:layout_below="@id/containerRead"
+                    android:background="@drawable/rectangle">
+
+                    <TextView
+                        android:id="@+id/tvCreatedBy"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/roboto_condensed_bold"
+                        android:text="Created By: "
+                        android:textColor="@color/black"
+                        android:textSize="18sp" />
 
                 </RelativeLayout>
 
