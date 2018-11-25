@@ -11,7 +11,7 @@ import android.widget.RelativeLayout;
 
 public class AdminMainActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private RelativeLayout rlMainViewAllRecords, rlMainViewApptMade, rlMainViewNameCardAdded, rlUserManagement;
+    private RelativeLayout rlMainViewAllRecords, rlMainViewApptMade, rlMainViewNameCardAdded, rlUserManagement, rlTaskAssignment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +39,9 @@ public class AdminMainActivity extends AppCompatActivity implements View.OnClick
 
         rlUserManagement = findViewById(R.id.rlAdminUserManagement);
         rlUserManagement.setOnClickListener(this);
+
+        rlTaskAssignment = findViewById(R.id.rlAdminTaskAssignment);
+        rlTaskAssignment.setOnClickListener(this);
 
     }
 

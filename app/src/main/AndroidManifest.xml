@@ -90,7 +90,8 @@
         <activity android:name=".AdminViewAppointmentDetailedYear" />
         <activity android:name=".AdminViewNameCardAddedMonthSelector" />
         <activity android:name=".AdminViewNameCardDetailedMonth" />
-        <activity android:name=".AdminUserManagement"></activity>
+        <activity android:name=".AdminUserManagement" />
+        <activity android:name=".AdminTaskAssignment"></activity>
     </application>
 
 </manifest>

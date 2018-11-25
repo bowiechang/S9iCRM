@@ -1,5 +1,6 @@
 package com.example.geenie.s9imobilecrm;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
@@ -121,9 +122,13 @@ public class AdminUserManagement extends AppCompatActivity implements View.OnCli
             Toast.makeText(getApplicationContext(), "PASSWORD DO NOT MATCH!", Toast.LENGTH_SHORT).show();
 
         }
+    }
 
-
-
+    @Override
+    public boolean onSupportNavigateUp() {
+        Intent intent = new Intent(this, AdminMainActivity.class);
+        this.startActivity(intent);
+        return true;
     }
 
 }

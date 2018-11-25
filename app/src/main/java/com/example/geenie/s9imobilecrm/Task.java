@@ -3,7 +3,7 @@ package com.example.geenie.s9imobilecrm;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Task implements Serializable{
+public class  Task implements Serializable{
 
     private String title;
     private String desc;
