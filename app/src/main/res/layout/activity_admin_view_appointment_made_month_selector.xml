@@ -1,0 +1,284 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".AdminViewAppointmentMadeMonthSelector">
+
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/appbarlayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@null"
+        app:elevation="0dp"
+        android:elevation="0dp">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/offwhite"
+            android:theme="@style/ToolbarTheme">
+
+            <TextView
+                android:id="@+id/toolbar_title"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:text="Select Month"
+                android:textColor="@color/black"
+                android:fontFamily="@font/roboto_slab_bold"
+                android:textSize="25sp"
+                android:textStyle="bold" />
+
+        </android.support.v7.widget.Toolbar>
+
+    </android.support.design.widget.AppBarLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/appbarlayout">
+
+        <LinearLayout
+            android:id="@+id/linearLayout1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_below="@id/tvDashboard"
+            android:padding="20dp">
+
+            <RelativeLayout
+                android:id="@+id/rlJAN"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:background="@drawable/rectangle">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/roboto_condensed_bold"
+                    android:textSize="21sp"
+                    android:textAlignment="center"
+                    android:text="JANUARY"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rlFEB"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:background="@drawable/rectangle"
+                android:layout_marginTop="10dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/roboto_condensed_bold"
+                    android:textSize="21sp"
+                    android:textAlignment="center"
+                    android:text="FEBRUARY"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rlMAR"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:background="@drawable/rectangle"
+                android:layout_marginTop="10dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/roboto_condensed_bold"
+                    android:textSize="21sp"
+                    android:textAlignment="center"
+                    android:text="MARCH"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rlAPR"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:background="@drawable/rectangle"
+                android:layout_marginTop="10dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/roboto_condensed_bold"
+                    android:textSize="21sp"
+                    android:textAlignment="center"
+                    android:text="APRIL"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rlMAY"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:background="@drawable/rectangle"
+                android:layout_marginTop="10dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/roboto_condensed_bold"
+                    android:textSize="21sp"
+                    android:textAlignment="center"
+                    android:text="MAY"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rlJUN"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:background="@drawable/rectangle"
+                android:layout_marginTop="10dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/roboto_condensed_bold"
+                    android:textSize="21sp"
+                    android:textAlignment="center"
+                    android:text="JUNE"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rlJUL"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:background="@drawable/rectangle"
+                android:layout_marginTop="10dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/roboto_condensed_bold"
+                    android:textSize="21sp"
+                    android:textAlignment="center"
+                    android:text="JULY"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rlAUG"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:background="@drawable/rectangle"
+                android:layout_marginTop="10dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/roboto_condensed_bold"
+                    android:textSize="21sp"
+                    android:textAlignment="center"
+                    android:text="AUGUST"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rlSEP"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:background="@drawable/rectangle"
+                android:layout_marginTop="10dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/roboto_condensed_bold"
+                    android:textSize="21sp"
+                    android:textAlignment="center"
+                    android:text="SEPTEMBER"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rlOCT"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:background="@drawable/rectangle"
+                android:layout_marginTop="10dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/roboto_condensed_bold"
+                    android:textSize="21sp"
+                    android:textAlignment="center"
+                    android:text="OCTOBER"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rlNOV"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:background="@drawable/rectangle"
+                android:layout_marginTop="10dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/roboto_condensed_bold"
+                    android:textSize="21sp"
+                    android:textAlignment="center"
+                    android:text="NOVEMBER"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rlDEC"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:background="@drawable/rectangle"
+                android:layout_marginTop="10dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/roboto_condensed_bold"
+                    android:textSize="21sp"
+                    android:textAlignment="center"
+                    android:text="DECEMBER"/>
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+
+    </ScrollView>
+
+</RelativeLayout>
