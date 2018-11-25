@@ -87,7 +87,9 @@
             </intent-filter>
         </activity>
         <activity android:name=".AdminViewAppointmentMonthOrYear" />
-        <activity android:name=".AdminViewAppointmentDetailedYear"></activity>
+        <activity android:name=".AdminViewAppointmentDetailedYear" />
+        <activity android:name=".AdminViewNameCardAddedMonthSelector" />
+        <activity android:name=".AdminViewNameCardDetailedMonth"></activity>
     </application>
 
 </manifest>

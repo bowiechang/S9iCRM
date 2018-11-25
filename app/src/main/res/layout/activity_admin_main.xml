@@ -85,6 +85,7 @@
             </RelativeLayout>
 
             <RelativeLayout
+                android:id="@+id/rlAdminMainViewNameCardAdded"
                 android:layout_width="match_parent"
                 android:layout_height="80dp"
                 android:background="@drawable/rectangle"
@@ -98,7 +99,7 @@
                     android:fontFamily="@font/roboto_condensed_bold"
                     android:textSize="21sp"
                     android:textAlignment="center"
-                    android:text="VIEW NAMECARD ADDED MONTHLY"/>
+                    android:text="VIEW TOTAL NAMECARD ADDED"/>
 
             </RelativeLayout>
 
@@ -117,7 +118,7 @@
                     android:fontFamily="@font/roboto_condensed_bold"
                     android:textSize="21sp"
                     android:textAlignment="center"
-                    android:text="VIEW APPOINTMENT MADE MONTHLY"/>
+                    android:text="VIEW TOTAL APPOINTMENT MADE"/>
 
             </RelativeLayout>
 

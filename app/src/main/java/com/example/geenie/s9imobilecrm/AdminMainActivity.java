@@ -11,7 +11,7 @@ import android.widget.RelativeLayout;
 
 public class AdminMainActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private RelativeLayout rlMainViewAllRecords, rlMainViewApptMade;
+    private RelativeLayout rlMainViewAllRecords, rlMainViewApptMade, rlMainViewNameCardAdded;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +34,9 @@ public class AdminMainActivity extends AppCompatActivity implements View.OnClick
         rlMainViewApptMade = findViewById(R.id.rlAdminMainViewApptMade);
         rlMainViewApptMade.setOnClickListener(this);
 
+        rlMainViewNameCardAdded = findViewById(R.id.rlAdminMainViewNameCardAdded);
+        rlMainViewNameCardAdded.setOnClickListener(this);
+
     }
 
     @Override
@@ -51,6 +54,10 @@ public class AdminMainActivity extends AppCompatActivity implements View.OnClick
         }
         else if(view.equals(rlMainViewApptMade)){
             Intent i = new Intent(AdminMainActivity.this, AdminViewAppointmentMonthOrYear.class);
+            AdminMainActivity.this.startActivity(i);
+        }
+        else if(view.equals(rlMainViewNameCardAdded)){
+            Intent i = new Intent(AdminMainActivity.this, AdminViewNameCardAddedMonthSelector.class);
             AdminMainActivity.this.startActivity(i);
         }
     }
