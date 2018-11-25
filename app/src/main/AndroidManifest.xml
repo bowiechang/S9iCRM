@@ -89,7 +89,8 @@
         <activity android:name=".AdminViewAppointmentMonthOrYear" />
         <activity android:name=".AdminViewAppointmentDetailedYear" />
         <activity android:name=".AdminViewNameCardAddedMonthSelector" />
-        <activity android:name=".AdminViewNameCardDetailedMonth"></activity>
+        <activity android:name=".AdminViewNameCardDetailedMonth" />
+        <activity android:name=".AdminUserManagement"></activity>
     </application>
 
 </manifest>
