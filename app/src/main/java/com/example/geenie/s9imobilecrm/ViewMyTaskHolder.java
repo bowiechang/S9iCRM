@@ -10,7 +10,7 @@ import java.util.List;
 
 public class ViewMyTaskHolder extends RecyclerView.ViewHolder {
 
-    protected TextView tvTaskTitle, tvTaskDesc, tvTaskCompany, tvTaskDueDate;
+    protected TextView tvTaskTitle, tvTaskDesc, tvTaskCompany, tvTaskDueDate, tvTaskAssignedTo;
     private Context context;
 
     public ViewMyTaskHolder(View itemview, List<Task> list, Context context){
@@ -21,5 +21,6 @@ public class ViewMyTaskHolder extends RecyclerView.ViewHolder {
         tvTaskDesc = itemview.findViewById(R.id.tvTaskDesc);
         tvTaskCompany = itemview.findViewById(R.id.tvTaskCompany);
         tvTaskDueDate = itemview.findViewById(R.id.tvTaskDueDate);
+        tvTaskAssignedTo = itemview.findViewById(R.id.tvTaskAssignedTo);
     }
 }

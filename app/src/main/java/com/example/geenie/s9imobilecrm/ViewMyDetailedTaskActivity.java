@@ -37,7 +37,7 @@ public class ViewMyDetailedTaskActivity extends AppCompatActivity implements Vie
     private EditText etLog;
     private RelativeLayout btnLog;
     private RelativeLayout btnCompleteTask;
-    private String title, companyid, companyname;
+    private String title, companyid, companyname, key;
     private Task task;
     private String taskDbKey;
 
@@ -74,6 +74,7 @@ public class ViewMyDetailedTaskActivity extends AppCompatActivity implements Vie
         companyname = getIntent().getExtras().getString("companyname");
         companyid = getIntent().getExtras().getString("companyid");
         title = getIntent().getExtras().getString("title");
+        key = getIntent().getExtras().getString("key");
 
         tvTitle = findViewById(R.id.tvTaskTitle);
         tvDesc = findViewById(R.id.tvTaskDesc);
@@ -85,6 +86,10 @@ public class ViewMyDetailedTaskActivity extends AppCompatActivity implements Vie
         btnCompleteTask = findViewById(R.id.btnCompleteTask);
         containerLog = findViewById(R.id.containerLog);
         tvToolbarTitle = findViewById(R.id.toolbar_title);
+
+        if(key.equalsIgnoreCase("admin")){
+            btnCompleteTask.setVisibility(View.GONE);
+        }
 
         btnLog.setOnClickListener(this);
         btnCompleteTask.setOnClickListener(this);
@@ -231,8 +236,14 @@ public class ViewMyDetailedTaskActivity extends AppCompatActivity implements Vie
     @Override
     public boolean onSupportNavigateUp() {
         onBackPressed();
-        Intent i = new Intent(ViewMyDetailedTaskActivity.this, ViewMyTaskActivity.class);
-        ViewMyDetailedTaskActivity.this.startActivity(i);
+        if(key.equalsIgnoreCase("admin")){
+            Intent i = new Intent(ViewMyDetailedTaskActivity.this, AdminViewAllTaskAssignment.class);
+            ViewMyDetailedTaskActivity.this.startActivity(i);
+        }
+        else{
+            Intent i = new Intent(ViewMyDetailedTaskActivity.this, ViewMyTaskActivity.class);
+            ViewMyDetailedTaskActivity.this.startActivity(i);
+        }
         return true;
     }
 }

@@ -7,6 +7,7 @@ public class  Task implements Serializable{
 
     private String title;
     private String desc;
+    private String dateCreated;
     private String dueDate;
     private String status;
     private String dateCompleted;
@@ -18,10 +19,11 @@ public class  Task implements Serializable{
 
     Task(){}
 
-    Task(String title, String desc, String dueDate, String status, String dateCompleted, String companyid, String companyName, String assigned_uid, ArrayList<String> log){
+    Task(String title, String desc, String dateCreated, String dueDate, String status, String dateCompleted, String companyid, String companyName, String assigned_uid, ArrayList<String> log){
 
         this.title = title;
         this.desc = desc;
+        this.dateCreated = dateCreated;
         this.dueDate = dueDate;
         this.status = status;
         this.dateCompleted = dateCompleted;
@@ -45,6 +47,14 @@ public class  Task implements Serializable{
 
     public void setDesc(String desc) {
         this.desc = desc;
+    }
+
+    public String getDateCreated() {
+        return dateCreated;
+    }
+
+    public void setDateCreated(String dateCreated) {
+        this.dateCreated = dateCreated;
     }
 
     public String getDueDate() {

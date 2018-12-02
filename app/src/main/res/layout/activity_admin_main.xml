@@ -63,7 +63,7 @@
                     android:fontFamily="@font/roboto_condensed_bold"
                     android:textSize="21sp"
                     android:textAlignment="center"
-                    android:text="TASK ASSIGNNMENT"/>
+                    android:text="VIEW TASK ASSIGNNMENT"/>
 
             </RelativeLayout>
 

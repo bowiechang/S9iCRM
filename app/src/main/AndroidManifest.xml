@@ -31,7 +31,7 @@
             android:resource="@array/preloaded_fonts" />
 
         <activity android:name=".MainTesterActivity" />
-        <activity android:name=".SignUpLoginActivity" />
+        <activity android:name=".SignUpLoginActivity"></activity>
         <activity android:name=".ProfileActivity" />
         <activity android:name=".AddNameCardActivity" />
         <activity android:name=".ViewMyNameCardActivity" />
@@ -91,7 +91,9 @@
         <activity android:name=".AdminViewNameCardAddedMonthSelector" />
         <activity android:name=".AdminViewNameCardDetailedMonth" />
         <activity android:name=".AdminUserManagement" />
-        <activity android:name=".AdminTaskAssignment"></activity>
+        <activity android:name=".AdminViewAllTaskAssignment" />
+        <activity android:name=".AdminAssignTaskActivity" />
+        <activity android:name=".AdminViewCompletedTaskActivity"></activity>
     </application>
 
 </manifest>

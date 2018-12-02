@@ -25,32 +25,24 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-public class ViewMyTaskActivity extends AppCompatActivity implements View.OnClickListener {
+public class AdminViewAllTaskAssignment extends AppCompatActivity implements View.OnClickListener {
 
-    private RecyclerView recyclerViewIncomplete;
-    private ArrayList<Task> listIncomplete;
-    private RelativeLayout relativeLayoutViewCompeletdTask;
-
+    private RecyclerView recyclerViewTaskAssgin;
+    private RelativeLayout rlTaskAssign, rlViewCompeletedTask;
     private TextView tvNo;
+    private ArrayList<Task> taskArrayList ;
 
     //firebase init
     private FirebaseAuth mAuth = FirebaseAuth.getInstance();
     private FirebaseUser user = mAuth.getCurrentUser();
-    private String uid = user.getUid();
+    private String uid;
     private DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("Task");
+    private ChildEventListener childEventListenerContacts;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_view_my_task);
-
-//        ArrayList<String> log = new ArrayList<>();
-//        log.add("Howie: Show them Model 256M if they are still looking");
-//
-//        Task task = new Task("Meet up with client and proceed to close", "Client is interested in mdk20v", "20/12/2018",
-//                "incomplete", "", "-LPK5VRDdzAp2HHu-yRZ", "CUBIT PTE LTD", "PKjjIXFJsldUFOi13AfQb8eS0ih1", log);
-//
-//        databaseReference.push().setValue(task);
+        setContentView(R.layout.activity_admin_view_task_assignment);
 
         //status bar
         Window window = this.getWindow();
@@ -62,28 +54,39 @@ public class ViewMyTaskActivity extends AppCompatActivity implements View.OnClic
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
-        init();
+        //idea of placing TASK
+//         ArrayList<String> log = new ArrayList<>();
+//        log.add("Howie: Show them Model 256M if they are still looking");
+//
+//        Task task = new Task("Meet up with client and proceed to close", "Client is interested in mdk20v", "20/12/2018",
+//                "incomplete", "", "-LPK5VRDdzAp2HHu-yRZ", "CUBIT PTE LTD", "PKjjIXFJsldUFOi13AfQb8eS0ih1", log);
+//
+//        databaseReference.push().setValue(task);
 
+        init();
     }
 
     public void init(){
 
-        relativeLayoutViewCompeletdTask = findViewById(R.id.relativeLayoutViewCompeletdTask);
-        relativeLayoutViewCompeletdTask.setOnClickListener(this);
-        recyclerViewIncomplete = findViewById(R.id.rvIncomplete);
-        recyclerViewIncomplete.setLayoutManager(new LinearLayoutManager(this));
-        recyclerViewIncomplete.setHasFixedSize(true);
+        recyclerViewTaskAssgin = findViewById(R.id.rvTaskAssignment);
+        recyclerViewTaskAssgin.setLayoutManager(new LinearLayoutManager(this));
+        recyclerViewTaskAssgin.setHasFixedSize(true);
+        rlTaskAssign = findViewById(R.id.relativeLayoutAssignTask);
+        rlViewCompeletedTask = findViewById(R.id.relativeLayoutViewCompletedTask);
+
+        rlTaskAssign.setOnClickListener(this);
+        rlViewCompeletedTask.setOnClickListener(this);
 
         tvNo = findViewById(R.id.tvNone);
+        taskArrayList = new ArrayList<>();
 
-        listIncomplete = new ArrayList<>();
         read();
     }
 
 
     public void read(){
 
-        databaseReference.orderByChild("assigned_uid").equalTo(uid).addChildEventListener(new ChildEventListener() {
+        databaseReference.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
                 Task task = dataSnapshot.getValue(Task.class);
@@ -123,9 +126,7 @@ public class ViewMyTaskActivity extends AppCompatActivity implements View.OnClic
                     System.out.println("viewmytask: " + task.getStatus());
 
                     if(task.getStatus().equals("incomplete")){
-                        listIncomplete.add(task);
-                        getMyTaskIncompleteList(listIncomplete);
-
+                        taskArrayList.add(task);
                         System.out.println("viewmytask incomplete: in");
                     }
                 }
@@ -152,12 +153,17 @@ public class ViewMyTaskActivity extends AppCompatActivity implements View.OnClic
             }
         });
 
-        databaseReference.orderByChild("assigned_uid").equalTo(uid).addValueEventListener(new ValueEventListener() {
+        databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if(listIncomplete.size() == 0){
+                if(taskArrayList.size() == 0){
                     tvNo.setVisibility(View.VISIBLE);
-                    recyclerViewIncomplete.setVisibility(View.GONE);
+                    recyclerViewTaskAssgin.setVisibility(View.GONE);
+                }
+                else{
+                    getMyTaskIncompleteList(taskArrayList);
+                    System.out.println("viewmytask rv generated");
+
                 }
             }
 
@@ -169,23 +175,30 @@ public class ViewMyTaskActivity extends AppCompatActivity implements View.OnClic
     }
 
     private void getMyTaskIncompleteList(ArrayList list){
-        ViewMyTaskAdapter viewMyTaskAdapter = new ViewMyTaskAdapter(ViewMyTaskActivity.this, list, "normal");
-        recyclerViewIncomplete.setAdapter(viewMyTaskAdapter);
+        System.out.println("viewmytask getMyTaskIncompleteList");
+
+        ViewMyTaskAdapter viewMyTaskAdapter = new ViewMyTaskAdapter(AdminViewAllTaskAssignment.this, list, "admin");
+        recyclerViewTaskAssgin.setAdapter(viewMyTaskAdapter);
     }
 
     @Override
     public void onClick(View view) {
-        if(view.equals(relativeLayoutViewCompeletdTask)){
-            Intent i = new Intent(ViewMyTaskActivity.this, ViewMyCompletedTaskActivity.class);
-            ViewMyTaskActivity.this.startActivity(i);
+        if(view.equals(rlTaskAssign)){
+            Intent i = new Intent(AdminViewAllTaskAssignment.this, AdminAssignTaskActivity.class);
+            AdminViewAllTaskAssignment.this.startActivity(i);
+        }
+        else if(view.equals(rlViewCompeletedTask)){
+            Intent i = new Intent(AdminViewAllTaskAssignment.this, AdminViewCompletedTaskActivity.class);
+            AdminViewAllTaskAssignment.this.startActivity(i);
         }
     }
 
     @Override
     public boolean onSupportNavigateUp() {
-        onBackPressed();
-        Intent i = new Intent(ViewMyTaskActivity.this, MainActivity.class);
-        ViewMyTaskActivity.this.startActivity(i);
+        Intent i = new Intent(AdminViewAllTaskAssignment.this, AdminMainActivity.class);
+        AdminViewAllTaskAssignment.this.startActivity(i);
         return true;
     }
+
+
 }

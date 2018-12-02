@@ -69,7 +69,7 @@ public class DashboardTaskActivity extends AppCompatActivity {
     }
 
     private void getMyTaskIncompleteList(ArrayList list){
-        ViewMyTaskAdapter viewMyTaskAdapter = new ViewMyTaskAdapter(DashboardTaskActivity.this, list);
+        ViewMyTaskAdapter viewMyTaskAdapter = new ViewMyTaskAdapter(DashboardTaskActivity.this, list, "normal");
         recyclerViewTask.setAdapter(viewMyTaskAdapter);
     }
 

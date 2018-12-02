@@ -70,5 +70,9 @@ public class AdminMainActivity extends AppCompatActivity implements View.OnClick
             Intent i = new Intent(AdminMainActivity.this, AdminUserManagement.class);
             AdminMainActivity.this.startActivity(i);
         }
+        else if(view.equals(rlTaskAssignment)){
+            Intent i = new Intent(AdminMainActivity.this, AdminViewAllTaskAssignment.class);
+            AdminMainActivity.this.startActivity(i);
+        }
     }
 }

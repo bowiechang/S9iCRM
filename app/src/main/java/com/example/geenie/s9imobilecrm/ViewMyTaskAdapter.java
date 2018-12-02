@@ -4,10 +4,18 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -23,10 +31,14 @@ public class ViewMyTaskAdapter extends RecyclerView.Adapter<ViewMyTaskHolder> {
 
     protected List<Task> list;
     protected Context context;
+    protected String key;
 
-    public ViewMyTaskAdapter(Context context, List<Task> list){
+    private DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
+
+    public ViewMyTaskAdapter(Context context, List<Task> list, String key){
         this.context = context;
         this.list = list;
+        this.key = key;
     }
 
     @Override
@@ -41,6 +53,10 @@ public class ViewMyTaskAdapter extends RecyclerView.Adapter<ViewMyTaskHolder> {
 
     @Override
     public void onBindViewHolder(final ViewMyTaskHolder holder, final int position) {
+
+        if(key.equalsIgnoreCase("normal")){
+            holder.tvTaskAssignedTo.setVisibility(View.GONE);
+        }
 
         holder.tvTaskTitle.setText((list.get(position).getTitle()));
         holder.tvTaskDesc.setText((list.get(position).getDesc()));
@@ -76,8 +92,40 @@ public class ViewMyTaskAdapter extends RecyclerView.Adapter<ViewMyTaskHolder> {
                 extras.putString("title", list.get(position).getTitle());
                 extras.putString("companyid", list.get(position).getCompanyid());
                 extras.putString("companyname", list.get(position).getCompanyName());
+                extras.putString("key", key);
                 intent.putExtras(extras);
                 context.startActivity(intent);
+            }
+        });
+
+        databaseReference.child("User").addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+                if(dataSnapshot.getKey().equalsIgnoreCase(list.get(position).getAssigned_uid())){
+                    User u = dataSnapshot.getValue(User.class);
+                    holder.tvTaskAssignedTo.setText("Assigned to: " + u.getName());
+                }
+
+            }
+
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
             }
         });
     }

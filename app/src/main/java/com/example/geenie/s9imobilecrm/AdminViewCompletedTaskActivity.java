@@ -9,10 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.view.View;
 import android.view.Window;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -21,17 +18,13 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-public class ViewMyTaskActivity extends AppCompatActivity implements View.OnClickListener {
+public class AdminViewCompletedTaskActivity extends AppCompatActivity {
 
-    private RecyclerView recyclerViewIncomplete;
-    private ArrayList<Task> listIncomplete;
-    private RelativeLayout relativeLayoutViewCompeletdTask;
-
-    private TextView tvNo;
+    private RecyclerView recyclerViewCompleted;
+    private ArrayList<Task> listCompleted;
 
     //firebase init
     private FirebaseAuth mAuth = FirebaseAuth.getInstance();
@@ -42,15 +35,7 @@ public class ViewMyTaskActivity extends AppCompatActivity implements View.OnClic
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_view_my_task);
-
-//        ArrayList<String> log = new ArrayList<>();
-//        log.add("Howie: Show them Model 256M if they are still looking");
-//
-//        Task task = new Task("Meet up with client and proceed to close", "Client is interested in mdk20v", "20/12/2018",
-//                "incomplete", "", "-LPK5VRDdzAp2HHu-yRZ", "CUBIT PTE LTD", "PKjjIXFJsldUFOi13AfQb8eS0ih1", log);
-//
-//        databaseReference.push().setValue(task);
+        setContentView(R.layout.activity_admin_view_completed_task);
 
         //status bar
         Window window = this.getWindow();
@@ -63,27 +48,22 @@ public class ViewMyTaskActivity extends AppCompatActivity implements View.OnClic
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         init();
-
     }
 
     public void init(){
 
-        relativeLayoutViewCompeletdTask = findViewById(R.id.relativeLayoutViewCompeletdTask);
-        relativeLayoutViewCompeletdTask.setOnClickListener(this);
-        recyclerViewIncomplete = findViewById(R.id.rvIncomplete);
-        recyclerViewIncomplete.setLayoutManager(new LinearLayoutManager(this));
-        recyclerViewIncomplete.setHasFixedSize(true);
+        recyclerViewCompleted = findViewById(R.id.rvComplete);
+        recyclerViewCompleted.setLayoutManager(new LinearLayoutManager(this));
+        recyclerViewCompleted.setHasFixedSize(true);
 
-        tvNo = findViewById(R.id.tvNone);
-
-        listIncomplete = new ArrayList<>();
+        listCompleted = new ArrayList<>();
         read();
     }
 
 
     public void read(){
 
-        databaseReference.orderByChild("assigned_uid").equalTo(uid).addChildEventListener(new ChildEventListener() {
+        databaseReference.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
                 Task task = dataSnapshot.getValue(Task.class);
@@ -122,11 +102,11 @@ public class ViewMyTaskActivity extends AppCompatActivity implements View.OnClic
 
                     System.out.println("viewmytask: " + task.getStatus());
 
-                    if(task.getStatus().equals("incomplete")){
-                        listIncomplete.add(task);
-                        getMyTaskIncompleteList(listIncomplete);
+                    if(task.getStatus().equalsIgnoreCase("completed")){
+                        listCompleted.add(task);
+                        getMyTaskCompleteList(listCompleted);
 
-                        System.out.println("viewmytask incomplete: in");
+                        System.out.println("viewmytask complete: in");
                     }
                 }
             }
@@ -151,41 +131,18 @@ public class ViewMyTaskActivity extends AppCompatActivity implements View.OnClic
 
             }
         });
-
-        databaseReference.orderByChild("assigned_uid").equalTo(uid).addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if(listIncomplete.size() == 0){
-                    tvNo.setVisibility(View.VISIBLE);
-                    recyclerViewIncomplete.setVisibility(View.GONE);
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
     }
 
-    private void getMyTaskIncompleteList(ArrayList list){
-        ViewMyTaskAdapter viewMyTaskAdapter = new ViewMyTaskAdapter(ViewMyTaskActivity.this, list, "normal");
-        recyclerViewIncomplete.setAdapter(viewMyTaskAdapter);
-    }
-
-    @Override
-    public void onClick(View view) {
-        if(view.equals(relativeLayoutViewCompeletdTask)){
-            Intent i = new Intent(ViewMyTaskActivity.this, ViewMyCompletedTaskActivity.class);
-            ViewMyTaskActivity.this.startActivity(i);
-        }
+    private void getMyTaskCompleteList(ArrayList list){
+        ViewMyCompletedTaskAdapter viewMyTaskAdapter = new ViewMyCompletedTaskAdapter(AdminViewCompletedTaskActivity.this, list);
+        recyclerViewCompleted.setAdapter(viewMyTaskAdapter);
     }
 
     @Override
     public boolean onSupportNavigateUp() {
         onBackPressed();
-        Intent i = new Intent(ViewMyTaskActivity.this, MainActivity.class);
-        ViewMyTaskActivity.this.startActivity(i);
+        Intent i = new Intent(AdminViewCompletedTaskActivity.this, ViewMyTaskActivity.class);
+        AdminViewCompletedTaskActivity.this.startActivity(i);
         return true;
     }
 }
