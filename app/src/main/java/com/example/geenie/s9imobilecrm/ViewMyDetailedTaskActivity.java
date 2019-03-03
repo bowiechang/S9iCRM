@@ -37,12 +37,13 @@ public class ViewMyDetailedTaskActivity extends AppCompatActivity implements Vie
     private EditText etLog;
     private RelativeLayout btnLog;
     private RelativeLayout btnCompleteTask;
-    private String title, companyid, companyname, key;
+    private String title, companyid, companyname;
+    private String key = "";
     private Task task;
     private String taskDbKey;
 
 //    private HashMap<String, String> log;
-    private ArrayList<String> log;
+    private ArrayList<String> log = new ArrayList<>();
 
     //firebase init
     private FirebaseAuth mAuth = FirebaseAuth.getInstance();
@@ -87,8 +88,10 @@ public class ViewMyDetailedTaskActivity extends AppCompatActivity implements Vie
         containerLog = findViewById(R.id.containerLog);
         tvToolbarTitle = findViewById(R.id.toolbar_title);
 
-        if(key.equalsIgnoreCase("admin")){
-            btnCompleteTask.setVisibility(View.GONE);
+        if(key != null && key.equalsIgnoreCase("")) {
+            if (key.equalsIgnoreCase("admin")) {
+                btnCompleteTask.setVisibility(View.GONE);
+            }
         }
 
         btnLog.setOnClickListener(this);
@@ -97,8 +100,6 @@ public class ViewMyDetailedTaskActivity extends AppCompatActivity implements Vie
 
 
     }
-
-
 
     public void retrieveTaskDetails(){
 
@@ -236,7 +237,7 @@ public class ViewMyDetailedTaskActivity extends AppCompatActivity implements Vie
     @Override
     public boolean onSupportNavigateUp() {
         onBackPressed();
-        if(key.equalsIgnoreCase("admin")){
+        if(key != null && key.equalsIgnoreCase("admin")){
             Intent i = new Intent(ViewMyDetailedTaskActivity.this, AdminViewAllTaskAssignment.class);
             ViewMyDetailedTaskActivity.this.startActivity(i);
         }

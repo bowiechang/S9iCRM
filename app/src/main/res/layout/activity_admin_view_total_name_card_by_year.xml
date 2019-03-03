@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AdminViewTotalNameCardByYear">
+
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/appbarlayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@null"
+        app:elevation="0dp"
+        android:elevation="0dp">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/offwhite"
+            android:theme="@style/ToolbarTheme">
+
+            <TextView
+                android:id="@+id/toolbar_title"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:text="Select Year"
+                android:textColor="@color/black"
+                android:fontFamily="@font/roboto_slab_bold"
+                android:textSize="25sp"
+                android:textStyle="bold" />
+
+        </android.support.v7.widget.Toolbar>
+
+    </android.support.design.widget.AppBarLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/appbarlayout"
+        android:layout_marginTop="10dp">
+
+        <RelativeLayout
+            android:id="@+id/rlYear"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:focusableInTouchMode="true"
+            android:layout_marginLeft="18dp"
+            android:layout_marginRight="18dp">
+
+            <EditText
+                android:id="@+id/etYear"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="Enter year"
+                android:inputType="number"
+                android:paddingTop="20dp"
+                android:paddingBottom="20dp"
+                android:paddingLeft="50dp"
+                android:paddingRight="50dp"
+                android:textSize="25sp"
+                android:textAlignment="center"
+                android:layout_marginRight="5dp"
+                android:fontFamily="@font/roboto_condensed_bold"
+                android:background="@drawable/rectangle"
+                android:layout_toRightOf="@id/tvOfficeNumber"
+                android:layout_centerVertical="true"/>
+
+            <TextView
+                android:id="@+id/tvGo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="SEARCH"
+                android:layout_toRightOf="@id/etYear"
+                android:layout_marginLeft="5dp"
+                android:padding="20dp"
+                android:textColor="@color/black"
+                android:fontFamily="@font/roboto_slab_bold"
+                android:textSize="25sp"
+                android:layout_centerVertical="true"/>
+
+        </RelativeLayout>
+
+
+        <com.anychart.AnyChartView
+            android:id="@+id/piechart"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="10dp"
+            android:layout_below="@id/rlYear"/>
+
+        //rlLoading
+        <RelativeLayout
+            android:id="@+id/rlLoading"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/offwhite"
+            android:layout_below="@id/rlYear">
+
+            <TextView
+                android:id="@+id/tvLoading"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Loading"
+                android:textColor="@color/black"
+                android:background="@color/offwhite"
+                android:fontFamily="@font/roboto_slab_bold"
+                android:layout_centerHorizontal="true"
+                android:textSize="40sp"
+                android:layout_marginTop="150dp"/>
+
+        </RelativeLayout>
+
+        //rlNoApptFound
+        <RelativeLayout
+            android:id="@+id/rlNone"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/offwhite"
+            android:layout_below="@id/rlYear"
+            android:visibility="gone">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="No Name Card Added"
+                android:textColor="@color/black"
+                android:textAlignment="center"
+                android:background="@color/offwhite"
+                android:fontFamily="@font/roboto_slab_bold"
+                android:textSize="40sp"
+                android:layout_centerInParent="true"/>
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+</RelativeLayout>

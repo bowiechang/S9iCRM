@@ -31,7 +31,7 @@
             android:resource="@array/preloaded_fonts" />
 
         <activity android:name=".MainTesterActivity" />
-        <activity android:name=".SignUpLoginActivity"></activity>
+        <activity android:name=".SignUpLoginActivity" />
         <activity android:name=".ProfileActivity" />
         <activity android:name=".AddNameCardActivity" />
         <activity android:name=".ViewMyNameCardActivity" />
@@ -74,15 +74,12 @@
             </intent-filter>
         </activity>
         <activity android:name=".AdminLoginActivity" />
-        <activity android:name=".AdminMainActivity">
-
-        </activity>
+        <activity android:name=".AdminMainActivity" />
         <activity android:name=".AdminViewAllRecordActivity" />
         <activity android:name=".AdminViewAllNameCardActivity" />
         <activity android:name=".AdminViewAllAppointment" />
         <activity android:name=".AdminViewAppointmentDetailedMonth" />
-        <activity android:name=".AdminViewAppointmentMadeMonthSelector">
-        </activity>
+        <activity android:name=".AdminViewAppointmentMadeMonthSelector" />
         <activity android:name=".AdminViewAppointmentMonthOrYear" />
         <activity android:name=".AdminViewAppointmentDetailedYear" />
         <activity android:name=".AdminViewNameCardAddedMonthSelector" />
@@ -90,7 +87,9 @@
         <activity android:name=".AdminUserManagement" />
         <activity android:name=".AdminViewAllTaskAssignment" />
         <activity android:name=".AdminAssignTaskActivity" />
-        <activity android:name=".AdminViewCompletedTaskActivity"></activity>
+        <activity android:name=".AdminViewCompletedTaskActivity" />
+        <activity android:name=".AdminTotalNameCardMonthOrYear" />
+        <activity android:name=".AdminViewTotalNameCardByYear"></activity>
     </application>
 
 </manifest>

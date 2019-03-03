@@ -364,7 +364,9 @@ public class AdminViewAllNameCardActivity extends AppCompatActivity {
         arraylistcurrentfilter.clear();
 
         //filter for lacking
-        if(filterkey.equals("Copier") || filterkey.equals("Scanner") || filterkey.equals("Shredder")) {
+        if(filterkey.equals("Copier") || filterkey.equals("Printer") || filterkey.equals("Plotter") || filterkey.equals("CCTV")
+                || filterkey.equals("HRM") || filterkey.equals("CRM") || filterkey.equals("ERP") || filterkey.equals("DoorAcs")
+                || filterkey.equals("AcctSftwe") || filterkey.equals("Misc")) {
             for (int i = 0; i < list.size(); i++) {
                 Company company = list.get(i);
                 if (company.getCompanyLackOf().contains(filterkey)){

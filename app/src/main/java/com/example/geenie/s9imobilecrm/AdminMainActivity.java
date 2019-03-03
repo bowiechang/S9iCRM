@@ -63,7 +63,7 @@ public class AdminMainActivity extends AppCompatActivity implements View.OnClick
             AdminMainActivity.this.startActivity(i);
         }
         else if(view.equals(rlMainViewNameCardAdded)){
-            Intent i = new Intent(AdminMainActivity.this, AdminViewNameCardAddedMonthSelector.class);
+            Intent i = new Intent(AdminMainActivity.this, AdminTotalNameCardMonthOrYear.class);
             AdminMainActivity.this.startActivity(i);
         }
         else if(view.equals(rlUserManagement)){

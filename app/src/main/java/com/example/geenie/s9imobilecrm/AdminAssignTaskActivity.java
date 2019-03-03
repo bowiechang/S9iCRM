@@ -1,6 +1,7 @@
 package com.example.geenie.s9imobilecrm;
 
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -14,6 +15,7 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -405,6 +407,17 @@ public class AdminAssignTaskActivity extends AppCompatActivity implements View.O
     public void onClick(View view) {
         if(view.equals(rlSave)){
             saveTask();
+            Intent i = new Intent(AdminAssignTaskActivity.this, AdminViewAllTaskAssignment.class);
+            AdminAssignTaskActivity.this.startActivity(i);
+            Toast.makeText(getApplicationContext(), "Task Assigned!", Toast.LENGTH_SHORT).show();
+
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent i = new Intent(AdminAssignTaskActivity.this, AdminViewAllTaskAssignment.class);
+        AdminAssignTaskActivity.this.startActivity(i);
     }
 }

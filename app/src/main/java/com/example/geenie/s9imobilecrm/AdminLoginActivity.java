@@ -38,12 +38,12 @@ public class AdminLoginActivity extends AppCompatActivity implements View.OnClic
 
     public void init(){
 
-        sp = getSharedPreferences("login", MODE_PRIVATE);
-        if(sp.getBoolean("logged", true)){
-            //user is admin already
-            Intent i = new Intent(AdminLoginActivity.this, AdminMainActivity.class);
-            AdminLoginActivity.this.startActivity(i);
-        }
+//        sp = getSharedPreferences("login", MODE_PRIVATE);
+//        if(sp.getBoolean("logged", true)){
+//            //user is admin already
+//            Intent i = new Intent(AdminLoginActivity.this, AdminMainActivity.class);
+//            AdminLoginActivity.this.startActivity(i);
+//        }
 
         etPassword = findViewById(R.id.adminLogin);
         relativeLayoutAdminLogin = findViewById(R.id.btnAdminLogin);
@@ -54,10 +54,10 @@ public class AdminLoginActivity extends AppCompatActivity implements View.OnClic
     @Override
     public void onClick(View view) {
         if(view.equals(relativeLayoutAdminLogin)){
-            if(etPassword.getText().toString().trim().equalsIgnoreCase("superflyfox")){
+            if(etPassword.getText().toString().trim().equalsIgnoreCase("517550517")){
 
                 //add to sp
-                sp.edit().putBoolean("logged",true).apply();
+//                sp.edit().putBoolean("logged",true).apply();
 
                 //and then proceed to admin activity
                 Intent i = new Intent(AdminLoginActivity.this, AdminMainActivity.class);

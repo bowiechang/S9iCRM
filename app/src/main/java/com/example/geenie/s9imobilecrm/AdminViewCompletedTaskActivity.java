@@ -166,7 +166,7 @@ public class AdminViewCompletedTaskActivity extends AppCompatActivity {
     @Override
     public boolean onSupportNavigateUp() {
         onBackPressed();
-        Intent i = new Intent(AdminViewCompletedTaskActivity.this, ViewMyTaskActivity.class);
+        Intent i = new Intent(AdminViewCompletedTaskActivity.this, AdminViewAllTaskAssignment.class);
         AdminViewCompletedTaskActivity.this.startActivity(i);
         return true;
     }
