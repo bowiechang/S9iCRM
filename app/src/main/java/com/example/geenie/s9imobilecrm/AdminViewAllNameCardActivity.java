@@ -233,24 +233,52 @@ public class AdminViewAllNameCardActivity extends AppCompatActivity {
                         spinnerSort1.setVisibility(View.VISIBLE);
                         break;
                     case 2:
-                        filterWithClone("Scanner");
+                        filterWithClone("Printer");
                         spinnerSort1.setVisibility(View.VISIBLE);
                         break;
                     case 3:
-                        filterWithClone("Shredder");
+                        filterWithClone("Plotter");
                         spinnerSort1.setVisibility(View.VISIBLE);
                         break;
                     case 4:
+                        filterWithClone("CCTV");
+                        spinnerSort1.setVisibility(View.VISIBLE);
+                        break;
+                    case 5:
+                        filterWithClone("HRM");
+                        spinnerSort1.setVisibility(View.VISIBLE);
+                        break;
+                    case 6:
+                        filterWithClone("CRM");
+                        spinnerSort1.setVisibility(View.VISIBLE);
+                        break;
+                    case 7:
+                        filterWithClone("ERP");
+                        spinnerSort1.setVisibility(View.VISIBLE);
+                        break;
+                    case 8:
+                        filterWithClone("DoorAcs");
+                        spinnerSort1.setVisibility(View.VISIBLE);
+                        break;
+                    case 9:
+                        filterWithClone("AcctSftwe");
+                        spinnerSort1.setVisibility(View.VISIBLE);
+                        break;
+                    case 10:
+                        filterWithClone("Misc");
+                        spinnerSort1.setVisibility(View.VISIBLE);
+                        break;
+                    case 11:
                         filterWithClone("a.Urgent");
                         spinnerSort1.setVisibility(View.GONE);
                         spinnerSort2.setVisibility(View.VISIBLE);
                         break;
-                    case 5:
+                    case 12:
                         filterWithClone("b.Follow Up");
                         spinnerSort1.setVisibility(View.GONE);
                         spinnerSort2.setVisibility(View.VISIBLE);
                         break;
-                    case 6:
+                    case 13:
                         filterWithClone("c.Normal");
                         spinnerSort1.setVisibility(View.GONE);
                         spinnerSort2.setVisibility(View.VISIBLE);
