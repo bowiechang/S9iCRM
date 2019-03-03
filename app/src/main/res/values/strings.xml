@@ -30,9 +30,18 @@
     </string-array>
 
     <string-array name="copierBrand">
-        <item>Fuji Xerox</item>
-        <item>Samsung</item>
+        <item>Brother</item>
         <item>Cannon</item>
+        <item>Dell</item>
+        <item>Fuji Xerox</item>
+        <item>HP</item>
+        <item>Kyocera</item>
+        <item>Konica Minolta</item>
+        <item>Lexmark</item>
+        <item>Sharp</item>
+        <item>Samsung</item>
+        <item>Ricoh</item>
+        <item>Toshiba</item>
     </string-array>
 
     <string-array name="filter">

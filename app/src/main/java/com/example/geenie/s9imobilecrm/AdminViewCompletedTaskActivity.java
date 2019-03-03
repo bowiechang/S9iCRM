@@ -9,15 +9,16 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
 import android.view.Window;
+import android.widget.TextView;
 
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
@@ -26,10 +27,12 @@ public class AdminViewCompletedTaskActivity extends AppCompatActivity {
     private RecyclerView recyclerViewCompleted;
     private ArrayList<Task> listCompleted;
 
+    private TextView tvNo;
+
     //firebase init
-    private FirebaseAuth mAuth = FirebaseAuth.getInstance();
-    private FirebaseUser user = mAuth.getCurrentUser();
-    private String uid = user.getUid();
+//    private FirebaseAuth mAuth = FirebaseAuth.getInstance();
+//    private FirebaseUser user = mAuth.getCurrentUser();
+//    private String uid = user.getUid();
     private DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("Task");
 
     @Override
@@ -55,6 +58,8 @@ public class AdminViewCompletedTaskActivity extends AppCompatActivity {
         recyclerViewCompleted = findViewById(R.id.rvComplete);
         recyclerViewCompleted.setLayoutManager(new LinearLayoutManager(this));
         recyclerViewCompleted.setHasFixedSize(true);
+
+        tvNo = findViewById(R.id.tvNone);
 
         listCompleted = new ArrayList<>();
         read();
@@ -124,6 +129,26 @@ public class AdminViewCompletedTaskActivity extends AppCompatActivity {
             @Override
             public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
 
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if(listCompleted.size() == 0){
+                    tvNo.setVisibility(View.VISIBLE);
+                    recyclerViewCompleted.setVisibility(View.GONE);
+                }
+                else{
+                    getMyTaskCompleteList(listCompleted);
+                    System.out.println("viewmytask rv generated");
+
+                }
             }
 
             @Override

@@ -66,25 +66,22 @@
         <activity android:name=".ViewMyPastFollowUpActivity" />
         <activity android:name=".ViewMyCompletedTaskActivity" />
         <activity android:name=".ViewMyCoWorkingSharedToActivity" />
-        <activity android:name=".LoginActivity" />
-        <activity android:name=".AdminLoginActivity" />
-        <activity android:name=".AdminMainActivity">
+        <activity android:name=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".AdminLoginActivity" />
+        <activity android:name=".AdminMainActivity">
+
+        </activity>
         <activity android:name=".AdminViewAllRecordActivity" />
         <activity android:name=".AdminViewAllNameCardActivity" />
         <activity android:name=".AdminViewAllAppointment" />
         <activity android:name=".AdminViewAppointmentDetailedMonth" />
         <activity android:name=".AdminViewAppointmentMadeMonthSelector">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name=".AdminViewAppointmentMonthOrYear" />
         <activity android:name=".AdminViewAppointmentDetailedYear" />

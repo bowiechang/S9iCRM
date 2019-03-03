@@ -16,8 +16,6 @@ import android.widget.AdapterView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -45,9 +43,9 @@ public class AdminViewAllNameCardActivity extends AppCompatActivity {
     private Spinner spinnerSort1, spinnerSort2, spinnerFilter;
 
     //firebase init
-    private FirebaseAuth mAuth = FirebaseAuth.getInstance();
-    private FirebaseUser user = mAuth.getCurrentUser();
-    private String uid = user.getUid();
+//    private FirebaseAuth mAuth = FirebaseAuth.getInstance();
+//    private FirebaseUser user = mAuth.getCurrentUser();
+//    private String uid = user.getUid();
     private DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("Company");
 
     @Override

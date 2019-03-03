@@ -4,7 +4,6 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
-import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +11,7 @@ import android.view.ViewGroup;
 
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.storage.FileDownloadTask;
+import com.google.firebase.storage.FileDownloadTask.TaskSnapshot;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
@@ -56,28 +56,51 @@ public class PhotoAdapter extends RecyclerView.Adapter<PhotoHolder> {
 
         System.out.println("bitmap insert: onBINDviewholder" );
         System.out.println("bitmap insert: dbkey: " + dbkey);
+        final StorageReference pathrefIVZoom = storageReference.child(dbkey.concat("/pic" + position + ".jpg"));
+        System.out.println("bitmap insert: link: " + pathrefIVZoom.getDownloadUrl());
 
+        final File localFile;
+        try {
+            localFile = File.createTempFile("Images", "jpg");
+            System.out.println("bitmap insert: file exist " + localFile.exists());
 
-        final StorageReference pathrefIVZoom = storageReference.child(dbkey+"/pic" + position + ".jpg");
-        pathrefIVZoom.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-            @Override
-            public void onSuccess(Uri uri) {
-                try {
-                    final File localFile = File.createTempFile("Images", "jpg");
-                    pathrefIVZoom.getFile(localFile).addOnSuccessListener(new OnSuccessListener< FileDownloadTask.TaskSnapshot >() {
-                        @Override
-                        public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
-                            bitmap = BitmapFactory.decodeFile(localFile.getAbsolutePath());
-                            holder.imageViewZoom.setImageBitmap(getResizedBitmap(bitmap, 800, 1100));
-                            System.out.println("bitmap insert: true" );
-                        }
-                    });
-
-                } catch (IOException e) {
-                    e.printStackTrace();
+            pathrefIVZoom.getFile(localFile).addOnSuccessListener(new OnSuccessListener< TaskSnapshot >() {
+                @Override
+                public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
+                    bitmap = BitmapFactory.decodeFile(localFile.getAbsolutePath());
+                    holder.imageViewZoom.setImageBitmap(getResizedBitmap(bitmap, 800, 1100));
+                    System.out.println("bitmap insert: true" );
+                    System.out.println("bitmap insert: file abpath" );
                 }
-            }
-        });
+            });
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
+
+//        pathrefIVZoom.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+//            @Override
+//            public void onSuccess(Uri uri) {
+//
+//                System.out.println("bitmap insert in" );
+//
+//                try {
+//                    final File localFile = File.createTempFile("Images", "jpg");
+//                    pathrefIVZoom.getFile(localFile).addOnSuccessListener(new OnSuccessListener< FileDownloadTask.TaskSnapshot >() {
+//                        @Override
+//                        public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
+//                            bitmap = BitmapFactory.decodeFile(localFile.getAbsolutePath());
+//                            holder.imageViewZoom.setImageBitmap(getResizedBitmap(bitmap, 800, 1100));
+//                            System.out.println("bitmap insert: true" );
+//                        }
+//                    });
+//
+//                } catch (IOException e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//        });
 
 //        final StorageReference pathref = storageReference.child("-LKkPuTjiV5s7M_4zTkl"+"/pic" + position + ".jpg");
 //        pathref.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {

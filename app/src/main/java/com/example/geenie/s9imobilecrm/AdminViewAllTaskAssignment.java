@@ -14,8 +14,6 @@ import android.view.Window;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -33,9 +31,9 @@ public class AdminViewAllTaskAssignment extends AppCompatActivity implements Vie
     private ArrayList<Task> taskArrayList ;
 
     //firebase init
-    private FirebaseAuth mAuth = FirebaseAuth.getInstance();
-    private FirebaseUser user = mAuth.getCurrentUser();
-    private String uid;
+//    private FirebaseAuth mAuth = FirebaseAuth.getInstance();
+//    private FirebaseUser user = mAuth.getCurrentUser();
+//    private String uid;
     private DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("Task");
     private ChildEventListener childEventListenerContacts;
 

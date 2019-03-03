@@ -11,6 +11,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Window;
+import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -19,6 +20,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
@@ -27,6 +29,7 @@ public class ViewMyCoWorkingSharedToActivity extends AppCompatActivity implement
     private RecyclerView recyclerViewIshare;
 
     private ArrayList<SharedCoWorkingCompany> listIShare;
+    private TextView tvNo;
 
     //firebase init
     private FirebaseAuth mAuth = FirebaseAuth.getInstance();
@@ -58,6 +61,8 @@ public class ViewMyCoWorkingSharedToActivity extends AppCompatActivity implement
         recyclerViewIshare.setLayoutManager(new LinearLayoutManager(this));
         recyclerViewIshare.setHasFixedSize(true);
 
+        tvNo = findViewById(R.id.tvNone);
+
         listIShare = new ArrayList<>();
         read();
     }
@@ -88,6 +93,21 @@ public class ViewMyCoWorkingSharedToActivity extends AppCompatActivity implement
             @Override
             public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
 
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if(listIShare.size() == 0){
+                    tvNo.setVisibility(View.VISIBLE);
+                    recyclerViewIshare.setVisibility(View.GONE);
+                }
             }
 
             @Override

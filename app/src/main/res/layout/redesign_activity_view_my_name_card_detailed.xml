@@ -830,7 +830,7 @@
                                     android:textColor="@color/black"
                                     android:text="Lacking of "
                                     android:textSize="16sp"
-                                    android:layout_centerVertical="true" />
+                                    android:layout_marginTop="5dp" />
 
                                 <!--<ImageView-->
                                 <!--android:id="@+id/ivCompanyLack"-->
@@ -867,26 +867,109 @@
                                         android:text="Copier"/>
 
                                     <android.support.v7.widget.AppCompatCheckBox
-                                        android:id="@+id/cbScanner"
+                                        android:id="@+id/cbPrinter"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:layout_toRightOf="@id/cbCopier"
-                                        android:layout_marginLeft="5dp"
+                                        android:layout_marginLeft="70dp"
                                         android:fontFamily="@font/roboto_condensed_bold"
                                         android:textSize="12sp"
                                         android:buttonTint="@color/black"
-                                        android:text="Scanner"/>
+                                        android:text="Printer"/>
 
                                     <android.support.v7.widget.AppCompatCheckBox
-                                        android:id="@+id/cbShredder"
+                                        android:id="@+id/cbPlotter"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:layout_toRightOf="@id/cbScanner"
+                                        android:layout_marginLeft="145dp"
+                                        android:fontFamily="@font/roboto_condensed_bold"
+                                        android:textSize="12sp"
+                                        android:buttonTint="@color/black"
+                                        android:text="Plotter"/>
+
+
+
+
+                                    <android.support.v7.widget.AppCompatCheckBox
+                                        android:id="@+id/cbCCTV"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_below="@id/cbCopier"
                                         android:layout_marginLeft="5dp"
                                         android:fontFamily="@font/roboto_condensed_bold"
                                         android:textSize="12sp"
                                         android:buttonTint="@color/black"
-                                        android:text="Shredder"/>
+                                        android:text="CCTV"/>
+
+                                    <android.support.v7.widget.AppCompatCheckBox
+                                        android:id="@+id/cbHRM"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_below="@id/cbCopier"
+                                        android:layout_marginLeft="70dp"
+                                        android:fontFamily="@font/roboto_condensed_bold"
+                                        android:textSize="12sp"
+                                        android:buttonTint="@color/black"
+                                        android:text="HRM"/>
+
+                                    <android.support.v7.widget.AppCompatCheckBox
+                                        android:id="@+id/cbCRM"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_below="@id/cbCopier"
+                                        android:layout_marginLeft="145dp"
+                                        android:fontFamily="@font/roboto_condensed_bold"
+                                        android:textSize="12sp"
+                                        android:buttonTint="@color/black"
+                                        android:text="CRM"/>
+
+
+
+
+                                    <android.support.v7.widget.AppCompatCheckBox
+                                        android:id="@+id/cbERP"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_below="@id/cbCCTV"
+                                        android:layout_marginLeft="5dp"
+                                        android:fontFamily="@font/roboto_condensed_bold"
+                                        android:textSize="12sp"
+                                        android:buttonTint="@color/black"
+                                        android:text="ERP"/>
+
+                                    <android.support.v7.widget.AppCompatCheckBox
+                                        android:id="@+id/cbDoorAccess"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_below="@id/cbCCTV"
+                                        android:layout_marginLeft="70dp"
+                                        android:fontFamily="@font/roboto_condensed_bold"
+                                        android:textSize="12sp"
+                                        android:buttonTint="@color/black"
+                                        android:text="DoorAcs"/>
+
+                                    <android.support.v7.widget.AppCompatCheckBox
+                                        android:id="@+id/cbAcctSftw"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_below="@id/cbCCTV"
+                                        android:layout_marginLeft="145dp"
+                                        android:fontFamily="@font/roboto_condensed_bold"
+                                        android:textSize="12sp"
+                                        android:buttonTint="@color/black"
+                                        android:text="AcctSftwe"/>
+
+
+
+                                    <android.support.v7.widget.AppCompatCheckBox
+                                        android:id="@+id/cbMisc"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_below="@id/cbERP"
+                                        android:layout_marginLeft="5dp"
+                                        android:fontFamily="@font/roboto_condensed_bold"
+                                        android:textSize="12sp"
+                                        android:buttonTint="@color/black"
+                                        android:text="Misc"/>
 
 
                                 </RelativeLayout>

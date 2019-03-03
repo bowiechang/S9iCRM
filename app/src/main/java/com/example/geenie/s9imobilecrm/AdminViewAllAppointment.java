@@ -15,8 +15,6 @@ import android.view.Window;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -38,9 +36,9 @@ public class AdminViewAllAppointment extends AppCompatActivity implements View.O
     private ArrayList<Appointment> listUpcoming;
 
     //firebase init
-    private FirebaseAuth mAuth = FirebaseAuth.getInstance();
-    private FirebaseUser user = mAuth.getCurrentUser();
-    private String uid = user.getUid();
+//    private FirebaseAuth mAuth = FirebaseAuth.getInstance();
+//    private FirebaseUser user = mAuth.getCurrentUser();
+//    private String uid = user.getUid();
     private DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("Appointment");
 
     @Override

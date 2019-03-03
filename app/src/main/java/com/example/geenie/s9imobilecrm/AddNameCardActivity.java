@@ -12,8 +12,6 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -77,15 +75,17 @@ public class AddNameCardActivity extends AppCompatActivity implements View.OnCli
 
 
     //photos
-    private RecyclerView recyclerView;
+//    private RecyclerView recyclerView;
     private RelativeLayout btnCapturePhoto;
 
     private Boolean exist = false;
     private int count, counter;
     private String dbkey = "";
 
+    private String rbSelectedText;
+
     //other info
-    private CheckBox cbCopier, cbScanner, cbShredder;
+    private CheckBox cbCopier, cbPrinter, cbPlotter, cbCCTV, cbHRM, cbCRM, cbERP, cbDoorAcs, cbAcctSoftw, cbMisc;
     private RadioGroup rgPriorityLevel;
     private RadioButton rbNormal, rbFollowUp, rbUrgent;
     private EditText comment;
@@ -125,9 +125,9 @@ public class AddNameCardActivity extends AppCompatActivity implements View.OnCli
 
     public void init(){
 
-        recyclerView = findViewById(R.id.rvPhotos);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
-        recyclerView.setHasFixedSize(true);
+//        recyclerView = findViewById(R.id.rvPhotos);
+//        recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+//        recyclerView.setHasFixedSize(true);
         btnCapturePhoto = findViewById(R.id.btnLaunchPhotoCaptureLib);
         btnCapturePhoto.setOnClickListener(this);
 
@@ -152,8 +152,17 @@ public class AddNameCardActivity extends AppCompatActivity implements View.OnCli
 
         //otherinfo
         cbCopier = findViewById(R.id.cbCopier);
-        cbScanner = findViewById(R.id.cbScanner);
-        cbShredder = findViewById(R.id.cbShredder);
+        cbPrinter = findViewById(R.id.cbPrinter);
+        cbPlotter = findViewById(R.id.cbPlotter);
+        cbCCTV = findViewById(R.id.cbCCTV);
+        cbHRM = findViewById(R.id.cbHRM);
+        cbCRM = findViewById(R.id.cbCRM);
+        cbERP = findViewById(R.id.cbERP);
+        cbDoorAcs = findViewById(R.id.cbDoorAccess);
+        cbAcctSoftw = findViewById(R.id.cbAcctSftw);
+        cbMisc = findViewById(R.id.cbMisc);
+
+
         rgPriorityLevel = findViewById(R.id.rgPriorityLevel);
         rbNormal = findViewById(R.id.rbNormal);
         rbFollowUp = findViewById(R.id.rbFollowUp);
@@ -491,7 +500,7 @@ public class AddNameCardActivity extends AppCompatActivity implements View.OnCli
                     .setImageTitle("Galleries")         //  Image title (works with FolderMode = false)
                     .setDoneTitle("Done")               //  Done button title
                     .setLimitMessage("You have reached selection limit")    // Selection limit message
-                    .setMaxSize(10)                     //  Max images can be selected
+                    .setMaxSize(6)                     //  Max images can be selected
                     .setSavePath("ImagePicker")             //  Selected images
                     .setAlwaysShowDoneButton(true)      //  Set always show done button in multiple mode
                     .setKeepScreenOn(true)              //  Keep screen on when selecting images
@@ -524,13 +533,15 @@ public class AddNameCardActivity extends AppCompatActivity implements View.OnCli
         String companyAddress = etAddress.getText().toString().trim();
         String companyPostalCode = etPostalCode.getText().toString().trim();
         String companyUnitNo = etUnitNo.getText().toString().trim();
-        char firstletterUnitchecker = companyUnitNo.charAt(0);
-        if(!companyUnitNo.contains("#")){
-            companyUnitNo = "#".concat(companyUnitNo);
-        }
-        else if(firstletterUnitchecker != '#'){
-            companyUnitNo = companyUnitNo.replaceAll("#", "");
-            companyUnitNo = "#".concat(companyUnitNo);
+        System.out.println("unitNo val: " + companyUnitNo.toString());
+        if(!companyUnitNo.isEmpty()) {
+            char firstletterUnitchecker = companyUnitNo.charAt(0);
+            if (!companyUnitNo.contains("#")) {
+                companyUnitNo = "#".concat(companyUnitNo);
+            } else if (firstletterUnitchecker != '#') {
+                companyUnitNo = companyUnitNo.replaceAll("#", "");
+                companyUnitNo = "#".concat(companyUnitNo);
+            }
         }
         String companyOfficeNumber = etOfficeNumber.getText().toString().trim();
         String companyIndustry = spIndustry.getSelectedItem().toString();
@@ -538,7 +549,7 @@ public class AddNameCardActivity extends AppCompatActivity implements View.OnCli
         //otherinfo
         String lack = "";
         ArrayList<String> arrayListLack = new ArrayList<String>();
-        int[] checkboxes = {R.id.cbCopier, R.id.cbScanner, R.id.cbShredder};
+        int[] checkboxes = {R.id.cbCopier, R.id.cbPrinter, R.id.cbPlotter, R.id.cbCCTV, R.id.cbHRM, R.id.cbCRM, R.id.cbERP, R.id.cbDoorAccess, R.id.cbAcctSftw, R.id.cbMisc};
         int length = checkboxes.length;
         for(int i = 0; i<length; i ++){
             CheckBox cb = findViewById(checkboxes[i]);
@@ -695,8 +706,8 @@ public class AddNameCardActivity extends AppCompatActivity implements View.OnCli
                 int rgCheckednumber = rgRorP.getCheckedRadioButtonId();
                 View radioButton = rgRorP.findViewById(rgCheckednumber);
                 int idx = rgRorP.indexOfChild(radioButton);
-                RadioButton rbChecked = (RadioButton)  rgRorP.getChildAt(idx);
-                String rbSelectedText = rbChecked.getText().toString();
+                RadioButton rbChecked = (RadioButton) rgRorP.getChildAt(idx);
+                rbSelectedText = rbChecked.getText().toString();
 
                 String brandText = "";
                 String modelText = "";
@@ -704,7 +715,7 @@ public class AddNameCardActivity extends AppCompatActivity implements View.OnCli
                 String rOrP = "";
                 String startDate = "";
                 String expiryDate = "";
-                int lengthCont;
+                int lengthCont = 0;
                 String contMP = "";
                 String contFP = "";
 
@@ -712,11 +723,22 @@ public class AddNameCardActivity extends AppCompatActivity implements View.OnCli
                 modelText = etCopierModel.getText().toString().trim();
                 age = etCopierAge.getText().toString().trim();
                 rOrP = rbSelectedText;
-                startDate = etCopierContractStartDate.getText().toString().trim();
-                expiryDate = etCopierContractExpiryDate.getText().toString().trim();
-                lengthCont = Integer.parseInt(etCopierContractLength.getText().toString().trim());
-                contMP = etCopierContractMP.getText().toString().trim();
-                contFP = etCopierContractFP.getText().toString().trim();
+
+                if(!etCopierContractExpiryDate.getText().equals("")) {
+                    expiryDate = etCopierContractExpiryDate.getText().toString().trim();
+                }
+                if(!etCopierContractLength.getText().equals("")) {
+                    lengthCont = Integer.parseInt(etCopierContractLength.getText().toString().trim());
+                }
+                if(!etCopierContractStartDate.getText().equals("")) {
+                    startDate = etCopierContractStartDate.getText().toString().trim();
+                }
+                if(!etCopierContractMP.getText().equals("")) {
+                    contMP = etCopierContractMP.getText().toString().trim();
+                }
+                if(!etCopierContractFP.getText().equals("")) {
+                    contFP = etCopierContractFP.getText().toString().trim();
+                }
 
                 Copier copier = new Copier(brandText, modelText, age, problem, rOrP, lengthCont, startDate, expiryDate, contMP, contFP, companyid);
                 databaseReference.child("Copier").push().setValue(copier).addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -852,12 +874,12 @@ public class AddNameCardActivity extends AppCompatActivity implements View.OnCli
             new Thread(new Runnable() {
                 public void run() {
                     try {
-                        Thread.sleep(2000);
+                        Thread.sleep(5000);
                     }
                     catch (Exception e) { }
                     handler.post(new Runnable() {
                         public void run() {
-                            retrieveStoragePath();
+//                            retrieveStoragePath();
                         }
                     });
                 }
@@ -877,7 +899,7 @@ public class AddNameCardActivity extends AppCompatActivity implements View.OnCli
                 for (int i = 0; i < Integer.parseInt(photo.getCount()); i++) {
                     arrayList.add(String.valueOf(i));
                 }
-                getPhotos(arrayList);
+//                getPhotos(arrayList);
             }
 
             @Override
@@ -947,7 +969,7 @@ public class AddNameCardActivity extends AppCompatActivity implements View.OnCli
     private void getPhotos(ArrayList<String> list){
 
         PhotoAdapter photoAdapter = new PhotoAdapter(list,AddNameCardActivity.this, dbkey);
-        recyclerView.setAdapter(photoAdapter);
+//        recyclerView.setAdapter(photoAdapter);
     }
 
     @Override

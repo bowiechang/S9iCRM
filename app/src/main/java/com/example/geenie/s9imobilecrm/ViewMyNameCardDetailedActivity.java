@@ -73,7 +73,7 @@ public class ViewMyNameCardDetailedActivity extends AppCompatActivity implements
             etCompanyComments, etCompanyPostalCode, etCompanyUnitNo;
 
     private Spinner spinnerIndustry;
-    private CheckBox checkBoxPrinter, checkBoxScanner, checkBoxShredder;
+    private CheckBox checkBoxPrinter, checkboxCopier, checkBoxPlotter, checkBoxCCTV, checkBoxHRM, checkBoxCRM, checkBoxERP, checkBoxDoorAcs, checkBoxAcctSftwre, checkBoxMisc;
     private RadioGroup rgPriorityLevel;
     private RadioButton rbNormal, rbFollowUp, rbUrgent;
     private LinearLayout containerContact;
@@ -195,9 +195,16 @@ public class ViewMyNameCardDetailedActivity extends AppCompatActivity implements
         etCompanyPostalCode.addTextChangedListener(this);
         etCompanyNumber = findViewById(R.id.etCompanyOfficeNumber);
         spinnerIndustry = findViewById(R.id.spinnerIndustry);
-        checkBoxPrinter = findViewById(R.id.cbCopier);
-        checkBoxScanner = findViewById(R.id.cbScanner);
-        checkBoxShredder = findViewById(R.id.cbShredder);
+        checkBoxPrinter = findViewById(R.id.cbPrinter);
+        checkboxCopier = findViewById(R.id.cbCopier);
+        checkBoxPlotter = findViewById(R.id.cbPlotter);
+        checkBoxCCTV = findViewById(R.id.cbCCTV);
+        checkBoxHRM = findViewById(R.id.cbHRM);
+        checkBoxCRM = findViewById(R.id.cbCRM);
+        checkBoxERP = findViewById(R.id.cbERP);
+        checkBoxDoorAcs = findViewById(R.id.cbDoorAccess);
+        checkBoxAcctSftwre = findViewById(R.id.cbAcctSftw);
+        checkBoxMisc = findViewById(R.id.cbMisc);
 //        etCompanyNumOfCalls = findViewById(R.id.etCompanyNumOfCalls);
         rgPriorityLevel = findViewById(R.id.rgPriorityLevel);
         rbUrgent = findViewById(R.id.rbUrgent);
@@ -220,8 +227,15 @@ public class ViewMyNameCardDetailedActivity extends AppCompatActivity implements
         etCompanyComments.setVisibility(View.GONE);
         spinnerIndustry.setVisibility(View.GONE);
         checkBoxPrinter.setVisibility(View.GONE);
-        checkBoxScanner.setVisibility(View.GONE);
-        checkBoxShredder.setVisibility(View.GONE);
+        checkboxCopier.setVisibility(View.GONE);
+        checkBoxPlotter.setVisibility(View.GONE);
+        checkBoxCCTV.setVisibility(View.GONE);
+        checkBoxHRM.setVisibility(View.GONE);
+        checkBoxCRM.setVisibility(View.GONE);
+        checkBoxERP.setVisibility(View.GONE);
+        checkBoxDoorAcs.setVisibility(View.GONE);
+        checkBoxAcctSftwre.setVisibility(View.GONE);
+        checkBoxMisc.setVisibility(View.GONE);
         rgPriorityLevel.setVisibility(View.GONE);
         rbUrgent.setVisibility(View.GONE);
         rbFollowUp.setVisibility(View.GONE);
@@ -635,7 +649,9 @@ public class ViewMyNameCardDetailedActivity extends AppCompatActivity implements
                     TextView tvRowcontLength = addView.findViewById(R.id.tvCopierContLength);
                     tvRowcontLength.setText(tvRowcontLength.getText().toString().concat(String.valueOf(copier.getContractLength())));
                     EditText etContLength = addView.findViewById(R.id.etCopierContLength);
-                    etContLength.setText(String.valueOf(copier.getContractLength()));
+                    if(copier.getContractLength() != 0) {
+                        etContLength.setText(String.valueOf(copier.getContractLength()));
+                    }
                     etContLength.setVisibility(View.GONE);
 
                     //contractStartDate
@@ -771,13 +787,34 @@ public class ViewMyNameCardDetailedActivity extends AppCompatActivity implements
         String[] split = key.split(" ");
         for(int i=0; i < split.length; i++){
             if(split[i].equals("Copier")){
+                checkboxCopier.setChecked(true);
+            }
+            else if(split[i].equals("Printer")){
                 checkBoxPrinter.setChecked(true);
             }
-            else if(split[i].equals("Scanner")){
-                checkBoxScanner.setChecked(true);
+            else if(split[i].equals("Plotter")){
+                checkBoxPlotter.setChecked(true);
             }
-            else if(split[i].equals("Shredder")){
-                checkBoxShredder.setChecked(true);
+            else if(split[i].equals("CCTV")){
+                checkBoxCCTV.setChecked(true);
+            }
+            else if(split[i].equals("HRM")){
+                checkBoxHRM.setChecked(true);
+            }
+            else if(split[i].equals("CRM")){
+                checkBoxCRM.setChecked(true);
+            }
+            else if(split[i].equals("ERP")){
+                checkBoxERP.setChecked(true);
+            }
+            else if(split[i].equals("DoorAcs")){
+                checkBoxDoorAcs.setChecked(true);
+            }
+            else if(split[i].equals("AcctSftwe")){
+                checkBoxAcctSftwre.setChecked(true);
+            }
+            else if(split[i].equals("Misc")){
+                checkBoxMisc.setChecked(true);
             }
         }
     }
@@ -815,7 +852,7 @@ public class ViewMyNameCardDetailedActivity extends AppCompatActivity implements
                 String industry = spinnerIndustry.getSelectedItem().toString();
 
                 String lack = "";
-                int[] checkboxes = {R.id.cbCopier, R.id.cbScanner, R.id.cbShredder};
+                int[] checkboxes = {R.id.cbCopier, R.id.cbPrinter, R.id.cbPlotter, R.id.cbCCTV, R.id.cbHRM, R.id.cbCRM, R.id.cbERP, R.id.cbDoorAccess, R.id.cbAcctSftw, R.id.cbMisc};
                 int length = checkboxes.length;
                 for(int i = 0; i<length; i ++){
                     CheckBox cb = findViewById(checkboxes[i]);
@@ -875,7 +912,7 @@ public class ViewMyNameCardDetailedActivity extends AppCompatActivity implements
 
 //                setCompanyNotEditable();
 //                setContactNotEditable();
-//                setCopierNotEditable();
+//                setCopierNotEditabl();
 
 //                relativeLayoutView.setVisibility(View.VISIBLE);
 //                relativeLayoutEdit.setVisibility(View.GONE);
@@ -1159,8 +1196,15 @@ public class ViewMyNameCardDetailedActivity extends AppCompatActivity implements
         etCompanyComments.setVisibility(View.VISIBLE);
         spinnerIndustry.setVisibility(View.VISIBLE);
         checkBoxPrinter.setVisibility(View.VISIBLE);
-        checkBoxScanner.setVisibility(View.VISIBLE);
-        checkBoxShredder.setVisibility(View.VISIBLE);
+        checkboxCopier.setVisibility(View.VISIBLE);
+        checkBoxPlotter.setVisibility(View.VISIBLE);
+        checkBoxCCTV.setVisibility(View.VISIBLE);
+        checkBoxHRM.setVisibility(View.VISIBLE);
+        checkBoxCRM.setVisibility(View.VISIBLE);
+        checkBoxERP.setVisibility(View.VISIBLE);
+        checkBoxDoorAcs.setVisibility(View.VISIBLE);
+        checkBoxAcctSftwre.setVisibility(View.VISIBLE);
+        checkBoxMisc.setVisibility(View.VISIBLE);
         rgPriorityLevel.setVisibility(View.VISIBLE);
         rbUrgent.setVisibility(View.VISIBLE);
         rbFollowUp.setVisibility(View.VISIBLE);
@@ -1214,8 +1258,15 @@ public class ViewMyNameCardDetailedActivity extends AppCompatActivity implements
         etCompanyComments.setVisibility(View.GONE);
         spinnerIndustry.setVisibility(View.GONE);
         checkBoxPrinter.setVisibility(View.GONE);
-        checkBoxScanner.setVisibility(View.GONE);
-        checkBoxShredder.setVisibility(View.GONE);
+        checkboxCopier.setVisibility(View.GONE);
+        checkBoxPlotter.setVisibility(View.GONE);
+        checkBoxCCTV.setVisibility(View.GONE);
+        checkBoxHRM.setVisibility(View.GONE);
+        checkBoxCRM.setVisibility(View.GONE);
+        checkBoxERP.setVisibility(View.GONE);
+        checkBoxDoorAcs.setVisibility(View.GONE);
+        checkBoxAcctSftwre.setVisibility(View.GONE);
+        checkBoxMisc.setVisibility(View.GONE);
         rgPriorityLevel.setVisibility(View.GONE);
         rbUrgent.setVisibility(View.GONE);
         rbFollowUp.setVisibility(View.GONE);
@@ -1818,7 +1869,7 @@ public class ViewMyNameCardDetailedActivity extends AppCompatActivity implements
                                 new Thread(new Runnable() {
                                     public void run() {
                                         try {
-                                            Thread.sleep(3000);
+                                            Thread.sleep(2000);
                                         }
                                         catch (Exception e) { }
                                         handler.post(new Runnable() {
